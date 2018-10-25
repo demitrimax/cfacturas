@@ -15,10 +15,10 @@
             <a href="#" class="nav-link" target="_blank">Reporte un problema</a>
           </li>
           <li class="nav-item">
-            <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
+            <a href="#" class="nav-link" target="_blank">Blog</a>
           </li>
           <li class="nav-item">
-            <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link" target="_blank">MIT License</a>
+            <a href="#" class="nav-link" target="_blank">GitHub</a>
           </li>
         </ul>
       </div>

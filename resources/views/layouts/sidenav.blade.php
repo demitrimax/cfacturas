@@ -95,12 +95,12 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="./examples/icons.html">
-            <i class="ni ni-planet text-blue"></i> Icons
+            <i class="ni ni-planet text-blue"></i> Clientes
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="./examples/maps.html">
-            <i class="ni ni-pin-3 text-orange"></i> Maps
+            <i class="ni ni-pin-3 text-orange"></i> Empresas
           </a>
         </li>
         <li class="nav-item">
