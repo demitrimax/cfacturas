@@ -59,7 +59,7 @@ class clientesController extends AppBaseController
 
         $clientes = $this->clientesRepository->create($input);
 
-        Flash::success('Clientes saved successfully.');
+        Flash::success('Cliente guardado correctamente.');
 
         return redirect(route('clientes.index'));
     }
@@ -76,7 +76,7 @@ class clientesController extends AppBaseController
         $clientes = $this->clientesRepository->findWithoutFail($id);
 
         if (empty($clientes)) {
-            Flash::error('Clientes not found');
+            Flash::error('Cliente no encontrado.');
 
             return redirect(route('clientes.index'));
         }
@@ -96,7 +96,7 @@ class clientesController extends AppBaseController
         $clientes = $this->clientesRepository->findWithoutFail($id);
 
         if (empty($clientes)) {
-            Flash::error('Clientes not found');
+            Flash::error('Cliente no encontrado.');
 
             return redirect(route('clientes.index'));
         }
@@ -117,14 +117,14 @@ class clientesController extends AppBaseController
         $clientes = $this->clientesRepository->findWithoutFail($id);
 
         if (empty($clientes)) {
-            Flash::error('Clientes not found');
+            Flash::error('Cliente no encontrado');
 
             return redirect(route('clientes.index'));
         }
 
         $clientes = $this->clientesRepository->update($request->all(), $id);
 
-        Flash::success('Clientes updated successfully.');
+        Flash::success('Clientes actualizado correctamente.');
 
         return redirect(route('clientes.index'));
     }
@@ -141,14 +141,14 @@ class clientesController extends AppBaseController
         $clientes = $this->clientesRepository->findWithoutFail($id);
 
         if (empty($clientes)) {
-            Flash::error('Clientes not found');
+            Flash::error('Cliente no encontrado');
 
             return redirect(route('clientes.index'));
         }
 
         $this->clientesRepository->delete($id);
 
-        Flash::success('Clientes deleted successfully.');
+        Flash::success('Cliente borrado correctamente.');
 
         return redirect(route('clientes.index'));
     }

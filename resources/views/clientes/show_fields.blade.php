@@ -12,19 +12,19 @@
 
 <!-- Apellidopat Field -->
 <div class="form-group">
-    {!! Form::label('apellidopat', 'Apellidopat:') !!}
+    {!! Form::label('apellidopat', 'Apellido Paterno:') !!}
     <p>{!! $clientes->apellidopat !!}</p>
 </div>
 
 <!-- Apellidomat Field -->
 <div class="form-group">
-    {!! Form::label('apellidomat', 'Apellidomat:') !!}
+    {!! Form::label('apellidomat', 'Apellido Materno:') !!}
     <p>{!! $clientes->apellidomat !!}</p>
 </div>
 
 <!-- Rfc Field -->
 <div class="form-group">
-    {!! Form::label('RFC', 'Rfc:') !!}
+    {!! Form::label('RFC', 'RFC:') !!}
     <p>{!! $clientes->RFC !!}</p>
 </div>
 
@@ -33,16 +33,3 @@
     {!! Form::label('CURP', 'Curp:') !!}
     <p>{!! $clientes->CURP !!}</p>
 </div>
-
-<!-- Created At Field -->
-<div class="form-group">
-    {!! Form::label('created_at', 'Created At:') !!}
-    <p>{!! $clientes->created_at !!}</p>
-</div>
-
-<!-- Updated At Field -->
-<div class="form-group">
-    {!! Form::label('updated_at', 'Updated At:') !!}
-    <p>{!! $clientes->updated_at !!}</p>
-</div>
-

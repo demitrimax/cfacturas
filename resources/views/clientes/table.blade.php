@@ -1,12 +1,12 @@
 <table class="table table-responsive" id="clientes-table">
     <thead>
         <tr>
-            <th>Nombre</th>
-        <th>Apellidopat</th>
-        <th>Apellidomat</th>
-        <th>Rfc</th>
-        <th>Curp</th>
-            <th colspan="3">Action</th>
+        <th>Nombre</th>
+        <th>Apellido Paterno</th>
+        <th>Apellido Materno</th>
+        <th>RFC</th>
+        <th>CURP</th>
+            <th colspan="3">Acciones</th>
         </tr>
     </thead>
     <tbody>
