@@ -71,7 +71,7 @@
                                          class="img-circle" alt="User Image"/>
                                     <p>
                                         {!! Auth::user()->name !!}
-                                        <small>Member since {!! Auth::user()->created_at->format('M. Y') !!}</small>
+                                        <small>Miembro desde {!! Auth::user()->created_at->format('M. Y') !!}</small>
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->
@@ -105,7 +105,7 @@
 
         <!-- Main Footer -->
         <footer class="main-footer" style="max-height: 100px;text-align: center">
-            <strong>Copyright © 2016 <a href="#">Company</a>.</strong> All rights reserved.
+            <strong>Copyright © 2018 <a href="#">Veritas</a>.</strong> Todos los derechos reservados.
         </footer>
 
     </div>
@@ -125,21 +125,21 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{!! url('/') !!}">
-                    InfyOm Generator
+                    Control de Facturas
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{!! url('/home') !!}">Home</a></li>
+                    <li><a href="{!! url('/home') !!}">Inicio</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
-                    <li><a href="{!! url('/login') !!}">Login</a></li>
-                    <li><a href="{!! url('/register') !!}">Register</a></li>
+                    <li><a href="{!! url('/login') !!}">Iniciar Sesión</a></li>
+                    <li><a href="{!! url('/register') !!}">Registrarse</a></li>
                 </ul>
             </div>
         </div>

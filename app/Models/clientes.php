@@ -57,5 +57,9 @@ class clientes extends Model
         'CURP' => 'max:18'
     ];
 
+    public function datcontacto() {
+      return $this->hasMany('App\Models\datcontacto','cliente_id');
+    }
+
 
 }

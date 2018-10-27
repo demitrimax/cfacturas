@@ -47,5 +47,9 @@ class datcontacto extends Model
         'contacto' => 'required|unique:datcontactos|max:65'
     ];
 
+    public function clientes() {
+      return $this->belongsTo('App\Models\clientes', 'id');
+    }
+
 
 }

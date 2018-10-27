@@ -67,6 +67,25 @@ class datcontactoController extends AppBaseController
     }
 
     /**
+     * Guardar un nuevo dato de contacto desde la vista de clientes
+     *
+     * @param CreatedatcontactoRequest $request
+     *
+     * @return Response
+     */
+    public function storeDos(CreatedatcontactoRequest $request)
+    {
+        $input = $request->all();
+        dd($input);
+        die;
+        $datcontacto = $this->datcontactoRepository->create($input);
+
+        Flash::success('Datos de contacto agregado correctamente.');
+
+        return redirect(route('clientes.show', [$clientes->id]));
+    }
+
+    /**
      * Display the specified datcontacto.
      *
      * @param  int $id
