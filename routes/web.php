@@ -25,3 +25,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::resource('clientes', 'clientesController');
+
+Route::resource('datcontactos', 'datcontactoController');
