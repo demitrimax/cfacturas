@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model as Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class clientes
@@ -18,8 +19,9 @@ use Illuminate\Database\Eloquent\Model as Model;
 class clientes extends Model
 {
 
+    use SoftDeletes;
     public $table = 'clientes';
-    
+
 
 
     public $fillable = [
@@ -55,5 +57,5 @@ class clientes extends Model
         'CURP' => 'max:18'
     ];
 
-    
+
 }

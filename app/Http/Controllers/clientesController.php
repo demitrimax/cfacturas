@@ -58,8 +58,9 @@ class clientesController extends AppBaseController
         $input = $request->all();
 
         $clientes = $this->clientesRepository->create($input);
-
-        Flash::success('Cliente guardado correctamente.');
+        $mensaje = "swal('Excelente','El cliente se agregó correctamente','success')";
+        $mensaje = "Se agregó correctamente.";
+        Flash::success($mensaje);
 
         return redirect(route('clientes.index'));
     }

@@ -1,13 +1,8 @@
-<!-- Id Field -->
-<div class="form-group">
-    {!! Form::label('id', 'Id:') !!}
-    <p>{!! $clientes->id !!}</p>
-</div>
 
 <!-- Nombre Field -->
 <div class="form-group">
-    {!! Form::label('nombre', 'Nombre:') !!}
-    <p>{!! $clientes->nombre !!}</p>
+    {!! Form::label('nombre', 'Nombre Completo:') !!}
+    <p>{!! $clientes->nombre." ".$clientes->apellidopat." ".$clientes->apellidomat !!}</p>
 </div>
 
 <!-- Apellidopat Field -->
