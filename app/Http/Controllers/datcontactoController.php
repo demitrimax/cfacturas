@@ -58,12 +58,20 @@ class datcontactoController extends AppBaseController
     public function store(CreatedatcontactoRequest $request)
     {
         $input = $request->all();
+        //dd($input);
+        //die;
 
         $datcontacto = $this->datcontactoRepository->create($input);
 
-        Flash::success('Datcontacto saved successfully.');
+        Flash::success('Datos de contacto guardados correctamente.');
 
+        if(isset($input['redirect'])){
+
+          return redirect(route('clientes.show', [$input['cliente_id']]));
+        }
+        else {
         return redirect(route('datcontactos.index'));
+      }
     }
 
     /**

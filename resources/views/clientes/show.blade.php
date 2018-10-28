@@ -8,6 +8,7 @@
     </section>
     <div class="content">
         <div class="box box-primary">
+                  @include('flash::message')
             <div class="box-body">
                 <div class="row" style="padding-left: 20px">
                     @include('clientes.show_fields')
@@ -53,19 +54,19 @@
                 <h4 class="modal-title">Datos de Contacto</h4>
               </div>
               <div class="modal-body">
-                <p>One fine body&hellip;</p>
-                  {!! Form::open(['route' => 'datcontactos.storeDos']) !!}
+                  {!! Form::open(['route' => 'datcontactos.store']) !!}
                 <div class="form-group col-sm-6">
                     {!! Form::label('tipo', 'Tipo:') !!}
                     {!! Form::select('tipo', ['telefono' => 'telefono', 'email' => 'email', 'whatsapp' => 'whatsapp'], null, ['class' => 'form-control']) !!}
                 <!-- Contacto Field -->
+              </div>
                 <div class="form-group col-sm-6">
                     {!! Form::label('contacto', 'Contacto:') !!}
                     {!! Form::text('contacto', null, ['class' => 'form-control']) !!}
                 </div>
                     {!! Form::hidden('cliente_id', $clientes->id) !!}
+                    {!! Form::hidden('redirect', 'clientes.show') !!}
 
-              </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Agregar Datos</button>
@@ -77,5 +78,6 @@
           <!-- /.modal-dialog -->
         </div>
         <!-- /.modal -->
+      </div>
 
 @endsection
