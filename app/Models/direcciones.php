@@ -23,7 +23,7 @@ class direcciones extends Model
 {
 
     public $table = 'direcciones';
-    
+
 
 
     public $fillable = [
@@ -64,8 +64,20 @@ class direcciones extends Model
         'cliente_id' => 'required',
         'calle' => 'required',
         'estado_id' => 'required',
-        'municipio_id' => 'required'
+        'municipio_id' => 'required',
+        'numeroExt' => 'max:5',
+        'numeroInt' => 'max:5',
+        'codpostal' => 'numeric',
     ];
 
-    
+    public function clientes() {
+      return $this->belongsTo('App\Models\clientes', 'cliente_id');
+    }
+    public function estados() {
+      return $this->belongsTo('App\catestados','estado_id');
+    }
+    public function municipios() {
+      return $this->belongsTo('App\catmunicipios','municipio_id');
+    }
+
 }

@@ -11,6 +11,8 @@ use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\Models\clientes;
+use App\catestados;
+use App\catmunicipios;
 
 class direccionesController extends AppBaseController
 {
@@ -45,7 +47,8 @@ class direccionesController extends AppBaseController
     public function create()
     {
         $clientes = clientes::pluck('nombre','id');
-        return view('direcciones.create',compact('clientes'));
+        $estados = catestados::pluck('nombre','id');
+        return view('direcciones.create',compact('clientes','estados'));
     }
 
     /**
@@ -62,8 +65,14 @@ class direccionesController extends AppBaseController
         $direcciones = $this->direccionesRepository->create($input);
 
         Flash::success('Direcciones saved successfully.');
+        if(isset($input['redirect'])){
+
+          return redirect(route('clientes.show', [$input['cliente_id']]));
+        }
+        else {
 
         return redirect(route('direcciones.index'));
+      }
     }
 
     /**
@@ -153,5 +162,25 @@ class direccionesController extends AppBaseController
         Flash::success('Direcciones deleted successfully.');
 
         return redirect(route('direcciones.index'));
+    }
+
+    public function GetMunicipios($id)
+    {
+      $municipios = catmunicipios::where('id_edo',$id)->select('id','nomMunicipio')->get();
+      /*
+      $data = [];
+      $data[0] = [
+        'id' => 0,
+        'text' => 'Selecciones',
+      ];
+      foreach ($municipios as $key=>$value) {
+        $data[$key+1] = [
+          'id' => $value->id,
+          'text' => $value->nomMunicipio,
+        ];
+      }
+      return response()->json($data);
+      */
+      return $municipios;
     }
 }

@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\catestados;
+use App\catmunicipios;
+use App\Models\direcciones;
 
 class clientesController extends AppBaseController
 {
@@ -81,8 +84,8 @@ class clientesController extends AppBaseController
 
             return redirect(route('clientes.index'));
         }
-
-        return view('clientes.show')->with('clientes', $clientes);
+          $estados = catestados::pluck('nombre','id');
+        return view('clientes.show')->with(compact('clientes','estados'));
     }
 
     /**

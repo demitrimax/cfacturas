@@ -61,5 +61,9 @@ class clientes extends Model
       return $this->hasMany('App\Models\datcontacto','cliente_id');
     }
 
+    public function direcciones() {
+      return $this->hasMany('App\Models\direcciones','cliente_id');
+    }
+
 
 }
