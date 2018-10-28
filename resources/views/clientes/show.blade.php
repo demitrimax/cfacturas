@@ -28,9 +28,9 @@
                   <th>Tipo</th>
                   <th>Dato</th>
                 </tr>
-              @foreach($clientes->datcontacto as $datcontacto)
+              @foreach($clientes->datcontacto as$key=>$datcontacto)
                 <tr>
-                  <td>1.</td>
+                  <td>{{$key+1}}</td>
                   <td>{{$datcontacto->tipo}}</td>
                   <td>{{$datcontacto->contacto}}</td>
                 </tr>
@@ -43,6 +43,33 @@
             <!-- /.box-body -->
 
           </div>
+          <div class="box box-success">
+              <div class="box-header">
+                <h3 class="box-title">Direcciones</h3>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body no-padding">
+                <table class="table table-condensed">
+                  <tbody><tr>
+                    <th style="width: 10px">#</th>
+                    <th>Tipo</th>
+                    <th>Dato</th>
+                  </tr>
+                @foreach($clientes->datcontacto as$key=>$datcontacto)
+                  <tr>
+                    <td>{{$key+1}}</td>
+                    <td>{{$datcontacto->tipo}}</td>
+                    <td>{{$datcontacto->contacto}}</td>
+                  </tr>
+                  @endforeach
+                </tbody></table>
+                <h1 class="pull-right">
+                   <button type="button" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-datcontacto">Agregar dato de contacto</button>
+                </h1>
+              </div>
+              <!-- /.box-body -->
+
+            </div>
     </div>
 
     <div class="modal fade" id="modal-datcontacto">
