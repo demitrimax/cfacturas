@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model as Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class direcciones
@@ -10,6 +11,8 @@ use Illuminate\Database\Eloquent\Model as Model;
  * @version October 28, 2018, 1:38 am UTC
  *
  * @property integer cliente_id
+ * @property string RFC
+ * @property string razonsocial
  * @property string calle
  * @property string numeroExt
  * @property string numeroInt
@@ -22,12 +25,15 @@ use Illuminate\Database\Eloquent\Model as Model;
 class direcciones extends Model
 {
 
+    use SoftDeletes;
     public $table = 'direcciones';
 
 
 
     public $fillable = [
         'cliente_id',
+        'RFC',
+        'razonsocial'
         'calle',
         'numeroExt',
         'numeroInt',
@@ -45,6 +51,8 @@ class direcciones extends Model
      */
     protected $casts = [
         'cliente_id' => 'integer',
+        'RFC' => 'string',
+        'razonsocial' => 'string',
         'calle' => 'string',
         'numeroExt' => 'string',
         'numeroInt' => 'string',
@@ -62,6 +70,8 @@ class direcciones extends Model
      */
     public static $rules = [
         'cliente_id' => 'required',
+        'RFC' => 'required',
+        'razonsocial' = 'required',
         'calle' => 'required',
         'estado_id' => 'required',
         'municipio_id' => 'required',

@@ -20,6 +20,7 @@ class datcontactoController extends AppBaseController
     public function __construct(datcontactoRepository $datcontactoRepo)
     {
         $this->datcontactoRepository = $datcontactoRepo;
+        $this->middleware('auth');
     }
 
     /**
@@ -105,7 +106,7 @@ class datcontactoController extends AppBaseController
         $datcontacto = $this->datcontactoRepository->findWithoutFail($id);
 
         if (empty($datcontacto)) {
-            Flash::error('Datcontacto not found');
+            Flash::error('Datos de contacto no encontrado.');
 
             return redirect(route('datcontactos.index'));
         }
@@ -125,7 +126,7 @@ class datcontactoController extends AppBaseController
         $datcontacto = $this->datcontactoRepository->findWithoutFail($id);
 
         if (empty($datcontacto)) {
-            Flash::error('Datcontacto not found');
+            Flash::error('Datos de contacto no encontrado.');
 
             return redirect(route('datcontactos.index'));
         }
@@ -146,14 +147,14 @@ class datcontactoController extends AppBaseController
         $datcontacto = $this->datcontactoRepository->findWithoutFail($id);
 
         if (empty($datcontacto)) {
-            Flash::error('Datcontacto not found');
+            Flash::error('Datos de contacto no encontrado.');
 
             return redirect(route('datcontactos.index'));
         }
 
         $datcontacto = $this->datcontactoRepository->update($request->all(), $id);
 
-        Flash::success('Datcontacto updated successfully.');
+        Flash::success('Información de contacto actualizada correctamente.');
 
         return redirect(route('datcontactos.index'));
     }
@@ -165,20 +166,27 @@ class datcontactoController extends AppBaseController
      *
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $datcontacto = $this->datcontactoRepository->findWithoutFail($id);
+        $input = $request->all();
 
         if (empty($datcontacto)) {
-            Flash::error('Datcontacto not found');
+            Flash::error('Información de contacto no encontrado.');
 
             return redirect(route('datcontactos.index'));
         }
 
         $this->datcontactoRepository->delete($id);
 
-        Flash::success('Datcontacto deleted successfully.');
+        Flash::success('Información de Contacto borrado correctamente.');
 
+        if(isset($input['redirect'])){
+
+          return redirect(route('clientes.show', [$input['cliente_id']]));
+        }
+        else {
         return redirect(route('datcontactos.index'));
+      }
     }
 }

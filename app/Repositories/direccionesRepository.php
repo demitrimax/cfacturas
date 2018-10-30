@@ -21,6 +21,8 @@ class direccionesRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'cliente_id',
+        'RFC',
+        'razonsocial',
         'calle',
         'numeroExt',
         'numeroInt',

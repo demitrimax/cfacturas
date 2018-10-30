@@ -29,3 +29,6 @@ Route::resource('datcontactos', 'datcontactoController');
 Route::resource('direcciones', 'direccionesController');
 
 Route::get('GetMunicipios/{id}', 'direccionesController@GetMunicipios');
+
+
+Route::resource('catdocumentos', 'catdocumentosController');

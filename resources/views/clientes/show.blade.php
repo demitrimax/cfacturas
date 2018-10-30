@@ -34,7 +34,16 @@
                   <td>{{$key+1}}</td>
                   <td>{{$datcontacto->tipo}}</td>
                   <td>{{$datcontacto->contacto}}</td>
-                  <td><button class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i> </button> <button class="btn btn-danger" rel="tooltip" title="Eliminar" Onclick="ConfirmDelete($categoria->id)"> <i class="fa fa-remove"></i></button></td>
+                  <td>
+                    {!! Form::open(['route' => ['datcontactos.destroy', $datcontacto->id], 'method' => 'delete', 'id'=>'contactform'.$datcontacto->id]) !!}
+                    <div class='btn-group'>
+                    <button type="button" class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i> </button>
+                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'button', 'class' => 'btn btn-danger', 'onclick' => "ConfirmDeleteContacto(".$datcontacto->id.")"]) !!}
+                                        {!! Form::hidden('redirect', 'clientes.show') !!}
+                                        {!! Form::hidden('cliente_id', $clientes->id) !!}
+                  </div>
+                  {!! Form::close() !!}
+                  </td>
                 </tr>
                 @endforeach
               </tbody></table>
@@ -67,7 +76,7 @@
                     <td>{{$direccion->colonia}}</td>
                     <td>{{$direccion->estados->nombre}}</td>
                     <td>{{$direccion->municipios->nomMunicipio3}}</td>
-                    <td><button class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i> </button> <button class="btn btn-danger" rel="tooltip" title="Eliminar" Onclick="ConfirmDelete($categoria->id)"> <i class="fa fa-remove"></i></button></td>
+                    <td><button class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i> </button> <button class="btn btn-danger" rel="tooltip" title="Eliminar" Onclick="ConfirmDeleteContacto({{$direccion->id}})"> <i class="fa fa-remove"></i></button></td>
                   </tr>
                   @endforeach
                 </tbody></table>
@@ -205,5 +214,20 @@
       });
     });
   });
+  function ConfirmDeleteContacto(id) {
+  swal({
+        title: '¿Estás seguro?',
+        text: 'Se eliminará la información de contacto.',
+        type: 'warning',
+        showCancelButton: true,
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Continuar',
+        }).then((result) => {
+  if (result.value) {
+    document.forms['contactform'+id].submit();
+  }
+})
+}
 </script>
 @endsection

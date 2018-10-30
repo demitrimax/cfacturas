@@ -22,6 +22,7 @@ class direccionesController extends AppBaseController
     public function __construct(direccionesRepository $direccionesRepo)
     {
         $this->direccionesRepository = $direccionesRepo;
+        $this->middleware('auth');
     }
 
     /**
@@ -64,7 +65,7 @@ class direccionesController extends AppBaseController
 
         $direcciones = $this->direccionesRepository->create($input);
 
-        Flash::success('Direcciones saved successfully.');
+        Flash::success('Dirección guardada correctamente.');
         if(isset($input['redirect'])){
 
           return redirect(route('clientes.show', [$input['cliente_id']]));
@@ -87,7 +88,7 @@ class direccionesController extends AppBaseController
         $direcciones = $this->direccionesRepository->findWithoutFail($id);
 
         if (empty($direcciones)) {
-            Flash::error('Direcciones not found');
+            Flash::error('Dirección no encontrada');
 
             return redirect(route('direcciones.index'));
         }
@@ -107,7 +108,7 @@ class direccionesController extends AppBaseController
         $direcciones = $this->direccionesRepository->findWithoutFail($id);
 
         if (empty($direcciones)) {
-            Flash::error('Direcciones not found');
+            Flash::error('Dirección no encontrada');
 
             return redirect(route('direcciones.index'));
         }
@@ -128,14 +129,14 @@ class direccionesController extends AppBaseController
         $direcciones = $this->direccionesRepository->findWithoutFail($id);
 
         if (empty($direcciones)) {
-            Flash::error('Direcciones not found');
+            Flash::error('Dirección no encontrada');
 
             return redirect(route('direcciones.index'));
         }
 
         $direcciones = $this->direccionesRepository->update($request->all(), $id);
 
-        Flash::success('Direcciones updated successfully.');
+        Flash::success('Dirección actualizada correctamente.');
 
         return redirect(route('direcciones.index'));
     }
@@ -152,16 +153,21 @@ class direccionesController extends AppBaseController
         $direcciones = $this->direccionesRepository->findWithoutFail($id);
 
         if (empty($direcciones)) {
-            Flash::error('Direcciones not found');
+            Flash::error('Dirección no encontrada');
 
             return redirect(route('direcciones.index'));
         }
 
         $this->direccionesRepository->delete($id);
 
-        Flash::success('Direcciones deleted successfully.');
+        Flash::success('Dirección borrada correctamente.');
+        if(isset($input['redirect'])){
 
-        return redirect(route('direcciones.index'));
+          return redirect(route('clientes.show', [$input['cliente_id']]));
+        }
+        else {
+          return redirect(route('direcciones.index'));
+        }
     }
 
     public function GetMunicipios($id)
