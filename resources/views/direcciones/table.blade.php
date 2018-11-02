@@ -1,10 +1,10 @@
 <table class="table table-responsive" id="direcciones-table">
     <thead>
         <tr>
-            <th>Cliente Id</th>
-        <th>Calle</th>
-        <th>Numeroext</th>
-        <th>Numeroint</th>
+        <th>Cliente Id</th>
+        <th>RFC</th>
+        <th>Razon Social</th>
+        <th>Dirección</th>
         <th>Estado Id</th>
         <th>Municipio Id</th>
         <th>Colonia</th>
@@ -16,11 +16,11 @@
     @foreach($direcciones as $direcciones)
         <tr>
             <td>{!! $direcciones->cliente_id !!}</td>
-            <td>{!! $direcciones->calle !!}</td>
-            <td>{!! $direcciones->numeroExt !!}</td>
-            <td>{!! $direcciones->numeroInt !!}</td>
-            <td>{!! $direcciones->estado_id !!}</td>
-            <td>{!! $direcciones->municipio_id !!}</td>
+            <td>{!! $direcciones->rfc !!}</td>
+            <td>{!! $direcciones->razonsocial !!}</td>
+            <td>{!! $direcciones->calle. ' '. $direcciones->numeroExt!!}</td>
+            <td>{!! $direcciones->estados->nombre !!}</td>
+            <td>{!! $direcciones->municipios->nomMunicipio !!}</td>
             <td>{!! $direcciones->colonia !!}</td>
             <td>{!! $direcciones->codpostal !!}</td>
             <td>

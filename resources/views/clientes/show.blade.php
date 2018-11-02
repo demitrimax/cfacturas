@@ -1,21 +1,40 @@
 @extends('layouts.app')
 
 @section('content')
+
+    @include('flash::message')
     <section class="content-header">
         <h1>
             Clientes
         </h1>
     </section>
-    <div class="content">
-        <div class="box box-primary">
-                  @include('flash::message')
-            <div class="box-body">
-                <div class="row" style="padding-left: 20px">
-                    @include('clientes.show_fields')
-                    <a href="{!! route('clientes.index') !!}" class="btn btn-default">Regresar</a>
-                </div>
+  <div class="content">
+    <div class="box box-primary">
+      <div class="box box-widget widget-user-2">
+            <!-- Add the bg color to the header using any of the bg-* classes -->
+            <div class="widget-user-header bg-aqua">
+              <div class="widget-user-image">
+                <img class="img-circle" src="{{asset('avatar/avatar.png')}}" alt="User Avatar" width="40">
+              </div>
+              <!-- /.widget-user-image -->
+              <h3 class="widget-user-username">{!! $clientes->nombre." ".$clientes->apellidopat." ".$clientes->apellidomat !!}</h3>
+              <h5 class="widget-user-desc">Cliente desde: {!! $clientes->created_at->format('M. Y') !!}</h5>
             </div>
+            <div class="box-footer no-padding">
+              <ul class="nav nav-stacked">
+                <li><a href="#">Feha de Nacimiento <span class="pull-right">N/D</span></a></li>
+                <li><a href="#">RFC <span class="pull-right">{!! $clientes->RFC !!}</span></a></li>
+                <li><a href="#">CURP <span class="pull-right">{!! $clientes->CURP !!}</span></a></li>
+                <li><a href="#">Fecha de Alta <span class="pull-right">{!! $clientes->created_at !!}</span></a></li>
+                <li><a href="{!! route('clientes.index') !!}" class="btn btn-default">Regresar</a></li>
+              </ul>
+
+            </div>
+          </div>
         </div>
+      </div>
+    <div class="content">
+
         <div class="box box-success">
             <div class="box-header">
               <h3 class="box-title">Datos de Contacto</h3>
@@ -56,15 +75,16 @@
           </div>
           <div class="box box-warning">
               <div class="box-header">
-                <h3 class="box-title">Direcciones</h3>
+                <h3 class="box-title">Datos Fiscales</h3>
               </div>
               <!-- /.box-header -->
               <div class="box-body no-padding">
                 <table class="table table-condensed">
                   <tbody><tr>
                     <th style="width: 10px">#</th>
-                    <th>Tipo</th>
-                    <th>Colonia</th>
+                    <th>RFC</th>
+                    <th>Razón Social</th>
+                    <th>Dirección</th>
                     <th>Estado</th>
                     <th>Municipio</th>
                     <th>Acciones</th>
@@ -72,16 +92,17 @@
                 @foreach($clientes->direcciones as$key=>$direccion)
                   <tr>
                     <td>{{$key+1}}</td>
+                    <td>{{$direccion->RFC}}</td>
+                    <td>{{$direccion->razonsocial}}</td>
                     <td>{{$direccion->calle.' '.$direccion->numeroExt.' '.$direccion->numeroInt}}</td>
-                    <td>{{$direccion->colonia}}</td>
                     <td>{{$direccion->estados->nombre}}</td>
-                    <td>{{$direccion->municipios->nomMunicipio3}}</td>
+                    <td>{{$direccion->municipios->nomMunicipio}}</td>
                     <td><button class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i> </button> <button class="btn btn-danger" rel="tooltip" title="Eliminar" Onclick="ConfirmDeleteContacto({{$direccion->id}})"> <i class="fa fa-remove"></i></button></td>
                   </tr>
                   @endforeach
                 </tbody></table>
                 <h1 class="pull-right">
-                   <button type="button" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-direccion">Agregar Dirección</button>
+                   <button type="button" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-direccion">Agregar Datos Fiscales</button>
                 </h1>
               </div>
               <!-- /.box-body -->
@@ -134,6 +155,18 @@
                 </div>
                 <div class="modal-body">
                     {!! Form::open(['route' => 'direcciones.store']) !!}
+                    <!-- RFC Field -->
+                    <div class="form-group col-sm-6">
+                        {!! Form::label('RFC', 'RFC:') !!}
+                        {!! Form::text('RFC', null, ['class' => 'form-control','onchange'=>'validarRFC(this)']) !!}
+                        <pre id="resultado"></pre>
+                    </div>
+
+                    <!-- Razon Social Field -->
+                    <div class="form-group col-sm-6">
+                        {!! Form::label('razonsocial', 'Razón Social:') !!}
+                        {!! Form::text('razonsocial', null, ['class' => 'form-control', 'required']) !!}
+                    </div>
                     <!-- Calle Field -->
                     <div class="form-group col-sm-6">
                         {!! Form::label('calle', 'Calle:') !!}
@@ -188,7 +221,7 @@
 
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
-                  <button type="submit" class="btn btn-primary">Agregar Dirección</button>
+                  <button type="submit" class="btn btn-primary" id="subdatfiscales" disabled>Agregar Datos Fiscales</button>
                 </div>
                 {!! Form::close() !!}
               </div>
@@ -229,5 +262,73 @@
   }
 })
 }
+
+//Función para validar un RFC
+// Devuelve el RFC sin espacios ni guiones si es correcto
+// Devuelve false si es inválido
+// (debe estar en mayúsculas, guiones y espacios intermedios opcionales)
+function rfcValido(rfc, aceptarGenerico = true) {
+    const re       = /^([A-ZÑ&]{3,4}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/;
+    var   validado = rfc.match(re);
+
+    if (!validado)  //Coincide con el formato general del regex?
+        return false;
+
+    //Separar el dígito verificador del resto del RFC
+    const digitoVerificador = validado.pop(),
+          rfcSinDigito      = validado.slice(1).join(''),
+          len               = rfcSinDigito.length,
+
+    //Obtener el digito esperado
+          diccionario       = "0123456789ABCDEFGHIJKLMN&OPQRSTUVWXYZ Ñ",
+          indice            = len + 1;
+    var   suma,
+          digitoEsperado;
+
+    if (len == 12) suma = 0
+    else suma = 481; //Ajuste para persona moral
+
+    for(var i=0; i<len; i++)
+        suma += diccionario.indexOf(rfcSinDigito.charAt(i)) * (indice - i);
+    digitoEsperado = 11 - suma % 11;
+    if (digitoEsperado == 11) digitoEsperado = 0;
+    else if (digitoEsperado == 10) digitoEsperado = "A";
+
+    //El dígito verificador coincide con el esperado?
+    // o es un RFC Genérico (ventas a público general)?
+    if ((digitoVerificador != digitoEsperado)
+     && (!aceptarGenerico || rfcSinDigito + digitoVerificador != "XAXX010101000"))
+        return false;
+    else if (!aceptarGenerico && rfcSinDigito + digitoVerificador == "XEXX010101000")
+        return false;
+    return rfcSinDigito + digitoVerificador;
+}
+
+
+//Handler para el evento cuando cambia el input
+// -Lleva la RFC a mayúsculas para validarlo
+// -Elimina los espacios que pueda tener antes o después
+function validarRFC(input) {
+    var rfc         = input.value.trim().toUpperCase(),
+        resultado   = document.getElementById("resultado"),
+        valido;
+
+    var rfcCorrecto = rfcValido(rfc);   // ⬅️ Acá se comprueba
+
+    if (rfcCorrecto) {
+    	valido = "Válido";
+      resultado.classList.add("ok");
+      document.getElementById("subdatfiscales").removeAttribute("disabled");
+    } else {
+    	valido = "No válido"
+    	resultado.classList.remove("ok");
+      document.getElementById("subdatfiscales").disabled=true;
+    }
+
+    resultado.innerText = "RFC: " + rfc
+                        + "\nResultado: " + rfcCorrecto
+                        + "\nFormato: " + valido;
+}
+
 </script>
 @endsection

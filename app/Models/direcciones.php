@@ -33,7 +33,7 @@ class direcciones extends Model
     public $fillable = [
         'cliente_id',
         'RFC',
-        'razonsocial'
+        'razonsocial',
         'calle',
         'numeroExt',
         'numeroInt',
@@ -70,8 +70,8 @@ class direcciones extends Model
      */
     public static $rules = [
         'cliente_id' => 'required',
-        'RFC' => 'required',
-        'razonsocial' = 'required',
+        'RFC' => 'required|unique:direcciones',
+        'razonsocial' => 'required',
         'calle' => 'required',
         'estado_id' => 'required',
         'municipio_id' => 'required',

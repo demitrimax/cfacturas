@@ -10,6 +10,18 @@
     <p>{!! $direcciones->cliente_id !!}</p>
 </div>
 
+<!-- RFC Field -->
+<div class="form-group">
+    {!! Form::label('RFC', 'RFC:') !!}
+    <p>{!! $direcciones->RFC !!}</p>
+</div>
+
+<!-- Razon Social Field -->
+<div class="form-group">
+    {!! Form::label('razonsocial', 'Razón Social:') !!}
+    <p>{!! $direcciones->razonsocial !!}</p>
+</div>
+
 <!-- Calle Field -->
 <div class="form-group">
     {!! Form::label('calle', 'Calle:') !!}
@@ -69,4 +81,3 @@
     {!! Form::label('updated_at', 'Updated At:') !!}
     <p>{!! $direcciones->updated_at !!}</p>
 </div>
-

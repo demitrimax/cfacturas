@@ -49,7 +49,8 @@ class direccionesController extends AppBaseController
     {
         $clientes = clientes::pluck('nombre','id');
         $estados = catestados::pluck('nombre','id');
-        return view('direcciones.create',compact('clientes','estados'));
+        $municipios = catmunicipios::get()->where('id_edo',1)->pluck('nomMunicipio','id');
+        return view('direcciones.create',compact('clientes','estados','municipios'));
     }
 
     /**
@@ -65,7 +66,7 @@ class direccionesController extends AppBaseController
 
         $direcciones = $this->direccionesRepository->create($input);
 
-        Flash::success('Dirección guardada correctamente.');
+        Flash::success('Datos Fiscales guardados correctamente.');
         if(isset($input['redirect'])){
 
           return redirect(route('clientes.show', [$input['cliente_id']]));
@@ -88,7 +89,7 @@ class direccionesController extends AppBaseController
         $direcciones = $this->direccionesRepository->findWithoutFail($id);
 
         if (empty($direcciones)) {
-            Flash::error('Dirección no encontrada');
+            Flash::error('Datos Fiscales no encontrados.');
 
             return redirect(route('direcciones.index'));
         }
@@ -108,12 +109,18 @@ class direccionesController extends AppBaseController
         $direcciones = $this->direccionesRepository->findWithoutFail($id);
 
         if (empty($direcciones)) {
-            Flash::error('Dirección no encontrada');
+            Flash::error('Datos Fiscales no encontrados.');
 
             return redirect(route('direcciones.index'));
         }
-
-        return view('direcciones.edit')->with('direcciones', $direcciones);
+        $clientes = clientes::pluck('nombre','id');
+        $estados = catestados::pluck('nombre','id');
+        $estadoid = $direcciones->estado_id;
+        //$municipios = $direcciones->municipios->pluck('nomMunicipio','id');//->where('id_edo',27);
+        $municipios = catmunicipios::get()->where('id_edo',$estadoid)->pluck('nomMunicipio','id');
+        //dd($municipios);
+        //die;
+        return view('direcciones.edit')->with(compact('direcciones','clientes','estados','municipios'));
     }
 
     /**
@@ -129,14 +136,14 @@ class direccionesController extends AppBaseController
         $direcciones = $this->direccionesRepository->findWithoutFail($id);
 
         if (empty($direcciones)) {
-            Flash::error('Dirección no encontrada');
+            Flash::error('Datos Fiscales no encontrados');
 
             return redirect(route('direcciones.index'));
         }
 
         $direcciones = $this->direccionesRepository->update($request->all(), $id);
 
-        Flash::success('Dirección actualizada correctamente.');
+        Flash::success('Datos Fiscales actualizados correctamente.');
 
         return redirect(route('direcciones.index'));
     }
@@ -173,7 +180,7 @@ class direccionesController extends AppBaseController
     public function GetMunicipios($id)
     {
       $municipios = catmunicipios::where('id_edo',$id)->select('id','nomMunicipio')->get();
-      /*
+      /* ESTO ERA PARA EL JSON
       $data = [];
       $data[0] = [
         'id' => 0,
