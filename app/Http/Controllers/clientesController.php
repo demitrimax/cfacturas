@@ -13,6 +13,8 @@ use Response;
 use App\catestados;
 use App\catmunicipios;
 use App\Models\direcciones;
+use App\Models\clientes;
+use Intervention\Image\ImageManager;
 
 class clientesController extends AppBaseController
 {
@@ -37,7 +39,7 @@ class clientesController extends AppBaseController
         $clientes = $this->clientesRepository->all();
 
         return view('clientes.index')
-            ->with('clientes', $clientes);
+            ->with(compact('clientes'));
     }
 
     /**
@@ -85,8 +87,13 @@ class clientesController extends AppBaseController
 
             return redirect(route('clientes.index'));
         }
+
+            $avatar = 'avatar/'.$clientes->avatar;
+          if (empty($clientes->avatar)) {
+            $avatar = 'avatar/avatar.png';
+          }
           $estados = catestados::pluck('nombre','id');
-        return view('clientes.show')->with(compact('clientes','estados'));
+        return view('clientes.show')->with(compact('clientes','estados','avatar'));
     }
 
     /**
@@ -156,5 +163,25 @@ class clientesController extends AppBaseController
         Flash::success('Cliente borrado correctamente.');
 
         return redirect(route('clientes.index'));
+    }
+    public function avatar(Request $request)
+    {
+      $clienteid = $request->cliente_id;
+      //$clientes = $this->clientesRepository->findWithoutFail($clienteid);
+      //guardar la imagen en el sistema de archivos
+      $manager = new ImageManager;
+      $file = $request->file('avatarimg');
+      $path = public_path() . '/avatar/';
+
+      $filename = uniqid().$file->getClientOriginalName();
+      //cambiar el tamaño de la imagen
+      $image = $manager->make($file)->resize(400, 400)->save($path.$filename);
+      //$file->move($path,$filename);
+
+      //guardar el registro de la Imagen
+      $avatar = clientes::find($clienteid);
+      $avatar->avatar = $filename;
+      $avatar->save(); //INSERT
+      return back();
     }
 }

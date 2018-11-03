@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string apellidomat
  * @property string RFC
  * @property string CURP
+ * @property string avatar
  */
 class clientes extends Model
 {
@@ -29,7 +30,8 @@ class clientes extends Model
         'apellidopat',
         'apellidomat',
         'RFC',
-        'CURP'
+        'CURP',
+        'avatar'
     ];
 
     /**
@@ -42,7 +44,8 @@ class clientes extends Model
         'apellidopat' => 'string',
         'apellidomat' => 'string',
         'RFC' => 'string',
-        'CURP' => 'string'
+        'CURP' => 'string',
+        'avatar' => 'string'
     ];
 
     /**
