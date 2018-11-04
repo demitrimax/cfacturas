@@ -110,6 +110,42 @@
               <!-- /.box-body -->
 
             </div>
+
+            <div class="box box-default collapsed-box">
+                <div class="box-header">
+                  <h3 class="box-title">Documentos del Cliente</h3>
+                  <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                </button>
+              </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body no-padding">
+                  <table class="table table-condensed">
+                    <tbody><tr>
+                      <th style="width: 10px">#</th>
+                      <th>Tipo de Documento</th>
+                      <th>Documento</th>
+                      <th>Nota</th>
+                      <th>Acciones</th>
+                    </tr>
+                  @foreach($clientes->catdocumentos as$key=>$documento)
+                    <tr>
+                      <td>{{$key+1}}</td>
+                      <td>{{$documento->cattipodoc->tipo}}</td>
+                      <td><a href="{!! asset($documento->archivo) !!}" target="_blank"> Documento </a></td>
+                      <td>{{$documento->nota}}</td>
+                      <td><button class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i> </button> <button class="btn btn-danger" rel="tooltip" title="Eliminar" Onclick="ConfirmDeleteContacto(direccion->id)"> <i class="fa fa-remove"></i></button></td>
+                    </tr>
+                    @endforeach
+                  </tbody></table>
+                  <h1 class="pull-right">
+                     <button type="button" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-documento">Agregar Documento</button>
+                  </h1>
+                </div>
+                <!-- /.box-body -->
+
+              </div>
     </div>
 
     <div class="modal fade" id="modal-datcontacto">
@@ -262,6 +298,50 @@
             </div>
             <!-- /.modal -->
           </div>
+
+          <div class="modal fade" id="modal-documento">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">Agregar Documento</h4>
+                    </div>
+                    <div class="modal-body">
+                        {!! Form::open(['route' => 'catdocumentos.store', 'enctype' => 'multipart/form-data']) !!}
+
+                    {!! Form::hidden('cliente_id', $clientes->id) !!}
+                    {!! Form::hidden('redirect', 'clientes.show') !!}
+                    <div class="form-group col-sm-6">
+                        {!! Form::label('tipodoc', 'Tipo de Documento:') !!}
+                        {!! Form::select('tipodoc', $tipodocs, null, ['class' => 'form-control']) !!}
+                    </div>
+
+                    <!-- Archivo Field -->
+                    <div class="form-group col-sm-6">
+                        {!! Form::label('archivo', 'Archivo:') !!}
+                        {!! Form::file('archivo', ['class' => 'form-control'])!!}
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!-- Nota Field -->
+                    <div class="form-group col-sm-6">
+                        {!! Form::label('nota', 'Nota:') !!}
+                        {!! Form::text('nota', null, ['class' => 'form-control']) !!}
+                    </div>
+                  </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
+                      <button type="submit" class="btn btn-primary" id="agregardoc">Agregar Documento</button>
+                    </div>
+                    {!! Form::close() !!}
+
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+              <!-- /.modal -->
+            </div>
 @endsection
 @section('scripts')
 <script>

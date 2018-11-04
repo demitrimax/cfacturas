@@ -1,7 +1,7 @@
 <!-- Tipodoc Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('tipodoc', 'Tipodoc:') !!}
-    {!! Form::text('tipodoc', null, ['class' => 'form-control']) !!}
+    {!! Form::label('tipodoc', 'Tipo de Documento:') !!}
+    {!! Form::select('tipodoc', $tipodocs, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Archivo Field -->

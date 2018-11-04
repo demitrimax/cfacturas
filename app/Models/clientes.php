@@ -56,8 +56,8 @@ class clientes extends Model
     public static $rules = [
         'nombre' => 'required',
         'apellidopat' => 'required',
-        'RFC' => 'max:15',
-        'CURP' => 'max:18'
+        'RFC' => 'max:15|required',
+        'CURP' => 'max:18|required'
     ];
 
     public function datcontacto() {
@@ -66,6 +66,10 @@ class clientes extends Model
 
     public function direcciones() {
       return $this->hasMany('App\Models\direcciones','cliente_id');
+    }
+
+    public function catdocumentos() {
+      return $this->hasMany('App\Models\catdocumentos','cliente_id');
     }
 
 

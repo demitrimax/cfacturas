@@ -14,7 +14,9 @@ use App\catestados;
 use App\catmunicipios;
 use App\Models\direcciones;
 use App\Models\clientes;
+use App\Models\catdocumentos;
 use Intervention\Image\ImageManager;
+use App\Models\cattipodoc;
 
 class clientesController extends AppBaseController
 {
@@ -92,8 +94,9 @@ class clientesController extends AppBaseController
           if (empty($clientes->avatar)) {
             $avatar = 'avatar/avatar.png';
           }
+          $tipodocs = cattipodoc::pluck('tipo','id');
           $estados = catestados::pluck('nombre','id');
-        return view('clientes.show')->with(compact('clientes','estados','avatar'));
+        return view('clientes.show')->with(compact('clientes','estados','avatar','tipodocs'));
     }
 
     /**

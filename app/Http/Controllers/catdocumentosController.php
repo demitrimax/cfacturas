@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Models\cattipodoc;
+use App\Models\catdocumentos;
 
 class catdocumentosController extends AppBaseController
 {
@@ -32,8 +34,9 @@ class catdocumentosController extends AppBaseController
         $this->catdocumentosRepository->pushCriteria(new RequestCriteria($request));
         $catdocumentos = $this->catdocumentosRepository->all();
 
+
         return view('catdocumentos.index')
-            ->with('catdocumentos', $catdocumentos);
+            ->with(compact('catdocumentos'));
     }
 
     /**
@@ -43,7 +46,8 @@ class catdocumentosController extends AppBaseController
      */
     public function create()
     {
-        return view('catdocumentos.create');
+        $tipodocs = cattipodoc::pluck('tipo','id');
+        return view('catdocumentos.create')->with(compact('tipodocs'));
     }
 
     /**
@@ -57,11 +61,32 @@ class catdocumentosController extends AppBaseController
     {
         $input = $request->all();
 
-        $catdocumentos = $this->catdocumentosRepository->create($input);
+        $tipodoc = cattipodoc::find($request->input('tipodoc'));
+        $file = $request->file('archivo');
+        $path = public_path() . '/documents/' . $tipodoc->carpeta;
+        $nombre = uniqid().$file->getClientOriginalName();
+        $file->move($path, $nombre);
 
-        Flash::success('Catdocumentos saved successfully.');
+        $catdocumentos = new catdocumentos();
+        $catdocumentos->tipodoc = $request->input('tipodoc');
+        $catdocumentos->archivo = 'documents/'.$tipodoc->carpeta.'/'.$nombre;
+        $catdocumentos->nota = $request->input('nota');
+        if (!empty($request->input('cliente_id'))) {
+          $catdocumentos->cliente_id = $request->input('cliente_id');
+        }
+        $catdocumentos->save();
+        //$catdocumentos = $this->catdocumentosRepository->create($input);
 
-        return redirect(route('catdocumentos.index'));
+
+        Flash::success('Documento guardado correctamente.');
+
+        if(isset($input['redirect'])){
+
+          return redirect(route('clientes.show', [$input['cliente_id']]));
+        }
+        else {
+          return redirect(route('catdocumentos.index'));
+      }
     }
 
     /**

@@ -17,7 +17,7 @@ class catdocumentos extends Model
 {
 
     public $table = 'catdocumentos';
-    
+
 
 
     public $fillable = [
@@ -47,5 +47,14 @@ class catdocumentos extends Model
         'archivo' => 'required'
     ];
 
-    
+    public function clientes()
+    {
+          return $this->belongsTo('App\Models\clientes', 'id');
+    }
+    public function cattipodoc()
+    {
+          return $this->belongsTo('App\Models\cattipodoc','tipodoc');
+    }
+
+
 }
