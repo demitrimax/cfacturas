@@ -33,3 +33,6 @@ Route::get('GetMunicipios/{id}', 'direccionesController@GetMunicipios');
 Route::resource('catdocumentos', 'catdocumentosController');
 
 Route::post('clientes/avatarchange', 'clientesController@avatar');
+
+
+Route::resource('catempresas', 'catempresasController');
