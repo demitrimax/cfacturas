@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model as Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class catempresas
@@ -18,8 +19,9 @@ use Illuminate\Database\Eloquent\Model as Model;
 class catempresas extends Model
 {
 
+    use SoftDeletes;
     public $table = 'catempresas';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -53,8 +55,8 @@ class catempresas extends Model
      * @var array
      */
     public static $rules = [
-        
+
     ];
 
-    
+
 }

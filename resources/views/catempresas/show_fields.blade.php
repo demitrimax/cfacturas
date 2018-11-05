@@ -1,8 +1,3 @@
-<!-- Id Field -->
-<div class="form-group">
-    {!! Form::label('id', 'Id:') !!}
-    <p>{!! $catempresas->id !!}</p>
-</div>
 
 <!-- Nombre Field -->
 <div class="form-group">
@@ -12,25 +7,24 @@
 
 <!-- Correo Factura Field -->
 <div class="form-group">
-    {!! Form::label('correo_factura', 'Correo Factura:') !!}
+    {!! Form::label('correo_factura', 'Correo de Facturación:') !!}
     <p>{!! $catempresas->correo_factura !!}</p>
 </div>
 
 <!-- Correo Notifica Field -->
 <div class="form-group">
-    {!! Form::label('correo_notifica', 'Correo Notifica:') !!}
+    {!! Form::label('Correo_notifica', 'Correo Notificaciones:') !!}
     <p>{!! $catempresas->correo_notifica !!}</p>
 </div>
 
 <!-- Telefono Field -->
 <div class="form-group">
-    {!! Form::label('telefono', 'Telefono:') !!}
+    {!! Form::label('telefono', 'Teléfono:') !!}
     <p>{!! $catempresas->telefono !!}</p>
 </div>
 
 <!-- Comision Field -->
 <div class="form-group">
-    {!! Form::label('comision', 'Comision:') !!}
-    <p>{!! $catempresas->comision !!}</p>
+    {!! Form::label('comision', 'Porcentaje de Comision:') !!}
+    <p>{!! $catempresas->comision !!} %</p>
 </div>
-
