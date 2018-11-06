@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\catestados;
+use App\catmunicipios;
 
 class catempresasController extends AppBaseController
 {
@@ -80,8 +82,8 @@ class catempresasController extends AppBaseController
 
             return redirect(route('catempresas.index'));
         }
-
-        return view('catempresas.show')->with('catempresas', $catempresas);
+        $estados = catestados::pluck('nombre','id');
+        return view('catempresas.show')->with(compact('catempresas','estados'));
     }
 
     /**

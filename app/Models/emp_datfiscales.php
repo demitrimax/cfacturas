@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model as Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class emp_datfiscales
@@ -26,9 +27,9 @@ use Illuminate\Database\Eloquent\Model as Model;
  */
 class emp_datfiscales extends Model
 {
-
+    use SoftDeletes;
     public $table = 'emp_datfiscales';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -74,7 +75,7 @@ class emp_datfiscales extends Model
      * @var array
      */
     public static $rules = [
-        
+
     ];
 
     /**

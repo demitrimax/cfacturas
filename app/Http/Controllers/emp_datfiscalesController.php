@@ -19,6 +19,7 @@ class emp_datfiscalesController extends AppBaseController
     public function __construct(emp_datfiscalesRepository $empDatfiscalesRepo)
     {
         $this->empDatfiscalesRepository = $empDatfiscalesRepo;
+        $this->middleware('auth');
     }
 
     /**
@@ -59,9 +60,15 @@ class emp_datfiscalesController extends AppBaseController
 
         $empDatfiscales = $this->empDatfiscalesRepository->create($input);
 
-        Flash::success('Emp Datfiscales saved successfully.');
+        Flash::success('Datos Fiscuales guardados correctamente.');
+        if(isset($input['redirect'])){
+
+          return redirect(route('catempresas.show', [$input['empresa_id']]));
+        }
+        else {
 
         return redirect(route('empDatfiscales.index'));
+      }
     }
 
     /**
@@ -76,7 +83,7 @@ class emp_datfiscalesController extends AppBaseController
         $empDatfiscales = $this->empDatfiscalesRepository->findWithoutFail($id);
 
         if (empty($empDatfiscales)) {
-            Flash::error('Emp Datfiscales not found');
+            Flash::error('Datos Fiscales no encontrados');
 
             return redirect(route('empDatfiscales.index'));
         }
@@ -96,7 +103,7 @@ class emp_datfiscalesController extends AppBaseController
         $empDatfiscales = $this->empDatfiscalesRepository->findWithoutFail($id);
 
         if (empty($empDatfiscales)) {
-            Flash::error('Emp Datfiscales not found');
+            Flash::error('Datos fiscales no encontrados.');
 
             return redirect(route('empDatfiscales.index'));
         }
@@ -117,14 +124,14 @@ class emp_datfiscalesController extends AppBaseController
         $empDatfiscales = $this->empDatfiscalesRepository->findWithoutFail($id);
 
         if (empty($empDatfiscales)) {
-            Flash::error('Emp Datfiscales not found');
+            Flash::error('Datos Fiscales no encontrados.');
 
             return redirect(route('empDatfiscales.index'));
         }
 
         $empDatfiscales = $this->empDatfiscalesRepository->update($request->all(), $id);
 
-        Flash::success('Emp Datfiscales updated successfully.');
+        Flash::success('Datos Fiscales actualizados correctamente.');
 
         return redirect(route('empDatfiscales.index'));
     }
@@ -141,15 +148,22 @@ class emp_datfiscalesController extends AppBaseController
         $empDatfiscales = $this->empDatfiscalesRepository->findWithoutFail($id);
 
         if (empty($empDatfiscales)) {
-            Flash::error('Emp Datfiscales not found');
+            Flash::error('Datos Fiscales no encontrados.');
 
             return redirect(route('empDatfiscales.index'));
         }
 
         $this->empDatfiscalesRepository->delete($id);
 
-        Flash::success('Emp Datfiscales deleted successfully.');
+        Flash::success('Datos Fiscales borrados correctamente.');
+
+        if(isset($input['redirect'])){
+
+          return redirect(route('catempresas.show', [$input['empresa_id']]));
+        }
+        else {
 
         return redirect(route('empDatfiscales.index'));
+      }
     }
 }

@@ -58,5 +58,8 @@ class catempresas extends Model
 
     ];
 
+    public function emp_datfiscales() {
+      return $this->hasMany('App\Models\emp_datfiscales','empresa_id');
+    }
 
 }
