@@ -38,3 +38,5 @@ Route::post('clientes/avatarchange', 'clientesController@avatar');
 Route::resource('catempresas', 'catempresasController');
 
 Route::resource('empDatfiscales', 'emp_datfiscalesController');
+
+Route::resource('catBancos', 'cat_bancosController');
