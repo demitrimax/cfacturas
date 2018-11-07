@@ -40,3 +40,5 @@ Route::resource('catempresas', 'catempresasController');
 Route::resource('empDatfiscales', 'emp_datfiscalesController');
 
 Route::resource('catBancos', 'cat_bancosController');
+
+Route::resource('catcuentas', 'catcuentasController');
