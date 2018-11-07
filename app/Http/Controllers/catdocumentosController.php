@@ -21,6 +21,7 @@ class catdocumentosController extends AppBaseController
     public function __construct(catdocumentosRepository $catdocumentosRepo)
     {
         $this->catdocumentosRepository = $catdocumentosRepo;
+        $this->middleware('auth');
     }
 
     /**
@@ -74,6 +75,9 @@ class catdocumentosController extends AppBaseController
         if (!empty($request->input('cliente_id'))) {
           $catdocumentos->cliente_id = $request->input('cliente_id');
         }
+        if (!empty($request->input('empresa_id'))) {
+          $catdocumentos->empresa_id = $request->input('empresa_id');
+        }
         $catdocumentos->save();
         //$catdocumentos = $this->catdocumentosRepository->create($input);
 
@@ -81,8 +85,17 @@ class catdocumentosController extends AppBaseController
         Flash::success('Documento guardado correctamente.');
 
         if(isset($input['redirect'])){
+          $redirectroute = $input['redirect'];
+          if (isset($input['cliente_id']))
+          {
+            $showid = $input['cliente_id'];
+          }
+          if (isset($input['empresa_id']))
+          {
+            $showid = $input['empresa_id'];
+          }
 
-          return redirect(route('clientes.show', [$input['cliente_id']]));
+          return redirect(route($redirectroute, $showid));
         }
         else {
           return redirect(route('catdocumentos.index'));

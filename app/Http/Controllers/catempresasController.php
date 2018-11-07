@@ -12,6 +12,8 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\catestados;
 use App\catmunicipios;
+use App\Models\cattipodoc;
+use App\Models\catdocumentos;
 
 class catempresasController extends AppBaseController
 {
@@ -21,6 +23,7 @@ class catempresasController extends AppBaseController
     public function __construct(catempresasRepository $catempresasRepo)
     {
         $this->catempresasRepository = $catempresasRepo;
+        $this->middleware('auth');
     }
 
     /**
@@ -82,8 +85,9 @@ class catempresasController extends AppBaseController
 
             return redirect(route('catempresas.index'));
         }
+        $tipodocs = cattipodoc::pluck('tipo','id');
         $estados = catestados::pluck('nombre','id');
-        return view('catempresas.show')->with(compact('catempresas','estados'));
+        return view('catempresas.show')->with(compact('catempresas','estados','tipodocs'));
     }
 
     /**

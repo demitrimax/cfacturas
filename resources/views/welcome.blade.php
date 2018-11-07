@@ -84,7 +84,11 @@
 
                 <div class="links">
                     <a href="#">Manual de Usuario</a>
+                  @if (Auth::user())
+                    <a href="{{ url('/home') }}">Principal</a>
+                  @else
                     <a href="{{ route('login') }}">Iniciar Sesión</a>
+                  @endif
                     <a href="{{ route('register') }}">Registrese</a>
                     <a href="#">DashBoard</a>
                     <a href="#">Informe un problema</a>

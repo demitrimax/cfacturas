@@ -62,4 +62,8 @@ class catempresas extends Model
       return $this->hasMany('App\Models\emp_datfiscales','empresa_id');
     }
 
+    public function catdocumentos() {
+      return $this->hasMany('App\Models\catdocumentos', 'empresa_id');
+    }
+
 }

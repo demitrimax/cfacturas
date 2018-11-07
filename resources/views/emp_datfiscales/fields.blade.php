@@ -66,5 +66,5 @@
 <!-- Submit Field -->
 <div class="form-group">
     {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
-    <a href="{!! route('empDatfiscales.index') !!}" class="btn btn-default">Cancelar</a>
+    <a href="{!! route('catempresas.index') !!}" class="btn btn-default">Cancelar</a>
 </div>

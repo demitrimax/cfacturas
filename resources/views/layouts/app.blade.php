@@ -41,8 +41,8 @@
 
             <!-- Logo -->
             <a href="{!! url('/home') !!}" class="logo">
-                <span class="logo-min"><b>Consorcio Comer</b></span>
-                <span class="logo-lg"><b>Consorcio</b>Comer</span>
+                <span class="logo-min"><b>Consorcio Comercial</b></span>
+                <span class="logo-lg"><b>Consorcio</b>Comercial</span>
             </a>
 
             <!-- Header Navbar -->
