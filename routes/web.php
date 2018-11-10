@@ -22,23 +22,19 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/home', 'HomeController@index');
 
-Route::resource('clientes', 'clientesController');
+Route::middleware(['admin'])->group(function() {
+  Route::resource('clientes', 'clientesController');
+  Route::resource('datcontactos', 'datcontactoController');
+  Route::resource('direcciones', 'direccionesController');
+  Route::get('GetMunicipios/{id}', 'direccionesController@GetMunicipios');
+  Route::resource('catdocumentos', 'catdocumentosController');
+  Route::post('clientes/avatarchange', 'clientesController@avatar');
+  Route::resource('catempresas', 'catempresasController');
+  Route::resource('empDatfiscales', 'emp_datfiscalesController');
+  Route::resource('catBancos', 'cat_bancosController');
+  Route::resource('catcuentas', 'catcuentasController');
+  Route::resource('usrs', 'usrsController');
+});
 
-Route::resource('datcontactos', 'datcontactoController');
 
-Route::resource('direcciones', 'direccionesController');
-
-Route::get('GetMunicipios/{id}', 'direccionesController@GetMunicipios');
-
-Route::resource('catdocumentos', 'catdocumentosController');
-
-Route::post('clientes/avatarchange', 'clientesController@avatar');
-
-
-Route::resource('catempresas', 'catempresasController');
-
-Route::resource('empDatfiscales', 'emp_datfiscalesController');
-
-Route::resource('catBancos', 'cat_bancosController');
-
-Route::resource('catcuentas', 'catcuentasController');
+Route::resource('users', 'usersController');

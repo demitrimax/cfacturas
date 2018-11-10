@@ -24,3 +24,11 @@
             </span>
           </a>
         </li>
+<li class="{{ Request::is('usrs*') ? 'active' : '' }}">
+    <a href="{!! route('usrs.index') !!}"><i class="fa fa-edit"></i><span>Usrs</span></a>
+</li>
+
+<li class="{{ Request::is('users*') ? 'active' : '' }}">
+    <a href="{!! route('users.index') !!}"><i class="fa fa-edit"></i><span>Users</span></a>
+</li>
+
