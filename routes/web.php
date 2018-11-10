@@ -36,7 +36,6 @@ Route::middleware(['admin'])->group(function() {
   Route::resource('usrs', 'usrsController');
 });
 
-
 Route::resource('users', 'usersController');
-
-Route::resource('users', 'usersController');
+Route::get('profile','profileController@index');
+Route::post('avatarchan', 'profileController@avatarchange');

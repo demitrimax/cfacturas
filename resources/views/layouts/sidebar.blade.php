@@ -6,8 +6,12 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="http://infyom.com/images/logo/blue_logo_150x150.jpg" class="img-circle"
+                @if (empty(Auth::user()->avatar))
+                <img src="avatar/avatar.png" class="img-circle"
                      alt="User Image"/>
+                     @else
+                     <img src="avatar/{{Auth::user()->avatar}}" class="img-circle" alt="User Image"/>
+                     @endif
             </div>
             <div class="pull-left info">
                 @if (Auth::guest())
