@@ -20,9 +20,9 @@
     <link rel="stylesheet" href="{{asset('adminlte/dist/css/skins/_all-skins.min.css')}}">
 
     <!-- iCheck -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/square/_all.css">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css">
+      <link rel="stylesheet" href="{{asset('adminlte/bower_components/icheck/skins/square/_all.css')}}">
+    <!-- select2 -->
+    <link rel="stylesheet" href="{{asset('adminlte/bower_components/select2/dist/css/select2.min.css')}}">
 
     <!-- Google Font -->
   <link rel="stylesheet"
@@ -41,14 +41,16 @@
 
             <!-- Logo -->
             <a href="{!! url('/home') !!}" class="logo">
-                <span class="logo-min"><b>Consorcio Comercial</b></span>
-                <span class="logo-lg"><b>Consorcio</b>Comercial</span>
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>C </b>Co</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>Consorcio </b>Comer</span>
             </a>
 
             <!-- Header Navbar -->
             <nav class="navbar navbar-static-top" role="navigation">
                 <!-- Sidebar toggle button-->
-                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                     <span class="sr-only">Toggle navigation</span>
                 </a>
                 <!-- Navbar Right Menu -->
@@ -60,9 +62,9 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <!-- The user image in the navbar-->
                                 @if (empty(Auth::user()->avatar))
-                                  <img src="avatar/avatar.png" class="img-circle" alt="User Image" width="30" height="30"/>
+                                  <img src="{{asset('avatar/avatar.png')}}" class="img-circle" alt="User Image" width="30" height="30"/>
                                 @else
-                                     <img src="avatar/{{Auth::user()->avatar}}" class="img-circle" alt="User Image" width="30"/>
+                                     <img src="{{asset('avatar/'.Auth::user()->avatar)}}" class="img-circle" alt="User Image" width="30"/>
                                 @endif
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
                                 <span class="hidden-xs">{!! Auth::user()->name !!}</span>
@@ -71,9 +73,9 @@
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
                                   @if (empty(Auth::user()->avatar))
-                                    <img src="avatar/avatar.png" class="img-circle" alt="User Image"/>
+                                    <img src="{{asset('avatar/avatar.png')}}" class="img-circle" alt="User Image"/>
                                   @else
-                                       <img src="avatar/{{Auth::user()->avatar}}" class="img-circle" alt="User Image"/>
+                                       <img src="{{asset('avatar/'.Auth::user()->avatar)}}" class="img-circle" alt="User Image"/>
                                   @endif
                                     <p>
                                         {!! Auth::user()->name !!}
@@ -173,9 +175,10 @@
     <script src="{{asset('adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
     <!-- SweetAlert2 -->
     <script src="{{asset('sweetalert/dist/sweetalert2.all.min.js')}}"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js"></script>
+    <!-- ichek -->
+    <script src="{{asset('adminlte/bower_components/icheck/icheck.min.js')}}"></script>
+    <!-- select2 -->
+    <script src="adminlte/bower_components/select2/dist/js/select2.min.js"></script>
 
     @yield('scripts')
 </body>
