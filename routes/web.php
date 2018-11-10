@@ -38,3 +38,5 @@ Route::middleware(['admin'])->group(function() {
 
 
 Route::resource('users', 'usersController');
+
+Route::resource('users', 'usersController');
