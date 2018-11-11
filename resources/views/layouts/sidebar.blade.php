@@ -7,10 +7,10 @@
         <div class="user-panel">
             <div class="pull-left image">
                 @if (empty(Auth::user()->avatar))
-                <img src="avatar/avatar.png" class="img-circle"
+                <img src="{{asset('avatar/avatar.png')}}" class="img-circle"
                      alt="User Image"/>
                      @else
-                     <img src="avatar/{{Auth::user()->avatar}}" class="img-circle" alt="User Image"/>
+                     <img src="{{asset('avatar/'.Auth::user()->avatar)}}" class="img-circle" alt="User Image"/>
                      @endif
             </div>
             <div class="pull-left info">

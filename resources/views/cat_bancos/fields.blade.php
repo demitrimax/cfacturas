@@ -1,7 +1,7 @@
 <!-- Nombre Field -->
 <div class="form-group">
     {!! Form::label('nombre', 'Nombre:') !!}
-    {!! Form::text('nombre', null, ['class' => 'form-control']) !!}
+    {!! Form::text('nombre', null, ['class' => 'form-control', 'maxlength' => 30]) !!}
 </div>
 
 <!-- Denominacionsocial Field -->
@@ -13,13 +13,13 @@
 <!-- Nombrecorto Field -->
 <div class="form-group">
     {!! Form::label('nombrecorto', 'Nombre corto:') !!}
-    {!! Form::text('nombrecorto', null, ['class' => 'form-control']) !!}
+    {!! Form::text('nombrecorto', null, ['class' => 'form-control', 'maxlength' => 10]) !!}
 </div>
 
 <!-- Rfc Field -->
 <div class="form-group">
     {!! Form::label('RFC', 'RFC:') !!}
-    {!! Form::text('RFC', null, ['class' => 'form-control']) !!}
+    {!! Form::text('RFC', null, ['class' => 'form-control', 'maxlength' => 13]) !!}
 </div>
 
 <!-- Entidad Field -->

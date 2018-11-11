@@ -178,7 +178,7 @@
     <!-- ichek -->
     <script src="{{asset('adminlte/bower_components/icheck/icheck.min.js')}}"></script>
     <!-- select2 -->
-    <script src="adminlte/bower_components/select2/dist/js/select2.min.js"></script>
+    <script src="{{asset('adminlte/bower_components/select2/dist/js/select2.min.js')}}"></script>
 
     @yield('scripts')
 </body>

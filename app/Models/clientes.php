@@ -60,6 +60,11 @@ class clientes extends Model
         'CURP' => 'max:18|required'
     ];
 
+    public function getNomcompletoAttribute()
+    {
+      return "{$this->nombre} {$this->apellidopat} {$this->apellidomat}";
+    }
+
     public function datcontacto() {
       return $this->hasMany('App\Models\datcontacto','cliente_id');
     }
@@ -71,6 +76,7 @@ class clientes extends Model
     public function catdocumentos() {
       return $this->hasMany('App\Models\catdocumentos','cliente_id');
     }
+
 
 
 }

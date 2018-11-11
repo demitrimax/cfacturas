@@ -55,6 +55,13 @@ class cat_bancosController extends AppBaseController
      */
     public function store(Createcat_bancosRequest $request)
     {
+        $rules = [
+          'nombre' => 'required',
+          'RFC' => 'unique:cat_bancos|required',
+          'nombrecorto' => 'required|max:10',
+          'denominacionsocial' => 'required',
+        ];
+        $this->validate($request, $rules);
         $input = $request->all();
 
         $catBancos = $this->catBancosRepository->create($input);

@@ -3,14 +3,17 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Cat Bancos
+            Catálogo de Bancos
         </h1>
    </section>
    <div class="content">
        @include('adminlte-templates::common.errors')
+    <div class="row">
+      <div class="col-md-6">
        <div class="box box-primary">
            <div class="box-body">
-               <div class="row">
+
+
                    {!! Form::model($catBancos, ['route' => ['catBancos.update', $catBancos->id], 'method' => 'patch']) !!}
 
                         @include('cat_bancos.fields')
@@ -20,4 +23,5 @@
            </div>
        </div>
    </div>
+ </div>
 @endsection

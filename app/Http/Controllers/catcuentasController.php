@@ -11,6 +11,7 @@ use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\Models\cat_bancos;
+use App\Models\clientes;
 
 class catcuentasController extends AppBaseController
 {
@@ -44,8 +45,11 @@ class catcuentasController extends AppBaseController
      */
     public function create()
     {
-        $bancos = catbancos::pluck('nombrecorto','id');
-        return view('catcuentas.create')->with(compact('bacos'));
+        $bancos = cat_bancos::pluck('nombrecorto','id');
+        $clientes = clientes::all();
+        $clientes = $clientes->pluck('nomcompleto','id');
+
+        return view('catcuentas.create')->with(compact('bancos','clientes'));
     }
 
     /**

@@ -1,14 +1,13 @@
 <table class="table table-responsive" id="catcuentas-table">
     <thead>
         <tr>
-            <th>Banco Id</th>
-        <th>Numcuenta</th>
-        <th>Clabeinterbancaria</th>
+        <th>Banco</th>
+        <th>Número de cuenta</th>
+        <th>Clabe Interbancaria</th>
         <th>Sucursal</th>
-        <th>Cliente Id</th>
-        <th>Empresa Id</th>
-        <th>Swift</th>
-            <th colspan="3">Action</th>
+        <th>Cliente</th>
+        <th>Empresa</th>
+            <th colspan="3">Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -20,7 +19,6 @@
             <td>{!! $catcuentas->sucursal !!}</td>
             <td>{!! $catcuentas->cliente_id !!}</td>
             <td>{!! $catcuentas->empresa_id !!}</td>
-            <td>{!! $catcuentas->swift !!}</td>
             <td>
                 {!! Form::open(['route' => ['catcuentas.destroy', $catcuentas->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
