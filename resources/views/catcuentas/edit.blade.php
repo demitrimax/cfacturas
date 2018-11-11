@@ -8,9 +8,11 @@
    </section>
    <div class="content">
        @include('adminlte-templates::common.errors')
+    <div class="row">
+      <div class="col-md-6">
        <div class="box box-primary">
            <div class="box-body">
-               <div class="row">
+
                    {!! Form::model($catcuentas, ['route' => ['catcuentas.update', $catcuentas->id], 'method' => 'patch']) !!}
 
                         @include('catcuentas.fields')
@@ -20,4 +22,5 @@
            </div>
        </div>
    </div>
+ </div>
 @endsection

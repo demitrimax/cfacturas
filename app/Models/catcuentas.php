@@ -72,7 +72,7 @@ class catcuentas extends Model
      **/
     public function catBanco()
     {
-        return $this->belongsTo(\App\Models\CatBanco::class);
+        return $this->belongsTo('App\Models\cat_bancos','banco_id');
     }
 
     /**
@@ -80,7 +80,7 @@ class catcuentas extends Model
      **/
     public function cliente()
     {
-        return $this->belongsTo(\App\Models\Cliente::class);
+        return $this->belongsTo('App\Models\clientes','cliente_id');
     }
 
     /**
@@ -88,6 +88,6 @@ class catcuentas extends Model
      **/
     public function catempresa()
     {
-        return $this->belongsTo(\App\Models\Catempresa::class);
+        return $this->belongsTo('App\Models\catempresas','empresa_id');
     }
 }

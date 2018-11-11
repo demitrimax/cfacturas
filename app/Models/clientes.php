@@ -40,6 +40,7 @@ class clientes extends Model
      * @var array
      */
     protected $casts = [
+        'id' => 'integer',
         'nombre' => 'string',
         'apellidopat' => 'string',
         'apellidomat' => 'string',

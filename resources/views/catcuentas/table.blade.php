@@ -13,11 +13,11 @@
     <tbody>
     @foreach($catcuentas as $catcuentas)
         <tr>
-            <td>{!! $catcuentas->banco_id !!}</td>
+            <td>{!! $catcuentas->catBanco->nombre !!}</td>
             <td>{!! $catcuentas->numcuenta !!}</td>
             <td>{!! $catcuentas->clabeinterbancaria !!}</td>
             <td>{!! $catcuentas->sucursal !!}</td>
-            <td>{!! $catcuentas->cliente_id !!}</td>
+            <td>{!! $catcuentas->cliente !!}</td>
             <td>{!! $catcuentas->empresa_id !!}</td>
             <td>
                 {!! Form::open(['route' => ['catcuentas.destroy', $catcuentas->id], 'method' => 'delete']) !!}

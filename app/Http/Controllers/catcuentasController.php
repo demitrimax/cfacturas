@@ -12,6 +12,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\Models\cat_bancos;
 use App\Models\clientes;
+use App\Models\catempresas;
 
 class catcuentasController extends AppBaseController
 {
@@ -35,7 +36,7 @@ class catcuentasController extends AppBaseController
         $catcuentas = $this->catcuentasRepository->all();
 
         return view('catcuentas.index')
-            ->with('catcuentas', $catcuentas);
+            ->with(compact('catcuentas'));
     }
 
     /**
@@ -48,8 +49,9 @@ class catcuentasController extends AppBaseController
         $bancos = cat_bancos::pluck('nombrecorto','id');
         $clientes = clientes::all();
         $clientes = $clientes->pluck('nomcompleto','id');
+        $empresas = catempresas::pluck('nombre','id');
 
-        return view('catcuentas.create')->with(compact('bancos','clientes'));
+        return view('catcuentas.create')->with(compact('bancos','clientes','empresas'));
     }
 
     /**
@@ -65,7 +67,7 @@ class catcuentasController extends AppBaseController
 
         $catcuentas = $this->catcuentasRepository->create($input);
 
-        Flash::success('Catcuentas saved successfully.');
+        Flash::success('Cuenta guardada correctamente.');
 
         return redirect(route('catcuentas.index'));
     }
@@ -82,7 +84,7 @@ class catcuentasController extends AppBaseController
         $catcuentas = $this->catcuentasRepository->findWithoutFail($id);
 
         if (empty($catcuentas)) {
-            Flash::error('Catcuentas not found');
+            Flash::error('Cuenta no encontrada');
 
             return redirect(route('catcuentas.index'));
         }
@@ -102,12 +104,16 @@ class catcuentasController extends AppBaseController
         $catcuentas = $this->catcuentasRepository->findWithoutFail($id);
 
         if (empty($catcuentas)) {
-            Flash::error('Catcuentas not found');
+            Flash::error('Cuenta no encontrada');
 
             return redirect(route('catcuentas.index'));
         }
+        $bancos = cat_bancos::pluck('nombrecorto','id');
+        $clientes = clientes::all();
+        $clientes = $clientes->pluck('nomcompleto','id');
+        $empresas = catempresas::pluck('nombre','id');
 
-        return view('catcuentas.edit')->with('catcuentas', $catcuentas);
+        return view('catcuentas.edit')->with(compact('catcuentas','clientes','bancos','empresas'));
     }
 
     /**
@@ -123,14 +129,14 @@ class catcuentasController extends AppBaseController
         $catcuentas = $this->catcuentasRepository->findWithoutFail($id);
 
         if (empty($catcuentas)) {
-            Flash::error('Catcuentas not found');
+            Flash::error('Cuenta no encontrada');
 
             return redirect(route('catcuentas.index'));
         }
 
         $catcuentas = $this->catcuentasRepository->update($request->all(), $id);
 
-        Flash::success('Catcuentas updated successfully.');
+        Flash::success('Cuenta actualizada correctamente.');
 
         return redirect(route('catcuentas.index'));
     }
@@ -147,14 +153,14 @@ class catcuentasController extends AppBaseController
         $catcuentas = $this->catcuentasRepository->findWithoutFail($id);
 
         if (empty($catcuentas)) {
-            Flash::error('Catcuentas not found');
+            Flash::error('Cuenta no encontrada');
 
             return redirect(route('catcuentas.index'));
         }
 
         $this->catcuentasRepository->delete($id);
 
-        Flash::success('Catcuentas deleted successfully.');
+        Flash::success('Cuenta borrada correctamente.');
 
         return redirect(route('catcuentas.index'));
     }

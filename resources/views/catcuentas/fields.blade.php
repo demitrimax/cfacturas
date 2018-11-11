@@ -7,7 +7,7 @@
 <!-- Numcuenta Field -->
 <div class="form-group">
     {!! Form::label('numcuenta', 'Número de cuenta:') !!}
-    {!! Form::text('numcuenta', null, ['class' => 'form-control']) !!}
+    {!! Form::text('numcuenta', null, ['class' => 'form-control', 'required'=>'true']) !!}
 </div>
 
 <!-- Clabeinterbancaria Field -->
@@ -30,8 +30,8 @@
 
 <!-- Empresa Id Field -->
 <div class="form-group">
-    {!! Form::label('empresa_id', 'Empresa Id:') !!}
-    {!! Form::number('empresa_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('empresa_id', 'Empresa:') !!}
+    {!! Form::select('empresa_id', [''=>'Seleccione uno', $empresas], null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Swift Field -->
