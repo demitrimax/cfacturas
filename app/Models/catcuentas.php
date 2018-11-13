@@ -80,8 +80,9 @@ class catcuentas extends Model
      **/
     public function cliente()
     {
-        return $this->belongsTo('App\Models\clientes','cliente_id');
+          return $this->belongsTo('App\Models\clientes','cliente_id');
     }
+
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -89,5 +90,32 @@ class catcuentas extends Model
     public function catempresa()
     {
         return $this->belongsTo('App\Models\catempresas','empresa_id');
+    }
+
+    public function getNombreclienteAttribute()
+    {
+      $clienteid = $this->cliente_id;
+      $nombrecliente = $this->cliente()->where('id', $clienteid)->first();
+      if (!$nombrecliente) {
+        $nombrecliente = "";
+      }
+      else
+      {
+        $nombrecliente = $nombrecliente->nombre;
+      }
+      return $nombrecliente;
+    }
+    public function getNombreempresaAttribute()
+    {
+      $empresaid = $this->empresa_id;
+      $nombreempresa = $this->catempresa()->where('id', $empresaid)->first();
+      if (!$nombreempresa) {
+        $nombreempresa = "";
+      }
+      else
+      {
+        $nombreempresa = $nombreempresa->nombre;
+      }
+      return $nombreempresa;
     }
 }

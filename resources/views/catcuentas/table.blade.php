@@ -17,8 +17,8 @@
             <td>{!! $catcuentas->numcuenta !!}</td>
             <td>{!! $catcuentas->clabeinterbancaria !!}</td>
             <td>{!! $catcuentas->sucursal !!}</td>
-            <td>{!! $catcuentas->cliente !!}</td>
-            <td>{!! $catcuentas->empresa_id !!}</td>
+            <td>{!! $catcuentas->nombrecliente !!}</td>
+            <td>{!! $catcuentas->nombreempresa !!}</td>
             <td>
                 {!! Form::open(['route' => ['catcuentas.destroy', $catcuentas->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

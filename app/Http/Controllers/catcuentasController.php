@@ -13,6 +13,7 @@ use Response;
 use App\Models\cat_bancos;
 use App\Models\clientes;
 use App\Models\catempresas;
+use App\Models\catcuentas;
 
 class catcuentasController extends AppBaseController
 {
@@ -34,7 +35,8 @@ class catcuentasController extends AppBaseController
     {
         $this->catcuentasRepository->pushCriteria(new RequestCriteria($request));
         $catcuentas = $this->catcuentasRepository->all();
-
+        //dd($catcuentas);
+        //die;
         return view('catcuentas.index')
             ->with(compact('catcuentas'));
     }
@@ -63,6 +65,12 @@ class catcuentasController extends AppBaseController
      */
     public function store(CreatecatcuentasRequest $request)
     {
+        $cuentas = catcuentas::where('numcuenta', $request->input('numcuenta'))->where('banco_id',$request->input('banco_id'))->first();
+        if (count($cuentas)>0) {
+          Flash::error('Cuenta Existe');
+          return back();
+        }
+
         $input = $request->all();
 
         $catcuentas = $this->catcuentasRepository->create($input);
