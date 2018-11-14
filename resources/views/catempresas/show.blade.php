@@ -100,6 +100,44 @@
         </div>
       </div>
 
+      <div class="content">
+        <div class="box box-warning collapsed-box">
+            <div class="box-header">
+              <h3 class="box-title">Cuentas Bancarias</h3>
+              <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+            </button>
+          </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <table class="table table-condensed">
+                <tbody><tr>
+                  <th style="width: 10px">#</th>
+                  <th>NoCuenta</th>
+                  <th>Banco</th>
+                  <th>Sucursal</th>
+                  <th>Acciones</th>
+                </tr>
+              @foreach($catempresas->catcuentas as$key=>$cuenta)
+                <tr>
+                  <td>{{$key+1}}</td>
+                  <td>{{$cuenta->numcuenta}}</td>
+                  <td>{{$cuenta->catBanco->nombre}}</td>
+                  <td>{{$cuenta->sucursal}}</td>
+                  <td><button class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i> </button> <button class="btn btn-danger" rel="tooltip" title="Eliminar" Onclick="ConfirmDeleteContacto(direccion->id)"> <i class="fa fa-remove"></i></button></td>
+                </tr>
+                @endforeach
+              </tbody></table>
+              <h1 class="pull-right">
+                 <button type="button" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-documento">Agregar Cuenta</button>
+              </h1>
+            </div>
+            <!-- /.box-body -->
+
+          </div>
+        </div>
+
       <div class="modal fade" id="modal-datfiscales">
             <div class="modal-dialog">
               <div class="modal-content">

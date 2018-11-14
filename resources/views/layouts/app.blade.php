@@ -62,9 +62,9 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <!-- The user image in the navbar-->
                                 @if (empty(Auth::user()->avatar))
-                                  <img src="{{asset('avatar/avatar.png')}}" class="img-circle" alt="User Image" width="30" height="30"/>
+                                  <img src="{{asset('avatar/avatar.png')}}" class="img-circle" alt="User Image" width="18" height="18"/>
                                 @else
-                                     <img src="{{asset('avatar/'.Auth::user()->avatar)}}" class="img-circle" alt="User Image" width="30"/>
+                                     <img src="{{asset('avatar/'.Auth::user()->avatar)}}" class="img-circle" alt="User Image" width="15" width="15"/>
                                 @endif
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
                                 <span class="hidden-xs">{!! Auth::user()->name !!}</span>

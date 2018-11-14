@@ -68,7 +68,8 @@ class catcuentasController extends AppBaseController
         $cuentas = catcuentas::where('numcuenta', $request->input('numcuenta'))->where('banco_id',$request->input('banco_id'))->first();
         if (count($cuentas)>0) {
           Flash::error('Cuenta Existe');
-          return back();
+          $errorflash = "Cuenta existente";
+          return back()->with($errorflash);
         }
 
         $input = $request->all();

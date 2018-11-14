@@ -15,7 +15,7 @@
     <tbody>
     @foreach($direcciones as $direcciones)
         <tr>
-            <td>{!! $direcciones->cliente_id !!}</td>
+            <td>{!! $direcciones->clientes->nomcompleto !!}</td>
             <td>{!! $direcciones->rfc !!}</td>
             <td>{!! $direcciones->razonsocial !!}</td>
             <td>{!! $direcciones->calle. ' '. $direcciones->numeroExt!!}</td>

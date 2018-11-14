@@ -22,9 +22,9 @@
             <td>
                 {!! Form::open(['route' => ['catcuentas.destroy', $catcuentas->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
-                    <a href="{!! route('catcuentas.show', [$catcuentas->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
-                    <a href="{!! route('catcuentas.edit', [$catcuentas->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
-                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                    <a href="{!! route('catcuentas.show', [$catcuentas->id]) !!}" class='btn btn-default'><i class="glyphicon glyphicon-eye-open"></i></a>
+                    <a href="{!! route('catcuentas.edit', [$catcuentas->id]) !!}" class='btn btn-default'><i class="glyphicon glyphicon-edit"></i></a>
+                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger', 'onclick' => "return confirm('Estas seguro de eliminar esta cuenta?')"]) !!}
                 </div>
                 {!! Form::close() !!}
             </td>

@@ -99,7 +99,14 @@
                     <td>{{$direccion->calle.' '.$direccion->numeroExt.' '.$direccion->numeroInt}}</td>
                     <td>{{$direccion->estados->nombre}}</td>
                     <td>{{$direccion->municipios->nomMunicipio}}</td>
-                    <td><button class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i> </button> <button class="btn btn-danger" rel="tooltip" title="Eliminar" Onclick="ConfirmDeleteContacto({{$direccion->id}})"> <i class="fa fa-remove"></i></button></td>
+                    <td>
+                        {!! Form::open(['route' => ['direcciones.destroy', $direccion->id], 'method' => 'delete', 'id'=>'datFiscalesForm'.$direccion->id]) !!}
+                      <button type="button" class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i></button>
+                      <button type="button" class="btn btn-danger" rel="tooltip" title="Eliminar" Onclick="ConfirmDeletedatFiscales({{$direccion->id}})"> <i class="fa fa-remove"></i></button>
+                        {!! Form::hidden('redirect', 'clientes.show') !!}
+                        {!! Form::hidden('cliente_id', $clientes->id) !!}
+                        {!! Form::close() !!}
+                    </td>
                   </tr>
                   @endforeach
                 </tbody></table>
@@ -358,6 +365,7 @@
       });
     });
   });
+//Confirmación Eliminar datos de Contacto
   function ConfirmDeleteContacto(id) {
   swal({
         title: '¿Estás seguro?',
@@ -370,6 +378,22 @@
         }).then((result) => {
   if (result.value) {
     document.forms['contactform'+id].submit();
+    }
+  })
+}
+
+function ConfirmDeletedatFiscales(id) {
+swal({
+      title: '¿Estás seguro?',
+      text: 'Se eliminará la información los datos fiscales.',
+      type: 'warning',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Continuar',
+      }).then((result) => {
+if (result.value) {
+  document.forms['datFiscalesForm'+id].submit();
   }
 })
 }

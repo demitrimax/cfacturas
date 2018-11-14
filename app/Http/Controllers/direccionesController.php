@@ -155,9 +155,10 @@ class direccionesController extends AppBaseController
      *
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $direcciones = $this->direccionesRepository->findWithoutFail($id);
+        $input = $request->all();
 
         if (empty($direcciones)) {
             Flash::error('Dirección no encontrada');
@@ -168,9 +169,12 @@ class direccionesController extends AppBaseController
         $this->direccionesRepository->delete($id);
 
         Flash::success('Dirección borrada correctamente.');
+
         if(isset($input['redirect'])){
 
-          return redirect(route('clientes.show', [$input['cliente_id']]));
+          $redirect = $input['redirect'];
+
+          return redirect(route($redirect, [$input['cliente_id']]));
         }
         else {
           return redirect(route('direcciones.index'));

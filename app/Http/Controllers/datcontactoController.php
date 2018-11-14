@@ -182,8 +182,9 @@ class datcontactoController extends AppBaseController
         Flash::success('Información de Contacto borrado correctamente.');
 
         if(isset($input['redirect'])){
+          $redirect = $input['redirect'];
 
-          return redirect(route('clientes.show', [$input['cliente_id']]));
+          return redirect(route($redirect, [$input['cliente_id']]));
         }
         else {
         return redirect(route('datcontactos.index'));

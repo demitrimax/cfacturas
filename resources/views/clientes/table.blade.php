@@ -20,9 +20,9 @@
             <td>
                 {!! Form::open(['route' => ['clientes.destroy', $clientes->id], 'method' => 'delete', 'id'=>'form'.$clientes->id]) !!}
                 <div class='btn-group'>
-                    <a href="{!! route('clientes.show', [$clientes->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
-                    <a href="{!! route('clientes.edit', [$clientes->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
-                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'button', 'class' => 'btn btn-danger btn-xs', 'onclick' => "ConfirmDelete(".$clientes->id.")"]) !!}
+                    <a href="{!! route('clientes.show', [$clientes->id]) !!}" class='btn btn-info'><i class="fa fa-eye"></i></a>
+                    <a href="{!! route('clientes.edit', [$clientes->id]) !!}" class='btn btn-primary'><i class="glyphicon glyphicon-edit"></i></a>
+                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'button', 'class' => 'btn btn-danger', 'onclick' => "ConfirmDelete(".$clientes->id.")"]) !!}
                 </div>
                 {!! Form::close() !!}
             </td>

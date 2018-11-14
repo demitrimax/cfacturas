@@ -66,4 +66,8 @@ class catempresas extends Model
       return $this->hasMany('App\Models\catdocumentos', 'empresa_id');
     }
 
+    public function catcuentas() {
+      return $this->hasMany('App\Models\catcuentas', 'empresa_id');
+    }
+
 }
