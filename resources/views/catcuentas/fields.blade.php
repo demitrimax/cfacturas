@@ -36,7 +36,7 @@
 
 <!-- Swift Field -->
 <div class="form-group">
-    {!! Form::label('swift', 'Swift:') !!}
+    {!! Form::label('swift', 'Cuenta Swift:') !!}
     {!! Form::text('swift', null, ['class' => 'form-control']) !!}
 </div>
 

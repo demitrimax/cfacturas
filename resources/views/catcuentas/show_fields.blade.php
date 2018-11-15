@@ -1,13 +1,8 @@
-<!-- Id Field -->
-<div class="form-group">
-    {!! Form::label('id', 'Id:') !!}
-    <p>{!! $catcuentas->id !!}</p>
-</div>
 
 <!-- Banco Id Field -->
 <div class="form-group">
-    {!! Form::label('banco_id', 'Banco Id:') !!}
-    <p>{!! $catcuentas->banco_id !!}</p>
+    {!! Form::label('banco_id', 'Banco:') !!}
+    <p>{!! $catcuentas->catBanco->nombre !!}</p>
 </div>
 
 <!-- Numcuenta Field -->
@@ -30,19 +25,18 @@
 
 <!-- Cliente Id Field -->
 <div class="form-group">
-    {!! Form::label('cliente_id', 'Cliente Id:') !!}
-    <p>{!! $catcuentas->cliente_id !!}</p>
+    {!! Form::label('cliente_id', 'Cliente:') !!}
+    <p>{!! $catcuentas->nombrecliente !!}</p>
 </div>
 
 <!-- Empresa Id Field -->
 <div class="form-group">
-    {!! Form::label('empresa_id', 'Empresa Id:') !!}
-    <p>{!! $catcuentas->empresa_id !!}</p>
+    {!! Form::label('empresa_id', 'Empresa:') !!}
+    <p>{!! $catcuentas->nombreempresa !!}</p>
 </div>
 
 <!-- Swift Field -->
 <div class="form-group">
-    {!! Form::label('swift', 'Swift:') !!}
+    {!! Form::label('swift', 'Cuenta Swift:') !!}
     <p>{!! $catcuentas->swift !!}</p>
 </div>
-
