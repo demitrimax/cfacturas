@@ -28,7 +28,7 @@
                 <li><a href="#">RFC <span class="pull-right">{!! $clientes->RFC !!}</span></a></li>
                 <li><a href="#">CURP <span class="pull-right">{!! $clientes->CURP !!}</span></a></li>
                 <li><a href="#">Fecha de Alta <span class="pull-right">{!! $clientes->created_at !!}</span></a></li>
-                <li><a href="{!! route('clientes.index') !!}" class="btn btn-default">Regresar</a></li>
+                <li><a href="{!! route('clientes.index') !!}" class="btn btn-success pull-right">Regresar</a></li>
               </ul>
 
             </div>

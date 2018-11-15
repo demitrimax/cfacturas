@@ -19,6 +19,11 @@
     <link rel="stylesheet" href="{{asset('adminlte/dist/css/AdminLTE.min.css')}}">
     <link rel="stylesheet" href="{{asset('adminlte/dist/css/skins/_all-skins.min.css')}}">
 
+    <!-- iCheck -->
+      <link rel="stylesheet" href="{{asset('adminlte/bower_components/icheck/skins/square/_all.css')}}">
+    <!-- select2 -->
+    <link rel="stylesheet" href="{{asset('adminlte/bower_components/select2/dist/css/select2.min.css')}}">
+
     <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -164,17 +169,16 @@
     <!-- Bootstrap 3.3.7 -->
     <script src="{{asset('adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
 
-
+    <!-- AdminLTE App -->
+    <script src="{{asset('adminlte/dist/js/adminlte.min.js')}}"></script>
     <!-- SlimScroll -->
     <script src="{{asset('adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
     <!-- SweetAlert2 -->
     <script src="{{asset('sweetalert/dist/sweetalert2.all.min.js')}}"></script>
-    <!-- FastClick -->
-    <script src="{{asset('adminlte/bower_components/fastclick/lib/fastclick.js')}}"></script>
-    <!-- AdminLTE App -->
-    <script src="{{asset('adminlte/dist/js/adminlte.min.js')}}"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="{{asset('adminlte/dist/js/demo.js')}}"></script>
+    <!-- ichek -->
+    <script src="{{asset('adminlte/bower_components/icheck/icheck.min.js')}}"></script>
+    <!-- select2 -->
+    <script src="{{asset('adminlte/bower_components/select2/dist/js/select2.min.js')}}"></script>
 
     @yield('scripts')
 </body>

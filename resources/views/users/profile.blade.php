@@ -18,11 +18,27 @@
   </style>
 @endsection
 
-
+@section('body-class')
+  skin-blue sidebar-mini
+@endsection
+@section('body-style')
+  height: auto; min-height: 100%;
+@endsection
 @section('content')
+<section class="content-header">
+      <h1>
+        Perfil
+        <small>Datos del usuario</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li class="active">Perfil</li>
+      </ol>
+    </section>
+<section class="content">
 	<div class="row">
         <!-- /.col -->
-        <div class="col-md-6">
+        <div class="col-md-6 col-md-offset-3">
           <!-- Widget: user widget style 1 -->
           <div class="box box-widget widget-user">
             <!-- Add the bg color to the header using any of the bg-* classes -->
@@ -114,4 +130,5 @@
         </div>
     </div>
         <!-- /.modal -->
+</section>
 @stop

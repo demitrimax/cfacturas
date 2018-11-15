@@ -1,12 +1,12 @@
 <table class="table table-bordered table-striped" id="clientes-table">
     <thead>
         <tr>
-        <th>Nombre</th>
-        <th>Apellido Paterno</th>
-        <th>Apellido Materno</th>
-        <th>RFC</th>
-        <th>CURP</th>
-            <th colspan="3">Acciones</th>
+          <th>Nombre</th>
+          <th>Apellido Paterno</th>
+          <th>Apellido Materno</th>
+          <th>RFC</th>
+          <th>CURP</th>
+          <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -29,6 +29,16 @@
         </tr>
     @endforeach
     </tbody>
+    <tfoot>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido Paterno</th>
+          <th>Apellido Materno</th>
+          <th>RFC</th>
+          <th>CURP</th>
+          <th>Acciones</th>
+        </tr>
+    </tfoot>
 </table>
 @section('scripts')
 <!-- DataTables -->
