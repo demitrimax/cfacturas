@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model as Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class catdocumentos
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\Model as Model;
 class catdocumentos extends Model
 {
 
+    use SoftDeletes;
     public $table = 'catdocumentos';
 
 

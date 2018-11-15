@@ -142,7 +142,14 @@
                       <td>{{$documento->cattipodoc->tipo}}</td>
                       <td><a href="{!! asset($documento->archivo) !!}" target="_blank"> Documento </a></td>
                       <td>{{$documento->nota}}</td>
-                      <td><button class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i> </button> <button class="btn btn-danger" rel="tooltip" title="Eliminar" Onclick="ConfirmDeleteContacto(direccion->id)"> <i class="fa fa-remove"></i></button></td>
+                      <td>
+                        {!! Form::open(['route' => ['catdocumentos.destroy', $documento->id], 'method' => 'delete', 'id'=>'delDocumento'.$documento->id]) !!}
+                        <button type="button" class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i> </button>
+                        <button type="button" class="btn btn-danger" rel="tooltip" title="Eliminar" Onclick="ConfirmDeleteDocumento({{$documento->id}})"> <i class="fa fa-remove"></i></button>
+                          {!! Form::hidden('redirect', 'clientes.show') !!}
+                          {!! Form::hidden('cliente_id', $clientes->id) !!}
+                        {!! Form::close() !!}
+                      </td>
                     </tr>
                     @endforeach
                   </tbody></table>
@@ -319,20 +326,20 @@
 
                     {!! Form::hidden('cliente_id', $clientes->id) !!}
                     {!! Form::hidden('redirect', 'clientes.show') !!}
-                    <div class="form-group col-sm-6">
+                    <div class="form-group">
                         {!! Form::label('tipodoc', 'Tipo de Documento:') !!}
                         {!! Form::select('tipodoc', $tipodocs, null, ['class' => 'form-control']) !!}
                     </div>
 
                     <!-- Archivo Field -->
-                    <div class="form-group col-sm-6">
+                    <div class="form-group">
                         {!! Form::label('archivo', 'Archivo:') !!}
                         {!! Form::file('archivo', ['class' => 'form-control'])!!}
                     </div>
                     <div class="clearfix"></div>
 
                     <!-- Nota Field -->
-                    <div class="form-group col-sm-6">
+                    <div class="form-group">
                         {!! Form::label('nota', 'Nota:') !!}
                         {!! Form::text('nota', null, ['class' => 'form-control']) !!}
                     </div>
@@ -394,6 +401,22 @@ swal({
       }).then((result) => {
 if (result.value) {
   document.forms['datFiscalesForm'+id].submit();
+  }
+})
+}
+
+function ConfirmDeleteDocumento(id) {
+swal({
+      title: '¿Estás seguro?',
+      text: 'Se eliminará el documento seleccionado.',
+      type: 'warning',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Continuar',
+      }).then((result) => {
+if (result.value) {
+  document.forms['delDocumento'+id].submit();
   }
 })
 }
@@ -461,7 +484,6 @@ function validarRFC(input) {
     }
 
     resultado.innerText = "RFC: " + rfc
-                        + "\nResultado: " + rfcCorrecto
                         + "\nFormato: " + valido;
 }
 
