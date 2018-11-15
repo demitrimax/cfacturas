@@ -14,6 +14,7 @@ use App\catestados;
 use App\catmunicipios;
 use App\Models\cattipodoc;
 use App\Models\catdocumentos;
+use App\Models\cat_bancos;
 
 class catempresasController extends AppBaseController
 {
@@ -87,7 +88,8 @@ class catempresasController extends AppBaseController
         }
         $tipodocs = cattipodoc::pluck('tipo','id');
         $estados = catestados::pluck('nombre','id');
-        return view('catempresas.show')->with(compact('catempresas','estados','tipodocs'));
+        $bancos = cat_bancos::pluck('nombrecorto','id');
+        return view('catempresas.show')->with(compact('catempresas','estados','tipodocs','bancos'));
     }
 
     /**

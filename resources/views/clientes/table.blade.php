@@ -1,4 +1,4 @@
-<table class="table table-responsive" id="clientes-table">
+<table class="table table-bordered table-striped" id="clientes-table">
     <thead>
         <tr>
         <th>Nombre</th>
@@ -37,14 +37,6 @@
 <script>
   $(function () {
     $('#clientes-table').DataTable()
-    $('#example2').DataTable({
-      'paging'      : true,
-      'lengthChange': false,
-      'searching'   : false,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : false
-    })
   })
 
 function ConfirmDelete(id) {

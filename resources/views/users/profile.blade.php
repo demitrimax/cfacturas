@@ -32,30 +32,34 @@
             </div>
             <a href="#" data-toggle="modal" data-target="#modal-default">
             <div class="widget-user-image">
-              <img class="img-circle" src="{{asset('avatar/'.Auth::user()->avatar)}}" alt="User Avatar">
+              @if (empty(Auth::user()->avatar))
+                <img src="{{asset('avatar/avatar.png')}}" class="img-circle" alt="User Image"/>
+              @else
+                   <img src="{{asset('avatar/'.Auth::user()->avatar)}}" class="img-circle" alt="User Image" />
+              @endif
             </div></a>
             <div class="box-footer">
               <div class="row">
                 <div class="col-sm-4 border-right">
                   <div class="description-block">
-                    <h5 class="description-header">3,200</h5>
-                    <span class="description-text">SALES</span>
+                    <h5 class="description-header">{{ Auth::user()->cargo }}</h5>
+                    <span class="description-text">CARGO</span>
                   </div>
                   <!-- /.description-block -->
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-4 border-right">
                   <div class="description-block">
-                    <h5 class="description-header">13,000</h5>
-                    <span class="description-text">FOLLOWERS</span>
+                    <h5 class="description-header">{{ Auth::user()->nombre.' '.Auth::user()->apellidos }}</h5>
+                    <span class="description-text">NOMBRE COMPLETO</span>
                   </div>
                   <!-- /.description-block -->
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-4">
                   <div class="description-block">
-                    <h5 class="description-header">35</h5>
-                    <span class="description-text">PRODUCTS</span>
+                    <h5 class="description-header">{{ Auth::user()->rol }}</h5>
+                    <span class="description-text">ROL</span>
                   </div>
                   <!-- /.description-block -->
                 </div>

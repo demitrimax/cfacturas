@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Crear Cuenta
+            Alta de Cuenta Bancaria
         </h1>
     </section>
     <div class="content">

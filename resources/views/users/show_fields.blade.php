@@ -21,7 +21,25 @@
 <!-- Avatar Field -->
 <div class="form-group">
     {!! Form::label('avatar', 'Avatar:') !!}
-    <p>{!! $users->avatar !!}</p>
+    <p><a href="{{asset('avatar/'.$users->avatar)}}" target="_blank"> {!! $users->avatar !!}</a></p>
+</div>
+
+<!-- Nombre -->
+<div class="form-group">
+    {!! Form::label('nombre', 'Nombre:') !!}
+    <p>{!! $users->nombre !!}</p>
+</div>
+
+<!-- Nombre -->
+<div class="form-group">
+    {!! Form::label('apellidos', 'Apellidos:') !!}
+    <p>{!! $users->apellidos !!}</p>
+</div>
+
+<!-- Cargo -->
+<div class="form-group">
+    {!! Form::label('cargo', 'Cargo:') !!}
+    <p>{!! $users->cargo !!}</p>
 </div>
 
 <!-- Rol Field -->

@@ -51,7 +51,7 @@ class catcuentas extends Model
         'id' => 'integer',
         'banco_id' => 'integer',
         'numcuenta' => 'string',
-        'clabeinterbancaria' => 'integer',
+        'clabeinterbancaria' => 'string',
         'sucursal' => 'string',
         'cliente_id' => 'integer',
         'empresa_id' => 'integer',

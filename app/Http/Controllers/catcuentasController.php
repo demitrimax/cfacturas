@@ -67,18 +67,40 @@ class catcuentasController extends AppBaseController
     {
         $cuentas = catcuentas::where('numcuenta', $request->input('numcuenta'))->where('banco_id',$request->input('banco_id'))->first();
         if (count($cuentas)>0) {
-          Flash::error('Cuenta Existe');
+          Flash::error('Ya existe una Cuenta Bancaria en el mismo Banco');
           $errorflash = "Cuenta existente";
           return back()->with($errorflash);
         }
+
+        $rules = [
+          'banco_id' => 'required',
+          'numcuenta' => 'required|max:10',
+          'clabeinterbancaria' => 'nullable|digits:18|unique:catcuentas',
+          'sucursal' => 'max:5',
+        ];
+        $this->validate($request, $rules);
 
         $input = $request->all();
 
         $catcuentas = $this->catcuentasRepository->create($input);
 
         Flash::success('Cuenta guardada correctamente.');
+        if(isset($input['redirect'])){
+          $redirect = $input['redirect'];
+          if (isset($input['cliente_id']))
+          {
+            $retornaid =$input['cliente_id'];
+          }
+          if (isset($input['empresa_id']))
+          {
+            $retornaid = $input['empresa_id'];
+          }
+          return redirect(route($redirect, [$retornaid]));
+        }
+        else {
 
         return redirect(route('catcuentas.index'));
+      }
     }
 
     /**
@@ -157,9 +179,10 @@ class catcuentasController extends AppBaseController
      *
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $catcuentas = $this->catcuentasRepository->findWithoutFail($id);
+        $input = $request->all();
 
         if (empty($catcuentas)) {
             Flash::error('Cuenta no encontrada');
@@ -170,7 +193,22 @@ class catcuentasController extends AppBaseController
         $this->catcuentasRepository->delete($id);
 
         Flash::success('Cuenta borrada correctamente.');
+        if(isset($input['redirect'])){
+          $redirectroute = $input['redirect'];
+          if (isset($input['cliente_id']))
+          {
+            $showid = $input['cliente_id'];
+          }
+          if (isset($input['empresa_id']))
+          {
+            $showid = $input['empresa_id'];
+          }
+
+          return redirect(route($redirectroute, $showid));
+        }
+        else {
 
         return redirect(route('catcuentas.index'));
+      }
     }
 }

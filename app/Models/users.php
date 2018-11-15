@@ -19,13 +19,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string avatar
  * @property string rol
  * @property integer roles
+ * @property string nombre
+ * @property string apellidos
  */
 class users extends Model
 {
     use SoftDeletes;
 
     public $table = 'users';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -41,7 +43,10 @@ class users extends Model
         'remember_token',
         'avatar',
         'rol',
-        'roles'
+        'roles',
+        'nombre',
+        'apellidos',
+        'cargo',
     ];
 
     /**
@@ -57,7 +62,10 @@ class users extends Model
         'remember_token' => 'string',
         'avatar' => 'string',
         'rol' => 'string',
-        'roles' => 'integer'
+        'roles' => 'integer',
+        'nombre' => 'string',
+        'apellidos' => 'string',
+        'cargo' => 'string'
     ];
 
     /**
@@ -66,8 +74,8 @@ class users extends Model
      * @var array
      */
     public static $rules = [
-        
+
     ];
 
-    
+
 }

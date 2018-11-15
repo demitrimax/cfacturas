@@ -25,7 +25,25 @@
 <!-- Rol Field -->
 <div class="form-group">
     {!! Form::label('rol', 'Rol:') !!}
-    {!! Form::text('rol', null, ['class' => 'form-control']) !!}
+    {!! Form::select('rol', ['admin'=>'Administrador', 'revisor' => 'Revisor', 'abogado'=>'Abogado'],null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Nombre Field -->
+<div class="form-group">
+    {!! Form::label('nombre', 'Nombre:') !!}
+    {!! Form::text('nombre', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Apellido Field -->
+<div class="form-group">
+    {!! Form::label('apellidos', 'Apellidos:') !!}
+    {!! Form::text('apellidos', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Cargo Field -->
+<div class="form-group">
+    {!! Form::label('cargo', 'Cargo o Puesto:') !!}
+    {!! Form::text('cargo', null, ['class' => 'form-control']) !!}
 </div>
 
 

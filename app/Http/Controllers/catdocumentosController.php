@@ -174,20 +174,36 @@ class catdocumentosController extends AppBaseController
      *
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $catdocumentos = $this->catdocumentosRepository->findWithoutFail($id);
+        $input = $request->all();
 
         if (empty($catdocumentos)) {
-            Flash::error('Catdocumentos not found');
+            Flash::error('Documento no encontrado');
 
             return redirect(route('catdocumentos.index'));
         }
 
         $this->catdocumentosRepository->delete($id);
 
-        Flash::success('Catdocumentos deleted successfully.');
+        Flash::success('Documento eliminado correctamente.');
+        if(isset($input['redirect'])){
+          $redirectroute = $input['redirect'];
+          if (isset($input['cliente_id']))
+          {
+            $showid = $input['cliente_id'];
+          }
+          if (isset($input['empresa_id']))
+          {
+            $showid = $input['empresa_id'];
+          }
+
+          return redirect(route($redirectroute, $showid));
+        }
+        else {
 
         return redirect(route('catdocumentos.index'));
+      }
     }
 }

@@ -17,6 +17,7 @@ use App\Models\clientes;
 use App\Models\catdocumentos;
 use Intervention\Image\ImageManager;
 use App\Models\cattipodoc;
+use App\Models\cat_bancos;
 
 class clientesController extends AppBaseController
 {
@@ -94,9 +95,10 @@ class clientesController extends AppBaseController
           if (empty($clientes->avatar)) {
             $avatar = 'avatar/avatar.png';
           }
+          $bancos = cat_bancos::pluck('nombrecorto','id');
           $tipodocs = cattipodoc::pluck('tipo','id');
           $estados = catestados::pluck('nombre','id');
-        return view('clientes.show')->with(compact('clientes','estados','avatar','tipodocs'));
+        return view('clientes.show')->with(compact('clientes','estados','avatar','tipodocs', 'bancos'));
     }
 
     /**

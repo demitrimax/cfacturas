@@ -2,6 +2,15 @@
 
 @section('content')
     @include('flash::message')
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <section class="content-header">
         <h1>
             Empresa {!! $catempresas->nombre !!}
@@ -44,8 +53,8 @@
                   <div class='btn-group'>
                   <a href="/empDatfiscales/{{$datFiscales->id}}/edit" type="button" class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i> </a>
                   {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'button', 'class' => 'btn btn-danger', 'onclick' => "ConfirmDeletedatFiscales(".$datFiscales->id.")"]) !!}
-                                      {!! Form::hidden('redirect', 'empDatfiscales.show') !!}
-                                      {!! Form::hidden('empresa_id', $datFiscales->id) !!}
+                                      {!! Form::hidden('redirect', 'catempresas.show') !!}
+                                      {!! Form::hidden('empresa_id', $catempresas->id) !!}
                 </div>
                 {!! Form::close() !!}
                 </td>
@@ -87,7 +96,14 @@
                 <td>{{$documento->cattipodoc->tipo}}</td>
                 <td><a href="{!! asset($documento->archivo) !!}" target="_blank"> Documento </a></td>
                 <td>{{$documento->nota}}</td>
-                <td><button class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i> </button> <button class="btn btn-danger" rel="tooltip" title="Eliminar" Onclick="ConfirmDeleteContacto(direccion->id)"> <i class="fa fa-remove"></i></button></td>
+                <td>
+                  {!! Form::open(['route' => ['catdocumentos.destroy', $documento->id], 'method' => 'delete', 'id'=>'deldocumento'.$documento->id]) !!}
+                  <button type="button" class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i> </button>
+                  <button type="button" class="btn btn-danger" rel="tooltip" title="Eliminar" Onclick="ConfirmDeleteDocumento({{$documento->id}})"> <i class="fa fa-remove"></i></button>
+                        {!! Form::hidden('redirect', 'catempresas.show') !!}
+                        {!! Form::hidden('empresa_id', $catempresas->id) !!}
+                  {!! Form::close() !!}
+                </td>
               </tr>
               @endforeach
             </tbody></table>
@@ -125,12 +141,19 @@
                   <td>{{$cuenta->numcuenta}}</td>
                   <td>{{$cuenta->catBanco->nombre}}</td>
                   <td>{{$cuenta->sucursal}}</td>
-                  <td><button class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i> </button> <button class="btn btn-danger" rel="tooltip" title="Eliminar" Onclick="ConfirmDeleteContacto(direccion->id)"> <i class="fa fa-remove"></i></button></td>
+                  <td>
+                    {!! Form::open(['route' => ['catcuentas.destroy', $cuenta->id], 'method' => 'delete', 'id'=>'delcuenta'.$cuenta->id]) !!}
+                    <button type="button" class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i> </button>
+                    <button type="button" class="btn btn-danger" rel="tooltip" title="Eliminar" Onclick="ConfirmDeleteCuenta({{$cuenta->id}})"> <i class="fa fa-remove"></i></button>
+                        {!! Form::hidden('redirect', 'catempresas.show') !!}
+                        {!! Form::hidden('empresa_id', $catempresas->id) !!}
+                    {!! Form::close() !!}
+                  </td>
                 </tr>
                 @endforeach
               </tbody></table>
               <h1 class="pull-right">
-                 <button type="button" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-documento">Agregar Cuenta</button>
+                 <button type="button" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-cuentabancaria">Agregar Cuenta</button>
               </h1>
             </div>
             <!-- /.box-body -->
@@ -269,6 +292,63 @@
             <!-- /.modal -->
           </div>
 
+          <div class="modal fade" id="modal-cuentabancaria">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">Agregar Cuenta Bancaria</h4>
+                    </div>
+                    <div class="modal-body">
+                        {!! Form::open(['route' => 'catcuentas.store']) !!}
+
+                    {!! Form::hidden('empresa_id', $catempresas->id) !!}
+                    {!! Form::hidden('redirect', 'catempresas.show') !!}
+
+                    <!-- Banco Id Field -->
+                    <div class="form-group">
+                        {!! Form::label('banco_id', 'Banco:') !!}
+                        {!! Form::select('banco_id', $bancos, null, ['class' => 'form-control']) !!}
+                    </div>
+
+                    <!-- Numcuenta Field -->
+                    <div class="form-group">
+                        {!! Form::label('numcuenta', 'Número de cuenta:') !!}
+                        {!! Form::text('numcuenta', null, ['class' => 'form-control', 'required'=>'true', 'maxlength'=>'10']) !!}
+                    </div>
+
+                    <!-- Clabeinterbancaria Field -->
+                    <div class="form-group">
+                        {!! Form::label('clabeinterbancaria', 'Clabe Interbancaria:') !!}
+                        {!! Form::text('clabeinterbancaria', null, ['class' => 'form-control', 'maxlength'=>'18']) !!}
+                    </div>
+
+                    <!-- Sucursal Field -->
+                    <div class="form-group">
+                        {!! Form::label('sucursal', 'Sucursal:') !!}
+                        {!! Form::text('sucursal', null, ['class' => 'form-control', 'maxlength'=>'5']) !!}
+                    </div>
+
+                    <!-- Swift Field -->
+                    <div class="form-group">
+                        {!! Form::label('swift', 'Swift:') !!}
+                        {!! Form::text('swift', null, ['class' => 'form-control', 'maxlength'=>'30']) !!}
+                    </div>
+                  </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
+                      <button type="submit" class="btn btn-primary" id="agregardoc">Agregar Cuenta</button>
+                    </div>
+                    {!! Form::close() !!}
+
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+              <!-- /.modal -->
+            </div>
+
 
 @endsection
 @section('scripts')
@@ -286,7 +366,7 @@
       });
     });
   });
-  function ConfirmDeletedatFiscales(id) {
+function ConfirmDeletedatFiscales(id) {
   swal({
         title: '¿Estás seguro?',
         text: 'Se eliminarán estos datos fiscales.',
@@ -298,8 +378,40 @@
         }).then((result) => {
   if (result.value) {
     document.forms['deldatfiscalesform'+id].submit();
-  }
-})
+    }
+  })
+}
+
+function ConfirmDeleteDocumento(id) {
+  swal({
+        title: '¿Estás seguro?',
+        text: 'Se eliminará el documento seleccionado.',
+        type: 'warning',
+        showCancelButton: true,
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Continuar',
+        }).then((result) => {
+  if (result.value) {
+    document.forms['deldocumento'+id].submit();
+    }
+  })
+}
+
+function ConfirmDeleteCuenta(id) {
+  swal({
+        title: '¿Estás seguro?',
+        text: 'Se eliminará la cuenta bancaria.',
+        type: 'warning',
+        showCancelButton: true,
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Continuar',
+        }).then((result) => {
+  if (result.value) {
+    document.forms['delcuenta'+id].submit();
+    }
+  })
 }
   </script>
   @endsection

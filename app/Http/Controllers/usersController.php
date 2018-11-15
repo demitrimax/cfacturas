@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\CreateusersRequest;
 use App\Http\Requests\UpdateusersRequest;
 use App\Repositories\usersRepository;
@@ -10,6 +11,8 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\User;
+
 
 class usersController extends AppBaseController
 {
@@ -57,9 +60,19 @@ class usersController extends AppBaseController
     {
         $input = $request->all();
 
-        $users = $this->usersRepository->create($input);
+        //$users = $this->usersRepository->create($input);
 
-        Flash::success('Users saved successfully.');
+        $usuario = new User();
+            $usuario->name = $input['name'];
+            $usuario->email = $input['email'];
+            $usuario->rol = $input['rol'];
+            $usuario->password = Hash::make($input['password']);
+            $usuario->nombre = $input['nombre'];
+            $usuario->apellidos= $input['apellidos'];
+            $usuario->cargo = $input['cargo'];
+            $usuario->save();
+
+        Flash::success('Usuario guardado correctamente.');
 
         return redirect(route('users.index'));
     }
@@ -76,7 +89,7 @@ class usersController extends AppBaseController
         $users = $this->usersRepository->findWithoutFail($id);
 
         if (empty($users)) {
-            Flash::error('Users not found');
+            Flash::error('Usuario no encontrado');
 
             return redirect(route('users.index'));
         }
@@ -96,7 +109,7 @@ class usersController extends AppBaseController
         $users = $this->usersRepository->findWithoutFail($id);
 
         if (empty($users)) {
-            Flash::error('Users not found');
+            Flash::error('Usuario no encontrado');
 
             return redirect(route('users.index'));
         }
@@ -115,16 +128,25 @@ class usersController extends AppBaseController
     public function update($id, UpdateusersRequest $request)
     {
         $users = $this->usersRepository->findWithoutFail($id);
+        $input = $request->all();
 
         if (empty($users)) {
-            Flash::error('Users not found');
+            Flash::error('Usuario no encontrado');
 
             return redirect(route('users.index'));
         }
 
-        $users = $this->usersRepository->update($request->all(), $id);
-
-        Flash::success('Users updated successfully.');
+        //$users = $this->usersRepository->update($request->all(), $id);
+        $usuario =  User::find($id);
+            $usuario->name = $input['name'];
+            $usuario->email = $input['email'];
+            $usuario->rol = $input['rol'];
+            $usuario->password = Hash::make($input['password']);
+            $usuario->nombre = $input['nombre'];
+            $usuario->apellidos= $input['apellidos'];
+            $usuario->cargo = $input['cargo'];
+            $usuario->save();
+        Flash::success('Usuario actualizado correctamente');
 
         return redirect(route('users.index'));
     }
@@ -141,14 +163,14 @@ class usersController extends AppBaseController
         $users = $this->usersRepository->findWithoutFail($id);
 
         if (empty($users)) {
-            Flash::error('Users not found');
+            Flash::error('Usuario no encontrado');
 
             return redirect(route('users.index'));
         }
 
         $this->usersRepository->delete($id);
 
-        Flash::success('Users deleted successfully.');
+        Flash::success('Usuario borrado correctamente.');
 
         return redirect(route('users.index'));
     }
