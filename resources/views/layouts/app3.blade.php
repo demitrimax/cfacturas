@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>{{ config('app.name', 'Control de Facturas') }}</title>
+        <title>{{ config('app.name', 'Consorcio Comercial') }}</title>
 
         <!-- Favicon -->
 <link href="{{asset('argondash/assets/img/brand/favicon.png')}}" rel="icon" type="image/png">

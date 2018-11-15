@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title','Consorcio Comercial | Catálogo de Empresas')
 @section('content')
     <section class="content-header">
         <h1 class="pull-left">Empresas</h1>

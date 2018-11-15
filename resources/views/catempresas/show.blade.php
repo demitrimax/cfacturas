@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title','Consorcio Comercial | '.$catempresas->nombre)
 @section('content')
     @include('flash::message')
     @if ($errors->any())

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title',config('app.name').' | Agregar Banco ')
 @section('content')
     <section class="content-header">
         <h1>

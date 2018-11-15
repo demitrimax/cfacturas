@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title',config('app.name').' | '.$catBancos->nombre)
 @section('content')
     <section class="content-header">
         <h1>

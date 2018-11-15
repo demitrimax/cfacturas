@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title',config('app.name').' | Editar Cuenta ')
 @section('content')
     <section class="content-header">
         <h1>

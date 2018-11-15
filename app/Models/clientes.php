@@ -78,6 +78,10 @@ class clientes extends Model
       return $this->hasMany('App\Models\catdocumentos','cliente_id');
     }
 
+    public function catcuentas() {
+      return $this->hasMany('App\Models\catcuentas','cliente_id');
+    }
+
 
 
 }

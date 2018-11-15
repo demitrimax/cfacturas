@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title',config('app.name').' | Catálogo de Bancos' )
 @section('content')
     <section class="content-header">
         <h1 class="pull-left">Catálogo de Bancos</h1>
