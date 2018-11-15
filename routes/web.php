@@ -39,3 +39,6 @@ Route::middleware(['admin'])->group(function() {
 Route::resource('users', 'usersController');
 Route::get('profile','profileController@index');
 Route::post('avatarchan', 'profileController@avatarchange');
+
+
+Route::resource('cattmovimientos', 'cattmovimientoController');
