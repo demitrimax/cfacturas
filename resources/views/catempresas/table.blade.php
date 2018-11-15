@@ -1,11 +1,15 @@
+@section('css')
+<!-- DataTables -->
+<link rel="stylesheet" href="{{asset('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
+@endsection
 <table class="table table-responsive" id="catempresas-table">
     <thead>
         <tr>
-            <th>Nombre</th>
-        <th>Correo Facturación</th>
-        <th>Correo Notificaciones</th>
-        <th>Teléfono</th>
-            <th colspan="3">Action</th>
+          <th>Nombre</th>
+          <th>Correo Facturación</th>
+          <th>Correo Notificaciones</th>
+          <th>Teléfono</th>
+          <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -28,3 +32,34 @@
     @endforeach
     </tbody>
 </table>
+
+@section('scripts')
+<!-- DataTables -->
+<script src="{{asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+<script>
+  $(function () {
+    $('#catempresas-table').DataTable({
+      "language": {
+                "url": "{{asset('adminlte/bower_components/datatables.net/Spanish.json')}}"
+            }
+    })
+  })
+
+function ConfirmDelete(id) {
+  swal({
+        title: '¿Estás seguro?',
+        text: 'Estás seguro de borrar la empresa?.',
+        type: 'warning',
+        showCancelButton: true,
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Continuar',
+        }).then((result) => {
+  if (result.value) {
+    document.forms['form'+id].submit();
+  }
+})
+}
+</script>
+@endsection

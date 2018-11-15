@@ -46,7 +46,11 @@
 <script src="{{asset('adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
 <script>
   $(function () {
-    $('#clientes-table').DataTable()
+    $('#clientes-table').DataTable({
+      "language": {
+                "url": "{{asset('adminlte/bower_components/datatables.net/Spanish.json')}}"
+            }
+    })
   })
 
 function ConfirmDelete(id) {
