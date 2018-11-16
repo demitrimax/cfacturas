@@ -34,11 +34,9 @@ Route::middleware(['admin'])->group(function() {
   Route::resource('catBancos', 'cat_bancosController');
   Route::resource('catcuentas', 'catcuentasController');
   Route::resource('usrs', 'usrsController');
+  Route::resource('users', 'usersController');
+  Route::get('profile','profileController@index');
+  Route::post('avatarchan', 'profileController@avatarchange');
+  Route::resource('cattmovimientos', 'cattmovimientoController');
+  Route::resource('mbancas', 'mbancaController');
 });
-
-Route::resource('users', 'usersController');
-Route::get('profile','profileController@index');
-Route::post('avatarchan', 'profileController@avatarchange');
-
-
-Route::resource('cattmovimientos', 'cattmovimientoController');

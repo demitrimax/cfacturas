@@ -1,26 +1,23 @@
 @extends('layouts.app')
-@section('title',config('app.name').' | Editar Empresa' )
+@section('title','Consorcio Comercial | Editar movimiento bancario')
 @section('content')
     <section class="content-header">
         <h1>
-            Catempresas
+            Mbanca
         </h1>
    </section>
    <div class="content">
        @include('adminlte-templates::common.errors')
-    <div class="row">
-      <div class="col-md-12">
        <div class="box box-primary">
            <div class="box-body">
+               <div class="row">
+                   {!! Form::model($mbanca, ['route' => ['mbancas.update', $mbanca->id], 'method' => 'patch']) !!}
 
-                   {!! Form::model($catempresas, ['route' => ['catempresas.update', $catempresas->id], 'method' => 'patch']) !!}
-
-                        @include('catempresas.fields')
+                        @include('mbancas.fields')
 
                    {!! Form::close() !!}
                </div>
            </div>
        </div>
-     </div>
    </div>
 @endsection
