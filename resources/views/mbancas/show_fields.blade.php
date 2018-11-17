@@ -1,8 +1,7 @@
-
 <!-- Cuenta Id Field -->
 <div class="form-group">
     {!! Form::label('cuenta_id', 'Cuenta:') !!}
-    <p>{!! $mbanca->cuenta_id !!}</p>
+    <p>{!! $mbanca->catcuenta->numcuenta.' - '.$mbanca->catcuenta->catBanco->nombre !!}</p>
 </div>
 
 <!-- Toperacion Field -->
@@ -14,7 +13,7 @@
 <!-- Tmovimiento Field -->
 <div class="form-group">
     {!! Form::label('tmovimiento', 'Tmovimiento:') !!}
-    <p>{!! $mbanca->tmovimiento !!}</p>
+    <p>{!! $mbanca->cattmovimiento->descripcion !!}</p>
 </div>
 
 <!-- Concepto Field -->
@@ -44,5 +43,5 @@
 <!-- User Id Field -->
 <div class="form-group">
     {!! Form::label('user_id', 'Usuario:') !!}
-    <p>{!! $mbanca->user_id !!}</p>
+    <p>{!! $mbanca->user->name !!}</p>
 </div>

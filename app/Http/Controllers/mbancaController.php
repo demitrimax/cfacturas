@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Models\clientes;
+use App\Models\users;
+use App\Models\catcuentas;
+use App\Models\cattmovimiento;
+use App\Models\mbanca;
 
 class mbancaController extends AppBaseController
 {
@@ -44,7 +49,11 @@ class mbancaController extends AppBaseController
      */
     public function create()
     {
-        return view('mbancas.create');
+        $clientes = clientes::pluck('nombre','id');
+        $cuentas = catcuentas::pluck('numcuenta','id');
+        $cattmovimiento = cattmovimiento::pluck('descripcion','id');
+        $usuarios = users::pluck('name','id');
+        return view('mbancas.create')->with(compact('clientes','cuentas','cattmovimiento','usuarios'));
     }
 
     /**
@@ -77,12 +86,12 @@ class mbancaController extends AppBaseController
         $mbanca = $this->mbancaRepository->findWithoutFail($id);
 
         if (empty($mbanca)) {
-            Flash::error('Mbanca not found');
+            Flash::error('Movimiento no encontrado');
 
             return redirect(route('mbancas.index'));
         }
 
-        return view('mbancas.show')->with('mbanca', $mbanca);
+        return view('mbancas.show')->with(compact('mbanca'));
     }
 
     /**

@@ -1,6 +1,7 @@
 <table class="table table-responsive" id="mbancas-table">
     <thead>
         <tr>
+          <th>Cuenta</th>
           <th>Tipo de operacion</th>
           <th>Tipo de movimiento</th>
           <th>Concepto</th>
@@ -11,8 +12,9 @@
     <tbody>
     @foreach($mbancas as $mbanca)
         <tr>
+            <td>{!! $mbanca->catcuenta->numcuenta.' - '.$mbanca->catcuenta->catBanco->nombre !!}</td>
             <td>{!! $mbanca->toperacion !!}</td>
-            <td>{!! $mbanca->tmovimiento !!}</td>
+            <td>{!! $mbanca->cattmovimiento->descripcion !!}</td>
             <td>{!! $mbanca->concepto !!}</td>
             <td>{!! $mbanca->fecha !!}</td>
             <td>

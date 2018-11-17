@@ -1,19 +1,19 @@
 <!-- Cuenta Id Field -->
 <div class="form-group">
-    {!! Form::label('cuenta_id', 'Cuenta Id:') !!}
-    {!! Form::number('cuenta_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('cuenta_id', 'Cuenta:') !!}
+    {!! Form::select('cuenta_id', $cuentas, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Toperacion Field -->
 <div class="form-group">
-    {!! Form::label('toperacion', 'Toperacion:') !!}
-    {!! Form::text('toperacion', null, ['class' => 'form-control']) !!}
+    {!! Form::label('toperacion', 'Tipo de operacion:') !!}
+    {!! Form::select('toperacion', ['cargo'=>'Cargo','abono'=>'Abono'],null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Tmovimiento Field -->
 <div class="form-group">
-    {!! Form::label('tmovimiento', 'Tmovimiento:') !!}
-    {!! Form::number('tmovimiento', null, ['class' => 'form-control']) !!}
+    {!! Form::label('tmovimiento', 'Tipo de movimiento:') !!}
+    {!! Form::select('tmovimiento', $cattmovimiento,null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Concepto Field -->
@@ -25,7 +25,7 @@
 <!-- Monto Field -->
 <div class="form-group">
     {!! Form::label('monto', 'Monto:') !!}
-    {!! Form::number('monto', null, ['class' => 'form-control']) !!}
+    {!! Form::number('monto', null, ['class' => 'form-control', 'step' => '0.01']) !!}
 </div>
 
 <!-- Fecha Field -->
@@ -37,17 +37,17 @@
 <!-- Saldo Field -->
 <div class="form-group">
     {!! Form::label('saldo', 'Saldo:') !!}
-    {!! Form::number('saldo', null, ['class' => 'form-control']) !!}
+    {!! Form::number('saldo', null, ['class' => 'form-control', 'step' => '0.01']) !!}
 </div>
 
 <!-- User Id Field -->
 <div class="form-group">
-    {!! Form::label('user_id', 'User Id:') !!}
-    {!! Form::number('user_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('user_id', 'Usuario:') !!}
+    {!! Form::select('user_id', $usuarios ,Auth::User()->id, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Submit Field -->
 <div class="form-group">
-    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-    <a href="{!! route('mbancas.index') !!}" class="btn btn-default">Cancel</a>
+    {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
+    <a href="{!! route('mbancas.index') !!}" class="btn btn-default">Cancelar</a>
 </div>

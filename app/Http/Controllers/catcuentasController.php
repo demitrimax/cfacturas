@@ -13,7 +13,8 @@ use Response;
 use App\Models\cat_bancos;
 use App\Models\clientes;
 use App\Models\catempresas;
-use App\Models\catcuentas;
+use App\Models\mbanca;
+use Illuminate\Support\Facades\DB;
 
 class catcuentasController extends AppBaseController
 {
@@ -119,8 +120,13 @@ class catcuentasController extends AppBaseController
 
             return redirect(route('catcuentas.index'));
         }
-
-        return view('catcuentas.show')->with('catcuentas', $catcuentas);
+        $cuenta_id = $id;
+        //DB::enableQueryLog();
+        $abonos = mbanca::where('toperacion','abono')->where('cuenta_id',$cuenta_id)->sum('monto');
+        $cargos = mbanca::where('toperacion','cargo')->where('cuenta_id',$cuenta_id)->sum('monto');
+        $saldo = $abonos - $cargos;
+        //dd($abonos);
+        return view('catcuentas.show')->with(compact('catcuentas','abonos','cargos','saldo'));
     }
 
     /**

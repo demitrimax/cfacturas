@@ -28,7 +28,7 @@ class mbanca extends Model
     use SoftDeletes;
 
     public $table = 'mbanca';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -69,7 +69,7 @@ class mbanca extends Model
      * @var array
      */
     public static $rules = [
-        
+
     ];
 
     /**
@@ -77,7 +77,7 @@ class mbanca extends Model
      **/
     public function catcuenta()
     {
-        return $this->belongsTo(\App\Models\Catcuenta::class);
+        return $this->belongsTo('App\Models\catcuentas','cuenta_id');
     }
 
     /**
@@ -85,7 +85,7 @@ class mbanca extends Model
      **/
     public function cattmovimiento()
     {
-        return $this->belongsTo(\App\Models\Cattmovimiento::class);
+        return $this->belongsTo('App\Models\cattmovimiento','tmovimiento');
     }
 
     /**
@@ -93,6 +93,6 @@ class mbanca extends Model
      **/
     public function user()
     {
-        return $this->belongsTo(\App\Models\User::class);
+        return $this->belongsTo('App\Models\users', 'user_id');
     }
 }
