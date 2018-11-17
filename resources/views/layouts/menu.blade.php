@@ -28,6 +28,3 @@
 <li class="{{ Request::is('users*') ? 'active' : '' }}">
     <a href="{!! route('users.index') !!}"><i class="fa fa-edit"></i><span>Usuarios</span></a>
 </li>
-<li class="{{ Request::is('mbancas*') ? 'active' : '' }}">
-    <a href="{!! route('mbancas.index') !!}"><i class="fa fa-edit"></i><span>Movimientos Bancarios</span></a>
-</li>
