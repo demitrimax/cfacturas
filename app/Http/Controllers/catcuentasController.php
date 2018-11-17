@@ -15,6 +15,7 @@ use App\Models\clientes;
 use App\Models\catempresas;
 use App\Models\mbanca;
 use App\Models\cattmovimiento;
+use App\Models\catcuentas;
 use Illuminate\Support\Facades\DB;
 use Auth;
 
