@@ -14,7 +14,9 @@ use App\Models\cat_bancos;
 use App\Models\clientes;
 use App\Models\catempresas;
 use App\Models\mbanca;
+use App\Models\cattmovimiento;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class catcuentasController extends AppBaseController
 {
@@ -104,6 +106,23 @@ class catcuentasController extends AppBaseController
       }
     }
 
+    public function agregarmov(Request $request)
+    {
+      //AGREGAR UN REGISTRO DE MOVIMIENTO DE CUENTA
+      //$input->$request->all();
+      $movcuenta = new mbanca();
+      $movcuenta->cuenta_id = $request->input('cuenta_id');
+      $movcuenta->toperacion = $request->input('toperacion');
+      $movcuenta->tmovimiento = $request->input('tmovimiento');
+      $movcuenta->concepto = $request->input('concepto');
+      $movcuenta->monto = $request->input('monto');
+      $movcuenta->fecha = date(now());
+      $movcuenta->user_id = Auth::User()->id;
+      $movcuenta->save();
+      Flash::success('Cuenta guardada correctamente.');
+      return back();
+    }
+
     /**
      * Display the specified catcuentas.
      *
@@ -122,11 +141,14 @@ class catcuentasController extends AppBaseController
         }
         $cuenta_id = $id;
         //DB::enableQueryLog();
+        $cattmovimiento = cattmovimiento::pluck('descripcion','id');
         $abonos = mbanca::where('toperacion','abono')->where('cuenta_id',$cuenta_id)->sum('monto');
         $cargos = mbanca::where('toperacion','cargo')->where('cuenta_id',$cuenta_id)->sum('monto');
         $saldo = $abonos - $cargos;
+        $mbancarios = $catcuentas->movimientos()->orderBy('fecha','DESC')->paginate(10);
+
         //dd($abonos);
-        return view('catcuentas.show')->with(compact('catcuentas','abonos','cargos','saldo'));
+        return view('catcuentas.show')->with(compact('catcuentas','abonos','cargos','saldo','mbancarios','cattmovimiento'));
     }
 
     /**

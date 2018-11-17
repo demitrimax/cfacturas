@@ -39,4 +39,5 @@ Route::middleware(['admin'])->group(function() {
   Route::post('avatarchan', 'profileController@avatarchange');
   Route::resource('cattmovimientos', 'cattmovimientoController');
   Route::resource('mbancas', 'mbancaController');
+  Route::post('catcuentas/agregarmov', 'catcuentasController@agregarmov');
 });

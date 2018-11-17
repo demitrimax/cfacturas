@@ -36,7 +36,7 @@ class mbancaController extends AppBaseController
     public function index(Request $request)
     {
         $this->mbancaRepository->pushCriteria(new RequestCriteria($request));
-        $mbancas = $this->mbancaRepository->all();
+        $mbancas = $this->mbancaRepository->orderBy('fecha','DESC')->paginate(10);
 
         return view('mbancas.index')
             ->with('mbancas', $mbancas);

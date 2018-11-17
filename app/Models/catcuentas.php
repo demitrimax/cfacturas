@@ -92,6 +92,11 @@ class catcuentas extends Model
         return $this->belongsTo('App\Models\catempresas','empresa_id');
     }
 
+    public function movimientos()
+    {
+      return $this->hasMany('App\Models\mbanca','cuenta_id');
+    }
+
     public function getNombreclienteAttribute()
     {
       $clienteid = $this->cliente_id;
