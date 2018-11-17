@@ -106,7 +106,7 @@ class catcuentas extends Model
       }
       else
       {
-        $nombrecliente = $nombrecliente->nombre;
+        $nombrecliente = $nombrecliente->nombre.' '.$nombrecliente->apellidopat.' '.$nombrecliente->apellidomat;
       }
       return $nombrecliente;
     }

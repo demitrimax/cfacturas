@@ -63,7 +63,7 @@ class clientes extends Model
 
     public function getNomcompletoAttribute()
     {
-      return "{$this->nombre} {$this->apellidopat} {$this->apellidomat}";
+        return "{$this->nombre} {$this->apellidopat} {$this->apellidomat}";
     }
 
     public function datcontacto() {

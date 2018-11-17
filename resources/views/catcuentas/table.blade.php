@@ -21,7 +21,7 @@
             <td>{!! $catcuentas->numcuenta !!}</td>
             <td>{!! $catcuentas->clabeinterbancaria !!}</td>
             <td>{!! $catcuentas->sucursal !!}</td>
-            <td>{!! $catcuentas->cliente->nomcompleto !!}</td>
+            <td>{!! $catcuentas->nombrecliente !!}</td>
             <td>{!! $catcuentas->nombreempresa !!}</td>
             <td>
                 {!! Form::open(['route' => ['catcuentas.destroy', $catcuentas->id], 'method' => 'delete', 'id'=>'form'.$catcuentas->id]) !!}
