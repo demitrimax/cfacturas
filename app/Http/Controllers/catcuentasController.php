@@ -70,7 +70,7 @@ class catcuentasController extends AppBaseController
     public function store(CreatecatcuentasRequest $request)
     {
         $cuentas = catcuentas::where('numcuenta', $request->input('numcuenta'))->where('banco_id',$request->input('banco_id'))->first();
-        if (count($cuentas)>0) {
+        if ($cuentas) {
           Flash::error('Ya existe una Cuenta Bancaria en el mismo Banco');
           $errorflash = "Cuenta existente";
           return back()->with($errorflash);
