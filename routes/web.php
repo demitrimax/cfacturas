@@ -41,3 +41,8 @@ Route::middleware(['admin'])->group(function() {
   Route::resource('mbancas', 'mbancaController');
   Route::post('catcuentas/agregarmov', 'catcuentasController@agregarmov');
 });
+
+Route::group(['middleware'=>['auth']], function() {
+  Route::resource('roles','RoleController');
+  Route::resource('user','UserController');
+});

@@ -55,17 +55,17 @@ class users extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
-        'name' => 'string',
-        'email' => 'string',
-        'password' => 'string',
+        'id'             => 'integer',
+        'name'           => 'string',
+        'email'          => 'string',
+        'password'       => 'string',
         'remember_token' => 'string',
-        'avatar' => 'string',
-        'rol' => 'string',
-        'roles' => 'integer',
-        'nombre' => 'string',
-        'apellidos' => 'string',
-        'cargo' => 'string'
+        'avatar'         => 'string',
+        'rol'            => 'string',
+        'roles'          => 'integer',
+        'nombre'         => 'string',
+        'apellidos'      => 'string',
+        'cargo'          => 'string'
     ];
 
     /**
