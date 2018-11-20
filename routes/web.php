@@ -23,6 +23,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index');
 
 Route::middleware(['admin'])->group(function() {
+
+});
+
+Route::group(['middleware'=>['auth']], function() {
   Route::resource('clientes', 'clientesController');
   Route::resource('datcontactos', 'datcontactoController');
   Route::resource('direcciones', 'direccionesController');
@@ -40,9 +44,8 @@ Route::middleware(['admin'])->group(function() {
   Route::resource('cattmovimientos', 'cattmovimientoController');
   Route::resource('mbancas', 'mbancaController');
   Route::post('catcuentas/agregarmov', 'catcuentasController@agregarmov');
-});
 
-Route::group(['middleware'=>['auth']], function() {
   Route::resource('roles','RoleController');
   Route::resource('user','UserController');
+  Route::resource('permissions', 'PermissionController');
 });
