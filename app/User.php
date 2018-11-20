@@ -6,13 +6,13 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
-use Laravel\Passport\hasApiTokens;
+use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class User extends Authenticatable
 {
-    use hasApiTokens, Notifiable;
+    use HasApiTokens, Notifiable;
     use HasRoles;
 
     /**
