@@ -25,6 +25,7 @@ class mbancaController extends AppBaseController
     {
         $this->mbancaRepository = $mbancaRepo;
                 $this->middleware('auth');
+                $this->middleware('permission:mbanca-list');
     }
 
     /**

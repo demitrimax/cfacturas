@@ -28,6 +28,10 @@ class clientesController extends AppBaseController
     {
         $this->clientesRepository = $clientesRepo;
         $this->middleware('auth');
+        $this->middleware('permission:clientes-list');
+        $this->middleware('permission:clientes-create', ['only' => ['create','store']]);
+        $this->middleware('permission:clientes-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:clientes-delete', ['only' => ['destroy']]);
     }
 
     /**
