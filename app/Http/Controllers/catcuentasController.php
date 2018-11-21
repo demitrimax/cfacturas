@@ -153,10 +153,12 @@ class catcuentasController extends AppBaseController
         $abonos = mbanca::where('toperacion','abono')->where('cuenta_id',$cuenta_id)->sum('monto');
         $cargos = mbanca::where('toperacion','cargo')->where('cuenta_id',$cuenta_id)->sum('monto');
         $saldo = $abonos - $cargos;
+        $ultimomov = mbanca::where('cuenta_id',$cuenta_id)->orderBy('fecha','DESC')->first();
+        //dd($ultimomov);
         $mbancarios = $catcuentas->movimientos()->orderBy('fecha','DESC')->paginate(10);
 
         //dd($abonos);
-        return view('catcuentas.show')->with(compact('catcuentas','abonos','cargos','saldo','mbancarios','cattmovimiento'));
+        return view('catcuentas.show')->with(compact('catcuentas','abonos','cargos','saldo','mbancarios','cattmovimiento','ultimomov'));
     }
 
     /**

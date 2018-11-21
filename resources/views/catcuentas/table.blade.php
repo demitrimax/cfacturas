@@ -26,9 +26,14 @@
             <td>
                 {!! Form::open(['route' => ['catcuentas.destroy', $catcuentas->id], 'method' => 'delete', 'id'=>'form'.$catcuentas->id]) !!}
                 <div class='btn-group'>
+
                     <a href="{!! route('catcuentas.show', [$catcuentas->id]) !!}" class='btn btn-default'><i class="glyphicon glyphicon-eye-open"></i></a>
+                    @can('catcuentas-edit')
                     <a href="{!! route('catcuentas.edit', [$catcuentas->id]) !!}" class='btn btn-default'><i class="glyphicon glyphicon-edit"></i></a>
+                    @endcan
+                    @can('catcuentas-delete')
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger', 'onclick' => "return confirm('Estas seguro de eliminar esta cuenta?')"]) !!}
+                    @endcan
                 </div>
                 {!! Form::close() !!}
             </td>

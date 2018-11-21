@@ -64,6 +64,7 @@ class mbanca extends Model
         'referencia' => 'string',
         'monto' => 'float',
         'saldo' => 'float',
+        'fecha' => 'date',
         'user_id' => 'integer'
     ];
 

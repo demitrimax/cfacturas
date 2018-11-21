@@ -17,7 +17,7 @@
                   </tr>
                   <tr>
                     <td class="mailbox-name">Ultimo movimiento:</td>
-                    <td class="mailbox-subject pull-right"><b>Fecha Movimiento</b></td>
+                    <td class="mailbox-subject pull-right"><b>@if($ultimomov) {{'('.$ultimomov->toperacion.') '.$ultimomov->fecha->format('d-m-Y').' - $'.number_format($ultimomov->monto,2)}} @endif</b></td>
                   </tr>
                   <tr>
                     <td class="mailbox-name">Saldo en la Cuenta:</td>
