@@ -19,6 +19,8 @@ class cattmovimientoController extends AppBaseController
     public function __construct(cattmovimientoRepository $cattmovimientoRepo)
     {
         $this->cattmovimientoRepository = $cattmovimientoRepo;
+        $this->middleware('auth');
+        $this->middleware('permission:cattmovimientos');
     }
 
     /**

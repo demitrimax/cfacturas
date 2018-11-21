@@ -26,7 +26,7 @@
             </div>
         </div>
     </div>
-
+    @can('empdatfiscales-list')
     <div class="content">
       <div class="box box-success">
           <div class="box-header">
@@ -51,10 +51,14 @@
                 <td>
                   {!! Form::open(['route' => ['empDatfiscales.destroy', $datFiscales->id], 'method' => 'delete', 'id'=>'deldatfiscalesform'.$datFiscales->id]) !!}
                   <div class='btn-group'>
+                  @can('empdatfiscales-edit')
                   <a href="/empDatfiscales/{{$datFiscales->id}}/edit" type="button" class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i> </a>
+                  @endcan
+                  @can('empdatfiscales-delete')
                   {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'button', 'class' => 'btn btn-danger', 'onclick' => "ConfirmDeletedatFiscales(".$datFiscales->id.")"]) !!}
                                       {!! Form::hidden('redirect', 'catempresas.show') !!}
                                       {!! Form::hidden('empresa_id', $catempresas->id) !!}
+                  @endcan
                 </div>
                 {!! Form::close() !!}
                 </td>
@@ -62,7 +66,9 @@
               @endforeach
             </tbody></table>
             <h1 class="pull-right">
+              @can('empdatfiscales-create')
                <button type="button" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-datfiscales">Agregar datos fiscales</button>
+              @endcan
             </h1>
           </div>
           <!-- /.box-body -->
@@ -70,9 +76,10 @@
         </div>
 
       </div>
-
+      @endcan
+    @can('documentos-list')
     <div class="content">
-      <div class="box box-default collapsed-box">
+      <div class="box box-default">
           <div class="box-header">
             <h3 class="box-title">Documentos de la Empresa</h3>
             <div class="box-tools pull-right">
@@ -98,26 +105,34 @@
                 <td>{{$documento->nota}}</td>
                 <td>
                   {!! Form::open(['route' => ['catdocumentos.destroy', $documento->id], 'method' => 'delete', 'id'=>'deldocumento'.$documento->id]) !!}
+                  @can('documentos-edit')
                   <button type="button" class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i> </button>
+                  @endcan
+                  @can('documentos-delete')
                   <button type="button" class="btn btn-danger" rel="tooltip" title="Eliminar" Onclick="ConfirmDeleteDocumento({{$documento->id}})"> <i class="fa fa-remove"></i></button>
                         {!! Form::hidden('redirect', 'catempresas.show') !!}
                         {!! Form::hidden('empresa_id', $catempresas->id) !!}
+                  @endcan
                   {!! Form::close() !!}
                 </td>
               </tr>
               @endforeach
             </tbody></table>
             <h1 class="pull-right">
+              @can('documentos-create')
                <button type="button" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-documento">Agregar Documento</button>
+              @endcan
             </h1>
           </div>
           <!-- /.box-body -->
 
         </div>
       </div>
+      @endcan
 
+      @can('catcuentas-list')
       <div class="content">
-        <div class="box box-warning collapsed-box">
+        <div class="box box-warning">
             <div class="box-header">
               <h3 class="box-title">Cuentas Bancarias</h3>
               <div class="box-tools pull-right">
@@ -138,29 +153,37 @@
               @foreach($catempresas->catcuentas as$key=>$cuenta)
                 <tr>
                   <td>{{$key+1}}</td>
-                  <td>{{$cuenta->numcuenta}}</td>
+                  <td><a href="{{url('/catcuentas/'.$cuenta->id)}}">{{$cuenta->numcuenta}}</a></td>
                   <td>{{$cuenta->catBanco->nombre}}</td>
                   <td>{{$cuenta->sucursal}}</td>
                   <td>
                     {!! Form::open(['route' => ['catcuentas.destroy', $cuenta->id], 'method' => 'delete', 'id'=>'delcuenta'.$cuenta->id]) !!}
+                    @can('catcuentas-edit')
                     <button type="button" class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i> </button>
+                    @endcan
+                    @can('catcuentas-delete')
                     <button type="button" class="btn btn-danger" rel="tooltip" title="Eliminar" Onclick="ConfirmDeleteCuenta({{$cuenta->id}})"> <i class="fa fa-remove"></i></button>
                         {!! Form::hidden('redirect', 'catempresas.show') !!}
                         {!! Form::hidden('empresa_id', $catempresas->id) !!}
+                    @endcan
                     {!! Form::close() !!}
                   </td>
                 </tr>
                 @endforeach
               </tbody></table>
               <h1 class="pull-right">
+                @can('catcuentas-create')
                  <button type="button" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-cuentabancaria">Agregar Cuenta</button>
+                @endcan
               </h1>
             </div>
             <!-- /.box-body -->
 
           </div>
         </div>
+        @endcan
 
+      @can('empdatfiscales-create')
       <div class="modal fade" id="modal-datfiscales">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -247,7 +270,10 @@
           </div>
           <!-- /.modal -->
         </div>
+        @endcan
 
+
+        @can('documentos-create')
         <div class="modal fade" id="modal-documento">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -291,7 +317,9 @@
             </div>
             <!-- /.modal -->
           </div>
+          @endcan
 
+          @can('catcuentas-create')
           <div class="modal fade" id="modal-cuentabancaria">
                 <div class="modal-dialog">
                   <div class="modal-content">
@@ -348,6 +376,7 @@
               </div>
               <!-- /.modal -->
             </div>
+            @endcan
 
 
 @endsection

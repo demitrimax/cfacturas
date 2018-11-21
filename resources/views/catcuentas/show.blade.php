@@ -72,7 +72,12 @@
                   <!-- Concepto Field -->
                   <div class="form-group">
                       {!! Form::label('concepto', 'Concepto:') !!}
-                      {!! Form::text('concepto', null, ['class' => 'form-control', 'maxlength' => '190']) !!}
+                      {!! Form::text('concepto', null, ['class' => 'form-control', 'maxlength' => '190', 'required']) !!}
+                  </div>
+
+                  <div class="form-group">
+                      {!! Form::label('metodo', 'Metodo de Págo:') !!}
+                      {!! Form::select('metodo', ['efectivo'=>'Efectivo','cheque'=>'Cheque', 'transferencia'=>'Transferencia'], null,['class' => 'form-control']) !!}
                   </div>
 
                   <div class="form-group">

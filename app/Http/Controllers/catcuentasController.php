@@ -27,6 +27,7 @@ class catcuentasController extends AppBaseController
     public function __construct(catcuentasRepository $catcuentasRepo)
     {
         $this->catcuentasRepository = $catcuentasRepo;
+        $this->middleware('auth');
         $this->middleware('permission:catcuentas-list');
         $this->middleware('permission:catcuentas-create', ['only' => ['create','store']]);
         $this->middleware('permission:catcuentas-edit', ['only' => ['edit','update']]);
@@ -121,6 +122,8 @@ class catcuentasController extends AppBaseController
       $movcuenta->tmovimiento = $request->input('tmovimiento');
       $movcuenta->concepto = $request->input('concepto');
       $movcuenta->monto = $request->input('monto');
+      $movcuenta->referencia = $request->input('referencia');
+      $movcuenta->metodo = $request->input('metodo');
       $movcuenta->fecha = date(now());
       $movcuenta->user_id = Auth::User()->id;
       $movcuenta->save();

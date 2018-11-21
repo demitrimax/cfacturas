@@ -41,9 +41,3 @@
     {!! Form::label('cargo', 'Cargo:') !!}
     <p>{!! $users->cargo !!}</p>
 </div>
-
-<!-- Rol Field -->
-<div class="form-group">
-    {!! Form::label('rol', 'Rol:') !!}
-    <p>{!! $users->rol !!}</p>
-</div>

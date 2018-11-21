@@ -19,6 +19,11 @@ class cat_bancosController extends AppBaseController
     public function __construct(cat_bancosRepository $catBancosRepo)
     {
         $this->catBancosRepository = $catBancosRepo;
+        $this->middleware('auth');
+        $this->middleware('permission:catbancos-list');
+        $this->middleware('permission:catbancos-create', ['only' => ['create','store']]);
+        $this->middleware('permission:catbancos-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:catbancos-delete', ['only' => ['destroy']]);
     }
 
     /**

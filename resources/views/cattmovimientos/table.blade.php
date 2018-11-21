@@ -14,9 +14,9 @@
             <td>
                 {!! Form::open(['route' => ['cattmovimientos.destroy', $cattmovimiento->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
-                    <a href="{!! route('cattmovimientos.show', [$cattmovimiento->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
-                    <a href="{!! route('cattmovimientos.edit', [$cattmovimiento->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
-                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Esta seguro?')"]) !!}
+                    <a href="{!! route('cattmovimientos.show', [$cattmovimiento->id]) !!}" class='btn btn-default'><i class="glyphicon glyphicon-eye-open"></i></a>
+                    <a href="{!! route('cattmovimientos.edit', [$cattmovimiento->id]) !!}" class='btn btn-default'><i class="glyphicon glyphicon-edit"></i></a>
+                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger', 'onclick' => "return confirm('Esta seguro?')"]) !!}
                 </div>
                 {!! Form::close() !!}
             </td>

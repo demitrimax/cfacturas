@@ -5,8 +5,7 @@
         <th>Email</th>
         <th>Email Verified At</th>
         <th>Avatar</th>
-        <th>Rol</th>
-            <th colspan="3">Acciones</th>
+        <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -16,7 +15,6 @@
             <td>{!! $users->email !!}</td>
             <td>{!! $users->email_verified_at !!}</td>
             <td>{!! $users->avatar !!}</td>
-            <td>{!! $users->rol !!}</td>
             <td>
                 {!! Form::open(['route' => ['users.destroy', $users->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

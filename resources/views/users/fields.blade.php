@@ -22,11 +22,6 @@
     {!! Form::text('avatar', null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- Rol Field -->
-<div class="form-group">
-    {!! Form::label('rol', 'Rol:') !!}
-    {!! Form::select('rol', ['admin'=>'Administrador', 'revisor' => 'Revisor', 'abogado'=>'Abogado'],null, ['class' => 'form-control']) !!}
-</div>
 
 <!-- Nombre Field -->
 <div class="form-group">

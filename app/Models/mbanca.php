@@ -42,6 +42,8 @@ class mbanca extends Model
         'tmovimiento',
         'concepto',
         'monto',
+        'metodo',
+        'referencia',
         'fecha',
         'saldo',
         'user_id'
@@ -58,6 +60,8 @@ class mbanca extends Model
         'toperacion' => 'string',
         'tmovimiento' => 'integer',
         'concepto' => 'string',
+        'metodo' => 'string',
+        'referencia' => 'string',
         'monto' => 'float',
         'saldo' => 'float',
         'user_id' => 'integer'

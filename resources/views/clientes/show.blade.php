@@ -233,7 +233,9 @@
                       @endforeach
                     </tbody></table>
                     <h1 class="pull-right">
+                      @can('catcuentas-create')
                        <button type="button" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-cuenta">Agregar Cuenta</button>
+                      @endcan
                     </h1>
                   </div>
                   <!-- /.box-body -->
