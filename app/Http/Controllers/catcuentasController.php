@@ -27,6 +27,10 @@ class catcuentasController extends AppBaseController
     public function __construct(catcuentasRepository $catcuentasRepo)
     {
         $this->catcuentasRepository = $catcuentasRepo;
+        $this->middleware('permission:catcuentas-list');
+        $this->middleware('permission:catcuentas-create', ['only' => ['create','store']]);
+        $this->middleware('permission:catcuentas-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:catcuentas-delete', ['only' => ['destroy']]);
     }
 
     /**

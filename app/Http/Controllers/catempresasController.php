@@ -25,6 +25,10 @@ class catempresasController extends AppBaseController
     {
         $this->catempresasRepository = $catempresasRepo;
         $this->middleware('auth');
+        $this->middleware('permission:empresas-list');
+        $this->middleware('permission:empresas-create', ['only' => ['create','store']]);
+        $this->middleware('permission:empresas-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:empresas-delete', ['only' => ['destroy']]);
     }
 
     /**

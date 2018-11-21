@@ -28,6 +28,7 @@
 
           </div>
       </div>
+      @can('movbancario-list')
       <div class="row" style="padding-left: 20px">
         <div class="col-md-12">
         <div class="box box-primary">
@@ -40,6 +41,7 @@
         </div>
 
       </div>
+    @endcan
     </div>
 
     <div class="modal fade" id="modal-addmov">
@@ -70,7 +72,12 @@
                   <!-- Concepto Field -->
                   <div class="form-group">
                       {!! Form::label('concepto', 'Concepto:') !!}
-                      {!! Form::text('concepto', null, ['class' => 'form-control']) !!}
+                      {!! Form::text('concepto', null, ['class' => 'form-control', 'maxlength' => '190']) !!}
+                  </div>
+
+                  <div class="form-group">
+                      {!! Form::label('referencia', 'Referencia Alfanumerica:') !!}
+                      {!! Form::text('referencia', null, ['class' => 'form-control', 'maxlength' => '15']) !!}
                   </div>
 
                   <!-- Monto Field -->

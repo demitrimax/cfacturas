@@ -45,7 +45,7 @@
         </div>
       </div>
     <div class="content">
-
+        @can('contacto-list')
         <div class="box box-success">
             <div class="box-header">
               <h3 class="box-title">Datos de Contacto</h3>
@@ -67,10 +67,14 @@
                   <td>
                     {!! Form::open(['route' => ['datcontactos.destroy', $datcontacto->id], 'method' => 'delete', 'id'=>'contactform'.$datcontacto->id]) !!}
                     <div class='btn-group'>
+                    @can('contacto-edit')
                     <button type="button" class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i> </button>
+                    @endcan
+                    @can('contacto-delete')
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'button', 'class' => 'btn btn-danger', 'onclick' => "ConfirmDeleteContacto(".$datcontacto->id.")"]) !!}
                                         {!! Form::hidden('redirect', 'clientes.show') !!}
                                         {!! Form::hidden('cliente_id', $clientes->id) !!}
+                    @endcan
                   </div>
                   {!! Form::close() !!}
                   </td>
@@ -78,12 +82,16 @@
                 @endforeach
               </tbody></table>
               <h1 class="pull-right">
+                @can('contacto-create')
                  <button type="button" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-datcontacto">Agregar dato de contacto</button>
+                @endcan
               </h1>
             </div>
             <!-- /.box-body -->
 
           </div>
+          @endcan
+          @can('direccion-list')
           <div class="box box-warning">
               <div class="box-header">
                 <h3 class="box-title">Datos Fiscales</h3>
@@ -110,23 +118,30 @@
                     <td>{{$direccion->municipios->nomMunicipio}}</td>
                     <td>
                         {!! Form::open(['route' => ['direcciones.destroy', $direccion->id], 'method' => 'delete', 'id'=>'datFiscalesForm'.$direccion->id]) !!}
+                      @can('direccion-edit')
                       <button type="button" class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i></button>
+                      @endcan
+                      @can('direccion-delete')
                       <button type="button" class="btn btn-danger" rel="tooltip" title="Eliminar" Onclick="ConfirmDeletedatFiscales({{$direccion->id}})"> <i class="fa fa-remove"></i></button>
                         {!! Form::hidden('redirect', 'clientes.show') !!}
                         {!! Form::hidden('cliente_id', $clientes->id) !!}
                         {!! Form::close() !!}
+                        @endcan
                     </td>
                   </tr>
                   @endforeach
                 </tbody></table>
                 <h1 class="pull-right">
+                  @can('direccion-create')
                    <button type="button" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-direccion">Agregar Datos Fiscales</button>
+                  @endcan
                 </h1>
               </div>
               <!-- /.box-body -->
 
             </div>
-
+            @endcan
+            @can('documentos-list')
             <div class="box box-default">
                 <div class="box-header">
                   <h3 class="box-title">Documentos del Cliente</h3>
@@ -136,6 +151,7 @@
               </div>
                 </div>
                 <!-- /.box-header -->
+
                 <div class="box-body no-padding">
                   <table class="table table-condensed">
                     <tbody><tr>
@@ -153,23 +169,30 @@
                       <td>{{$documento->nota}}</td>
                       <td>
                         {!! Form::open(['route' => ['catdocumentos.destroy', $documento->id], 'method' => 'delete', 'id'=>'delDocumento'.$documento->id]) !!}
+                        @can('documentos-edit')
                         <button type="button" class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i> </button>
+                        @endcan
+                        @can('documentos-delete')
                         <button type="button" class="btn btn-danger" rel="tooltip" title="Eliminar" Onclick="ConfirmDeleteDocumento({{$documento->id}})"> <i class="fa fa-remove"></i></button>
                           {!! Form::hidden('redirect', 'clientes.show') !!}
                           {!! Form::hidden('cliente_id', $clientes->id) !!}
+                          @endcan
                         {!! Form::close() !!}
                       </td>
                     </tr>
                     @endforeach
                   </tbody></table>
                   <h1 class="pull-right">
+                    @can('documentos-create')
                      <button type="button" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-documento">Agregar Documento</button>
+                    @endcan
                   </h1>
                 </div>
                 <!-- /.box-body -->
 
               </div>
-
+              @endcan
+              @can('catcuentas-list')
               <div class="box box-primary">
                   <div class="box-header">
                     <h3 class="box-title">Cuentas del Cliente</h3>
@@ -196,10 +219,14 @@
                         <td>{{$cuenta->sucursal}}</td>
                         <td>
                           {!! Form::open(['route' => ['catcuentas.destroy', $cuenta->id], 'method' => 'delete', 'id'=>'delCuenta'.$cuenta->id]) !!}
+                          @can('catcuentas-edit')
                           <button type="button" class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i> </button>
+                          @endcan
+                          @can('catcuentas-delete')
                           <button type="button" class="btn btn-danger" rel="tooltip" title="Eliminar" Onclick="ConfirmDeleteCuenta({{$cuenta->id}})"> <i class="fa fa-remove"></i></button>
                             {!! Form::hidden('redirect', 'clientes.show') !!}
                             {!! Form::hidden('cliente_id', $clientes->id) !!}
+                          @endcan
                           {!! Form::close() !!}
                         </td>
                       </tr>
@@ -212,6 +239,7 @@
                   <!-- /.box-body -->
 
                 </div>
+                @endcan
     </div>
 
     <div class="modal fade" id="modal-datcontacto">
@@ -248,7 +276,7 @@
         </div>
         <!-- /.modal -->
       </div>
-
+      @can('direccion-create')
       <div class="modal fade" id="modal-direccion">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -335,6 +363,8 @@
           </div>
           <!-- /.modal -->
         </div>
+        @endcan
+        @can('clientes-edit')
         <div class="modal fade" id="modal-fotoperfil">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -354,7 +384,9 @@
 
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
+                    @can('clientes-edit')
                     <button type="submit" class="btn btn-primary" id="actualizafoto">Actualizar Foto</button>
+                    @endcan
                   </div>
                   {!! Form::close() !!}
                 </div>
@@ -364,6 +396,7 @@
             </div>
             <!-- /.modal -->
           </div>
+          @endcan
 
           <div class="modal fade" id="modal-documento">
                 <div class="modal-dialog">

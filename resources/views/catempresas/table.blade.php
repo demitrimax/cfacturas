@@ -24,7 +24,9 @@
                 <div class='btn-group'>
                     <a href="{!! route('catempresas.show', [$catempresas->id]) !!}" class='btn btn-default'><i class="glyphicon glyphicon-eye-open"></i></a>
                     <a href="{!! route('catempresas.edit', [$catempresas->id]) !!}" class='btn btn-default'><i class="glyphicon glyphicon-edit"></i></a>
+                    @can('empresas-delete')
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger', 'onclick' => "return confirm('Estas Seguro?')"]) !!}
+                    @endcan
                 </div>
                 {!! Form::close() !!}
             </td>

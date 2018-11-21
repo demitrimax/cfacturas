@@ -21,6 +21,10 @@ class datcontactoController extends AppBaseController
     {
         $this->datcontactoRepository = $datcontactoRepo;
         $this->middleware('auth');
+        $this->middleware('permission:contacto-list');
+        $this->middleware('permission:contacto-create', ['only' => ['create','store']]);
+        $this->middleware('permission:contacto-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:contacto-delete', ['only' => ['destroy']]);
     }
 
     /**

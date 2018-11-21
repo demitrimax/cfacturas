@@ -22,6 +22,10 @@ class catdocumentosController extends AppBaseController
     {
         $this->catdocumentosRepository = $catdocumentosRepo;
         $this->middleware('auth');
+        $this->middleware('permission:documentos-list');
+        $this->middleware('permission:documentos-create', ['only' => ['create','store']]);
+        $this->middleware('permission:documentos-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:documentos-delete', ['only' => ['destroy']]);
     }
 
     /**

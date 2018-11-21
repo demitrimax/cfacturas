@@ -25,7 +25,7 @@ class mbancaController extends AppBaseController
     {
         $this->mbancaRepository = $mbancaRepo;
                 $this->middleware('auth');
-                $this->middleware('permission:mbanca-list');
+                $this->middleware('permission:movbancario-list');
     }
 
     /**
@@ -70,7 +70,7 @@ class mbancaController extends AppBaseController
 
         $mbanca = $this->mbancaRepository->create($input);
 
-        Flash::success('Mbanca saved successfully.');
+        Flash::success('Movimiento guardado correctamente.');
 
         return redirect(route('mbancas.index'));
     }
@@ -107,7 +107,7 @@ class mbancaController extends AppBaseController
         $mbanca = $this->mbancaRepository->findWithoutFail($id);
 
         if (empty($mbanca)) {
-            Flash::error('Mbanca not found');
+            Flash::error('Movimiento no encontrado');
 
             return redirect(route('mbancas.index'));
         }
@@ -128,14 +128,14 @@ class mbancaController extends AppBaseController
         $mbanca = $this->mbancaRepository->findWithoutFail($id);
 
         if (empty($mbanca)) {
-            Flash::error('Mbanca not found');
+            Flash::error('Movimiento no encontrado');
 
             return redirect(route('mbancas.index'));
         }
 
         $mbanca = $this->mbancaRepository->update($request->all(), $id);
 
-        Flash::success('Mbanca updated successfully.');
+        Flash::success('Movimiento actualizado correctamente.');
 
         return redirect(route('mbancas.index'));
     }
@@ -152,14 +152,14 @@ class mbancaController extends AppBaseController
         $mbanca = $this->mbancaRepository->findWithoutFail($id);
 
         if (empty($mbanca)) {
-            Flash::error('Mbanca not found');
+            Flash::error('Movimiento no encontrado');
 
             return redirect(route('mbancas.index'));
         }
 
         $this->mbancaRepository->delete($id);
 
-        Flash::success('Mbanca deleted successfully.');
+        Flash::success('Movimiento bancario borrado correctamente.');
 
         return redirect(route('mbancas.index'));
     }

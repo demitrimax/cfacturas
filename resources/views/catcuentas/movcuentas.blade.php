@@ -29,5 +29,6 @@
 @else
   <p> No existen movimientos registrados en esta cuenta </p>
 @endif
-
+@can('movbancario-create')
 <button type="button" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-addmov">Agregar Movimiento</button>
+@endcan
