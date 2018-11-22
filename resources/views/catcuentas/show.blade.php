@@ -7,7 +7,7 @@
         </h1>
     </section>
     <div class="content">
-      <div class="row" style="padding-left: 20px">
+      <div class="row">
         <div class="col-md-6">
         <div class="box box-primary">
             <div class="box-body">
@@ -19,7 +19,7 @@
         </div>
           <div class="col-md-6">
             <div class="box box-primary">
-                <div class="box-body">
+                <div class="box-body table-responsive no-padding">
 
                         @include('catcuentas.estado_cuenta')
 
@@ -29,10 +29,10 @@
           </div>
       </div>
       @can('movbancario-list')
-      <div class="row" style="padding-left: 20px">
+      <div class="row">
         <div class="col-md-12">
         <div class="box box-primary">
-            <div class="box-body">
+            <div class="box-body table-responsive no-padding">
 
                 @include('catcuentas.movcuentas')
 

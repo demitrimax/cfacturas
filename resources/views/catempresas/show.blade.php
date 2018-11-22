@@ -46,7 +46,9 @@
             @foreach($catempresas->emp_datfiscales as $key=>$datFiscales)
               <tr>
                 <td>{{$key+1}}</td>
-                <td>{{$datFiscales->razonsocial}}</td>
+                <td>{{$datFiscales->razonsocial}}
+                  {!! ($datFiscales->sucursal==1)? '<button type="button" class="btn bg-navy btn-xs" data-toggle="tooltip" data-placement="top" title="Sucursal"><i class="fa fa-check-square"></i></button>':'' !!}
+                </td>
                 <td>{{$datFiscales->RFC}}</td>
                 <td>{{$datFiscales->calle.' '.$datFiscales->numeroExt}}</td>
                 <td>
@@ -209,6 +211,14 @@
                 </div>
                 <div class="modal-body">
                     {!! Form::open(['route' => 'empDatfiscales.store']) !!}
+                    <!-- Sucursal Field -->
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        {!! Form::checkbox('sucursal', null) !!}
+                      </span>
+                        {!! Form::label('sucursal', 'Sucursal') !!}
+                    </div>
+
                     <!-- Empresa Id Field -->
                         {!! Form::hidden('empresa_id', $catempresas->id, ['class' => 'form-control']) !!}
                         {!! Form::hidden('redirect', 'clientes.show') !!}
@@ -246,13 +256,13 @@
                     <!-- Estado Id Field -->
                     <div class="form-group">
                         {!! Form::label('estado_id', 'Estado Id:') !!}
-                        {!! Form::select('estado_id', $estados, null, ['class' => 'form-control']) !!}
+                        {!! Form::select('estado_id', $estados, null, ['class' => 'form-control', 'required']) !!}
                     </div>
 
                     <!-- Municipio Id Field -->
                     <div class="form-group">
                         {!! Form::label('municipio_id', 'Municipio Id:') !!}
-                        {!! Form::select('municipio_id', ['Seleccione uno'], null, ['class' => 'form-control']) !!}
+                        {!! Form::select('municipio_id', ['Seleccione uno'], null, ['class' => 'form-control', 'required']) !!}
                     </div>
 
                     <!-- Colonia Field -->
@@ -457,5 +467,8 @@ function ConfirmDeleteCuenta(id) {
     }
   })
 }
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
   </script>
   @endsection

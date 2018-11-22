@@ -46,7 +46,7 @@ class catempresas extends Model
         'correo_factura' => 'string',
         'correo_notifica' => 'string',
         'telefono' => 'string',
-        'comision' => 'integer'
+        'comision' => 'float'
     ];
 
     /**

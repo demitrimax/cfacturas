@@ -26,5 +26,5 @@
 <!-- Comision Field -->
 <div class="form-group">
     {!! Form::label('comision', 'Porcentaje de Comision:') !!}
-    <p>{!! $catempresas->comision !!} %</p>
+    <p>{!! number_format($catempresas->comision,2) !!} %</p>
 </div>

@@ -14,7 +14,7 @@
 
         <div class="clearfix"></div>
         <div class="box box-primary">
-            <div class="box-body">
+            <div class="box-body table-responsive no-padding">
                     @include('cat_bancos.table')
             </div>
         </div>

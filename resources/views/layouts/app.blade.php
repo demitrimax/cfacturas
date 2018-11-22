@@ -39,7 +39,7 @@
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>C </b>Co</span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>Consorcio </b>Comer</span>
+                <span class="logo-lg"><b>Consorcio </b>Comercial</span>
             </a>
 
             <!-- Header Navbar -->

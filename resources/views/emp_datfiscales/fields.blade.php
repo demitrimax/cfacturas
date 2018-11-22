@@ -3,6 +3,14 @@
     {!! Form::hidden('empresa_id', null, ['class' => 'form-control']) !!}
 
 
+    <!-- Sucursal Field -->
+    <div class="input-group">
+      <span class="input-group-addon">
+        {!! Form::checkbox('sucursal', null) !!}
+      </span>
+        {!! Form::label('sucursal', 'Sucursal:') !!}
+    </div>
+
 <!-- Razonsocial Field -->
 <div class="form-group">
     {!! Form::label('razonsocial', 'Razon Social:') !!}

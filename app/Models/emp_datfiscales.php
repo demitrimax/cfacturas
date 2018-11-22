@@ -24,6 +24,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string colonia
  * @property integer codpostal
  * @property string referencias
+ * @property boolean sucursal
  */
 class emp_datfiscales extends Model
 {
@@ -46,7 +47,8 @@ class emp_datfiscales extends Model
         'municipio_id',
         'colonia',
         'codpostal',
-        'referencias'
+        'referencias',
+        'sucursal'
     ];
 
     /**
@@ -66,7 +68,8 @@ class emp_datfiscales extends Model
         'municipio_id' => 'integer',
         'colonia' => 'string',
         'codpostal' => 'integer',
-        'referencias' => 'string'
+        'referencias' => 'string',
+        'sucursal' => 'boolean'
     ];
 
     /**

@@ -58,6 +58,9 @@ class emp_datfiscalesController extends AppBaseController
     {
         $input = $request->all();
 
+        ($input['sucursal']='on')? $input['sucursal'] = 1 : $input['sucursal'] = 0;
+        //dd($input);
+
         $empDatfiscales = $this->empDatfiscalesRepository->create($input);
 
         Flash::success('Datos Fiscuales guardados correctamente.');
