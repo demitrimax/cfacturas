@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title',config('app.name').' | ''.$clientes->nomcompleto)
+@section('title',config('app.name').' | '.$clientes->nomcompleto)
 @section('content')
 
     @include('flash::message')
