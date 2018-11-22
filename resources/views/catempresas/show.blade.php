@@ -34,6 +34,7 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body no-padding">
+          @if($catempresas->emp_datfiscales->count()>0)
             <table class="table table-condensed">
               <tbody><tr>
                 <th style="width: 10px">#</th>
@@ -64,7 +65,11 @@
                 </td>
               </tr>
               @endforeach
-            </tbody></table>
+            </tbody>
+          </table>
+          @else
+            <h5> No existen datos fiscales registrados.</h5>
+          @endif
             <h1 class="pull-right">
               @can('empdatfiscales-create')
                <button type="button" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-datfiscales">Agregar datos fiscales</button>
@@ -89,6 +94,7 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body no-padding">
+            @if($catempresas->catdocumentos->count()>0)
             <table class="table table-condensed">
               <tbody><tr>
                 <th style="width: 10px">#</th>
@@ -117,7 +123,11 @@
                 </td>
               </tr>
               @endforeach
-            </tbody></table>
+            </tbody>
+          </table>
+          @else
+            <h5>No existen Documentos registrados para esta empresa.</h5>
+          @endif
             <h1 class="pull-right">
               @can('documentos-create')
                <button type="button" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-documento">Agregar Documento</button>
@@ -142,6 +152,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
+              @if($catempresas->catcuentas->count()>0)
               <table class="table table-condensed">
                 <tbody><tr>
                   <th style="width: 10px">#</th>
@@ -170,7 +181,11 @@
                   </td>
                 </tr>
                 @endforeach
-              </tbody></table>
+              </tbody>
+            </table>
+            @else
+            <h5>No existen cuentas bancarias registradas.</h5>
+            @endif
               <h1 class="pull-right">
                 @can('catcuentas-create')
                  <button type="button" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-cuentabancaria">Agregar Cuenta</button>

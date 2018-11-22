@@ -5,11 +5,11 @@
 <table class="table table-responsive" id="catempresas-table">
     <thead>
         <tr>
-          <th>Nombre</th>
+          <th>Alias Empresa</th>
           <th>Correo Facturación</th>
           <th>Correo Notificaciones</th>
           <th>Teléfono</th>
-          <th>Action</th>
+          <th>Acciones</th>
         </tr>
     </thead>
     <tbody>

@@ -1,7 +1,7 @@
 
 <!-- Nombre Field -->
 <div class="form-group">
-    {!! Form::label('nombre', 'Nombre:') !!}
+    {!! Form::label('nombre', 'Alias Empresa:') !!}
     <p>{!! $catempresas->nombre !!}</p>
 </div>
 

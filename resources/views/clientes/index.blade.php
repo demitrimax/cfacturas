@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Consorcio Comercial | Catálogo de Clientes')
+@section('title',config('app.name').' | Catálogo de Clientes ')
 @section('css')
 <!-- DataTables -->
 <link rel="stylesheet" href="{{asset('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">

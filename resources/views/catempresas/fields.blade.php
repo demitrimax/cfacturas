@@ -1,19 +1,19 @@
 <!-- Nombre Field -->
 <div class="form-group">
-    {!! Form::label('nombre', 'Nombre de la Empresa:') !!}
-    {!! Form::text('nombre', null, ['class' => 'form-control']) !!}
+    {!! Form::label('nombre', 'Alias de la Empresa:') !!}
+    {!! Form::text('nombre', null, ['class' => 'form-control', 'length'=>'150']) !!}
 </div>
 
 <!-- Correo Factura Field -->
 <div class="form-group">
     {!! Form::label('correo_factura', 'Correo de Facturas:') !!}
-    {!! Form::text('correo_factura', null, ['class' => 'form-control']) !!}
+    {!! Form::email('correo_factura', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Correo Notifica Field -->
 <div class="form-group">
     {!! Form::label('correo_notifica', 'Correo de Notificaciones:') !!}
-    {!! Form::text('correo_notifica', null, ['class' => 'form-control']) !!}
+    {!! Form::email('correo_notifica', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Telefono Field -->
@@ -27,7 +27,7 @@
 
 <div class="input-group">
     <span class="input-group-addon">Porcentaje de Comisión</span>
-    {!! Form::number('comision', null, ['class' => 'form-control']) !!}
+    {!! Form::number('comision', null, ['class' => 'form-control', 'step'=>'0.01']) !!}
     <span class="input-group-addon">%</span>
 </div>
 
