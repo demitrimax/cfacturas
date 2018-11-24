@@ -28,13 +28,13 @@
               </div>
               </a>
               <!-- /.widget-user-image -->
-              <h3 class="widget-user-username">{!! $clientes->nombre." ".$clientes->apellidopat." ".$clientes->apellidomat !!}</h3>
+              <h3 class="widget-user-username" id="nombreClient">{!! $clientes->nombre." ".$clientes->apellidopat." ".$clientes->apellidomat !!}</h3>
               <h5 class="widget-user-desc">Cliente desde: {!! $clientes->created_at->format('M. Y') !!}</h5>
             </div>
             <div class="box-footer no-padding">
               <ul class="nav nav-stacked">
                 <li><a href="#">Feha de Nacimiento <span class="pull-right">N/D</span></a></li>
-                <li><a href="#">RFC <span class="pull-right">{!! $clientes->RFC !!}</span></a></li>
+                <li><a href="#">RFC <span class="pull-right" id="clientRFC">{!! $clientes->RFC !!}</span></a></li>
                 <li><a href="#">CURP <span class="pull-right">{!! $clientes->CURP !!}</span></a></li>
                 <li><a href="#">Fecha de Alta <span class="pull-right">{!! $clientes->created_at !!}</span></a></li>
                 <li><a href="{!! route('clientes.index') !!}" class="btn btn-success pull-right">Regresar</a></li>
@@ -52,6 +52,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
+              @if($clientes->datcontacto->count()>0)
               <table class="table table-condensed">
                 <tbody><tr>
                   <th style="width: 10px">#</th>
@@ -80,7 +81,11 @@
                   </td>
                 </tr>
                 @endforeach
-              </tbody></table>
+              </tbody>
+            </table>
+            @else
+            <p>No existen datos de contacto.</p>
+            @endif
               <h1 class="pull-right">
                 @can('contacto-create')
                  <button type="button" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-datcontacto">Agregar dato de contacto</button>
@@ -98,6 +103,7 @@
               </div>
               <!-- /.box-header -->
               <div class="box-body no-padding">
+                @if($clientes->direcciones->count()>0)
                 <table class="table table-condensed">
                   <tbody><tr>
                     <th style="width: 10px">#</th>
@@ -130,7 +136,11 @@
                     </td>
                   </tr>
                   @endforeach
-                </tbody></table>
+                </tbody>
+              </table>
+              @else
+              <p>No existen datos fiscales.</p>
+              @endif
                 <h1 class="pull-right">
                   @can('direccion-create')
                    <button type="button" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-direccion">Agregar Datos Fiscales</button>
@@ -153,6 +163,7 @@
                 <!-- /.box-header -->
 
                 <div class="box-body no-padding">
+                  @if($clientes->catdocumentos->count()>0)
                   <table class="table table-condensed">
                     <tbody><tr>
                       <th style="width: 10px">#</th>
@@ -181,7 +192,11 @@
                       </td>
                     </tr>
                     @endforeach
-                  </tbody></table>
+                  </tbody>
+                </table>
+                @else
+                <p>No existen documentos del cliente.</p>
+                @endif
                   <h1 class="pull-right">
                     @can('documentos-create')
                      <button type="button" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-documento">Agregar Documento</button>
@@ -202,7 +217,8 @@
                 </div>
                   </div>
                   <!-- /.box-header -->
-                  <div class="box-body no-padding">
+                  <div class="box-body">
+                    @if($clientes->catcuentas->count()>0)
                     <table class="table table-condensed">
                       <tbody><tr>
                         <th style="width: 10px">#</th>
@@ -231,7 +247,11 @@
                         </td>
                       </tr>
                       @endforeach
-                    </tbody></table>
+                    </tbody>
+                  </table>
+                  @else
+                  <p>No existen cuentas asociadas al cliente.</p>
+                  @endif
                     <h1 class="pull-right">
                       @can('catcuentas-create')
                        <button type="button" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-cuenta">Agregar Cuenta</button>
@@ -290,6 +310,10 @@
                 <div class="modal-body">
                     {!! Form::open(['route' => 'direcciones.store']) !!}
                     <!-- RFC Field -->
+                    <div class="form-group col-sm-6">
+                      {!! Form::checkbox('autocomplete','false', null, ['onclick'=>'autocompletardatos(this)'])!!}
+                      {!! Form::label('autocomplete','Auto completar con datos de usuario.')!!}
+                    </div>
                     <div class="form-group col-sm-6">
                         {!! Form::label('RFC', 'RFC:') !!}
                         {!! Form::text('RFC', null, ['class' => 'form-control','onchange'=>'validarRFC(this)']) !!}
@@ -353,12 +377,12 @@
                       {!! Form::hidden('redirect', 'clientes.show') !!}
                       </div>
 
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
-                  <button type="submit" class="btn btn-primary" id="subdatfiscales" disabled>Agregar Datos Fiscales</button>
-                </div>
-                {!! Form::close() !!}
               </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary" id="subdatfiscales" disabled>Agregar Datos Fiscales</button>
+              </div>
+              {!! Form::close() !!}
               <!-- /.modal-content -->
             </div>
             <!-- /.modal-dialog -->
@@ -643,6 +667,26 @@ function validarRFC(input) {
 
     resultado.innerText = "RFC: " + rfc
                         + "\nFormato: " + valido;
+}
+
+function autocompletardatos(checked)
+{
+  var habilitado = checked.checked;
+  if (habilitado) {
+    var RFC = document.getElementById('clientRFC').innerText;
+    var razonSocial = document.getElementById('nombreClient').innerText;
+    //alert('RFC del Cliente '+ RFC + habilitado);
+    document.getElementById('RFC').value = RFC;
+    document.getElementById('razonsocial').value = razonSocial.toUpperCase();
+
+    validarRFC(document.getElementById('RFC'));
+  }
+  if (!habilitado) {
+    document.getElementById('RFC').value = '';
+    document.getElementById('razonsocial').value = '';
+  }
+
+
 }
 
 </script>
