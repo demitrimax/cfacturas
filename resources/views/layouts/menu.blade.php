@@ -17,7 +17,9 @@
           <a href="{{url('/catBancos')}}">
             <i class="fa fa-money"></i> <span>Bancos</span>
             <span class="pull-right-container">
+              @isset($globalnews->catbancos)
               <small class="label pull-right bg-green">nuevo</small>
+              @endisset
             </span>
           </a>
         </li>
@@ -27,7 +29,9 @@
           <a href="{{url('/catcuentas')}}">
             <i class="fa fa-usd"></i> <span>Cuentas</span>
             <span class="pull-right-container">
+              @isset($globalnews->catcuentas)
               <small class="label pull-right bg-green">nuevo</small>
+              @endisset
             </span>
           </a>
         </li>

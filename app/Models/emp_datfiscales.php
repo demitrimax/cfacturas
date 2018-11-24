@@ -86,7 +86,7 @@ class emp_datfiscales extends Model
      **/
     public function catempresa()
     {
-        return $this->belongsTo(\App\Models\Catempresa::class);
+        return $this->belongsTo('App\Models\catempresas','empresa_id');
     }
 
     /**
@@ -94,7 +94,7 @@ class emp_datfiscales extends Model
      **/
     public function catestado()
     {
-        return $this->belongsTo(\App\Models\Catestado::class);
+        return $this->belongsTo('App\catestados','estado_id');
     }
 
     /**
@@ -102,6 +102,6 @@ class emp_datfiscales extends Model
      **/
     public function catmunicipio()
     {
-        return $this->belongsTo(\App\Models\Catmunicipio::class);
+        return $this->belongsTo('App\catmunicipios','municipio_id');
     }
 }

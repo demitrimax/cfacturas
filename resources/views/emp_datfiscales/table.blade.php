@@ -1,31 +1,25 @@
 <table class="table table-responsive" id="empDatfiscales-table">
     <thead>
         <tr>
-            <th>Empresa Id</th>
         <th>Razonsocial</th>
-        <th>Rfc</th>
+        <th>RFC</th>
         <th>Calle</th>
-        <th>Numeroext</th>
-        <th>Numeroint</th>
-        <th>Estado Id</th>
-        <th>Municipio Id</th>
+        <th>Estado</th>
+        <th>Municipio</th>
         <th>Colonia</th>
-        <th>Codpostal</th>
+        <th>Cod. Postal</th>
         <th>Referencias</th>
-            <th colspan="3">Action</th>
+        <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
     @foreach($empDatfiscales as $empDatfiscales)
         <tr>
-            <td>{!! $empDatfiscales->empresa_id !!}</td>
             <td>{!! $empDatfiscales->razonsocial !!}</td>
             <td>{!! $empDatfiscales->RFC !!}</td>
-            <td>{!! $empDatfiscales->calle !!}</td>
-            <td>{!! $empDatfiscales->numeroExt !!}</td>
-            <td>{!! $empDatfiscales->numeroInt !!}</td>
-            <td>{!! $empDatfiscales->estado_id !!}</td>
-            <td>{!! $empDatfiscales->municipio_id !!}</td>
+            <td>{!! $empDatfiscales->calle.' '.$empDatfiscales->numeroExt.' ' .$empDatfiscales->numeroInt!!}</td>
+            <td>{!! $empDatfiscales->catestado->nombre !!}</td>
+            <td>{!! $empDatfiscales->catmunicipio->nomMunicipio !!}</td>
             <td>{!! $empDatfiscales->colonia !!}</td>
             <td>{!! $empDatfiscales->codpostal !!}</td>
             <td>{!! $empDatfiscales->referencias !!}</td>
@@ -33,8 +27,12 @@
                 {!! Form::open(['route' => ['empDatfiscales.destroy', $empDatfiscales->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
                     <a href="{!! route('empDatfiscales.show', [$empDatfiscales->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
+                    @can('empdatfiscales-edit')
                     <a href="{!! route('empDatfiscales.edit', [$empDatfiscales->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
+                    @endcan
+                    @can('empdatfiscales-delete')
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                    @endcan
                 </div>
                 {!! Form::close() !!}
             </td>
