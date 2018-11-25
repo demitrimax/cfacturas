@@ -6,7 +6,7 @@
         <h1 class="pull-right">
           @can('catbancos-create')
            <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('catBancos.create') !!}">Agregar Nuevo</a>
-          @endcarn
+          @endcan
         </h1>
     </section>
     <div class="content">
