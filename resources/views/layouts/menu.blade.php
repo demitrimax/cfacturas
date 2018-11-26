@@ -1,3 +1,8 @@
+        @can('accomerciales-list')
+        <li class="{{ Request::is('accomercials*') ? 'active' : '' }}">
+            <a href="{!! route('accomercials.index') !!}"><i class="fa fa-check-square-o"></i><span>Acuerdos Comerciales</span></a>
+        </li>
+        @endcan
         @can('clientes-list')
         <li class="{{ Request::is('clientes*') ? 'active' : '' }}">
           <a href="{{url('/clientes')}}">

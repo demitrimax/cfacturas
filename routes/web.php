@@ -44,6 +44,7 @@ Route::group(['middleware'=>['auth']], function() {
   Route::resource('cattmovimientos', 'cattmovimientoController');
   Route::resource('mbancas', 'mbancaController');
   Route::post('catcuentas/agregarmov', 'catcuentasController@agregarmov');
+  Route::resource('accomercials', 'accomercialController');
 
   Route::resource('roles','RoleController');
   Route::resource('user','UserController');
