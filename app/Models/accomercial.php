@@ -143,8 +143,18 @@ class accomercial extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function authuser2()
+    public function autuser2()
     {
         return $this->belongsTo('App\Models\users','aut_user2_id');
+    }
+
+    public function getNomsocioAttribute()
+    {
+      $socioid = $this->sociocomer_id;
+      $nomsocio = "N/D";
+      if($socioid) {
+        $nomsocio = $this->sociocomer->nomcompleto;
+      }
+      return $nomsocio;
     }
 }

@@ -14,6 +14,9 @@ use App\Models\clientes;
 use App\Models\direcciones;
 use App\Models\catcuentas;
 use App\Models\catempresas;
+use App\Models\accomercial;
+use App\Models\users;
+use App\acempresas;
 
 class accomercialController extends AppBaseController
 {
@@ -54,10 +57,12 @@ class accomercialController extends AppBaseController
     {
         $sociocomer = clientes::all();
         $sociocomer = $sociocomer->pluck('nomcompleto','id');
-        $cliente = $sociocomer;
+        $clientes = clientes::all();
+        $clientes = $sociocomer;
+        $usuarios = users::pluck('name','id');
         $empresas = catempresas::pluck('nombre','id');
 
-        return view('accomercials.create')->with(compact('sociocomer','cliente','empresas'));
+        return view('accomercials.create')->with(compact('sociocomer','clientes','empresas','usuarios'));
     }
 
     /**
@@ -69,11 +74,50 @@ class accomercialController extends AppBaseController
      */
     public function store(CreateaccomercialRequest $request)
     {
+        $rules = [
+          //'fechasolicitud' => 'required',
+          'sociocomer_id' => 'integer|nullable',
+          'cliente_id' => 'required',
+          'direccion_id' => 'required',
+          'cuenta_id' => 'required',
+          'descripcion' => 'required',
+          'ac_principalporc' => 'required',
+          'aut_user_id' => 'required',
+          'empresasasoc' => 'required',
+        ];
+        $this->validate($request, $rules);
+
         $input = $request->all();
 
-        $accomercial = $this->accomercialRepository->create($input);
+        //$accomercial = $this->accomercialRepository->create($input);
+        ($input['autorizado']='on')? $input['autorizado'] = 1 : $input['autorizado'] = 0;
+        //dd($request);
+        $accomercial = new accomercial();
+        $accomercial->fechasolicitud = $request->input('fechasolicitud');
+        $accomercial->sociocomer_id = $request->input('sociocomer_id');
+        $accomercial->cliente_id = $request->input('cliente_id');
+        $accomercial->direccion_id = $request->input('direccion_id');
+        $accomercial->cuenta_id = $request->input('cuenta_id');
+        $accomercial->descripcion = $request->input('descripcion');
+        $accomercial->informacion = $request->input('informacion');
+        $accomercial->ac_principalporc = $request->input('ac_principalporc');
+        $accomercial->ac_secundarioporc = $request->input('ac_secundarioporc');
+        $accomercial->autorizado = $request->input('autorizado');
+        $accomercial->elab_user_id = $request->input('elab_user_id');
+        $accomercial->aut_user_id = $request->input('aut_user_id');
+        $accomercial->aut_user2_id = $request->input('aut_user2_id');
+        $accomercial->save();
 
-        Flash::success('Accomercial saved successfully.');
+        foreach ($request->input('empresasasoc') as $empresas)
+        {
+          $acempresas = new acempresas();
+          $acempresas->acuerdoc_id = $accomercial->id;
+          $acempresas->empresa_id = $empresas;
+          $acempresas->save();
+        }
+
+
+        Flash::success('Acuerdo Comercial guardado correctamente.');
 
         return redirect(route('accomercials.index'));
     }
@@ -90,7 +134,7 @@ class accomercialController extends AppBaseController
         $accomercial = $this->accomercialRepository->findWithoutFail($id);
 
         if (empty($accomercial)) {
-            Flash::error('Accomercial not found');
+            Flash::error('Acuerdo Comercial no encontrado.');
 
             return redirect(route('accomercials.index'));
         }
@@ -110,7 +154,7 @@ class accomercialController extends AppBaseController
         $accomercial = $this->accomercialRepository->findWithoutFail($id);
 
         if (empty($accomercial)) {
-            Flash::error('Accomercial not found');
+            Flash::error('Acuerdo Comercial no encontado.');
 
             return redirect(route('accomercials.index'));
         }
@@ -131,14 +175,14 @@ class accomercialController extends AppBaseController
         $accomercial = $this->accomercialRepository->findWithoutFail($id);
 
         if (empty($accomercial)) {
-            Flash::error('Accomercial not found');
+            Flash::error('Acuerdo Comercial no encontrado.');
 
             return redirect(route('accomercials.index'));
         }
 
         $accomercial = $this->accomercialRepository->update($request->all(), $id);
 
-        Flash::success('Accomercial updated successfully.');
+        Flash::success('Acuerdo Comercial actualizado correctamente.');
 
         return redirect(route('accomercials.index'));
     }
@@ -155,14 +199,14 @@ class accomercialController extends AppBaseController
         $accomercial = $this->accomercialRepository->findWithoutFail($id);
 
         if (empty($accomercial)) {
-            Flash::error('Accomercial not found');
+            Flash::error('Acuerdo Comercial no encontrado.');
 
             return redirect(route('accomercials.index'));
         }
 
         $this->accomercialRepository->delete($id);
 
-        Flash::success('Accomercial deleted successfully.');
+        Flash::success('Acuerdo comercial borrado correctamente.');
 
         return redirect(route('accomercials.index'));
     }

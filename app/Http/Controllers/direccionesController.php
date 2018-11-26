@@ -23,6 +23,10 @@ class direccionesController extends AppBaseController
     {
         $this->direccionesRepository = $direccionesRepo;
         $this->middleware('auth');
+        $this->middleware('permission:direccion-list');
+        $this->middleware('permission:direccion-create', ['only' => ['create','store']]);
+        $this->middleware('permission:direccion-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:direccion-delete', ['only' => ['destroy']]);
     }
 
     /**

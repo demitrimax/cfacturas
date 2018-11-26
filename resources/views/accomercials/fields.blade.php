@@ -11,19 +11,20 @@
 <!-- Fechasolicitud Field -->
 <div class="form-group">
     {!! Form::label('fechasolicitud', 'Fecha de Solicitud:*') !!}
-    {!! Form::date('fechasolicitud', date("Y-m-d"), ['class' => 'form-control', 'required', 'disabled']) !!}
+    {!! Form::date('fechasolicitud0', date("Y-m-d"), ['class' => 'form-control', 'required', 'disabled']) !!}
+    {!! Form::hidden('fechasolicitud', date("Y-m-d")) !!}
 </div>
 
 <!-- Sociocomer Id Field -->
 <div class="form-group">
-    {!! Form::label('sociocomer_id', 'Socio Comercial:*') !!}
-    {!! Form::select('sociocomer_id', $sociocomer ,null, ['class' => 'form-control select2', 'style'=>'width: 100%;', 'required','placeholder'=>'Seleccione uno', 'onchange' =>'sociocomercialremove(selectedIndex)']) !!}
+    {!! Form::label('sociocomer_id', 'Socio Comercial:') !!}
+    {!! Form::select('sociocomer_id', $sociocomer ,null, ['class' => 'form-control select2', 'style'=>'width: 100%;','placeholder'=>'Seleccione uno', 'onchange' =>'sociocomercialremove(selectedIndex)']) !!}
 </div>
 
 <!-- Cliente Id Field -->
 <div class="form-group">
     {!! Form::label('cliente_id', 'Cliente:*') !!}
-    {!! Form::select('cliente_id', $cliente, null, ['class' => 'form-control select2', 'style'=>'width: 100%;', 'required', 'placeholder'=>'Seleccione uno']) !!}
+    {!! Form::select('cliente_id', $clientes, null, ['class' => 'form-control select2', 'style'=>'width: 100%;', 'required', 'placeholder'=>'Seleccione uno']) !!}
 </div>
 
 <!-- Direccion Id Field -->
@@ -41,7 +42,7 @@
 <!-- Empresas Asociadas al Acuerdo Comercial -->
 <div class="form-group">
     {!! Form::label('empresasasoc', 'Empresa(s) Asociada(s):*') !!}
-    {!! Form::select('empresasasoc', $empresas, null, ['class' => 'form-control select2', 'required', 'multiple'=>'multiple', 'data-placeholder'=>'Seleccione una empresa', 'style'=>'width: 100%;']) !!}
+    {!! Form::select('empresasasoc[]', $empresas, null, ['class' => 'form-control select2', 'required', 'multiple'=>'multiple', 'data-placeholder'=>'Seleccione una empresa', 'style'=>'width: 100%;']) !!}
 </div>
 
 <!-- Descripcion Field -->
@@ -58,35 +59,36 @@
 
 <!-- Ac Principalporc Field -->
 <div class="form-group">
-    {!! Form::label('ac_principalporc', 'Porcentaje Principal:') !!}
+    {!! Form::label('ac_principalporc', 'Porcentaje Principal:*') !!}
     {!! Form::number('ac_principalporc', null, ['class' => 'form-control', 'required', 'step'=>'0.01', 'max' => '6.99', 'min'=>'0.09']) !!}
 </div>
 
 <!-- Ac Secundarioporc Field -->
 <div class="form-group">
     {!! Form::label('ac_secundarioporc', 'Porcentaje Secundario:') !!}
-    {!! Form::number('ac_secundarioporc', null, ['class' => 'form-control', 'required', 'step'=>'0.01', 'max' => '6.99', 'min'=>'0.09']) !!}
+    {!! Form::number('ac_secundarioporc', null, ['class' => 'form-control', 'step'=>'0.01', 'max' => '6.99', 'min'=>'0.09']) !!}
 </div>
 
 
 
 <!-- Elab User Id Field -->
 <div class="form-group">
-    {!! Form::label('elab_user_id', 'Usuario que Elabora:') !!}
-    {!! Form::text('elab_user_id', Auth::user()->nombre, ['class' => 'form-control', 'disabled','required']) !!}
+    {!! Form::label('elab_user_id0', 'Usuario que Elabora:*') !!}
+    {!! Form::select('elab_user_id0', $usuarios, Auth::user()->id, ['class' => 'form-control', 'readonly','required']) !!}
+    {!! Form::hidden('elab_user_id', Auth::user()->id) !!}
 </div>
 @can('accomerciales-authorized')
 <!-- Aut User Id Field -->
 <div class="form-group">
-    {!! Form::label('aut_user_id', 'Usuario Supervisa:') !!}
-    {!! Form::number('aut_user_id', null, ['class' => 'form-control', 'required']) !!}
+    {!! Form::label('aut_user_id', 'Usuario que Supervis:') !!}
+    {!! Form::select('aut_user_id', $usuarios,null, ['class' => 'form-control', 'required']) !!}
 </div>
 @endcan
 @can('accomerciales-supervised')
 <!-- Aut User2 Id Field -->
 <div class="form-group">
-    {!! Form::label('aut_user2_id', 'Usuario Autoriza:') !!}
-    {!! Form::number('aut_user2_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('aut_user2_id', 'Usuario que Autoriza:') !!}
+    {!! Form::select('aut_user2_id', $usuarios,null, ['class' => 'form-control', 'required']) !!}
 </div>
 @endcan
 
