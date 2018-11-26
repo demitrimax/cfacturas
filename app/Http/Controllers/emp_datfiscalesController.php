@@ -20,6 +20,10 @@ class emp_datfiscalesController extends AppBaseController
     {
         $this->empDatfiscalesRepository = $empDatfiscalesRepo;
         $this->middleware('auth');
+        $this->middleware('permission:empdatfiscales-list');
+        $this->middleware('permission:empdatfiscales-create', ['only' => ['create','store']]);
+        $this->middleware('permission:empdatfiscales-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:empdatfiscales-delete', ['only' => ['destroy']]);
     }
 
     /**

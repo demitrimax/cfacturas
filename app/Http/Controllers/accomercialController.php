@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Models\clientes;
+use App\Models\direcciones;
+use App\Models\catcuentas;
+use App\Models\catempresas;
 
 class accomercialController extends AppBaseController
 {
@@ -19,6 +23,11 @@ class accomercialController extends AppBaseController
     public function __construct(accomercialRepository $accomercialRepo)
     {
         $this->accomercialRepository = $accomercialRepo;
+        $this->middleware('auth');
+        $this->middleware('permission:accomerciales-list');
+        $this->middleware('permission:accomerciales-create', ['only' => ['create','store']]);
+        $this->middleware('permission:accomerciales-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:accomerciales-delete', ['only' => ['destroy']]);
     }
 
     /**
@@ -43,7 +52,12 @@ class accomercialController extends AppBaseController
      */
     public function create()
     {
-        return view('accomercials.create');
+        $sociocomer = clientes::all();
+        $sociocomer = $sociocomer->pluck('nomcompleto','id');
+        $cliente = $sociocomer;
+        $empresas = catempresas::pluck('nombre','id');
+
+        return view('accomercials.create')->with(compact('sociocomer','cliente','empresas'));
     }
 
     /**
@@ -151,5 +165,15 @@ class accomercialController extends AppBaseController
         Flash::success('Accomercial deleted successfully.');
 
         return redirect(route('accomercials.index'));
+    }
+    public function GetDirecciones($id)
+    {
+      $direcciones = direcciones::where('cliente_id',$id)->select('id','razonsocial')->get();
+      return $direcciones;
+    }
+    public function GetCuentas($id)
+    {
+      $cuentas = catcuentas::where('cliente_id',$id)->select('id','numcuenta')->get();
+      return $cuentas;
     }
 }

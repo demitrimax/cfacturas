@@ -281,7 +281,7 @@
               </div>
                 <div class="form-group col-sm-6">
                     {!! Form::label('contacto', 'Contacto:') !!}
-                    {!! Form::text('contacto', null, ['class' => 'form-control']) !!}
+                    {!! Form::text('contacto', null, ['class' => 'form-control', 'required']) !!}
                 </div>
                     {!! Form::hidden('cliente_id', $clientes->id) !!}
                     {!! Form::hidden('redirect', 'clientes.show') !!}
@@ -316,25 +316,25 @@
                     </div>
                     <div class="form-group col-sm-6">
                         {!! Form::label('RFC', 'RFC:') !!}
-                        {!! Form::text('RFC', null, ['class' => 'form-control','onchange'=>'validarRFC(this)']) !!}
+                        {!! Form::text('RFC', null, ['class' => 'form-control','onchange'=>'validarRFC(this)', 'required', 'maxlength'=>'13']) !!}
                         <pre id="resultado"></pre>
                     </div>
 
                     <!-- Razon Social Field -->
                     <div class="form-group col-sm-6">
                         {!! Form::label('razonsocial', 'Razón Social:') !!}
-                        {!! Form::text('razonsocial', null, ['class' => 'form-control', 'required']) !!}
+                        {!! Form::text('razonsocial', null, ['class' => 'form-control', 'required', 'maxlength'=>'120']) !!}
                     </div>
                     <!-- Calle Field -->
                     <div class="form-group col-sm-6">
                         {!! Form::label('calle', 'Calle:') !!}
-                        {!! Form::text('calle', null, ['class' => 'form-control', 'required']) !!}
+                        {!! Form::text('calle', null, ['class' => 'form-control', 'required', 'maxlength'=>'120']) !!}
                     </div>
 
                     <!-- Numeroext Field -->
                     <div class="form-group col-sm-6">
                         {!! Form::label('numeroExt', 'Numero Exterior:') !!}
-                        {!! Form::text('numeroExt', null, ['class' => 'form-control', 'maxlength'=>'5']) !!}
+                        {!! Form::text('numeroExt', null, ['class' => 'form-control', 'maxlength'=>'5', 'required']) !!}
                     </div>
 
                     <!-- Numeroint Field -->
@@ -357,13 +357,13 @@
                     <!-- Colonia Field -->
                     <div class="form-group col-sm-6">
                         {!! Form::label('colonia', 'Colonia:') !!}
-                        {!! Form::text('colonia', null, ['class' => 'form-control']) !!}
+                        {!! Form::text('colonia', null, ['class' => 'form-control', 'required']) !!}
                     </div>
 
                     <!-- Codpostal Field -->
                     <div class="form-group col-sm-6">
                         {!! Form::label('codpostal', 'Código postal:') !!}
-                        {!! Form::text('codpostal', null, ['class' => 'form-control']) !!}
+                        {!! Form::text('codpostal', null, ['class' => 'form-control', 'required']) !!}
                     </div>
 
                     <!-- Referencias Field -->

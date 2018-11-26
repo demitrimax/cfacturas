@@ -1,25 +1,25 @@
 
 <!-- Fechasolicitud Field -->
 <div class="form-group">
-    {!! Form::label('fechasolicitud', 'Fechasolicitud:') !!}
+    {!! Form::label('fechasolicitud', 'Fecha de Solicitud:') !!}
     <p>{!! $accomercial->fechasolicitud !!}</p>
 </div>
 
 <!-- Sociocomer Id Field -->
 <div class="form-group">
-    {!! Form::label('sociocomer_id', 'Sociocomer Id:') !!}
+    {!! Form::label('sociocomer_id', 'Socio Comercial:') !!}
     <p>{!! $accomercial->sociocomer_id !!}</p>
 </div>
 
 <!-- Cliente Id Field -->
 <div class="form-group">
-    {!! Form::label('cliente_id', 'Cliente Id:') !!}
+    {!! Form::label('cliente_id', 'Cliente:') !!}
     <p>{!! $accomercial->cliente_id !!}</p>
 </div>
 
 <!-- Direccion Id Field -->
 <div class="form-group">
-    {!! Form::label('direccion_id', 'Direccion Id:') !!}
+    {!! Form::label('direccion_id', 'Datos Fiscales:') !!}
     <p>{!! $accomercial->direccion_id !!}</p>
 </div>
 

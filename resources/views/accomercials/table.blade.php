@@ -7,8 +7,8 @@
         <th>Informacion</th>
         <th>Autorizado</th>
         <th>Elaborado por:</th>
-        <th>Autorizado por:</th>
-        <th>Aut User2 Id</th>
+        <th>Vito bueno por:</th>
+        <th>Autorizado por: </th>
         <th>Acciones</th>
         </tr>
     </thead>
