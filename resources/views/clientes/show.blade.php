@@ -51,7 +51,7 @@
               <h3 class="box-title">Datos de Contacto</h3>
             </div>
             <!-- /.box-header -->
-            <div class="box-body no-padding">
+            <div class="box-body">
               @if($clientes->datcontacto->count()>0)
               <table class="table table-condensed">
                 <tbody><tr>
@@ -102,7 +102,7 @@
                 <h3 class="box-title">Datos Fiscales</h3>
               </div>
               <!-- /.box-header -->
-              <div class="box-body no-padding">
+              <div class="box-body">
                 @if($clientes->direcciones->count()>0)
                 <table class="table table-condensed">
                   <tbody><tr>
@@ -162,7 +162,7 @@
                 </div>
                 <!-- /.box-header -->
 
-                <div class="box-body no-padding">
+                <div class="box-body">
                   @if($clientes->catdocumentos->count()>0)
                   <table class="table table-condensed">
                     <tbody><tr>
