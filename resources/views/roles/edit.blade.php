@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-
+@section('title',config('app.name').' | Editar Rol' )
 @section('content')
 @if (count($errors) > 0)
     <div class="alert alert-danger">

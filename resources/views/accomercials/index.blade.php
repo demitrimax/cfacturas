@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title',config('app.name').' | Acuerdos Comerciales' )
 @section('content')
     <section class="content-header">
         <h1 class="pull-left"><i class="fa fa-check-square-o"></i> Acuerdos Comerciales</h1>

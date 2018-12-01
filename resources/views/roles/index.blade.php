@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+@section('title',config('app.name').' | Administración de Roles' )
 
 @section('content')
 
@@ -13,7 +14,7 @@
               <h3 class="box-title">Role Management</h3>
               <div class="pull-right">
                 @can('role-create')
-                    <a class="btn btn-success" href="{{ route('roles.create') }}"> Create New Role</a>
+                    <a class="btn btn-success" href="{{ route('roles.create') }}"> Alta de Nuevo Rol</a>
                     @endcan
               </div>
             </div>

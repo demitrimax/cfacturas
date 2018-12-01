@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+@section('title',config('app.name').' | Rol '.$role->name )
 
 @section('content')
 <section class="content">

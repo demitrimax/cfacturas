@@ -1,7 +1,6 @@
 {{-- \resources\views\permissions\index.blade.php --}}
 @extends('layouts.app')
-
-@section('title', '| Permissions')
+@section('title',config('app.name').' | Permisos' )
 
 @section('content')
 <section class="content">

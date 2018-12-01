@@ -1,7 +1,7 @@
 {{-- \resources\views\permissions\create.blade.php --}}
 @extends('layouts.app')
 
-@section('title', '| Create Permission')
+@section('title',config('app.name').' | Alta de Permisos' )
 
 @section('content')
 

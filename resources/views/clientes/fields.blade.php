@@ -1,18 +1,18 @@
 <!-- Nombre Field -->
 <div class="form-group">
-    {!! Form::label('nombre', 'Nombre:') !!}
+    {!! Form::label('nombre', 'Nombre:*') !!}
     {!! Form::text('nombre', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Apellidopat Field -->
 <div class="form-group">
-    {!! Form::label('apellidopat', 'Apellido Paterno:') !!}
+    {!! Form::label('apellidopat', 'Apellido Paterno:*') !!}
     {!! Form::text('apellidopat', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Apellidomat Field -->
 <div class="form-group">
-    {!! Form::label('apellidomat', 'Apellido Materno:') !!}
+    {!! Form::label('apellidomat', 'Apellido Materno:*') !!}
     {!! Form::text('apellidomat', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
@@ -28,12 +28,13 @@
     {!! Form::text('CURP', null, ['class' => 'form-control', 'maxlength'=>'18', 'onchange'=>'validarInput(this)']) !!}
     <!-- <pre id="resultado"></pre> -->
 </div>
-
+<p><strong>*</strong> Datos Requeridos.</p>
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
     <a href="{!! route('clientes.index') !!}" class="btn btn-default">Cancelar</a>
 </div>
+
 @section('scripts')
 <script>
 //Función para validar una CURP

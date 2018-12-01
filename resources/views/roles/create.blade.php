@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+@section('title',config('app.name').' | Alta de Roles' )
 
 @section('content')
 @if (count($errors) > 0)
