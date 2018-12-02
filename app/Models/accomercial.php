@@ -148,6 +148,11 @@ class accomercial extends Model
         return $this->belongsTo('App\Models\users','aut_user2_id');
     }
 
+    public function empresasfact()
+    {
+        return $this->hasMany('App\acempresas','acuerdoc_id');
+    }
+
     public function getNomsocioAttribute()
     {
       $socioid = $this->sociocomer_id;

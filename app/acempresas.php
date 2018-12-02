@@ -46,7 +46,7 @@ class acempresas extends Model
 
     public function acuerdoc()
     {
-      return $this->belongsTo('App\Models\accomercial','acuerdo_id');
+      return $this->belongsTo('App\Models\accomercial','acuerdoc_id');
     }
     public function empresa()
     {

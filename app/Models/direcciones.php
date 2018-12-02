@@ -50,17 +50,17 @@ class direcciones extends Model
      * @var array
      */
     protected $casts = [
-        'cliente_id' => 'integer',
-        'RFC' => 'string',
-        'razonsocial' => 'string',
-        'calle' => 'string',
-        'numeroExt' => 'string',
-        'numeroInt' => 'string',
-        'estado_id' => 'integer',
+        'cliente_id'   => 'integer',
+        'RFC'          => 'string',
+        'razonsocial'  => 'string',
+        'calle'        => 'string',
+        'numeroExt'    => 'string',
+        'numeroInt'    => 'string',
+        'estado_id'    => 'integer',
         'municipio_id' => 'integer',
-        'colonia' => 'string',
-        'codpostal' => 'integer',
-        'referencias' => 'string'
+        'colonia'      => 'string',
+        'codpostal'    => 'integer',
+        'referencias'  => 'string'
     ];
 
     /**
@@ -69,15 +69,15 @@ class direcciones extends Model
      * @var array
      */
     public static $rules = [
-        'cliente_id' => 'required',
-        'RFC' => 'required|unique:direcciones',
-        'razonsocial' => 'required',
-        'calle' => 'required',
-        'estado_id' => 'required',
-        'municipio_id' => 'required',
-        'numeroExt' => 'max:5',
-        'numeroInt' => 'max:5',
-        'codpostal' => 'numeric',
+        'cliente_id'    => 'required',
+        'RFC'           => 'required|unique:direcciones',
+        'razonsocial'   => 'required',
+        'calle'         => 'required',
+        'estado_id'     => 'required',
+        'municipio_id'  => 'required',
+        'numeroExt'     => 'max:5',
+        'numeroInt'     => 'max:5',
+        'codpostal'     => 'numeric',
     ];
 
     public function clientes() {

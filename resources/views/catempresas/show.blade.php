@@ -74,7 +74,9 @@
           @endif
             <h1 class="pull-right">
               @can('empdatfiscales-create')
+              @if($catempresas->emp_datfiscales->count()<1)
                <button type="button" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-datfiscales">Agregar datos fiscales</button>
+              @endif
               @endcan
             </h1>
           </div>
