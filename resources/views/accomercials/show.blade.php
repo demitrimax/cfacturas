@@ -3,17 +3,11 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Accomercial
+            Acuerdo Comercial
         </h1>
-    </section>
-    <div class="content">
-        <div class="box box-primary">
-            <div class="box-body">
-                <div class="row" style="padding-left: 20px">
-                    @include('accomercials.show_fields')
-                    <a href="{!! route('accomercials.index') !!}" class="btn btn-default">Regresar</a>
-                </div>
-            </div>
-        </div>
-    </div>
+
+
+                    @include('accomercials.viewacuerdo')
+
+
 @endsection

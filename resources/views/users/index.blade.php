@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title',config('app.name').' | Administración de Usuarios' )
+
 @section('content')
     <section class="content-header">
         <h1 class="pull-left">Usuarios</h1>

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title',config('app.name').' | Editar Usuario' )
+
 @section('content')
     <section class="content-header">
         <h1>

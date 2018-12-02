@@ -1,9 +1,11 @@
 @extends('layouts.app')
 
+@section('title',config('app.name').' | Usuario '.$users->name )
+
 @section('content')
     <section class="content-header">
         <h1>
-            Usuarios del Sistema
+            Usuario de la Aplicación 
         </h1>
     </section>
     <div class="content">
