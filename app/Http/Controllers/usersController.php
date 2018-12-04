@@ -65,7 +65,7 @@ class usersController extends AppBaseController
         $usuario = new User();
             $usuario->name = $input['name'];
             $usuario->email = $input['email'];
-            $usuario->rol = $input['rol'];
+            //$usuario->rol = $input['rol'];
             $usuario->password = Hash::make($input['password']);
             $usuario->nombre = $input['nombre'];
             $usuario->apellidos= $input['apellidos'];
