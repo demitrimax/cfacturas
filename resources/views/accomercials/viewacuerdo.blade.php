@@ -134,45 +134,35 @@
       <!-- info row -->
       <div class="row invoice-info">
         <div class="col-sm-4 invoice-col">
-          Cliente
+          Elabora
           <address>
-            <strong>{{$accomercial->cliente->nomcompleto}}</strong><br>
-            {{$accomercial->direccion->razonsocial}}<br>
-            {{$accomercial->direccion->calle.' '.$accomercial->direccion->numeroExt.' '.$accomercial->direccion->numeroInt}}<br>
-            @foreach($accomercial->cliente->datcontacto as $datcontacto)
-            {{$datcontacto->tipo.' : '.$datcontacto->contacto}}<br>
-            @endforeach
-            {{$accomercial->direccion->municipios->nomMunicipio.', '.$accomercial->direccion->estados->nombre}}<br>
+            <strong>{{$accomercial->elabuser->name}}</strong><br>
+            <hr>
+            <b>Firma</b>
+            <br>
           </address>
         </div>
         <!-- /.col -->
 
         <div class="col-sm-4 invoice-col">
-        @if($accomercial->sociocomer_id)
+          Autoriza
+          <address>
+            <strong>$accomercial->sociocomer->nomcompleto </strong><br>
+            <hr>
+            <b>Firma</b>
+          </address>
+        </div>
+
+        <!-- /.col -->
+
+        <div class="col-sm-4 invoice-col">
           Asociado Comercial
           <address>
-            <strong>{{ $accomercial->sociocomer->nomcompleto }}</strong><br>
-            @foreach($accomercial->sociocomer->datcontacto as $datcontacto)
-            {{$datcontacto->tipo.' : '.$datcontacto->contacto}}<br>
-            @endforeach
-            {{$accomercial->sociocomer->RFC}}<br>
+            <strong>$accomercial->sociocomer->nomcompleto </strong><br>
+            <br>
           </address>
-        @endif
         </div>
 
-        <!-- /.col -->
-        @if($accomercial->autorizado)
-        <div class="col-sm-4 invoice-col">
-          <b>AC No. #{{ date('y').str_pad($accomercial->id,3,"0",STR_PAD_LEFT) }}</b><br>
-          <br>
-          <b>Autorizado por:</b> {{ $accomercial->aut_user2_id}}<br>
-          <b>Creado el: </b> {{ $accomercial->created_at->format('d/m/Y')}}<br>
-          @if( $accomercial->created_at <> $accomercial->updated_at )
-          <b>Actualizado el :</b> {{ $accomercial->updated_at->format('d/m/Y')}} <br>
-          @endif
-          <b>ID Folio:</b> {{ 'AC'.date('y') .'-'. str_pad($accomercial->id,3,"0",STR_PAD_LEFT) }}
-        </div>
-        @endif
         <!-- /.col -->
       </div>
       <!-- /.row -->
