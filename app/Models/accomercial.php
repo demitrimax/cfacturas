@@ -162,4 +162,14 @@ class accomercial extends Model
       }
       return $nomsocio;
     }
+    public function getNomclienteAttribute()
+    {
+      $clienteid = $this->cliente_id;
+      $nomcliente = "N/D";
+      //el cliente no debe haberse eliminado
+      if($clienteid) {
+        $nomcliente = $this->cliente->nomcompleto;
+      }
+      return $nomcliente;
+    }
 }

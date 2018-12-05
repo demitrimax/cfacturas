@@ -17,7 +17,7 @@
         <tr>
             <td>{!! $accomercial->fechasolicitud->format('d-M-Y') !!}</td>
             <td>{!! $accomercial->nomsocio !!}</td>
-            <td>{!! $accomercial->cliente->nomcompleto !!}</td>
+            <td>{!! $accomercial->nomcliente !!}</td>
             <td>{!! $accomercial->informacion !!}</td>
             <td>{!! $accomercial->autorizado !!}</td>
             <td>{!! $accomercial->elabuser->name !!}</td>

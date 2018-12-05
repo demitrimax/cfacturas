@@ -166,6 +166,11 @@ class clientesController extends AppBaseController
 
             return redirect(route('clientes.index'));
         }
+        if ($clientes->accomerciales->count()>0)
+        {
+            Flash::error('Cliente no puede ser eliminado, tiene Acuerdos Comerciales Activos');
+            return redirect(route('clientes.index'));
+        }
 
         $this->clientesRepository->delete($id);
 

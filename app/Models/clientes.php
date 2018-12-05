@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
 
 /**
  * Class clientes
@@ -22,6 +23,8 @@ class clientes extends Model
 
     use SoftDeletes;
     public $table = 'clientes';
+
+    protected $softCascade = ['accomerciales@restrict'];
 
 
 
@@ -82,6 +85,10 @@ class clientes extends Model
       return $this->hasMany('App\Models\catcuentas','cliente_id');
     }
 
+    public function accomerciales()
+    {
+      return $this->hasMany('App\Models\accomercial', 'cliente_id');
+    }
 
 
 }
