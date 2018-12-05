@@ -16,7 +16,9 @@
           Cliente
           <address>
             <strong>{{$accomercial->cliente->nomcompleto}}</strong><br>
-            {{$accomercial->direccion->razonsocial}}<br>
+            <hr>
+            <strong>Datos Fiscales Referido</strong><br>
+            {{$accomercial->direccion->razonsocial ." | ".$accomercial->direccion->RFC}}<br>
             {{$accomercial->direccion->calle.' '.$accomercial->direccion->numeroExt.' '.$accomercial->direccion->numeroInt}}<br>
             @foreach($accomercial->cliente->datcontacto as $datcontacto)
             {{$datcontacto->tipo.' : '.$datcontacto->contacto}}<br>
@@ -28,7 +30,7 @@
 
         <div class="col-sm-4 invoice-col">
         @if($accomercial->sociocomer_id)
-          Asociado Comercial
+          Asociado Comercial {{ $accomercial->asoc_comision."%" }}
           <address>
             <strong>{{ $accomercial->sociocomer->nomcompleto }}</strong><br>
             @foreach($accomercial->sociocomer->datcontacto as $datcontacto)
@@ -66,7 +68,6 @@
               <th>Empresa Alias</th>
               <th>Correo Notificaciones</th>
               <th>Correo Facturas</th>
-              <th>Comisión</th>
             </tr>
             </thead>
             <tbody>
@@ -76,7 +77,6 @@
               <td>{{$empresaria->empresa->nombre}}</td>
               <td>{{$empresaria->empresa->correo_notifica}}</td>
               <td>{{$empresaria->empresa->correo_factura}}</td>
-              <td>{{$empresaria->empresa->comision}}%</td>
             </tr>
               @endforeach
             </tbody>
@@ -137,29 +137,33 @@
           Elabora
           <address>
             <strong>{{$accomercial->elabuser->name}}</strong><br>
-            <hr>
-            <b>Firma</b>
             <br>
+            <hr>
+            <b>{{$accomercial->elabuser->cargo}}</b>
+
           </address>
         </div>
+        <!-- /.col -->
+
+        <div class="col-sm-4 invoice-col">
+          Supervisa
+          <address>
+            <strong>{{$accomercial->autuser->name}} </strong><br>
+            <br>
+            <hr>
+            <b>{{$accomercial->autuser->cargo}}</b>
+          </address>
+        </div>
+
         <!-- /.col -->
 
         <div class="col-sm-4 invoice-col">
           Autoriza
           <address>
-            <strong>$accomercial->sociocomer->nomcompleto </strong><br>
-            <hr>
-            <b>Firma</b>
-          </address>
-        </div>
-
-        <!-- /.col -->
-
-        <div class="col-sm-4 invoice-col">
-          Asociado Comercial
-          <address>
-            <strong>$accomercial->sociocomer->nomcompleto </strong><br>
+            <strong>{{$accomercial->autuser2->name}} </strong><br>
             <br>
+            <hr>
+            <b>{{$accomercial->autuser2->cargo}}</b>
           </address>
         </div>
 
@@ -170,7 +174,7 @@
       <!-- this row will not appear when printing -->
       <div class="row no-print">
         <div class="col-xs-12">
-          <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+          <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Imprimir</a>
           <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Enviar Copias Involucrados
           </button>
           <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">

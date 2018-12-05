@@ -95,6 +95,7 @@ class accomercialController extends AppBaseController
         $accomercial = new accomercial();
         $accomercial->fechasolicitud = $request->input('fechasolicitud');
         $accomercial->sociocomer_id = $request->input('sociocomer_id');
+        $accomercial->asoc_comision = $request->input('asoc_comision');
         $accomercial->cliente_id = $request->input('cliente_id');
         $accomercial->direccion_id = $request->input('direccion_id');
         $accomercial->cuenta_id = $request->input('cuenta_id');
@@ -158,8 +159,14 @@ class accomercialController extends AppBaseController
 
             return redirect(route('accomercials.index'));
         }
+        $sociocomer = clientes::all();
+        $sociocomer = $sociocomer->pluck('nomcompleto','id');
+        $clientes = clientes::all();
+        $clientes = $sociocomer;
+        $usuarios = users::pluck('name','id');
+        $empresas = catempresas::pluck('nombre','id');
 
-        return view('accomercials.edit')->with('accomercial', $accomercial);
+        return view('accomercials.edit')->with(compact('accomercial','sociocomer','clientes', 'empresas', 'usuarios'));
     }
 
     /**

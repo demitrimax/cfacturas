@@ -21,6 +21,12 @@
     {!! Form::select('sociocomer_id', $sociocomer ,null, ['class' => 'form-control select2', 'style'=>'width: 100%;','placeholder'=>'Seleccione uno', 'onchange' =>'sociocomercialremove(selectedIndex)']) !!}
 </div>
 
+<!-- Sociocomer Id Field -->
+<div class="form-group">
+    {!! Form::label('asoc_comision', 'Comision Socio:') !!}
+    {!! Form::number('asoc_comision', null, ['class' => 'form-control', 'step'=>'0.01', 'max' => '15.00', 'placeholder'=>'Porcentaje comisionable']) !!}
+</div>
+
 <!-- Cliente Id Field -->
 <div class="form-group">
     {!! Form::label('cliente_id', 'Cliente:*') !!}
@@ -29,7 +35,7 @@
 
 <!-- Direccion Id Field -->
 <div class="form-group">
-    {!! Form::label('direccion_id', 'Datos Fiscales:*') !!}
+    {!! Form::label('direccion_id', 'Razón Social:*') !!}
     {!! Form::select('direccion_id', [''=>'Seleccione un cliente'],null, ['class' => 'form-control', 'required']) !!}
 </div>
 
@@ -41,7 +47,7 @@
 
 <!-- Empresas Asociadas al Acuerdo Comercial -->
 <div class="form-group">
-    {!! Form::label('empresasasoc', 'Empresa(s) Asociada(s):*') !!}
+    {!! Form::label('empresasasoc', 'Empresa(s) Facturadoras(s):*') !!}
     {!! Form::select('empresasasoc[]', $empresas, null, ['class' => 'form-control select2', 'required', 'multiple'=>'multiple', 'data-placeholder'=>'Seleccione una empresa', 'style'=>'width: 100%;']) !!}
 </div>
 
@@ -60,13 +66,13 @@
 <!-- Ac Principalporc Field -->
 <div class="form-group">
     {!! Form::label('ac_principalporc', 'Porcentaje Principal:*') !!}
-    {!! Form::number('ac_principalporc', null, ['class' => 'form-control', 'required', 'step'=>'0.01', 'max' => '6.99', 'min'=>'0.09']) !!}
+    {!! Form::number('ac_principalporc', null, ['class' => 'form-control', 'required', 'step'=>'0.01', 'max' => '15.00', 'min'=>'0.09']) !!}
 </div>
 
 <!-- Ac Secundarioporc Field -->
 <div class="form-group">
     {!! Form::label('ac_secundarioporc', 'Porcentaje Secundario:') !!}
-    {!! Form::number('ac_secundarioporc', null, ['class' => 'form-control', 'step'=>'0.01', 'max' => '6.99', 'min'=>'0.09']) !!}
+    {!! Form::number('ac_secundarioporc', null, ['class' => 'form-control', 'step'=>'0.01', 'max' => '15.00', 'min'=>'0.09']) !!}
 </div>
 
 

@@ -13,7 +13,7 @@
         @can('empresas-list')
         <li class="{{ Request::is('catempresas*') ? 'active' : '' }}">
           <a href="{{url('/catempresas')}}">
-            <i class="fa fa-building"></i> <span>Empresas</span>
+            <i class="fa fa-building"></i> <span>Empresas Facturadoras</span>
           </a>
         </li>
         @endcan

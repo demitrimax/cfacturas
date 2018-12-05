@@ -19,7 +19,9 @@
             <td>{!! $accomercial->nomsocio !!}</td>
             <td>{!! $accomercial->nomcliente !!}</td>
             <td>{!! $accomercial->informacion !!}</td>
-            <td>{!! $accomercial->autorizado !!}</td>
+            <td>
+              {!! ($accomercial->autorizado == 1) ? '<span class="badge bg-blue"><i class="fa fa-check"></i></span>' : '<span class="badge bg-red"><i class="fa fa-close"></i></span>' !!}
+            </td>
             <td>{!! $accomercial->elabuser->name !!}</td>
             <td>{!! $accomercial->autuser->name !!}</td>
             <td>{!! $accomercial->autuser2->name !!}</td>
@@ -31,7 +33,7 @@
                     <a href="{!! route('accomercials.edit', [$accomercial->id]) !!}" class='btn btn-default'><i class="glyphicon glyphicon-edit"></i></a>
                     @endcan
                     @can('accomerciales-delete')
-                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger', 'onclick' => "return confirm('Esta Seguro de Eliminar este Acuerdo?')"]) !!}
                     @endcan
                 </div>
                 {!! Form::close() !!}
