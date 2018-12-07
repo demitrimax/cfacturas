@@ -63,9 +63,9 @@
               <!-- small box -->
               <div class="small-box bg-red">
                 <div class="inner">
-                  <h3>0</h3>
+                  <h3>{{$nsolicitudes}}</h3>
 
-                  <p>Transacciones Realizadas</p>
+                  <p>Solicitudes Pendientes</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-pie-graph"></i>
@@ -109,7 +109,7 @@
                 <div class="box-header ui-sortable-handle" style="cursor: move;">
                   <i class="ion ion-clipboard"></i>
 
-                  <h3 class="box-title">Actividades Pendientes</h3>
+                  <h3 class="box-title">Solicitudes Pendientes</h3>
 
                   <div class="box-tools pull-right">
                     <ul class="pagination pagination-sm inline">
@@ -125,6 +125,7 @@
                 <div class="box-body">
                   <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
                   <ul class="todo-list ui-sortable">
+                  @foreach($detsolicitudes as $solicitud)
                     <li>
                       <!-- drag handle -->
                       <span class="handle ui-sortable-handle">
@@ -134,7 +135,7 @@
                       <!-- checkbox -->
                       <input type="checkbox" value="">
                       <!-- todo text -->
-                      <span class="text">Agregar Catálogo de Clientes nuevos</span>
+                      <span class="text">{{ strip_tags($solicitud->concepto)}}</span>
                       <!-- Emphasis label -->
                       <small class="label label-danger"><i class="fa fa-clock-o"></i> 10 años</small>
                       <!-- General tools such as edit or delete-->
@@ -143,71 +144,7 @@
                         <i class="fa fa-trash-o"></i>
                       </div>
                     </li>
-                    <li>
-                          <span class="handle ui-sortable-handle">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <i class="fa fa-ellipsis-v"></i>
-                          </span>
-                      <input type="checkbox" value="">
-                      <span class="text">Archivar en la nube documentos de CONSORCIO COMERCIAL</span>
-                      <small class="label label-info"><i class="fa fa-clock-o"></i> 4 horas</small>
-                      <div class="tools">
-                        <i class="fa fa-edit"></i>
-                        <i class="fa fa-trash-o"></i>
-                      </div>
-                    </li>
-                    <li>
-                          <span class="handle ui-sortable-handle">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <i class="fa fa-ellipsis-v"></i>
-                          </span>
-                      <input type="checkbox" value="">
-                      <span class="text">Reagendar cita con Dr. Fredy </span>
-                      <small class="label label-warning"><i class="fa fa-clock-o"></i> 5 min</small>
-                      <div class="tools">
-                        <i class="fa fa-edit"></i>
-                        <i class="fa fa-trash-o"></i>
-                      </div>
-                    </li>
-                    <li>
-                          <span class="handle ui-sortable-handle">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <i class="fa fa-ellipsis-v"></i>
-                          </span>
-                      <input type="checkbox" value="">
-                      <span class="text">Anexar gatos del día a las cuentas</span>
-                      <small class="label label-success"><i class="fa fa-clock-o"></i> 3 horas</small>
-                      <div class="tools">
-                        <i class="fa fa-edit"></i>
-                        <i class="fa fa-trash-o"></i>
-                      </div>
-                    </li>
-                    <li>
-                          <span class="handle ui-sortable-handle">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <i class="fa fa-ellipsis-v"></i>
-                          </span>
-                      <input type="checkbox" value="">
-                      <span class="text">Consolidar Cuentas Bancarias</span>
-                      <small class="label label-primary"><i class="fa fa-clock-o"></i> 1 semana</small>
-                      <div class="tools">
-                        <i class="fa fa-edit"></i>
-                        <i class="fa fa-trash-o"></i>
-                      </div>
-                    </li>
-                    <li>
-                          <span class="handle ui-sortable-handle">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <i class="fa fa-ellipsis-v"></i>
-                          </span>
-                      <input type="checkbox" value="">
-                      <span class="text">Actualizar datos de contacto de Lic. Mauricio</span>
-                      <small class="label label-default"><i class="fa fa-clock-o"></i> 1 month</small>
-                      <div class="tools">
-                        <i class="fa fa-edit"></i>
-                        <i class="fa fa-trash-o"></i>
-                      </div>
-                    </li>
+                    @endforeach
                   </ul>
                 </div>
                 <!-- /.box-body -->

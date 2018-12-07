@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Models\clientes;
+use App\Models\facsolicitud;
 
 class HomeController extends Controller
 {
@@ -26,6 +27,8 @@ class HomeController extends Controller
     public function index()
     {
         $nclientes = clientes::count();
-        return view('home')->with(compact('nclientes'));
+        $nsolicitudes = facsolicitud::count();
+        $detsolicitudes = facsolicitud::get()->where('atendido',null);
+        return view('home')->with(compact('nclientes','nsolicitudes','detsolicitudes'));
     }
 }
