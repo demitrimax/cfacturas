@@ -19,9 +19,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/solicitud', function() {
-  return view('solicitud');
-})->name('solicitud');
+Route::get('/solicitud', 'solicitudController@index')->name('solicitud');
+Route::post('/solicitud', 'solicitudController@store');
 
 
 Route::get('/home', 'HomeController@index');
