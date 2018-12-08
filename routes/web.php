@@ -15,21 +15,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/solicitud', 'solicitudController@index')->name('solicitud');
-Route::post('/solicitud', 'solicitudController@store');
+Route::get('/home', 'HomeController@index')->middleware('verified');
 
-
-Route::get('/home', 'HomeController@index');
+Route::get('/privacidad', function() {
+    return view('users.terminosycondiciones');
+});
 
 Route::middleware(['admin'])->group(function() {
 
 });
 
-Route::group(['middleware'=>['auth']], function() {
+Route::group(['middleware'=>['auth','verified']], function() {
   Route::resource('clientes', 'clientesController');
   Route::resource('datcontactos', 'datcontactoController');
   Route::resource('direcciones', 'direccionesController');
@@ -54,4 +54,7 @@ Route::group(['middleware'=>['auth']], function() {
   Route::resource('roles','RoleController');
   Route::resource('user','UserController');
   Route::resource('permissions', 'PermissionController');
+
+  Route::get('/solicitud', 'solicitudController@index')->name('solicitud');
+  Route::post('/solicitud', 'solicitudController@store');
 });

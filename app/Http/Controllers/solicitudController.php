@@ -30,7 +30,7 @@ class solicitudController extends Controller
         'correo.required' => 'El correo es requerido',
         'rfc.exists' => 'El RFC no existe en nuestros registros',
       ];
-      $this->validate($request, $rules, $messages);
+      //$this->validate($request, $rules, $messages);
 
       $solicitudfac = new facsolicitud();
       $solicitudfac->nombre = $request->input('nombre');
@@ -54,7 +54,7 @@ class solicitudController extends Controller
         $solicitudfac->adjunto = 'solicitudes/'.$nombre;
       }
       $solicitudfac->save();
-      $mensaje = 'Se ha enviado correctamente su solicitud';
+      $mensaje = 'Se ha enviado correctamente su solicitud. <br> En breve recibirá un correo electrónico como acuse de recibo.';
 
       return back()->with(compact('mensaje'));
 

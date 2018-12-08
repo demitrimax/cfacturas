@@ -78,12 +78,12 @@
               <div class="panel-body">
                 <div class="form-group">
                     {!! Form::label('nombre', 'Nombre:*') !!}
-                    {!! Form::text('nombre', null, ['class' => 'form-control', 'maxlength' =>'150', 'required']) !!}
+                    {!! Form::text('nombre', Auth::user()->name, ['class' => 'form-control', 'maxlength' =>'150', 'required']) !!}
                     {!! Form::hidden('fecha', date("Y-m-d")) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('correo', 'Correo Electronico:*') !!}
-                    {!! Form::email('correo', null, ['class' => 'form-control', 'maxlength' =>'150', 'required', 'placeholder'=>'correo@electronico.com']) !!}
+                    {!! Form::email('correo', Auth::user()->email, ['class' => 'form-control', 'maxlength' =>'150', 'required', 'placeholder'=>'correo@electronico.com']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('telefono', 'Teléfono:*') !!}
@@ -143,7 +143,7 @@
 
     </div> <!-- /container -->
 
-             {!! NoCaptcha::renderJs() !!}
+            <!-- {!! NoCaptcha::renderJs() !!} -->
             <!-- Bootstrap core JavaScript
             ================================================== -->
             <!-- Placed at the end of the document so the pages load faster -->
