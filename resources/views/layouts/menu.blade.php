@@ -1,3 +1,12 @@
+
+        <li class="{{ Request::is('home*') ? 'active' : '' }}">
+            <a href="{!! url('/home') !!}"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
+        </li>
+        @can('solicitud-list')
+        <li class="{{ Request::is('solicitud*') ? 'active' : '' }}">
+            <a href="{!! url('/solicitudes') !!}"><i class="fa fa-check-square-o"></i><span>Solicitudes</span></a>
+        </li>
+        @endcan
         @can('accomerciales-list')
         <li class="{{ Request::is('accomercials*') ? 'active' : '' }}">
             <a href="{!! route('accomercials.index') !!}"><i class="fa fa-check-square-o"></i><span>Acuerdos Comerciales</span></a>

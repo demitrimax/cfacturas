@@ -57,4 +57,7 @@ Route::group(['middleware'=>['auth','verified']], function() {
 
   Route::get('/solicitud', 'solicitudController@index')->name('solicitud');
   Route::post('/solicitud', 'solicitudController@store');
+
+  Route::resource('solicitudes', 'solicitudesController');
+
 });

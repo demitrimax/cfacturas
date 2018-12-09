@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Models\clientes;
 use App\Models\facsolicitud;
+use App\Models\accomercial;
 
 class HomeController extends Controller
 {
@@ -29,6 +30,7 @@ class HomeController extends Controller
         $nclientes = clientes::count();
         $nsolicitudes = facsolicitud::count();
         $detsolicitudes = facsolicitud::get()->where('atendido',null);
-        return view('home')->with(compact('nclientes','nsolicitudes','detsolicitudes'));
+        $acuerdosactivos = accomercial::get()->where('autorizado',1);
+        return view('home')->with(compact('nclientes','nsolicitudes','detsolicitudes','acuerdosactivos'));
     }
 }

@@ -34,7 +34,7 @@ class facsolicitud extends Model
 
     protected $casts = [
         'id' => 'integer',
-        'nombre' => 'integer',
+        'nombre' => 'string',
         'correo' => 'string',
         'telefono' => 'string',
         'rfc' => 'string',
@@ -47,5 +47,29 @@ class facsolicitud extends Model
         'fecha' => 'date',
 
     ];
+
+    public function getSemaforofechaAttribute()
+    {
+      $now = now();
+      $colorattribute = '';
+      if ( $this->created_at->diffInDays($now) < 3 )
+      {
+        $colorattribute = 'success';
+      }
+      if ( $this->created_at->diffInDays($now) >= 3 )
+      {
+        $colorattribute = 'primary';
+      }
+      if ( $this->created_at->diffInDays($now) >= 5 )
+      {
+        $colorattribute = 'warning';
+      }
+      if ( $this->created_at->diffInDays($now) >= 10 )
+      {
+        $colorattribute = 'danger';
+      }
+
+      return $colorattribute;
+    }
 
 }
