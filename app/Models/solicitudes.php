@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * Class solicitudes
@@ -29,9 +30,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class solicitudes extends Model
 {
     use SoftDeletes;
+    use LogsActivity;
 
     public $table = 'fac_solicitud';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -55,6 +57,9 @@ class solicitudes extends Model
         'atendidopor',
         'facturaid'
     ];
+
+     protected static $logAttributes = ['*'];
+     //protected static $logFillable = true;
 
     /**
      * The attributes that should be casted to native types.
@@ -84,8 +89,8 @@ class solicitudes extends Model
      * @var array
      */
     public static $rules = [
-        
+
     ];
 
-    
+
 }

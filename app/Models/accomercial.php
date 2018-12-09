@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * Class accomercial
@@ -35,6 +36,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class accomercial extends Model
 {
     use SoftDeletes;
+    use LogsActivity;
 
     public $table = 'acuerdoscomerciales';
 
@@ -60,6 +62,7 @@ class accomercial extends Model
         'aut_user_id',
         'aut_user2_id'
     ];
+    protected static $logAttributes = ['*'];
 
     /**
      * The attributes that should be casted to native types.

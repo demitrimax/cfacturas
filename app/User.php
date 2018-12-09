@@ -9,12 +9,17 @@ use Spatie\Permission\Traits\HasRoles;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, Notifiable;
     use HasRoles;
+    use SoftDeletes;
+    use LogsActivity;
 
+    protected $dates = ['deleted_at'];
     /**
      * The attributes that are mass assignable.
      *
@@ -23,6 +28,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'name', 'email', 'password',
     ];
+    protected static $logAttributes = ['*'];
 
     /**
      * The attributes that should be hidden for arrays.

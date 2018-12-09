@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
+use Spatie\Activitylog\Traits\LogsActivity;
+
 
 /**
  * Class clientes
@@ -22,6 +24,7 @@ class clientes extends Model
 {
 
     use SoftDeletes;
+    use LogsActivity;
     public $table = 'clientes';
 
     protected $softCascade = ['accomerciales@restrict'];
@@ -36,6 +39,7 @@ class clientes extends Model
         'CURP',
         'avatar'
     ];
+    protected static $logAttributes = ['*'];
 
     /**
      * The attributes that should be casted to native types.

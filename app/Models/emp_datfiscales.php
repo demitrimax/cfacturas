@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * Class emp_datfiscales
@@ -29,6 +30,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class emp_datfiscales extends Model
 {
     use SoftDeletes;
+    use LogsActivity;
     public $table = 'emp_datfiscales';
 
     const CREATED_AT = 'created_at';
@@ -50,6 +52,7 @@ class emp_datfiscales extends Model
         'referencias',
         'sucursal'
     ];
+    protected static $logAttributes = ['*'];
 
     /**
      * The attributes that should be casted to native types.
@@ -104,4 +107,5 @@ class emp_datfiscales extends Model
     {
         return $this->belongsTo('App\catmunicipios','municipio_id');
     }
+
 }

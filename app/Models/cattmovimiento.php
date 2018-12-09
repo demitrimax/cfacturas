@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * Class cattmovimiento
@@ -18,6 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class cattmovimiento extends Model
 {
     use SoftDeletes;
+    use LogsActivity;
 
     public $table = 'cattmovimiento';
 
@@ -32,7 +34,7 @@ class cattmovimiento extends Model
         'descripcion',
         'descrp_corto'
     ];
-
+    protected static $logAttributes = ['*'];
     /**
      * The attributes that should be casted to native types.
      *

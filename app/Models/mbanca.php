@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * Class mbanca
@@ -26,6 +27,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class mbanca extends Model
 {
     use SoftDeletes;
+    use LogsActivity;
 
     public $table = 'mbanca';
 
@@ -48,7 +50,7 @@ class mbanca extends Model
         'saldo',
         'user_id'
     ];
-
+    protected static $logAttributes = ['*'];
     /**
      * The attributes that should be casted to native types.
      *

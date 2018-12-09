@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * Class direcciones
@@ -26,6 +27,7 @@ class direcciones extends Model
 {
 
     use SoftDeletes;
+    use LogsActivity;
     public $table = 'direcciones';
 
 
@@ -43,6 +45,7 @@ class direcciones extends Model
         'codpostal',
         'referencias'
     ];
+    protected static $logAttributes = ['*'];
 
     /**
      * The attributes that should be casted to native types.

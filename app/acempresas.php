@@ -4,11 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class acempresas extends Model
 {
     //
     use SoftDeletes;
+    use LogsActivity;
     public $table = 'ac_empresas';
 
     const CREATED_AT = 'created_at';
@@ -22,6 +24,7 @@ class acempresas extends Model
         'empresa_id'
 
     ];
+    protected static $logAttributes = ['*'];
 
     /**
      * The attributes that should be casted to native types.

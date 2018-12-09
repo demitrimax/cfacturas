@@ -4,11 +4,13 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class facsolicitud extends Model
 {
     //
     use SoftDeletes;
+    use LogsActivity;
 
     public $table = 'fac_solicitud';
 
@@ -31,6 +33,8 @@ class facsolicitud extends Model
         'adjunto',
         'fecha',
     ];
+    //protected static $logFillable = true;
+    protected static $logAttributes = ['*'];
 
     protected $casts = [
         'id' => 'integer',
