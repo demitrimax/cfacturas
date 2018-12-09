@@ -61,7 +61,6 @@ class catcuentas extends Model
         'empresa_id' => 'integer',
         'swift' => 'string'
     ];
-    protected static $logAttributes = ['*'];
 
     /**
      * Validation rules

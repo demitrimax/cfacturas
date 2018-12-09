@@ -1,7 +1,8 @@
-
+        @can('dashboard')
         <li class="{{ Request::is('home*') ? 'active' : '' }}">
             <a href="{!! url('/home') !!}"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
         </li>
+        @endcan
         @can('solicitud-list')
         <li class="{{ Request::is('solicitudes*') ? 'active' : '' }}">
             <a href="{!! url('/solicitudes') !!}"><i class="fa fa-calendar-check-o"></i><span>Solicitudes</span></a>
@@ -15,7 +16,7 @@
         @can('clientes-list')
         <li class="{{ Request::is('clientes*') ? 'active' : '' }}">
           <a href="{{url('/clientes')}}">
-            <i class="fa fa-th"></i> <span>Clientes</span>
+            <i class="fa fa-users"></i> <span>Clientes</span>
           </a>
         </li>
         @endcan

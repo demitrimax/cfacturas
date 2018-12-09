@@ -11,6 +11,7 @@
         <li class="active">Dashboard</li>
       </ol>
     </section>
+    @can('dashboard')
     <section class="content">
           <!-- Small boxes (Stat box) -->
           <div class="row">
@@ -133,6 +134,7 @@
                   </section>
                 </div>
               </section>
+          @endcan
 
 
 @endsection

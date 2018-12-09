@@ -159,11 +159,6 @@ class emp_datfiscalesController extends AppBaseController
 
             return redirect(route('empDatfiscales.index'));
         }
-        if ($empDatfiscales->empresasacuerdo->count()>0)
-        {
-            Flash::error('Empresa no puede ser eliminada, tiene Acuerdos Comerciales Activos');
-            return redirect(route('empDatfiscales.index'));
-        }
 
         $this->empDatfiscalesRepository->delete($id);
 
