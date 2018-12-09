@@ -25,8 +25,9 @@ class solicitudController extends Controller
 
       $rules = [
         'nombre' => 'required',
+        'user_id' => 'required',
         'correo' => 'required',
-        'rfc' => 'exists:direcciones,RFC',
+        //'rfc' => 'exists:direcciones,RFC',
         'telefono' => 'required',
         'condicion' => 'required',
         'metodo' => 'required'
@@ -34,12 +35,14 @@ class solicitudController extends Controller
       $messages = [
         'nombre.required' => 'Es necesario un nombre',
         'correo.required' => 'El correo es requerido',
-        'rfc.exists' => 'El RFC no existe en nuestros registros',
+        //'rfc.exists' => 'El RFC no existe en nuestros registros',
+        'user_id.required' => 'Se requiere un ID de usuario registrado',
       ];
-      //$this->validate($request, $rules, $messages);
+      $this->validate($request, $rules, $messages);
 
       $solicitudfac = new facsolicitud();
       $solicitudfac->nombre = $request->input('nombre');
+      $solicitudfac->user_id = $request->input('user_id');
       $solicitudfac->correo = $request->input('correo');
       $solicitudfac->telefono = $request->input('telefono');
       $solicitudfac->rfc = $request->input('rfc');

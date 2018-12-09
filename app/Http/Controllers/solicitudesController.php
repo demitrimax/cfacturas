@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Helpers\SomeClass;
 
 class solicitudesController extends AppBaseController
 {
@@ -79,6 +80,7 @@ class solicitudesController extends AppBaseController
     public function show($id)
     {
         $solicitudes = $this->solicitudesRepository->findWithoutFail($id);
+        $tamanoadjunto = SomeClass::bytesToHuman(filesize($solicitudes->adjunto));
 
         if (empty($solicitudes)) {
             Flash::error('Solicitudes not found');
@@ -86,7 +88,8 @@ class solicitudesController extends AppBaseController
             return redirect(route('solicitudes.index'));
         }
 
-        return view('solicitudes.show')->with('solicitudes', $solicitudes);
+        return view('solicitudes.show')->with(compact('solicitudes','tamanoadjunto'));
+
     }
 
     /**
@@ -157,4 +160,5 @@ class solicitudesController extends AppBaseController
 
         return redirect(route('solicitudes.index'));
     }
+
 }

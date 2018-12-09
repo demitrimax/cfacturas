@@ -11,6 +11,7 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
+use App\Models\factsolicitud;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -38,4 +39,9 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function solicitudes()
+    {
+      return $this->hasMany('App\Models\factsolicitud','user_id');
+    }
 }

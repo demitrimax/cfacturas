@@ -3,8 +3,9 @@
 @section('title',config('app.name').' | Alta de Solicitud' )
 
 @section('content')
-<h3>Enviar Solicitud</h3>
+
   <div class="content">
+    <h3>Enviar Solicitud</h3>
     @if ($errors->any())
        <div class="alert alert-danger">
            <ul>
@@ -27,6 +28,7 @@
             {!! Form::label('nombre', 'Nombre:*') !!}
             {!! Form::text('nombre', Auth::user()->name, ['class' => 'form-control', 'maxlength' =>'150', 'required']) !!}
             {!! Form::hidden('fecha', date("Y-m-d")) !!}
+            {!! Form::hidden('user_id', Auth::user()->id) !!}
         </div>
         <div class="form-group">
             {!! Form::label('correo', 'Correo Electronico:*') !!}
@@ -74,7 +76,7 @@
     </div>
     <div class="panel-footer">
       <div class="form-group">
-        {!! NoCaptcha::display() !!}
+
     </div>
     <div class="form-group">
         {!! Form::submit('Enviar', ['class' => 'btn btn-primary']) !!}

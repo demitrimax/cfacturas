@@ -112,7 +112,7 @@
                       <!-- checkbox -->
                       <input type="checkbox" value="">
                       <!-- todo text -->
-                      <span class="text">{{ $solicitud->nombre.' | '.strip_tags($solicitud->concepto) }}</span>
+                      <span class="text"><a href="solfact/{{$solicitud->id}}">{{ $solicitud->nombre.' | '.strip_tags($solicitud->concepto) }}</a></span>
                       <!-- Emphasis label -->
                       <small class="label label-{{$solicitud->semaforofecha}}"><i class="fa fa-clock-o"></i> {{ $solicitud->created_at->diffForHumans()}}</small>
                       <!-- General tools such as edit or delete-->

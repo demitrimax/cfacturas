@@ -18,7 +18,7 @@ class facsolicitud extends Model
     const UPDATED_AT = 'updated_at';
 
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at','fecha'];
 
     public $fillable = [
         'nombre',
@@ -48,8 +48,6 @@ class facsolicitud extends Model
         'concepto' => 'string',
         'comentario' =>'string',
         'adjunto' => 'string',
-        'fecha' => 'date',
-
     ];
 
     public function getSemaforofechaAttribute()

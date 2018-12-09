@@ -43,6 +43,7 @@ class solicitudes extends Model
 
     public $fillable = [
         'nombre',
+        'user_id',
         'correo',
         'telefono',
         'rfc',
@@ -68,6 +69,7 @@ class solicitudes extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'user_id' => 'integer',
         'nombre' => 'string',
         'correo' => 'string',
         'telefono' => 'string',

@@ -5,7 +5,7 @@
         @endcan
         @can('solicitud-list')
         <li class="{{ Request::is('solfact*') ? 'active' : '' }}">
-            <a href="{!! route('solfact.index') !!}"><i class="fa fa-edit"></i><span>Solicitudes</span></a>
+            <a href="{!! route('solfact.index') !!}"><i class="fa fa-sticky-note-o"></i><span>Solicitudes</span></a>
         </li>
         @endcan
         @can('accomerciales-list')
@@ -30,7 +30,7 @@
         @can('catbancos-list')
         <li class="{{ Request::is('catBancos*') ? 'active' : '' }}">
           <a href="{{url('/catBancos')}}">
-            <i class="fa fa-money"></i> <span>Bancos</span>
+            <i class="fa fa-bank"></i> <span>Bancos</span>
             <span class="pull-right-container">
               @isset($globalnews->catbancos)
               <small class="label pull-right bg-green">nuevo</small>
@@ -82,6 +82,9 @@ $ruta = Request::route()->getName();
           </ul>
         </li>
 @endcan
+@if(Auth()->user()->email_verified_at)
+
 <li class="{{ Request::is('solfactura*') ? 'active' : '' }}">
     <a href="{!! url('/solfactura') !!}"><i class="fa fa-calendar-check-o"></i><span>Solicitudes</span></a>
 </li>
+@endif

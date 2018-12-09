@@ -11,7 +11,7 @@
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                   {!! Form::model($solicitudes, ['route' => ['solicitudes.update', $solicitudes->id], 'method' => 'patch']) !!}
+                   {!! Form::model($solicitudes, ['route' => ['solfact.update', $solicitudes->id], 'method' => 'patch']) !!}
 
                         @include('solicitudes.fields')
 
