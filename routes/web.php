@@ -40,7 +40,7 @@ Route::group(['middleware'=>['auth','verified']], function() {
   Route::resource('empDatfiscales', 'emp_datfiscalesController');
   Route::resource('catBancos', 'cat_bancosController');
   Route::resource('catcuentas', 'catcuentasController');
-  Route::resource('usrs', 'usrsController');
+  //Route::resource('usrs', 'usrsController');
   Route::resource('users', 'usersController');
   Route::get('profile','profileController@index');
   Route::post('avatarchan', 'profileController@avatarchange');
@@ -60,4 +60,8 @@ Route::group(['middleware'=>['auth','verified']], function() {
 
   Route::resource('solicitudes', 'solicitudesController');
 
+
 });
+
+
+//Route::resource('solicitudes', 'solicitudesController');

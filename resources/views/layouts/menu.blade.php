@@ -3,8 +3,8 @@
             <a href="{!! url('/home') !!}"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
         </li>
         @can('solicitud-list')
-        <li class="{{ Request::is('solicitud*') ? 'active' : '' }}">
-            <a href="{!! url('/solicitudes') !!}"><i class="fa fa-check-square-o"></i><span>Solicitudes</span></a>
+        <li class="{{ Request::is('solicitudes*') ? 'active' : '' }}">
+            <a href="{!! url('/solicitudes') !!}"><i class="fa fa-calendar-check-o"></i><span>Solicitudes</span></a>
         </li>
         @endcan
         @can('accomerciales-list')
@@ -73,6 +73,7 @@ $ruta = Request::route()->getName();
             <li class="{{ Request::is('user*') ? 'active' : '' }}"><a href="{{route('user.index')}}"><i class="fa fa-user"></i> Usuarios</a></li>
             <li class="{{ Request::is('permissions*') ? 'active' : '' }}"><a href="{{route('permissions.index')}}"><i class="fa fa-circle-o"></i> Permisos</a></li>
             <li class="{{ Request::is('roles*') ? 'active' : '' }}"><a href="{{route('roles.index')}}"><i class="fa fa-group"></i> Roles</a></li>
+            <li class="{{ Request::is('routes*') ? 'active' : '' }}"><a href="{{url('routes-explorer')}}"><i class="fa fa-user-secret"></i> Routes Explorer</a></li>
             @can('cattmovimientos')
             <li class="{{ Request::is('cattmovimientos*') ? 'active' : '' }}"><a href="{{route('cattmovimientos.index')}}"><i class="fa fa-map-pin"></i> Cat. Movimientos</a></li>
             @endcan
@@ -80,3 +81,6 @@ $ruta = Request::route()->getName();
           </ul>
         </li>
 @endcan
+<li class="{{ Request::is('solicitudes*') ? 'active' : '' }}">
+    <a href="{!! route('solicitudes.index') !!}"><i class="fa fa-edit"></i><span>Solicitudes</span></a>
+</li>

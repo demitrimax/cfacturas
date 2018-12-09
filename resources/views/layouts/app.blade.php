@@ -143,7 +143,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{!! url('/') !!}">
-                    Control de Facturas
+                    {{config('app.name')}}
                 </a>
             </div>
 
