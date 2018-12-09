@@ -17,17 +17,12 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/home', 'HomeController@index')->middleware('verified');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
 Route::get('/privacidad', function() {
     return view('users.terminosycondiciones');
 });
 
-Route::middleware(['admin'])->group(function() {
-
-});
 
 Route::group(['middleware'=>['auth','verified']], function() {
   Route::resource('clientes', 'clientesController');
@@ -57,8 +52,9 @@ Route::group(['middleware'=>['auth','verified']], function() {
 
   Route::get('/solicitud', 'solicitudController@index')->name('solicitud');
   Route::post('/solicitud', 'solicitudController@store');
+  Route::get('/solfactura', 'solicitudController@solfactura');
 
-  Route::resource('solicitudes', 'solicitudesController');
+  Route::resource('solfact', 'solicitudesController');
 
 
 });

@@ -19,6 +19,11 @@ class solicitudesController extends AppBaseController
     public function __construct(solicitudesRepository $solicitudesRepo)
     {
         $this->solicitudesRepository = $solicitudesRepo;
+        $this->middleware('auth');
+        $this->middleware('permission:solicitud-list');
+        $this->middleware('permission:solicitud-create', ['only' => ['create','store']]);
+        $this->middleware('permission:solicitud-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:solicitud-delete', ['only' => ['destroy']]);
     }
 
     /**

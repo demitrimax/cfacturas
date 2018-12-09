@@ -4,8 +4,8 @@
         </li>
         @endcan
         @can('solicitud-list')
-        <li class="{{ Request::is('solicitudes*') ? 'active' : '' }}">
-            <a href="{!! url('/solicitudes') !!}"><i class="fa fa-calendar-check-o"></i><span>Solicitudes</span></a>
+        <li class="{{ Request::is('solfact*') ? 'active' : '' }}">
+            <a href="{!! route('solfact.index') !!}"><i class="fa fa-edit"></i><span>Solicitudes</span></a>
         </li>
         @endcan
         @can('accomerciales-list')
@@ -82,6 +82,6 @@ $ruta = Request::route()->getName();
           </ul>
         </li>
 @endcan
-<li class="{{ Request::is('solicitudes*') ? 'active' : '' }}">
-    <a href="{!! route('solicitudes.index') !!}"><i class="fa fa-edit"></i><span>Solicitudes</span></a>
+<li class="{{ Request::is('solfactura*') ? 'active' : '' }}">
+    <a href="{!! url('/solfactura') !!}"><i class="fa fa-calendar-check-o"></i><span>Solicitudes</span></a>
 </li>

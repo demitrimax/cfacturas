@@ -14,10 +14,10 @@ class solicitudController extends Controller
       return view('solicitud');
     }
 
-    public function solicitudes()
+    public function solfactura()
     {
-        return "hola";
-      //return view('solicitudes.solicitud');
+        //return "hola";
+      return view('solicitudes.solicitud');
     }
 
     public function store(request $request)
