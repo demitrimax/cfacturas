@@ -51,7 +51,7 @@ class solicitudesController extends AppBaseController
      */
     public function create()
     {
-        return view('solicitudes.create');
+        return view('solicitudes.solicitud');
     }
 
     /**

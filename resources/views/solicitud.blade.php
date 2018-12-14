@@ -80,7 +80,7 @@
                     {!! Form::label('nombre', 'Nombre:*') !!}
                     {!! Form::text('nombre', Auth::user()->name, ['class' => 'form-control', 'maxlength' =>'150', 'required']) !!}
                     {!! Form::hidden('fecha', date("Y-m-d")) !!}
-                    {!! Form::hidden('user_id', Auth::user()->id !!}
+                    {!! Form::hidden('user_id', Auth::user()->id) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('correo', 'Correo Electronico:*') !!}

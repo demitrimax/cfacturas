@@ -227,4 +227,17 @@ class accomercialController extends AppBaseController
       $cuentas = catcuentas::where('cliente_id',$id)->select('id','numcuenta')->get();
       return $cuentas;
     }
+    //MUESTRA LA VERSION IMPRIMIBLE
+    public function verprint($id)
+    {
+      $accomercial = $this->accomercialRepository->findWithoutFail($id);
+
+      if (empty($accomercial)) {
+          Flash::error('Acuerdo Comercial no encontrado.');
+
+          return redirect(route('accomercials.index'));
+      }
+
+      return view('accomercials.viewacuerdoprint')->with('accomercial', $accomercial);
+    }
 }

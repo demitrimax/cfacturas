@@ -1,4 +1,9 @@
-
+@extends('layouts.app_blank')
+@section('title',config('app.name').' | Detalle del Acuerdo' )
+@section('content')
+@section('body')
+  onload="window.print();"
+@endsection
 <section class="invoice">
       <!-- title row -->
       <div class="row">
@@ -174,7 +179,7 @@
       <!-- this row will not appear when printing -->
       <div class="row no-print">
         <div class="col-xs-12">
-          <a href="{{url('accomercials/print/'.$accomercial->id)}}" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Imprimir</a>
+          <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Imprimir</a>
           <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Enviar Copias Involucrados
           </button>
           <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
@@ -183,3 +188,4 @@
         </div>
       </div>
     </section>
+    @endsection
