@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use App\Models\facsolicitud;
+use App\User;
+use Spatie\Permission\Models\Role;
+use App\Mail\SolicitudFactura;
+use Mail;
 
 class solicitudController extends Controller
 {
@@ -63,7 +67,11 @@ class solicitudController extends Controller
         $solicitudfac->adjunto = 'solicitudes/'.$nombre;
       }
       $solicitudfac->save();
-      $mensaje = 'Se ha enviado correctamente su solicitud. <br> En breve recibirá un correo electrónico como acuse de recibo.';
+      $mensaje = 'Se ha enviado correctamente su solicitud. En breve recibirá un correo electrónico como acuse de recibo.';
+      //envío de correo electronico
+      $gerentes = User::role('gerente')->get();
+      $usuario = User::find($solicitudfac->user_id);
+      Mail::to($gerentes, $solicitudfac)->send(new SolicitudFactura($usuario, $solicitudfac));
 
       return back()->with(compact('mensaje'));
 
