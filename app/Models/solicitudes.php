@@ -94,5 +94,29 @@ class solicitudes extends Model
 
     ];
 
+    public function getSemaforofechaAttribute()
+    {
+      $now = now();
+      $colorattribute = '';
+      if ( $this->created_at->diffInDays($now) < 3 )
+      {
+        $colorattribute = 'success';
+      }
+      if ( $this->created_at->diffInDays($now) >= 3 )
+      {
+        $colorattribute = 'primary';
+      }
+      if ( $this->created_at->diffInDays($now) >= 5 )
+      {
+        $colorattribute = 'warning';
+      }
+      if ( $this->created_at->diffInDays($now) >= 10 )
+      {
+        $colorattribute = 'danger';
+      }
+
+      return $colorattribute;
+    }
+
 
 }

@@ -19,7 +19,11 @@
             <td>{!! $solicitudes->nombre !!}</td>
             <td>{!! $solicitudes->correo !!}</td>
             <td>{!! $solicitudes->telefono !!}</td>
-            <td>{!! strip_tags($solicitudes->concepto) !!}</td>
+            <td>
+              <a href="{!! route('solfact.show', [$solicitudes->id]) !!}">
+                {!! strip_tags($solicitudes->concepto) !!}
+              </a>
+            </td>
             <td>{!! $solicitudes->comentario !!}</td>
             <td>
               {!! ($solicitudes->adjunto) ? '<i class="fa fa-paperclip"></i>' : '' !!}

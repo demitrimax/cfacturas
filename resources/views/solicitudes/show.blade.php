@@ -6,7 +6,7 @@
     Vista de Solicitud de Factura
   </h1>
   <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> dashboard</a></li>
+    <li><a href="{{url('/home')}}"><i class="fa fa-dashboard"></i> dashboard</a></li>
     <li class="active">Solcitud de Factura</li>
   </ol>
 </section>
@@ -28,9 +28,9 @@
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
                 <li><a href="mailbox.html"><i class="fa fa-clock-o"></i> Creada hace:
-                  <span class="label label-primary pull-right">{{$solicitudes->created_at->diffForHumans()}}</span></a></li>
-                <li><a href="#"><i class="fa fa-envelope-o"></i> Asignada a:</a></li>
-                <li><a href="#"><i class="fa fa-file-text-o"></i> Drafts</a></li>
+                  <span class="label label-{{$solicitudes->semaforofecha}} pull-right">{{$solicitudes->created_at->diffForHumans()}}</span></a></li>
+                <li><a href="#"><i class="fa fa-hand-o-right"></i> Asignada a:</a></li>
+                <li><a href="#"><i class="fa fa-wrench"></i> Estado</a></li>
                 <li><a href="#"><i class="fa fa-filter"></i> Junk <span class="label label-warning pull-right">65</span></a>
                 </li>
                 <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
