@@ -90,12 +90,9 @@
 
                   <div class="box-tools pull-right">
                     <ul class="pagination pagination-sm inline">
-                      <li><a href="#">«</a></li>
-                      <li><a href="#">1</a></li>
-                      <li><a href="#">2</a></li>
-                      <li><a href="#">3</a></li>
-                      <li><a href="#">»</a></li>
+                      {{$detsolicitudes->links()}}
                     </ul>
+
                   </div>
                 </div>
                 <!-- /.box-header -->
@@ -126,7 +123,7 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer clearfix no-border">
-                  <button type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Agregar solicitud</button>
+                  <a type="button" class="btn btn-default pull-right" href="{{url('/solfactura')}}"><i class="fa fa-plus"></i> Agregar solicitud</a>
                 </div>
               </div>
               <!-- /.box -->

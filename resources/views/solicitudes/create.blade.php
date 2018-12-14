@@ -12,7 +12,7 @@
 
             <div class="box-body">
                 <div class="row">
-                    {!! Form::open(['route' => 'solicitudes.store']) !!}
+                    {!! Form::open(['route' => 'solfact.store']) !!}
 
                         @include('solicitudes.fields')
 

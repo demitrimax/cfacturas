@@ -27,7 +27,7 @@
             </div>
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
-                <li><a href="mailbox.html"><i class="fa fa-inbox"></i> Creada hace:
+                <li><a href="mailbox.html"><i class="fa fa-clock-o"></i> Creada hace:
                   <span class="label label-primary pull-right">{{$solicitudes->created_at->diffForHumans()}}</span></a></li>
                 <li><a href="#"><i class="fa fa-envelope-o"></i> Asignada a:</a></li>
                 <li><a href="#"><i class="fa fa-file-text-o"></i> Drafts</a></li>

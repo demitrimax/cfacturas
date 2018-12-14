@@ -29,7 +29,7 @@ class HomeController extends Controller
     {
         $nclientes = clientes::count();
         $nsolicitudes = facsolicitud::count();
-        $detsolicitudes = facsolicitud::get()->where('atendido',null);
+        $detsolicitudes = facsolicitud::where('atendido',null)->paginate(10);
         $acuerdosactivos = accomercial::get()->where('autorizado',1);
         return view('home')->with(compact('nclientes','nsolicitudes','detsolicitudes','acuerdosactivos'));
     }

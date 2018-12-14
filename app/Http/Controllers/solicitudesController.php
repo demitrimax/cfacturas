@@ -11,6 +11,7 @@ use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\Helpers\SomeClass;
+use App\Helpers\RecortarTexto;
 
 class solicitudesController extends AppBaseController
 {
@@ -36,10 +37,11 @@ class solicitudesController extends AppBaseController
     public function index(Request $request)
     {
         $this->solicitudesRepository->pushCriteria(new RequestCriteria($request));
-        $solicitudes = $this->solicitudesRepository->all();
+        $solicitudes = $this->solicitudesRepository->paginate(10);
 
+        //$textcorto = RecortarTexto::recortar_texto($solicitudes);
         return view('solicitudes.index')
-            ->with('solicitudes', $solicitudes);
+            ->with(compact('solicitudes'));
     }
 
     /**
@@ -80,12 +82,14 @@ class solicitudesController extends AppBaseController
     public function show($id)
     {
         $solicitudes = $this->solicitudesRepository->findWithoutFail($id);
-        $tamanoadjunto = SomeClass::bytesToHuman(filesize($solicitudes->adjunto));
-
+        if (!empty($solicitudes))
+        {
+          $tamanoadjunto = SomeClass::bytesToHuman(filesize($solicitudes->adjunto));
+        }
         if (empty($solicitudes)) {
-            Flash::error('Solicitudes not found');
+            Flash::error('Solicitud no encontrada');
 
-            return redirect(route('solicitudes.index'));
+            return redirect(route('solfact.index'));
         }
 
         return view('solicitudes.show')->with(compact('solicitudes','tamanoadjunto'));
@@ -106,7 +110,7 @@ class solicitudesController extends AppBaseController
         if (empty($solicitudes)) {
             Flash::error('Solicitudes not found');
 
-            return redirect(route('solicitudes.index'));
+            return redirect(route('solfact.index'));
         }
 
         return view('solicitudes.edit')->with('solicitudes', $solicitudes);
@@ -127,14 +131,14 @@ class solicitudesController extends AppBaseController
         if (empty($solicitudes)) {
             Flash::error('Solicitudes not found');
 
-            return redirect(route('solicitudes.index'));
+            return redirect(route('solfact.index'));
         }
 
         $solicitudes = $this->solicitudesRepository->update($request->all(), $id);
 
         Flash::success('Solicitudes updated successfully.');
 
-        return redirect(route('solicitudes.index'));
+        return redirect(route('solfact.index'));
     }
 
     /**
@@ -151,14 +155,14 @@ class solicitudesController extends AppBaseController
         if (empty($solicitudes)) {
             Flash::error('Solicitudes not found');
 
-            return redirect(route('solicitudes.index'));
+            return redirect(route('solfact.index'));
         }
 
         $this->solicitudesRepository->delete($id);
 
-        Flash::success('Solicitudes deleted successfully.');
+        Flash::success('Solicitud borrada correctamente.');
 
-        return redirect(route('solicitudes.index'));
+        return redirect(route('solfact.index'));
     }
 
 }

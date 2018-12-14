@@ -16,6 +16,7 @@
         <div class="box box-primary">
             <div class="box-body">
                     @include('solicitudes.table')
+                    {{$solicitudes->links()}}
             </div>
         </div>
         <div class="text-center">
