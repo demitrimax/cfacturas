@@ -177,9 +177,9 @@
           <a href="{{url('accomercials/print/'.$accomercial->id)}}" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Imprimir</a>
           <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Enviar Copias Involucrados
           </button>
-          <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
+          <a href="{{url('accomercials/pdf/'.$accomercial->id)}}" type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
             <i class="fa fa-download"></i> Generar PDF
-          </button>
+          </a>
         </div>
       </div>
     </section>

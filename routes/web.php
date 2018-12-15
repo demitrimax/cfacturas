@@ -44,6 +44,7 @@ Route::group(['middleware'=>['auth','verified']], function() {
   Route::post('catcuentas/agregarmov', 'catcuentasController@agregarmov');
   Route::resource('accomercials', 'accomercialController');
   Route::get('/accomercials/print/{id}', 'accomercialController@verprint');
+  Route::get('/accomercials/pdf/{id}', 'accomercialController@verpdf');
   Route::get('GetDirecciones/{id}','accomercialController@GetDirecciones');
   Route::get('GetCuentas/{id}','accomercialController@GetCuentas');
 

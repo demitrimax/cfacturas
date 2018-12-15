@@ -240,4 +240,20 @@ class accomercialController extends AppBaseController
 
       return view('accomercials.viewacuerdoprint')->with('accomercial', $accomercial);
     }
+    public function verpdf($id)
+    {
+      $accomercial = $this->accomercialRepository->findWithoutFail($id);
+
+      if (empty($accomercial)) {
+          Flash::error('Acuerdo Comercial no encontrado.');
+
+          return redirect(route('accomercials.index'));
+      }
+      $view = view('accomercials.viewacuerdoprint')->with(compact('accomercial'))->render();
+      $conv = new \Anam\PhantomMagick\Converter();
+      $conv->source($view)
+            ->toPdf()
+            ->download('acuerdo.pdf');
+      //return view('accomercials.viewacuerdoprint')->with(compact('accomercial'));
+    }
 }
