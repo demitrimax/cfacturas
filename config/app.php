@@ -171,6 +171,7 @@ return [
         \InfyOm\RoutesExplorer\RoutesExplorerServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -228,6 +229,7 @@ return [
         'Flash'     => Laracasts\Flash\Flash::class,
 
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

@@ -9,6 +9,7 @@
         "anhskohbo/no-captcha": "^3.0",
         "arcanedev/log-viewer": "^4.6",
         "askedio/laravel-soft-cascade": "^5.7",
+        "barryvdh/laravel-dompdf": "^0.8.3",
         "crocodicstudio/crudbooster": "^5.4",
         "fideloper/proxy": "^4.0",
         "infyomlabs/adminlte-templates": "5.7.x-dev",

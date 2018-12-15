@@ -17,6 +17,7 @@ use App\Models\catempresas;
 use App\Models\accomercial;
 use App\Models\users;
 use App\acempresas;
+use PDF;
 
 class accomercialController extends AppBaseController
 {
@@ -249,11 +250,8 @@ class accomercialController extends AppBaseController
 
           return redirect(route('accomercials.index'));
       }
-      $view = view('accomercials.viewacuerdoprint')->with(compact('accomercial'))->render();
-      $conv = new \Anam\PhantomMagick\Converter();
-      $conv->source($view)
-            ->toPdf()
-            ->download('acuerdo.pdf');
+      $pdf = \PDF::loadView('accomercials.viewacuerdoprint',compact('accomercial'));
+      return $pdf->download('acuerdo.pdf');
       //return view('accomercials.viewacuerdoprint')->with(compact('accomercial'));
     }
 }

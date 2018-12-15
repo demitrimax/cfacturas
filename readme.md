@@ -9,7 +9,9 @@
 
 ## SOBRE ESTE PROYECTO
 
-Control de Facturas es un proyecto para la empresa CREA CONSULTORIA que le permitirá tener un control de sus activos, documentos, clientes, con la finalidad de darle seguimiento a los clientes con los que cuenta así mismo permitirá enviar notificaciones a los clientes sobre las actividades que se registran con la empresa. 
+Control de Facturas es un proyecto para la empresa CONSORCIO Comercial  que le permitirá tener un control de sus activos, documentos, clientes, con la finalidad de darle seguimiento a los clientes con los que cuenta así mismo permitirá enviar notificaciones a los clientes sobre las actividades que se registran con la empresa. 
+
+
 
 ## Learning Laravel
 
