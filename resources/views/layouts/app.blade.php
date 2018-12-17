@@ -72,9 +72,9 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <!-- The user image in the navbar-->
                                 @if (empty(Auth::user()->avatar))
-                                  <img src="{{asset('avatar/avatar.png')}}" class="img-circle" alt="User Image" width="18" height="18"/>
+                                  <img src="{{asset('avatar/avatar.png')}}" class="user-image" alt="User Image"/>
                                 @else
-                                     <img src="{{asset('avatar/'.Auth::user()->avatar)}}" class="img-circle" alt="User Image" width="15" width="15"/>
+                                     <img src="{{asset('avatar/'.Auth::user()->avatar)}}" class="user-image" alt="User Image"/>
                                 @endif
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
                                 <span class="hidden-xs">{!! Auth::user()->name !!}</span>
@@ -95,12 +95,12 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="{{url('/profile')}}" class="btn btn-default btn-flat">Profile</a>
+                                        <a href="{{url('/profile')}}" class="btn btn-default btn-flat">Perfil</a>
                                     </div>
                                     <div class="pull-right">
                                         <a href="{!! url('/logout') !!}" class="btn btn-default btn-flat"
                                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            Sign out
+                                            Cerrar Sesión
                                         </a>
                                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
