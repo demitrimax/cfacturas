@@ -2,6 +2,13 @@
 
 @section('title',config('app.name').' | Alta de Solicitud' )
 
+@section('css')
+<script src="{{asset('adminlte/bower_components/ckeditor/ckeditor.js')}}"></script>
+<script src="{{asset('adminlte/bower_components/ckeditor/samples/js/sample.js')}}"></script>
+<link rel="stylesheet" href="{{asset('adminlte/bower_components/ckeditor/samples/css/samples.css')}}">
+<link rel="stylesheet" href="{{asset('adminlte/bower_components/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css')}}">
+@endsection
+
 @section('content')
 
   <div class="content">
@@ -89,4 +96,19 @@
 
 {!! Form::close() !!}
 </div>
+@endsection
+@section('scripts')
+<!-- CK Editor -->
+<script src="{{asset('adminlte/bower_components/ckeditor/ckeditor.js')}}"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<script src="{{asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
+<script>
+  $(function () {
+    // Replace the <textarea id="editor1"> with a CKEditor
+    // instance, using default configuration.
+    CKEDITOR.replace('concepto')
+    //bootstrap WYSIHTML5 - text editor
+    $('.textarea').wysihtml5()
+  })
+</script>
 @endsection

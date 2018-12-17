@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\catestados;
+use App\catmunicipios;
 
 class emp_datfiscalesController extends AppBaseController
 {
@@ -48,7 +50,10 @@ class emp_datfiscalesController extends AppBaseController
      */
     public function create()
     {
-        return view('emp_datfiscales.create');
+        $estados = catestados::pluck('nombre','id');
+        $municipios = catmunicipios::where('id_edo',1)->pluck('nomMunicipio','id');
+
+        return view('emp_datfiscales.create')->with(compact('estados','municipios'));
     }
 
     /**
@@ -74,7 +79,7 @@ class emp_datfiscalesController extends AppBaseController
         }
         else {
 
-        return redirect(route('empDatfiscales.index'));
+        return redirect(route('catempresas.show',$input['empresa_id']));
       }
     }
 
@@ -114,8 +119,9 @@ class emp_datfiscalesController extends AppBaseController
 
             return redirect(route('empDatfiscales.index'));
         }
-
-        return view('emp_datfiscales.edit')->with('empDatfiscales', $empDatfiscales);
+        $estados = catestados::pluck('nombre','id');
+        $municipios = catmunicipios::pluck('nomMunicipio','id');
+        return view('emp_datfiscales.edit')->with(compact('empDatfiscales','estados','municipios'));
     }
 
     /**

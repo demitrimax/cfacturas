@@ -75,6 +75,8 @@ $ruta = Request::route()->getName();
             <li class="{{ Request::is('permissions*') ? 'active' : '' }}"><a href="{{route('permissions.index')}}"><i class="fa fa-circle-o"></i> Permisos</a></li>
             <li class="{{ Request::is('roles*') ? 'active' : '' }}"><a href="{{route('roles.index')}}"><i class="fa fa-group"></i> Roles</a></li>
             <li class="{{ Request::is('routes*') ? 'active' : '' }}"><a href="{{url('routes-explorer')}}"><i class="fa fa-user-secret"></i> Routes Explorer</a></li>
+            <li class="{{ Request::is('log-*') ? 'active' : '' }}"><a href="{{url('log-viewer')}}"><i class="fa fa-paw"></i> Log-Viewer</a></li>
+
             @can('cattmovimientos')
             <li class="{{ Request::is('cattmovimientos*') ? 'active' : '' }}"><a href="{{route('cattmovimientos.index')}}"><i class="fa fa-map-pin"></i> Cat. Movimientos</a></li>
             @endcan

@@ -44,13 +44,13 @@
 <!-- Estado Id Field -->
 <div class="form-group">
     {!! Form::label('estado_id', 'Estado Id:') !!}
-    {!! Form::number('estado_id', null, ['class' => 'form-control']) !!}
+    {!! Form::select('estado_id', $estados, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Municipio Id Field -->
 <div class="form-group">
     {!! Form::label('municipio_id', 'Municipio Id:') !!}
-    {!! Form::number('municipio_id', null, ['class' => 'form-control']) !!}
+    {!! Form::select('municipio_id', $municipios, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Colonia Field -->
@@ -74,5 +74,22 @@
 <!-- Submit Field -->
 <div class="form-group">
     {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
-    <a href="{!! route('catempresas.index') !!}" class="btn btn-default">Cancelar</a>
+    <a href="{!! route('catempresas.show',$empDatfiscales->catempresa->id) !!}" class="btn btn-default">Cancelar {{$empDatfiscales->catempresa->id}}</a>
 </div>
+@section('scripts')
+<script>
+  $('#estado_id').on('change', function(e) {
+    //console.log(e);
+    var estado_id = e.target.value;
+    //ajax
+    $.get('/GetMunicipios/'+estado_id, function(data) {
+      //exito al obtener los datos
+      //console.log(data);
+      $('#municipio_id').empty();
+      $.each(data, function(index, Municipios) {
+        $('#municipio_id').append('<option value ="' + Municipios.id + '">'+Municipios.nomMunicipio+'</option>' );
+      });
+    });
+  });
+</script>
+@endsection

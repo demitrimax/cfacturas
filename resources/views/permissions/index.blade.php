@@ -2,6 +2,11 @@
 @extends('layouts.app')
 @section('title',config('app.name').' | Permisos' )
 
+@section('css')
+<!-- DataTables -->
+<link rel="stylesheet" href="{{asset('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
+@endsection
+
 @section('content')
 <section class="content">
       <div class="row">
@@ -23,7 +28,7 @@
             @endif
             <!-- /.box-header -->
             <div class="table-responsive">
-                <table class="table table-bordered table-striped">
+                <table class="table table-bordered table-striped" id="permisos-table">
                     <thead>
                         <tr>
                             <th>Permissions</th>
@@ -60,6 +65,18 @@
 
       </div>
       <!-- /.row -->
-
-
+@endsection
+@section('scripts')
+<!-- DataTables -->
+<script src="{{asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+<script>
+  $(function () {
+    $('#permisos-table').DataTable({
+      "language": {
+                "url": "{{asset('adminlte/bower_components/datatables.net/Spanish.json')}}"
+            }
+    })
+  })
+</script>
 @endsection

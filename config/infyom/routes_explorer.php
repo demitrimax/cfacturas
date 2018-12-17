@@ -12,7 +12,7 @@ return [
     |
     */
 
-    'enable_explorer' => true,
+    'enable_explorer' => env('RE_ENABLE_EXPLORER', true),
 
     /*
     |--------------------------------------------------------------------------

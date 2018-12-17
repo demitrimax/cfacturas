@@ -7,6 +7,8 @@ use App\User;
 use App\Models\clientes;
 use App\Models\facsolicitud;
 use App\Models\accomercial;
+use Spatie\Activitylog\Models\Activity;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -18,6 +20,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        //Activity::all();
     }
 
     /**
@@ -27,6 +30,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        activity()->log('Home Dashboard')->causedBy(Auth::user());
         $nclientes = clientes::count();
         $nsolicitudes = facsolicitud::count();
         $detsolicitudes = facsolicitud::where('atendido',null)->paginate(10);
