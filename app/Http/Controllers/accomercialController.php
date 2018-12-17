@@ -18,6 +18,10 @@ use App\Models\accomercial;
 use App\Models\users;
 use App\acempresas;
 use PDF;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\acuerdocomer;
+use App\Mail\acuerdocomerinter;
+use App\User;
 
 class accomercialController extends AppBaseController
 {
@@ -253,5 +257,30 @@ class accomercialController extends AppBaseController
       $pdf = \PDF::loadView('accomercials.viewacuerdoprint',compact('accomercial'));
       return $pdf->download('acuerdo.pdf');
       //return view('accomercials.viewacuerdoprint')->with(compact('accomercial'));
+    }
+    public function notificaralta($id)
+    {
+            $accomercial = $this->accomercialRepository->findWithoutFail($id);
+            if (empty($accomercial)) {
+                Flash::error('Acuerdo Comercial no encontrado.');
+
+                return redirect(route('accomercials.index'));
+            }
+            //A quienes se les envía email del alta de correo
+            $gerentes = User::role('gerente')->get();
+            $sociocomercial = '';
+            if ($accomercial->sociocomer_id) {
+              $sociocomercial = $accomercial->sociocomer->datcontacto->where('tipo','email');
+            }
+            $cliente = $accomercial->cliente->datcontacto->where('tipo','email')->first();
+            $usuarioelabora = $accomercial->elabuser;
+            //dd($cliente->contacto);
+            Mail::to($cliente->contacto)->send(new acuerdocomer($accomercial));
+            Mail::to($usuarioelabora)->send(new acuerdocomerinter($accomercial));
+            Mail::to($gerentes)->send(new acuerdocomerinter($accomercial));
+            //return (new \App\Mail\acuerdocomer($accomercial))->render();
+            $mensaje = 'Se han enviado correctamente notificaciones a los usuarios';
+            return back()->with(compact('mensaje'));
+
     }
 }

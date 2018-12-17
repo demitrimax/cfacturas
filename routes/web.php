@@ -45,6 +45,7 @@ Route::group(['middleware'=>['auth','verified']], function() {
   Route::resource('accomercials', 'accomercialController');
   Route::get('/accomercials/print/{id}', 'accomercialController@verprint');
   Route::get('/accomercials/pdf/{id}', 'accomercialController@verpdf');
+  Route::get('accomercials/notificaralta/{id}', 'accomercialController@notificaralta');
   Route::get('GetDirecciones/{id}','accomercialController@GetDirecciones');
   Route::get('GetCuentas/{id}','accomercialController@GetCuentas');
 
