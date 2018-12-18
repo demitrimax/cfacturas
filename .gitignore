@@ -3,6 +3,7 @@
 /public/storage
 /public/documents
 /public/solicitudes
+/public/avatar
 /storage/*.key
 /vendor
 /.idea
