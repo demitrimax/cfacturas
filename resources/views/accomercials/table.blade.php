@@ -26,14 +26,14 @@
             <td>{!! $accomercial->autuser->name !!}</td>
             <td>{!! $accomercial->autuser2->name !!}</td>
             <td>
-                {!! Form::open(['route' => ['accomercials.destroy', $accomercial->id], 'method' => 'delete']) !!}
+                {!! Form::open(['route' => ['accomercials.destroy', $accomercial->id], 'method' => 'delete', 'id'=>'form'.$accomercial->id]) !!}
                 <div class='btn-group'>
                     <a href="{!! route('accomercials.show', [$accomercial->id]) !!}" class='btn btn-default'><i class="glyphicon glyphicon-eye-open"></i></a>
                     @can('accomerciales-edit')
                     <a href="{!! route('accomercials.edit', [$accomercial->id]) !!}" class='btn btn-default'><i class="glyphicon glyphicon-edit"></i></a>
                     @endcan
                     @can('accomerciales-delete')
-                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger', 'onclick' => "return confirm('Esta Seguro de Eliminar este Acuerdo?')"]) !!}
+                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'button', 'class' => 'btn btn-danger', 'onclick' => "ConfirmaEliminar($accomercial->id)"]) !!}
                     @endcan
                 </div>
                 {!! Form::close() !!}
@@ -42,3 +42,22 @@
     @endforeach
     </tbody>
 </table>
+@section('scripts')
+<script>
+function ConfirmaEliminar(id) {
+swal({
+      title: '¿Estás seguro de eliminar?',
+      text: 'Se eliminará los datos de la solicitud.',
+      type: 'warning',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Continuar',
+      }).then((result) => {
+if (result.value) {
+    document.forms['form'+id].submit();
+  }
+})
+}
+</script>
+@endsection

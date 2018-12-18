@@ -12,6 +12,9 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\Helpers\SomeClass;
 use App\Helpers\RecortarTexto;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SolicitudEliminada;
+use Auth;
 
 class solicitudesController extends AppBaseController
 {
@@ -157,6 +160,12 @@ class solicitudesController extends AppBaseController
 
             return redirect(route('solfact.index'));
         }
+        //A QUIEN SE LE VA ENVIAR NOTIFICACION QUE SE BORRO LA SOLICITUD
+        $cliente = $solicitudes->correo;
+        $usuario = $solicitudes->usuario;
+        $usuarioelimina = Auth::user()->name;
+        //SE ENVIA ANTES QUE SE ELIMINE
+        Mail::to($usuario,$cliente)->send(new SolicitudEliminada($solicitudes,$usuarioelimina));
 
         $this->solicitudesRepository->delete($id);
 

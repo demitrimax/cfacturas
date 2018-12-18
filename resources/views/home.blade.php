@@ -21,7 +21,7 @@
                 <div class="inner">
                   <h3>{{$acuerdosactivos->count()}}</h3>
 
-                  <p>Acuerdos Comerciales Activos</p>
+                  <p>Acuerdos Comerciales</p>
                 </div>
                 <div class="icon">
                   <i class="fa fa-file-text-o"></i>
@@ -71,7 +71,7 @@
                 <div class="icon">
                   <i class="ion ion-pie-graph"></i>
                 </div>
-                <a href="#" class="small-box-footer">Más Información<i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{url('/solfact')}}" class="small-box-footer">Más Información<i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
@@ -109,7 +109,7 @@
                       <!-- checkbox -->
                       <input type="checkbox" value="">
                       <!-- todo text -->
-                      <span class="text"><a href="solfact/{{$solicitud->id}}">{{ $solicitud->nombre.' | '.strip_tags($solicitud->concepto) }}</a></span>
+                      <span class="text"><a href="solfact/{{$solicitud->id}}">{{ $solicitud->nombre.' | '.str_limit(strip_tags($solicitud->concepto),30,'...') }}</a></span>
                       <!-- Emphasis label -->
                       <small class="label label-{{$solicitud->semaforofecha}}"><i class="fa fa-clock-o"></i> {{ $solicitud->created_at->diffForHumans()}}</small>
                       <!-- General tools such as edit or delete-->

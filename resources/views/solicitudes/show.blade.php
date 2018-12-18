@@ -107,7 +107,7 @@
                 <a href="{{url('/solfact')}}" type="button" class="btn btn-default"><i class="fa fa-reply"></i> Regresar </a>
                 <button type="button" class="btn btn-default"><i class="fa fa-share"></i> Asignar</button>
               </div>
-              <button type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> Eliminar</button>
+              <button type="button" class="btn btn-default" Onclick="ConfirmaEliminar()"><i class="fa fa-trash-o"></i> Eliminar</button>
               <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Imprimir</button>
             </div>
             <!-- /.box-footer -->
@@ -117,4 +117,25 @@
         <!-- /.col -->
     </div>
   </div>
+  {!! Form::open(['route' => ['solfact.destroy', $solicitudes->id], 'method' => 'delete', 'id'=>'formElimina']) !!}
+  {!! Form::close() !!}
+@endsection
+@section('scripts')
+<script>
+function ConfirmaEliminar() {
+swal({
+      title: '¿Estás seguro de eliminar?',
+      text: 'Se eliminará la solicitud, Se enviará una notificación a los involucrados sobre esta eliminación.',
+      type: 'warning',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Continuar',
+      }).then((result) => {
+if (result.value) {
+      document.forms['formElimina'].submit();
+  }
+})
+}
+</script>
 @endsection

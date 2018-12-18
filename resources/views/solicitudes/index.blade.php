@@ -14,7 +14,7 @@
 
         <div class="clearfix"></div>
         <div class="box box-primary">
-            <div class="box-body">
+            <div class="box-body table-responsive no-padding">
                     @include('solicitudes.table')
                     {{$solicitudes->links()}}
             </div>

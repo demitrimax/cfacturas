@@ -118,5 +118,10 @@ class solicitudes extends Model
       return $colorattribute;
     }
 
+    public function usuario()
+    {
+      return $this->belongsTo('App\Models\users','user_id');
+    }
+
 
 }

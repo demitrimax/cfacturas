@@ -122,8 +122,22 @@ class accomercialController extends AppBaseController
           $acempresas->save();
         }
 
+        //A quienes se les envía email del alta de correo
+        $gerentes = User::role('gerente')->get();
+        $sociocomercial = '';
+        if ($accomercial->sociocomer_id) {
+          $sociocomercial = $accomercial->sociocomer->datcontacto->where('tipo','email');
+        }
+        $cliente = $accomercial->cliente->datcontacto->where('tipo','email')->first();
+        $usuarioelabora = $accomercial->elabuser;
+        //dd($cliente->contacto);
+        Mail::to($cliente->contacto)->send(new acuerdocomer($accomercial));
+        Mail::to($usuarioelabora)->send(new acuerdocomerinter($accomercial));
+        Mail::to($gerentes)->send(new acuerdocomerinter($accomercial));
+        //return (new \App\Mail\acuerdocomer($accomercial))->render();
+        $mensaje = 'Se han enviado correctamente notificaciones a los usuarios';
 
-        Flash::success('Acuerdo Comercial guardado correctamente.');
+        Flash::success('Acuerdo Comercial guardado correctamente, Se enviaron correos electronicos a los participantes.');
 
         return redirect(route('accomercials.index'));
     }
