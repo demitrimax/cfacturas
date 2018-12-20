@@ -59,8 +59,7 @@ Route::group(['middleware'=>['auth','verified']], function() {
   Route::get('/solfactura', 'solicitudController@solfactura');
 
   Route::resource('solfact', 'solicitudesController');
-
-
+  Route::resource('pagocondicions', 'pagocondicionController');
 });
 
 

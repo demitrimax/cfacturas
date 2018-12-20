@@ -55,11 +55,7 @@
 <li class="{{ Request::is('users*') ? 'active' : '' }}">
     <a href="{!! route('users.index') !!}"><i class="fa fa-edit"></i><span>Usuarios</span></a>
 </li>
-<?php
-$ruta = Request::route()->getName();
-//echo $ruta;
-?>
-@if( $ruta == 'user' || $ruta === 'permissions')
+@if( Request::is('user*') || Request::is('permissions*') || Request::is('cattmovimientos*') || Request::is('pagocondicions*') || Request::is('roles*'))
 <li class="treeview active">
 @else
 <li class="treeview">
@@ -79,6 +75,11 @@ $ruta = Request::route()->getName();
 
             @can('cattmovimientos')
             <li class="{{ Request::is('cattmovimientos*') ? 'active' : '' }}"><a href="{{route('cattmovimientos.index')}}"><i class="fa fa-map-pin"></i> Cat. Movimientos</a></li>
+            @endcan
+            @can('pagocondicion')
+            <li class="{{ Request::is('pagocondicions*') ? 'active' : '' }}">
+                <a href="{!! route('pagocondicions.index') !!}"><i class="fa fa-dot-circle-o"></i><span>Condiciones de Pago</span></a>
+            </li>
             @endcan
 
           </ul>
