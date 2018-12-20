@@ -72,14 +72,14 @@ class emp_datfiscalesController extends AppBaseController
 
         $empDatfiscales = $this->empDatfiscalesRepository->create($input);
 
-        Flash::success('Datos Fiscuales guardados correctamente.');
+        Flash::success('Datos Fiscales guardados correctamente.');
+        $sweet = 'Datos Fiscales guardados correctamente';
         if(isset($input['redirect'])){
-
-          return redirect(route('catempresas.show', [$input['empresa_id']]));
+          return redirect(route('catempresas.show', [$input['empresa_id']]))->with(compact('sweet'));
         }
         else {
 
-        return redirect(route('catempresas.show',$input['empresa_id']));
+        return redirect(route('catempresas.show',$input['empresa_id']))->with(compact('sweet'));
       }
     }
 
@@ -138,15 +138,16 @@ class emp_datfiscalesController extends AppBaseController
 
         if (empty($empDatfiscales)) {
             Flash::error('Datos Fiscales no encontrados.');
-
-            return redirect(route('empDatfiscales.index'));
+            $sweeterror = 'Datos fiscales no encontrados';
+            return redirect(route('empDatfiscales.index'))->with(compact('sweeterror'));
         }
 
         $empDatfiscales = $this->empDatfiscalesRepository->update($request->all(), $id);
 
         Flash::success('Datos Fiscales actualizados correctamente.');
-
-        return redirect(route('empDatfiscales.index'));
+        $sweet = 'Datos fiscales actualizados correctamente';
+        return redirect(route('catempresas.show', $empDatfiscales->catempresa->id))->with(compact('sweet'));
+        //return redirect(route('empDatfiscales.index'))->with(compact('sweet'));
     }
 
     /**

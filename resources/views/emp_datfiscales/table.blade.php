@@ -26,12 +26,12 @@
             <td>
                 {!! Form::open(['route' => ['empDatfiscales.destroy', $empDatfiscales->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
-                    <a href="{!! route('empDatfiscales.show', [$empDatfiscales->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
+                    <a href="{!! route('empDatfiscales.show', [$empDatfiscales->id]) !!}" class='btn btn-default'><i class="glyphicon glyphicon-eye-open"></i></a>
                     @can('empdatfiscales-edit')
-                    <a href="{!! route('empDatfiscales.edit', [$empDatfiscales->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
+                    <a href="{!! route('empDatfiscales.edit', [$empDatfiscales->id]) !!}" class='btn btn-default'><i class="glyphicon glyphicon-edit"></i></a>
                     @endcan
                     @can('empdatfiscales-delete')
-                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger', 'onclick' => "return confirm('Estas seguro?')"]) !!}
                     @endcan
                 </div>
                 {!! Form::close() !!}

@@ -72,11 +72,10 @@ class clientesController extends AppBaseController
         $input = $request->all();
 
         $clientes = $this->clientesRepository->create($input);
-        $mensaje = "swal('Excelente','El cliente se agregó correctamente','success')";
-        $mensaje = "Se agregó correctamente.";
-        Flash::success($mensaje);
+        $sweet = "Se agregó correctamente.";
+        Flash::success('Cliente guardado correctamente');
 
-        return redirect(route('clientes.index'));
+        return redirect(route('clientes.index'))->with(compact('sweet'));
     }
 
     /**
@@ -178,15 +177,15 @@ class clientesController extends AppBaseController
 
         if (empty($clientes)) {
             Flash::error('Cliente no encontrado');
-
-            return redirect(route('clientes.index'));
+            $sweeterror = 'Cliente no encontrado';
+            return redirect(route('clientes.index'))->with(compact('sweeterror'));
         }
 
         $clientes = $this->clientesRepository->update($request->all(), $id);
 
         Flash::success('Clientes actualizado correctamente.');
-
-        return redirect(route('clientes.index'));
+        $sweet = 'Cliente actualizado correctamente';
+        return redirect(route('clientes.index'))->with(compact('sweet'));
     }
 
     /**

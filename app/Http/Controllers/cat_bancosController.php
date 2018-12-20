@@ -70,10 +70,10 @@ class cat_bancosController extends AppBaseController
         $input = $request->all();
 
         $catBancos = $this->catBancosRepository->create($input);
-
+        $sweet = 'Datos bancarios guardados correctamente';
         Flash::success('Datos Bancarios guardados correctamente.');
 
-        return redirect(route('catBancos.index'));
+        return redirect(route('catBancos.index'))->with(compact('sweet'));
     }
 
     /**
@@ -89,8 +89,8 @@ class cat_bancosController extends AppBaseController
 
         if (empty($catBancos)) {
             Flash::error('Banco no encontrado.');
-
-            return redirect(route('catBancos.index'));
+            $sweeterror = 'Banco no encontrado';
+            return redirect(route('catBancos.index'))->with(compact('sweeterror'));
         }
 
         return view('cat_bancos.show')->with('catBancos', $catBancos);
@@ -137,8 +137,9 @@ class cat_bancosController extends AppBaseController
         $catBancos = $this->catBancosRepository->update($request->all(), $id);
 
         Flash::success('Datos Bancarios actualizado correctamente.');
+        $sweet = 'Datos Bancarios actualizado correctamente';
 
-        return redirect(route('catBancos.index'));
+        return redirect(route('catBancos.index'))->with(compact('sweet'));
     }
 
     /**
@@ -154,14 +155,15 @@ class cat_bancosController extends AppBaseController
 
         if (empty($catBancos)) {
             Flash::error('Banco no encontrado.');
-
+            $sweeterror = 'Banco no encontrado';
             return redirect(route('catBancos.index'));
         }
 
         $this->catBancosRepository->delete($id);
 
         Flash::success('Datos bancarios borrando correcatamente.');
+        $sweet = 'Datos bancarios borrado correctamente';
 
-        return redirect(route('catBancos.index'));
+        return redirect(route('catBancos.index'))->with(compact('sweet'));
     }
 }

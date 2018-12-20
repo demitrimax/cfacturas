@@ -19,13 +19,13 @@
 <!-- Rfc Field -->
 <div class="form-group">
     {!! Form::label('RFC', 'RFC:') !!}
-    {!! Form::text('RFC', null, ['class' => 'form-control', 'maxlength'=>'13']) !!}
+    {!! Form::text('RFC', null, ['class' => 'form-control', 'maxlength'=>'13', 'required']) !!}
 </div>
 
 <!-- Curp Field -->
 <div class="form-group">
     {!! Form::label('CURP', 'CURP:') !!}
-    {!! Form::text('CURP', null, ['class' => 'form-control', 'maxlength'=>'18', 'onchange'=>'validarInput(this)']) !!}
+    {!! Form::text('CURP', null, ['class' => 'form-control', 'maxlength'=>'18', 'onchange'=>'validarInput(this)', 'required']) !!}
     <!-- <pre id="resultado"></pre> -->
 </div>
 <p><strong>*</strong> Datos Requeridos.</p>

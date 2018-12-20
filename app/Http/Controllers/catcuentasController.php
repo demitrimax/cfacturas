@@ -77,8 +77,8 @@ class catcuentasController extends AppBaseController
         $cuentas = catcuentas::where('numcuenta', $request->input('numcuenta'))->where('banco_id',$request->input('banco_id'))->first();
         if ($cuentas) {
           Flash::error('Ya existe una Cuenta Bancaria en el mismo Banco');
-          $errorflash = "Cuenta existente";
-          return back()->with($errorflash);
+          $sweeterror = "Cuenta existente";
+          return back()->with($sweeterror);
         }
 
         $rules = [
@@ -94,6 +94,7 @@ class catcuentasController extends AppBaseController
         $catcuentas = $this->catcuentasRepository->create($input);
 
         Flash::success('Cuenta guardada correctamente.');
+        $sweet = 'Cuenta guardada correctamente';
         if(isset($input['redirect'])){
           $redirect = $input['redirect'];
           if (isset($input['cliente_id']))
@@ -104,7 +105,7 @@ class catcuentasController extends AppBaseController
           {
             $retornaid = $input['empresa_id'];
           }
-          return redirect(route($redirect, [$retornaid]));
+          return redirect(route($redirect, [$retornaid]))->with(compact('sweet'));
         }
         else {
 

@@ -20,14 +20,14 @@
             <td>{!! $catempresas->correo_notifica !!}</td>
             <td>{!! $catempresas->telefono !!}</td>
             <td>
-                {!! Form::open(['route' => ['catempresas.destroy', $catempresas->id], 'method' => 'delete']) !!}
+                {!! Form::open(['route' => ['catempresas.destroy', $catempresas->id], 'method' => 'delete', 'id' => 'form'.$catempresas->id]) !!}
                 <div class='btn-group'>
                     <a href="{!! route('catempresas.show', [$catempresas->id]) !!}" class='btn btn-default'><i class="glyphicon glyphicon-eye-open"></i></a>
                     @can('empresas-edit')
                     <a href="{!! route('catempresas.edit', [$catempresas->id]) !!}" class='btn btn-default'><i class="glyphicon glyphicon-edit"></i></a>
                     @endcan
                     @can('empresas-delete')
-                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger', 'onclick' => "return confirm('Estas Seguro?')"]) !!}
+                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'button', 'class' => 'btn btn-danger', 'onclick' => "ConfirmDelete($catempresas->id)"]) !!}
                     @endcan
                 </div>
                 {!! Form::close() !!}

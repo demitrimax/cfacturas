@@ -83,7 +83,7 @@
             @endcan
             @can('pagometodo')
             <li class="{{ Request::is('pagometodos*') ? 'active' : '' }}">
-                <a href="{!! route('pagometodos.index') !!}"><i class="fa fa-bookmark-o"></i><span>Pagometodos</span></a>
+                <a href="{!! route('pagometodos.index') !!}"><i class="fa fa-bookmark-o"></i><span>Métodos de pago</span></a>
             </li>
             @endcan
 

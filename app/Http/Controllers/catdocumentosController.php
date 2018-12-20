@@ -87,6 +87,7 @@ class catdocumentosController extends AppBaseController
 
 
         Flash::success('Documento guardado correctamente.');
+        $sweet = 'Documento guardado correctamente';
 
         if(isset($input['redirect'])){
           $redirectroute = $input['redirect'];
@@ -99,10 +100,10 @@ class catdocumentosController extends AppBaseController
             $showid = $input['empresa_id'];
           }
 
-          return redirect(route($redirectroute, $showid));
+          return redirect(route($redirectroute, $showid))->with(compact('sweet'));
         }
         else {
-          return redirect(route('catdocumentos.index'));
+          return redirect(route('catdocumentos.index'))->with(compact('sweet'));
       }
     }
 
@@ -138,12 +139,13 @@ class catdocumentosController extends AppBaseController
         $catdocumentos = $this->catdocumentosRepository->findWithoutFail($id);
 
         if (empty($catdocumentos)) {
-            Flash::error('Catdocumentos not found');
+            Flash::error('Documento no encontrado');
+            $sweeterror = 'Documento no encontrado';
 
-            return redirect(route('catdocumentos.index'));
+            return redirect(route('catdocumentos.index'))->with(compact('sweeterror'));
         }
 
-        return view('catdocumentos.edit')->with('catdocumentos', $catdocumentos);
+        return view('catdocumentos.edit')->with(compact('catdocumentos'));
     }
 
     /**
@@ -159,16 +161,16 @@ class catdocumentosController extends AppBaseController
         $catdocumentos = $this->catdocumentosRepository->findWithoutFail($id);
 
         if (empty($catdocumentos)) {
-            Flash::error('Catdocumentos not found');
-
-            return redirect(route('catdocumentos.index'));
+            Flash::error('Documento no encontrado');
+            $sweeterror = 'Documento no encontrado';
+            return redirect(route('catdocumentos.index'))->with(compact('sweeterror'));
         }
 
         $catdocumentos = $this->catdocumentosRepository->update($request->all(), $id);
 
-        Flash::success('Catdocumentos updated successfully.');
-
-        return redirect(route('catdocumentos.index'));
+        Flash::success('Documento actualizado correctamente.');
+        $sweet = 'Documento actualizado correctamente';
+        return redirect(route('catdocumentos.index'))->with(compact('sweet'));
     }
 
     /**
@@ -185,13 +187,14 @@ class catdocumentosController extends AppBaseController
 
         if (empty($catdocumentos)) {
             Flash::error('Documento no encontrado');
-
-            return redirect(route('catdocumentos.index'));
+            $sweeterror = 'Documento no encontrado';
+            return redirect(route('catdocumentos.index'))->with(compact('sweeterror'));
         }
 
         $this->catdocumentosRepository->delete($id);
 
         Flash::success('Documento eliminado correctamente.');
+        $sweet = 'Documento eliminado correctamente';
         if(isset($input['redirect'])){
           $redirectroute = $input['redirect'];
           if (isset($input['cliente_id']))
@@ -203,11 +206,11 @@ class catdocumentosController extends AppBaseController
             $showid = $input['empresa_id'];
           }
 
-          return redirect(route($redirectroute, $showid));
+          return redirect(route($redirectroute, $showid))->with(compact('sweet'));
         }
         else {
 
-        return redirect(route('catdocumentos.index'));
+        return redirect(route('catdocumentos.index'))->with(compact('sweet'));
       }
     }
 }
