@@ -72,8 +72,9 @@ class solicitudController extends Controller
       $gerentes = User::role('gerente')->get();
       $usuario = User::find($solicitudfac->user_id);
       Mail::to($gerentes, $solicitudfac)->send(new SolicitudFactura($usuario, $solicitudfac));
+      $sweet = 'Solicitud Creada';
 
-      return back()->with(compact('mensaje'));
+      return back()->with(compact('mensaje','sweet'));
 
     }
 }

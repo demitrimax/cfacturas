@@ -18,10 +18,9 @@
         <tr>
             <td>{!! $solicitudes->nombre !!}</td>
             <td>{!! $solicitudes->correo !!}</td>
-            <td>{!! $solicitudes->telefono !!}</td>
             <td>
               <a href="{!! route('solfact.show', [$solicitudes->id]) !!}">
-                {!! strip_tags($solicitudes->concepto) !!}
+                {!! str_limit(strip_tags($solicitudes->concepto),30,'...') !!}
               </a>
             </td>
             <td>{!! $solicitudes->comentario !!}</td>
@@ -29,14 +28,14 @@
               {!! ($solicitudes->adjunto) ? '<i class="fa fa-paperclip"></i>' : '' !!}
             </td>
             <td>{!! $solicitudes->atendido !!}</td>
-            <td>{!! $solicitudes->fecha !!}</td>
+            <td>{!! $solicitudes->fecha->format('d/m/Y H:i:s') !!}</td>
             <td>{!! $solicitudes->atendidopor !!}</td>
             <td>
-                {!! Form::open(['route' => ['solfact.destroy', $solicitudes->id], 'method' => 'delete']) !!}
+                {!! Form::open(['route' => ['solfact.destroy', $solicitudes->id], 'method' => 'delete', 'id'=>'form'.$solicitudes->id]) !!}
                 <div class='btn-group'>
                     <a href="{!! route('solfact.show', [$solicitudes->id]) !!}" class='btn btn-default'><i class="glyphicon glyphicon-eye-open"></i></a>
                     <a href="{!! route('solfact.edit', [$solicitudes->id]) !!}" class='btn btn-default'><i class="glyphicon glyphicon-edit"></i></a>
-                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger', 'onclick' => "return confirm('Esta seguro de eliminar?')"]) !!}
+                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'button', 'class' => 'btn btn-danger', 'onclick' => "ConfirmDelete(".$solicitudes->id.")"]) !!}
                 </div>
                 {!! Form::close() !!}
             </td>
@@ -44,3 +43,24 @@
     @endforeach
     </tbody>
 </table>
+@section('scripts')
+<script>
+
+function ConfirmDelete(id) {
+  swal({
+        title: '¿Estás seguro?',
+        text: 'Estás seguro de borrar esta solicitud.',
+        type: 'warning',
+        showCancelButton: true,
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Continuar',
+        }).then((result) => {
+  if (result.value) {
+    document.forms['form'+id].submit();
+  }
+})
+
+}
+</script>
+@endsection

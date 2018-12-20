@@ -33,7 +33,7 @@
             </div>
             <div class="box-footer no-padding">
               <ul class="nav nav-stacked">
-                <li><a href="#">Feha de Nacimiento <span class="pull-right">N/D</span></a></li>
+                <li><a href="#">Feha de Nacimiento <span class="pull-right">{{$edad}}</span></a></li>
                 <li><a href="#">RFC <span class="pull-right" id="clientRFC">{!! $clientes->RFC !!}</span></a></li>
                 <li><a href="#">CURP <span class="pull-right">{!! $clientes->CURP !!}</span></a></li>
                 <li><a href="#">Fecha de Alta <span class="pull-right">{!! $clientes->created_at !!}</span></a></li>

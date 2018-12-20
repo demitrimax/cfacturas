@@ -70,9 +70,9 @@ class solicitudesController extends AppBaseController
 
         $solicitudes = $this->solicitudesRepository->create($input);
 
-        Flash::success('Solicitudes saved successfully.');
-
-        return redirect(route('solicitudes.index'));
+        Flash::success('Solicitud guardada correctamente.');
+        $sweet = 'Solicitud guardada correctamente';
+        return redirect(route('solicitudes.index'))->with(compact('sweet'));
     }
 
     /**
@@ -91,8 +91,9 @@ class solicitudesController extends AppBaseController
         }
         if (empty($solicitudes)) {
             Flash::error('Solicitud no encontrada');
+            $sweeterror = 'Solicitud no encontrada';
 
-            return redirect(route('solfact.index'));
+            return redirect(route('solfact.index'))->with(compact('sweeterror'));
         }
 
         return view('solicitudes.show')->with(compact('solicitudes','tamanoadjunto'));
@@ -170,8 +171,9 @@ class solicitudesController extends AppBaseController
         $this->solicitudesRepository->delete($id);
 
         Flash::success('Solicitud borrada correctamente.');
+        $sweet = 'Solicitud borrada correctamente';
 
-        return redirect(route('solfact.index'));
+        return redirect(route('solfact.index'))->with(compact('sweet'));
     }
 
 }

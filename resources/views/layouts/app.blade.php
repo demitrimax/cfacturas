@@ -39,6 +39,11 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   <!-- sweetalert -->
   <link rel="stylesheet" href="{{asset('sweetalert/dist/sweetalert2.min.css')}}">
+  <style>
+  .swal2-popup {
+    font-size: 1.6rem !important;
+  }
+  </style>
 
     @yield('css')
 </head>
@@ -190,6 +195,25 @@
     <script src="{{asset('adminlte/dist/js/adminlte.min.js')}}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{asset('adminlte/dist/js/demo.js')}}"></script>
+
+    @if( session('sweet'))
+    <script>
+      Swal(
+        'Muy bien!',
+        '{{session('sweet')}}',
+        'success'
+      )
+    </script>
+    @endif
+    @if( session('sweeterror'))
+    <script>
+      Swal(
+        'Ocurrió un error!',
+        '{{session('sweeterror')}}',
+        'error'
+      )
+      </script>
+    @endif
 
     @yield('scripts')
 </body>

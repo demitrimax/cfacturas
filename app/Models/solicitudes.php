@@ -38,7 +38,7 @@ class solicitudes extends Model
     const UPDATED_AT = 'updated_at';
 
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at','fecha'];
 
 
     public $fillable = [

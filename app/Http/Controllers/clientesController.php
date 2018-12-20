@@ -18,6 +18,7 @@ use App\Models\catdocumentos;
 use Intervention\Image\ImageManager;
 use App\Models\cattipodoc;
 use App\Models\cat_bancos;
+use App\Helpers\VerificaRFC;
 
 class clientesController extends AppBaseController
 {
@@ -99,10 +100,48 @@ class clientesController extends AppBaseController
           if (empty($clientes->avatar)) {
             $avatar = 'avatar/avatar.png';
           }
+          $edad = 'N/D';
+          $rfc = VerificaRFC::validarRFC($clientes->RFC);
+          if($rfc){
+            $edad = 'Verdadero RFC';
+            $anio = substr($clientes->RFC,4,2);
+            $mes = substr($clientes->RFC,6,2);
+            $dia = substr($clientes->RFC,8,2);
+            /*
+            $actdia=date(j);
+            $actmes=date(n);
+            $actanio=date(Y);
+            //si el mes es el mismo pero el día inferior aun no ha cumplido años, le quitaremos un año al actual
+            if (($mes == $actmes) && ($dia > $actdia))
+            {
+              $actanio=($actanio-1);
+            }
+            //si el mes es superior al actual tampoco habrá cumplido años, por eso le quitamos un año al actual
+
+            if ($mes > $actmes) {
+            $actanio=($actanio-1);}
+
+            //ya no habría mas condiciones, ahora simplemente restamos los años y mostramos el resultado como su edad
+
+            $edad=($actanio-$anio);
+            */
+            $edad = $dia.'/'.$mes.'/'.$anio;
+
+          }
+          $curp = VerificaRFC::validarCURP($clientes->CURP);
+          if($curp)
+          {
+            $edad = 'Verdadero CURP';
+            $anio = substr($clientes->CURP,4,2);
+            $mes = substr($clientes->CURP,6,2);
+            $dia = substr($clientes->CURP,8,2);
+            $edad = $dia.'/'.$mes.'/'.$anio;
+          }
+
           $bancos = cat_bancos::pluck('nombrecorto','id');
           $tipodocs = cattipodoc::pluck('tipo','id');
           $estados = catestados::pluck('nombre','id');
-        return view('clientes.show')->with(compact('clientes','estados','avatar','tipodocs', 'bancos'));
+        return view('clientes.show')->with(compact('clientes','estados','avatar','tipodocs', 'bancos','edad'));
     }
 
     /**

@@ -41,7 +41,7 @@
           <!-- /. box -->
           <div class="box box-solid">
             <div class="box-header with-border">
-              <h3 class="box-title">Labels</h3>
+              <h3 class="box-title">Categoría</h3>
 
               <div class="box-tools">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -74,7 +74,7 @@
             <div class="box-body no-padding">
               <div class="mailbox-read-info">
                 <h3>{{$solicitudes->descripcion}}</h3>
-                <h5>De: {{$solicitudes->correo}}
+                <h5>De: {{$solicitudes->correo}} | Teléfono: {{$solicitudes->telefono}}
                   <span class="mailbox-read-time pull-right">{{$solicitudes->fecha}}</span></h5>
               </div>
 

@@ -61,9 +61,9 @@ class pagometodoController extends AppBaseController
 
         $pagometodo = $this->pagometodoRepository->create($input);
 
-        Flash::success('Pagometodo saved successfully.');
-
-        return redirect(route('pagometodos.index'));
+        Flash::success('Método de pago guardado corrrectamente.');
+        $sweet = 'Método de pago guardado correctamente';
+        return redirect(route('pagometodos.index'))->with(compact('sweet'));
     }
 
     /**
@@ -78,7 +78,7 @@ class pagometodoController extends AppBaseController
         $pagometodo = $this->pagometodoRepository->findWithoutFail($id);
 
         if (empty($pagometodo)) {
-            Flash::error('Pagometodo not found');
+            Flash::error('Método de pago no encontrado');
 
             return redirect(route('pagometodos.index'));
         }
@@ -98,7 +98,7 @@ class pagometodoController extends AppBaseController
         $pagometodo = $this->pagometodoRepository->findWithoutFail($id);
 
         if (empty($pagometodo)) {
-            Flash::error('Pagometodo not found');
+            Flash::error('Método de pago no encontrado');
 
             return redirect(route('pagometodos.index'));
         }
@@ -119,16 +119,17 @@ class pagometodoController extends AppBaseController
         $pagometodo = $this->pagometodoRepository->findWithoutFail($id);
 
         if (empty($pagometodo)) {
-            Flash::error('Pagometodo not found');
+            Flash::error('Método de págo no encontrado.');
 
             return redirect(route('pagometodos.index'));
         }
 
         $pagometodo = $this->pagometodoRepository->update($request->all(), $id);
 
-        Flash::success('Pagometodo updated successfully.');
+        Flash::success('Método de pago actualizado correctamente.');
+        $sweet = 'Metodo de Pago actualizado correctamente';
 
-        return redirect(route('pagometodos.index'));
+        return redirect(route('pagometodos.index'))->with(compact('sweet'));
     }
 
     /**
@@ -143,15 +144,15 @@ class pagometodoController extends AppBaseController
         $pagometodo = $this->pagometodoRepository->findWithoutFail($id);
 
         if (empty($pagometodo)) {
-            Flash::error('Pagometodo not found');
-
-            return redirect(route('pagometodos.index'));
+            Flash::error('Método de pago no encontrado.');
+            $sweeterror = 'Método de pago no encontrado';
+            return redirect(route('pagometodos.index'))->with(compact('sweeterror'));
         }
 
         $this->pagometodoRepository->delete($id);
 
-        Flash::success('Pagometodo deleted successfully.');
-
-        return redirect(route('pagometodos.index'));
+        Flash::success('Método de pago eliminado correctamente.');
+        $sweet = 'Metodo de Pago Eliminado';
+        return redirect(route('pagometodos.index'))->with(compact('sweet'));
     }
 }

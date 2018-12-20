@@ -32,7 +32,7 @@
                     <a href="{!! route('catcuentas.edit', [$catcuentas->id]) !!}" class='btn btn-default'><i class="glyphicon glyphicon-edit"></i></a>
                     @endcan
                     @can('catcuentas-delete')
-                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger', 'onclick' => "return confirm('Estas seguro de eliminar esta cuenta?')"]) !!}
+                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'button', 'class' => 'btn btn-danger', 'onclick' => "ConfirmDelete($catcuentas->id)"]) !!}
                     @endcan
                 </div>
                 {!! Form::close() !!}
