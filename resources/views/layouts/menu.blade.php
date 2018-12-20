@@ -55,7 +55,7 @@
 <li class="{{ Request::is('users*') ? 'active' : '' }}">
     <a href="{!! route('users.index') !!}"><i class="fa fa-edit"></i><span>Usuarios</span></a>
 </li>
-@if( Request::is('user*') || Request::is('permissions*') || Request::is('cattmovimientos*') || Request::is('pagocondicions*') || Request::is('roles*'))
+@if( Request::is('user*') || Request::is('permissions*') || Request::is('cattmovimientos*') || Request::is('pagocondicions*') || Request::is('roles*') || Request::is('pagometodo*') )
 <li class="treeview active">
 @else
 <li class="treeview">
@@ -79,6 +79,11 @@
             @can('pagocondicion')
             <li class="{{ Request::is('pagocondicions*') ? 'active' : '' }}">
                 <a href="{!! route('pagocondicions.index') !!}"><i class="fa fa-dot-circle-o"></i><span>Condiciones de Pago</span></a>
+            </li>
+            @endcan
+            @can('pagometodo')
+            <li class="{{ Request::is('pagometodos*') ? 'active' : '' }}">
+                <a href="{!! route('pagometodos.index') !!}"><i class="fa fa-bookmark-o"></i><span>Pagometodos</span></a>
             </li>
             @endcan
 

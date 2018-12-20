@@ -60,6 +60,7 @@ Route::group(['middleware'=>['auth','verified']], function() {
 
   Route::resource('solfact', 'solicitudesController');
   Route::resource('pagocondicions', 'pagocondicionController');
+  Route::resource('pagometodos', 'pagometodoController');
 });
 
 

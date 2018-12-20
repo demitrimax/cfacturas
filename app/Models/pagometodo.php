@@ -7,20 +7,20 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
- * Class pagocondicion
+ * Class pagometodo
  * @package App\Models
- * @version December 20, 2018, 1:19 am CST
+ * @version December 20, 2018, 7:26 am CST
  *
  * @property \Illuminate\Database\Eloquent\Collection roleHasPermissions
  * @property string nombre
  * @property string descripcion
  */
-class pagocondicion extends Model
+class pagometodo extends Model
 {
     use SoftDeletes;
     use LogsActivity;
 
-    public $table = 'pago_condicion';
+    public $table = 'pago_metodo';
 
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
@@ -33,7 +33,7 @@ class pagocondicion extends Model
         'nombre',
         'descripcion'
     ];
-    protected static $logAttributes = ['*'];
+         protected static $logAttributes = ['*'];
 
     /**
      * The attributes that should be casted to native types.
