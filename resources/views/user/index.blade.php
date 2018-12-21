@@ -45,10 +45,10 @@
                       @endif
                     </td>
                     <td>
-                       <a class="btn btn-info" href="{{ route('user.show',$user->id) }}">Show</a>
-                       <a class="btn btn-primary" href="{{ route('user.edit',$user->id) }}">Edit</a>
+                       <a class="btn btn-info" href="{{ route('user.show',$user->id) }}">Detalles</a>
+                       <a class="btn btn-primary" href="{{ route('user.edit',$user->id) }}">Editar</a>
                         {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
-                            {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                            {!! Form::submit('Eliminar', ['class' => 'btn btn-danger']) !!}
                         {!! Form::close() !!}
                     </td>
                   </tr>

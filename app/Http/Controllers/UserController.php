@@ -61,11 +61,14 @@ class UserController extends Controller
 
 
         $user = User::create($input);
-        $user->assignRole($request->input('roles'));
-
+        if($request->$input('roles'))
+        {
+            $user->assignRole($request->input('roles'));
+        }
+        $sweet = 'Usuario creado correctamente';
 
         return redirect()->route('users.index')
-                        ->with('success','User created successfully');
+                        ->with(compact('sweet'));
     }
 
 

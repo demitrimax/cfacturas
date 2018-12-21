@@ -3,8 +3,11 @@
 namespace App\Models;
 
 use Eloquent as Model;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * Class users
@@ -26,6 +29,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class users extends Model
 {
     use SoftDeletes;
+    use HasRoles;
     use LogsActivity;
 
     public $table = 'users';

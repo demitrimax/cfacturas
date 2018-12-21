@@ -11,7 +11,6 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
-use App\Models\factsolicitud;
 
 class User extends Authenticatable implements MustVerifyEmail
 {

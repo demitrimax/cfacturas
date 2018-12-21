@@ -12,6 +12,9 @@ use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\User;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Traits\HasRoles;
 
 
 class usersController extends AppBaseController
@@ -73,8 +76,8 @@ class usersController extends AppBaseController
             $usuario->save();
 
         Flash::success('Usuario guardado correctamente.');
-
-        return redirect(route('users.index'));
+        $sweet = 'Usuario guardado correctamente';
+        return redirect(route('users.index'))->with(compact('sweet'));
     }
 
     /**
@@ -132,23 +135,27 @@ class usersController extends AppBaseController
 
         if (empty($users)) {
             Flash::error('Usuario no encontrado');
-
-            return redirect(route('users.index'));
+            $sweeterror = 'Usuario no encontrado';
+            return redirect(route('users.index'))->with(compact('sweeterror'));
         }
 
         //$users = $this->usersRepository->update($request->all(), $id);
         $usuario =  User::find($id);
             $usuario->name = $input['name'];
             $usuario->email = $input['email'];
-            $usuario->rol = $input['rol'];
+            if (isset($input['rol']))
+            {
+                $usuario->rol = $input['rol'];
+            }
             $usuario->password = Hash::make($input['password']);
             $usuario->nombre = $input['nombre'];
             $usuario->apellidos= $input['apellidos'];
             $usuario->cargo = $input['cargo'];
             $usuario->save();
         Flash::success('Usuario actualizado correctamente');
+        $sweet = 'Usuario actualizado correctamente';
 
-        return redirect(route('users.index'));
+        return redirect(route('users.index'))->with(compact('sweet'));
     }
 
     /**
