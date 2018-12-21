@@ -14,6 +14,7 @@ use App\Helpers\SomeClass;
 use App\Helpers\RecortarTexto;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SolicitudEliminada;
+use App\Mail\NuevaSolicitud;
 use Auth;
 
 class solicitudesController extends AppBaseController

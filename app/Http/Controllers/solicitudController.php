@@ -8,6 +8,7 @@ use App\Models\facsolicitud;
 use App\User;
 use Spatie\Permission\Models\Role;
 use App\Mail\SolicitudFactura;
+use App\Mail\NuevaSolicitud;
 use Mail;
 
 class solicitudController extends Controller
@@ -71,7 +72,8 @@ class solicitudController extends Controller
       //envío de correo electronico
       $gerentes = User::role('gerente')->get();
       $usuario = User::find($solicitudfac->user_id);
-      Mail::to($gerentes, $solicitudfac)->send(new SolicitudFactura($usuario, $solicitudfac));
+      Mail::to($gerentes)->send(new NuevaSolicitud($usuario, $solicitudfac));
+      Mail::to($solicitudfac->correo)->send(new NuevaSolicitud($usuario, $solicitudfac));
       $sweet = 'Solicitud Creada';
 
       return back()->with(compact('mensaje','sweet'));

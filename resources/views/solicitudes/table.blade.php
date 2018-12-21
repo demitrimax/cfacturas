@@ -3,7 +3,6 @@
         <tr>
         <th>Nombre</th>
         <th>Correo</th>
-        <th>Telefono</th>
         <th>Concepto</th>
         <th>Comentario</th>
         <th>Adjunto</th>
