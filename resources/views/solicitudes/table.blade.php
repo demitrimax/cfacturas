@@ -21,6 +21,7 @@
               <a href="{!! route('solfact.show', [$solicitudes->id]) !!}">
                 {!! str_limit(strip_tags($solicitudes->concepto),30,'...') !!}
               </a>
+                <small class="label label-{{$solicitudes->semaforofecha}}"><i class="fa fa-clock-o"></i> {{ $solicitudes->created_at->diffForHumans()}}</small>
             </td>
             <td>{!! $solicitudes->comentario !!}</td>
             <td>
