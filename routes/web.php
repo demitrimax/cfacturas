@@ -65,3 +65,6 @@ Route::group(['middleware'=>['auth','verified']], function() {
 
 
 //Route::resource('solicitudes', 'solicitudesController');
+
+
+Route::resource('facestatuses', 'facestatusController');
