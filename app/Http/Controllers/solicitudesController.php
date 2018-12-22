@@ -111,6 +111,15 @@ class solicitudesController extends AppBaseController
           $tamanoadjunto = SomeClass::bytesToHuman(filesize($solicitudes->adjunto));
           $empleados = User::role(['empleado','gerente'])->get();
           $empleados = $empleados->pluck('name','id');
+          $borrados = facsolicitud::onlyTrashed()->count();
+          if($solicitudes->atendidopor)
+          {
+            $usuarioid = $solicitudes->atendidopor;
+            $asignadas = facsolicitud::where('atendidopor',$usuarioid)->count();
+            $atendidas = facsolicitud::where('atendidopor',$usuarioid)->where('atendido',1)->count();
+            $borradas = facsolicitud::onlyTrashed()->where('atendidopor',$usuarioid)->count();
+          }
+
         }
 
         if (empty($solicitudes)) {
@@ -120,7 +129,7 @@ class solicitudesController extends AppBaseController
             return redirect(route('solfact.index'))->with(compact('sweeterror'));
         }
 
-        return view('solicitudes.show')->with(compact('solicitudes','tamanoadjunto','empleados'));
+        return view('solicitudes.show')->with(compact('solicitudes','tamanoadjunto','empleados','borrados','asignadas','atendidas','borradas'));
 
     }
 
@@ -214,18 +223,30 @@ class solicitudesController extends AppBaseController
       return redirect(route('solfact.index'))->with(compact('sweet'));
     }
     //ASIGNAR EMPLEADO A UNA SOLICITUD
-    public function asignar($id, UpdatesolicitudesRequest $request)
+    public function asignar(Request $request)
     {
       //FUNCION PARA ASIGNAR EMPLEADO PARA ATENDER SOLICITUD DE FACTURA
-      $solicitudes = $this->solicitudesRepository->findWithoutFail($id);
+      $id = $request->input('solicitudid');
+      $solicitudes = facsolicitud::find($id);
 
       if (empty($solicitudes)) {
           Flash::error('Solicitud no encontrada');
           $sweeterror = 'Solicitud no encontrada';
           return redirect(route('solfact.index'))->with(compact('sweeterror'));
       }
+      $solicitudes->atendidopor = $request->input('usuario');
+      $solicitudes->save();
 
+      Flash::success('Se ha asignado usuario correctamente.');
+      $sweet = 'Se ha asignado un usuario para atender la solicitud.';
 
+      return redirect(route('solfact.show',[$id]))->with(compact('sweet'));
+
+    }
+    public function registrosborrados()
+    {
+      $borrados = facsolicitud::onlyTrashed()->count();
+      return $solicitudes;
     }
 
 }

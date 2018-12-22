@@ -122,6 +122,19 @@ class solicitudes extends Model
     {
       return $this->belongsTo('App\Models\users','user_id');
     }
+    public function asignadoa()
+    {
+      return $this->belongsTo('App\Models\users','atendidopor');
+    }
+    public function getAsignadoAttribute()
+    {
+      $asignado = 'N/D';
+      if ($this->atendidopor)
+      {
+        $asignado = $this->asignadoa->name;
+      }
+      return $asignado;
+    }
 
 
 }

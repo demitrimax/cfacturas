@@ -29,7 +29,7 @@
             </td>
             <td>{!! $solicitudes->atendido !!}</td>
             <td>{!! $solicitudes->fecha->format('d/m/Y H:i:s') !!}</td>
-            <td>{!! $solicitudes->atendidopor !!}</td>
+            <td>{!! $solicitudes->asignado !!}</td>
             <td>
                 {!! Form::open(['route' => ['solfact.destroy', $solicitudes->id], 'method' => 'delete', 'id'=>'form'.$solicitudes->id]) !!}
                 <div class='btn-group'>

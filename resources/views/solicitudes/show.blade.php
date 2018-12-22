@@ -33,19 +33,21 @@
               <ul class="nav nav-pills nav-stacked">
                 <li><a href="mailbox.html"><i class="fa fa-clock-o"></i> Creada hace:
                   <span class="label label-{{$solicitudes->semaforofecha}} pull-right">{{$solicitudes->created_at->diffForHumans()}}</span></a></li>
-                <li><a href="#"><i class="fa fa-hand-o-right"></i> Asignada a:</a></li>
+                <li><a href="#"><i class="fa fa-hand-o-right"></i> Asignada a: <span class="label label-primary pull-right">{{$solicitudes->asignado}}</span></a></a></li>
                 <li><a href="#"><i class="fa fa-wrench"></i> Estado</a></li>
-                <li><a href="#"><i class="fa fa-filter"></i> Junk <span class="label label-warning pull-right">65</span></a>
+                <li><a href="#"><i class="fa fa-check-circle-o"></i> Atendidas </a>
                 </li>
-                <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
+                <li><a href="#"><i class="fa fa-trash-o"></i> Eliminadas <span class="label label-warning pull-right">{{$borrados}}</span></a></li>
               </ul>
             </div>
             <!-- /.box-body -->
           </div>
           <!-- /. box -->
+          <!-- Sí ya tiene asignado usuario -->
+          @if ($solicitudes->atendidopor)
           <div class="box box-solid">
             <div class="box-header with-border">
-              <h3 class="box-title">Categoría</h3>
+              <h3 class="box-title">{{$solicitudes->asignado }}</h3>
 
               <div class="box-tools">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -54,14 +56,15 @@
             </div>
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
-                <li><a href="#"><i class="fa fa-circle-o text-red"></i> Important</a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> Promotions</a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-light-blue"></i> Social</a></li>
+                <li><a href="#"><i class="fa fa-circle-o text-red"></i> Asignadas <span class="label label-warning pull-right">{{$asignadas}}</span></a></li>
+                <li><a href="#"><i class="fa fa-check-circle-o text-yellow"></i> Atendidas <span class="label label-warning pull-right">{{$atendidas}}</span></a></li>
+                <li><a href="#"><i class="fa fa-trash-o text-light-blue"></i> Eliminadas <span class="label label-warning pull-right">{{$borradas}}</span></a></li>
               </ul>
             </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
+          @endif
         </div>
         <!-- /.col -->
         <div class="col-md-9">
@@ -112,7 +115,9 @@
                 <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-primary"><i class="fa fa-share"></i> Asignar</button>
 
               </div>
+              @can('solicitud-delete')
               <button type="button" class="btn btn-default" Onclick="ConfirmaEliminar()"><i class="fa fa-trash-o"></i> Eliminar</button>
+              @endcan
               <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Imprimir</button>
             </div>
             <!-- /.box-footer -->
@@ -131,7 +136,7 @@
                   <span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Asignar Usuario</h4>
               </div>
-              {!! Form::open(['url'=>'solfact/asignar','id'=>'formElimina']) !!}
+              {!! Form::open(['url'=>'solfact/asignar','id'=>'formAsigna']) !!}
               <div class="modal-body">
                 <p>Seleccione el Empleado para asignarle esta solicitud.&hellip;</p>
                 {!! Form::select('usuario', $empleados, null, ['class' => 'form-control select2', 'style'=> 'width: 100%;']) !!}
@@ -139,7 +144,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-outline">Asignar Usuario</button>
+                <button type="submit" class="btn btn-outline">Asignar Usuario</button>
                   {!! Form::close() !!}
               </div>
             </div>

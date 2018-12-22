@@ -62,7 +62,7 @@ Route::group(['middleware'=>['auth','verified']], function() {
   Route::resource('solfact', 'solicitudesController');
   Route::get('/solfact/deleted/lista', 'solicitudesController@deleted');
   Route::post('/solfact/restaura', 'solicitudesController@restaura');
-  Route::post('/solfac/asignar', 'solicitudesController@asignar');
+  Route::post('/solfact/asignar', 'solicitudesController@asignar');
 
   Route::resource('pagocondicions', 'pagocondicionController');
   Route::resource('pagometodos', 'pagometodoController');
