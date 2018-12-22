@@ -71,6 +71,10 @@
                 <!-- Navbar Right Menu -->
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
+                        <!-- Icono de Tareas del usuario-->
+                        @if($solicitudess->where('atendidopor',Auth::user()->id)->count()>0)
+                          @include('layouts.tasks')
+                        @endif
                         <!-- User Account Menu -->
                         <li class="dropdown user user-menu">
                             <!-- Menu Toggle Button -->
