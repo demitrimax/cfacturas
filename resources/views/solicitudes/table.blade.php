@@ -8,7 +8,7 @@
         <th>Adjunto</th>
         <th>Atendido</th>
         <th>Fecha</th>
-        <th>Atendido Por</th>
+        <th>Asignado a</th>
         <th>Acciones</th>
         </tr>
     </thead>

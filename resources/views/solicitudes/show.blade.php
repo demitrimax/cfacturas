@@ -1,5 +1,9 @@
 @extends('layouts.app')
 @section('title',config('app.name').' | Vista de Solicitud' )
+@section('css')
+<!-- Select2 -->
+ <link rel="stylesheet" href="{{asset('adminlte/bower_components/select2/dist/css/select2.min.css')}}">
+@endsection
 @section('content')
 <section class="content-header">
   <h1>
@@ -105,7 +109,8 @@
             <div class="box-footer">
               <div class="pull-right">
                 <a href="{{url('/solfact')}}" type="button" class="btn btn-default"><i class="fa fa-reply"></i> Regresar </a>
-                <button type="button" class="btn btn-default"><i class="fa fa-share"></i> Asignar</button>
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-primary"><i class="fa fa-share"></i> Asignar</button>
+
               </div>
               <button type="button" class="btn btn-default" Onclick="ConfirmaEliminar()"><i class="fa fa-trash-o"></i> Eliminar</button>
               <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Imprimir</button>
@@ -117,10 +122,38 @@
         <!-- /.col -->
     </div>
   </div>
+
+  <div class="modal modal-primary fade" id="modal-primary">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Asignar Usuario</h4>
+              </div>
+              {!! Form::open(['url'=>'solfact/asignar','id'=>'formElimina']) !!}
+              <div class="modal-body">
+                <p>Seleccione el Empleado para asignarle esta solicitud.&hellip;</p>
+                {!! Form::select('usuario', $empleados, null, ['class' => 'form-control select2', 'style'=> 'width: 100%;']) !!}
+                {!! Form::hidden('solicitudid', $solicitudes->id) !!}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-outline">Asignar Usuario</button>
+                  {!! Form::close() !!}
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
   {!! Form::open(['route' => ['solfact.destroy', $solicitudes->id], 'method' => 'delete', 'id'=>'formElimina']) !!}
   {!! Form::close() !!}
 @endsection
 @section('scripts')
+<!-- Select2 -->
+<script src="{{asset('adminlte/bower_components/select2/dist/js/select2.full.min.js')}}"></script>
 <script>
 function ConfirmaEliminar() {
 swal({
@@ -137,5 +170,10 @@ if (result.value) {
   }
 })
 }
+
+  $(document).ready(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+});
 </script>
 @endsection

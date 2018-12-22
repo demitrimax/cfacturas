@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\SolicitudEliminada;
 use App\Mail\NuevaSolicitud;
 use Auth;
+use App\Models\users;
+use App\User;
+use App\Models\facsolicitud;
 
 class solicitudesController extends AppBaseController
 {
@@ -42,6 +45,23 @@ class solicitudesController extends AppBaseController
     {
         $this->solicitudesRepository->pushCriteria(new RequestCriteria($request));
         $solicitudes = $this->solicitudesRepository->paginate(10);
+
+        //$textcorto = RecortarTexto::recortar_texto($solicitudes);
+        return view('solicitudes.index')
+            ->with(compact('solicitudes'));
+    }
+
+    /**
+     * Display a listing of the solicitudes eliminadas
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function deleted()
+    {
+        //$this->solicitudesRepository->pushCriteria(new RequestCriteria($request));
+        //$solicitudes = $this->solicitudesRepository->paginate(10);
+        $solicitudes = facsolicitud::onlyTrashed()->paginate(10);
 
         //$textcorto = RecortarTexto::recortar_texto($solicitudes);
         return view('solicitudes.index')
@@ -89,7 +109,10 @@ class solicitudesController extends AppBaseController
         if (!empty($solicitudes))
         {
           $tamanoadjunto = SomeClass::bytesToHuman(filesize($solicitudes->adjunto));
+          $empleados = User::role(['empleado','gerente'])->get();
+          $empleados = $empleados->pluck('name','id');
         }
+
         if (empty($solicitudes)) {
             Flash::error('Solicitud no encontrada');
             $sweeterror = 'Solicitud no encontrada';
@@ -97,7 +120,7 @@ class solicitudesController extends AppBaseController
             return redirect(route('solfact.index'))->with(compact('sweeterror'));
         }
 
-        return view('solicitudes.show')->with(compact('solicitudes','tamanoadjunto'));
+        return view('solicitudes.show')->with(compact('solicitudes','tamanoadjunto','empleados'));
 
     }
 
@@ -158,9 +181,9 @@ class solicitudesController extends AppBaseController
         $solicitudes = $this->solicitudesRepository->findWithoutFail($id);
 
         if (empty($solicitudes)) {
-            Flash::error('Solicitudes not found');
-
-            return redirect(route('solfact.index'));
+            Flash::error('Solicitud no encontrada');
+            $sweeterror = 'Solicitud no encontrada';
+            return redirect(route('solfact.index'))->with(compact('sweeterror'));
         }
         //A QUIEN SE LE VA ENVIAR NOTIFICACION QUE SE BORRO LA SOLICITUD
         $cliente = $solicitudes->correo;
@@ -175,6 +198,34 @@ class solicitudesController extends AppBaseController
         $sweet = 'Solicitud borrada correctamente';
 
         return redirect(route('solfact.index'))->with(compact('sweet'));
+    }
+      //RESTAURAR UNA SOLICITUD ESPECIFICA
+    public function restaura(Request $request)
+    {
+      $solicitud = facsolicitud::withTrashed()->where('id',$request['solicitudid'])->first();
+      //dd($solicitud);
+      if (empty($solicitud)) {
+          Flash::error('No se ha podido restaurar, solicitud no encontrada');
+          $sweeterror = 'No se ha podido restaurar, solicitud no encontrada';
+          return redirect(route('solfact.index'))->with(compact('sweeterror'));
+      }
+      $solicitud->restore();
+      $sweet = 'Registro restaurado correctamente';
+      return redirect(route('solfact.index'))->with(compact('sweet'));
+    }
+    //ASIGNAR EMPLEADO A UNA SOLICITUD
+    public function asignar($id, UpdatesolicitudesRequest $request)
+    {
+      //FUNCION PARA ASIGNAR EMPLEADO PARA ATENDER SOLICITUD DE FACTURA
+      $solicitudes = $this->solicitudesRepository->findWithoutFail($id);
+
+      if (empty($solicitudes)) {
+          Flash::error('Solicitud no encontrada');
+          $sweeterror = 'Solicitud no encontrada';
+          return redirect(route('solfact.index'))->with(compact('sweeterror'));
+      }
+
+
     }
 
 }

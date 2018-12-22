@@ -1,5 +1,5 @@
 <?php
-
+//ESTE CONTROLLER SOLO SE USA PARA GUARDAR SOLICITUDES
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
