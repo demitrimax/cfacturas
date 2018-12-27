@@ -31,7 +31,7 @@
         <small>Datos del usuario</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li><a href="{{url('/home')}}"><i class="fa fa-dashboard"></i> Inicio</a></li>
         <li class="active">Perfil</li>
       </ol>
     </section>

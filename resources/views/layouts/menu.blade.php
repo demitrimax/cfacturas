@@ -98,6 +98,6 @@
 @if(Auth()->user()->email_verified_at)
 
 <li class="{{ Request::is('solfactura*') ? 'active' : '' }}">
-    <a href="{!! url('/solfactura') !!}"><i class="fa fa-calendar-check-o"></i><span>Solicitudes</span></a>
+    <a href="{!! url('/solfactura') !!}"><i class="fa fa-calendar-check-o"></i><span>Nueva Solcitud de Factura</span></a>
 </li>
 @endif

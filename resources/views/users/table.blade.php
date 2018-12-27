@@ -5,6 +5,7 @@
         <th>Email</th>
         <th>Correo Verificado</th>
         <th>Avatar</th>
+        <th>Solcitudes Asignadas</th>
         <th>Roles</th>
         <th>Acciones</th>
         </tr>
@@ -16,6 +17,7 @@
             <td>{!! $users->email !!}</td>
             <td>{!! $users->email_verified_at !!}</td>
             <td>{!! $users->avatar !!}</td>
+            <td>{!! $users->solicitudes->count() !!}</td>
             <td>
               @if(!empty($users->getRoleNames()))
                 @foreach($users->getRoleNames() as $v)

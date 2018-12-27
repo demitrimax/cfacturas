@@ -83,6 +83,9 @@ class users extends Model
     public static $rules = [
 
     ];
-
+    public function solicitudes()
+    {
+      return $this->hasMany('App\Models\solicitudes','atendidopor');
+    }
 
 }
