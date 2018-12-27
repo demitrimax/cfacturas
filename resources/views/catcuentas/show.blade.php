@@ -77,7 +77,7 @@
 
                   <div class="form-group">
                       {!! Form::label('metodo', 'Metodo de Págo:') !!}
-                      {!! Form::select('metodo', ['efectivo'=>'Efectivo','cheque'=>'Cheque', 'transferencia'=>'Transferencia'], null,['class' => 'form-control']) !!}
+                      {!! Form::select('metodo', $pagometodo, null,['class' => 'form-control']) !!}
                   </div>
 
                   <div class="form-group">

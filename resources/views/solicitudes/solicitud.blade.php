@@ -53,7 +53,7 @@
     <div class="panel-body">
       <div class="form-group">
           {!! Form::label('rfc', 'RFC:*') !!}
-          {!! Form::text('rfc', null, ['class' => 'form-control', 'maxlength' =>'150','placeholder'=>'RFC registrado', 'required']) !!}
+          {!! Form::text('rfc', null, ['class' => 'form-control', 'maxlength' =>'13','placeholder'=>'RFC registrado', 'required']) !!}
       </div>
       <div class="form-group">
           {!! Form::label('condicion', 'Condición de Pago:*') !!}

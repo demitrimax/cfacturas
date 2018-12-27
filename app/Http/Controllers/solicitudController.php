@@ -70,9 +70,12 @@ class solicitudController extends Controller
       $solicitudfac->save();
       $mensaje = 'Se ha enviado correctamente su solicitud. En breve recibirá un correo electrónico como acuse de recibo.';
       //envío de correo electronico
-      $gerentes = User::role('gerente')->get();
+      $enviomails = User::role('emailnotify')->get();
       $usuario = User::find($solicitudfac->user_id);
-      Mail::to($gerentes)->send(new NuevaSolicitud($usuario, $solicitudfac));
+      foreach($enviomails as $enviara)
+      {
+        Mail::to($enviara)->send(new NotificaSolicitudFactura($usuario, $solicitudfac));
+      }
       Mail::to($solicitudfac->correo)->send(new NuevaSolicitud($usuario, $solicitudfac));
       $sweet = 'Solicitud Creada';
 

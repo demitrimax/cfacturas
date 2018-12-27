@@ -18,6 +18,7 @@ use App\Models\cattmovimiento;
 use App\Models\catcuentas;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use App\Models\pagometodo;
 
 class catcuentasController extends AppBaseController
 {
@@ -129,7 +130,8 @@ class catcuentasController extends AppBaseController
       $movcuenta->user_id = Auth::User()->id;
       $movcuenta->save();
       Flash::success('Cuenta guardada correctamente.');
-      return back();
+      $sweet = 'Movimiento guardado correctamente';
+      return back()->with(compact('sweet'));
     }
 
     /**
@@ -145,12 +147,13 @@ class catcuentasController extends AppBaseController
 
         if (empty($catcuentas)) {
             Flash::error('Cuenta no encontrada');
-
-            return redirect(route('catcuentas.index'));
+            $sweeterror = 'Cuenta no encontrada';
+            return redirect(route('catcuentas.index'))->with(compact('sweeterror'));
         }
         $cuenta_id = $id;
         //DB::enableQueryLog();
         $cattmovimiento = cattmovimiento::pluck('descripcion','id');
+        $pagometodo = pagometodo::pluck('nombre','id');
         $abonos = mbanca::where('toperacion','abono')->where('cuenta_id',$cuenta_id)->sum('monto');
         $cargos = mbanca::where('toperacion','cargo')->where('cuenta_id',$cuenta_id)->sum('monto');
         $saldo = $abonos - $cargos;
@@ -159,7 +162,7 @@ class catcuentasController extends AppBaseController
         $mbancarios = $catcuentas->movimientos()->orderBy('fecha','DESC')->paginate(10);
 
         //dd($abonos);
-        return view('catcuentas.show')->with(compact('catcuentas','abonos','cargos','saldo','mbancarios','cattmovimiento','ultimomov'));
+        return view('catcuentas.show')->with(compact('catcuentas','abonos','cargos','saldo','mbancarios','cattmovimiento','ultimomov','pagometodo'));
     }
 
     /**
@@ -200,15 +203,16 @@ class catcuentasController extends AppBaseController
 
         if (empty($catcuentas)) {
             Flash::error('Cuenta no encontrada');
-
-            return redirect(route('catcuentas.index'));
+            $sweeterror = 'Cuenta no encontrada';
+            return redirect(route('catcuentas.index'))->with(compact('sweeterror'));
         }
 
         $catcuentas = $this->catcuentasRepository->update($request->all(), $id);
 
         Flash::success('Cuenta actualizada correctamente.');
+        $sweet = 'Cuenta actualizada correctamente';
 
-        return redirect(route('catcuentas.index'));
+        return redirect(route('catcuentas.index'))->with(compact('sweet'));
     }
 
     /**
@@ -225,8 +229,8 @@ class catcuentasController extends AppBaseController
 
         if (empty($catcuentas)) {
             Flash::error('Cuenta no encontrada');
-
-            return redirect(route('catcuentas.index'));
+              $sweeterror = 'Cuenta no encontrada';
+            return redirect(route('catcuentas.index'))->with(compact('sweeterror'));
         }
 
         $this->catcuentasRepository->delete($id);

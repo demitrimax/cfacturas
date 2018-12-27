@@ -71,8 +71,8 @@ class mbancaController extends AppBaseController
         $mbanca = $this->mbancaRepository->create($input);
 
         Flash::success('Movimiento guardado correctamente.');
-
-        return redirect(route('mbancas.index'));
+        $sweet = 'Movimiento guardado correctamente';
+        return redirect(route('mbancas.index'))->with(compact('sweet'));
     }
 
     /**
@@ -88,8 +88,8 @@ class mbancaController extends AppBaseController
 
         if (empty($mbanca)) {
             Flash::error('Movimiento no encontrado');
-
-            return redirect(route('mbancas.index'));
+            $sweeterror = 'Movimiento no encontrado';
+            return redirect(route('mbancas.index'))->with(compact('sweeterror'));
         }
 
         return view('mbancas.show')->with(compact('mbanca'));
@@ -108,8 +108,8 @@ class mbancaController extends AppBaseController
 
         if (empty($mbanca)) {
             Flash::error('Movimiento no encontrado');
-
-            return redirect(route('mbancas.index'));
+            $sweeterror = 'Movimiento no encontrado';
+            return redirect(route('mbancas.index'))->with(compact('sweeterror'));
         }
 
         return view('mbancas.edit')->with('mbanca', $mbanca);
@@ -129,15 +129,15 @@ class mbancaController extends AppBaseController
 
         if (empty($mbanca)) {
             Flash::error('Movimiento no encontrado');
-
-            return redirect(route('mbancas.index'));
+            $sweeterror = 'Movimiento no encontrado';
+            return redirect(route('mbancas.index'))->with(compact('sweeterror'));
         }
 
         $mbanca = $this->mbancaRepository->update($request->all(), $id);
 
         Flash::success('Movimiento actualizado correctamente.');
-
-        return redirect(route('mbancas.index'));
+        $sweet = 'Movimiento actualizado correctamente'
+        return redirect(route('mbancas.index'))->with(compact('sweet'));
     }
 
     /**
