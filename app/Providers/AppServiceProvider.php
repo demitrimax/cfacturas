@@ -20,7 +20,19 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Schema::defaultStringLength(191);
-        View::share('solicitudess',solicitudes::all());
+
+        view()->composer('*', function($view)
+      {
+          if (Auth::check()) {
+              $CurrentUserId = Auth::user()->id;
+              $solicitudess = solicitudes::where('atendidopor',$CurrentUserId)->get();
+              $view->with(compact('solicitudess'));
+
+              //View::share('solicitudess',solicitudes::all());
+          }else {
+              $view->with('solicitudess', null);
+          }
+      });
     }
 
     /**

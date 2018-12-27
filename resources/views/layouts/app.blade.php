@@ -72,7 +72,7 @@
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <!-- Icono de Tareas del usuario-->
-                        @if($solicitudess->where('atendidopor',Auth::user()->id)->count()>0)
+                        @if($solicitudess->count()>0)
                           @include('layouts.tasks')
                         @endif
                         <!-- User Account Menu -->

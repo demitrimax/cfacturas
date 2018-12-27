@@ -2,16 +2,16 @@
           <li class="dropdown tasks-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-flag-o"></i>
-              <span class="label label-danger">{{ $solicitudess->where('atendidopor',Auth::user()->id)->count() }}</span>
+              <span class="label label-danger">{{ $solicitudess->count() }}</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">Usted tiene {{ $solicitudess->where('atendidopor',Auth::user()->id)->count() }} Solicitudes Asignadas</li>
+              <li class="header">Usted tiene {{ $solicitudess->count() }} Solicitudes Asignadas</li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
-                  @foreach($solicitudess->where('atendidopor',Auth::user()->id) as $solic)
+                  @foreach($solicitudess as $solic)
                   <li><!-- Task item -->
-                    <a href="#">
+                    <a href="{{url('solfact/'.$solic->id)}}">
                       <h3>
                         {{ str_limit(strip_tags($solic->concepto),30,'...') }}
                         <small class="pull-right">20%</small>
