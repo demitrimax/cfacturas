@@ -9,6 +9,7 @@ use App\User;
 use Spatie\Permission\Models\Role;
 use App\Mail\SolicitudFactura;
 use App\Mail\NuevaSolicitud;
+use App\Mail\NotificaSolicitudFactura;
 use Mail;
 
 class solicitudController extends Controller
