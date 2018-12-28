@@ -3,6 +3,11 @@
             <a href="{!! url('/home') !!}"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
         </li>
         @endcan
+        @can('facturas-list')
+        <li class="{{ Request::is('facturas*') ? 'active' : '' }}">
+            <a href="{!! route('facturas.index') !!}"><i class="fa fa-diamond"></i><span>Facturas</span></a>
+        </li>
+        @endcan
         @can('solicitud-list')
         <li class="{{ Request::is('solfact*') ? 'active' : '' }}">
             <a href="{!! route('solfact.index') !!}"><i class="fa fa-sticky-note-o"></i><span>Solicitudes</span></a>

@@ -68,3 +68,6 @@ Route::group(['middleware'=>['auth','verified']], function() {
   Route::resource('pagometodos', 'pagometodoController');
   Route::resource('facestatuses', 'facestatusController');
 });
+
+
+Route::resource('facturas', 'facturasController');
