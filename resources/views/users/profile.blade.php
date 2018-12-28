@@ -88,7 +88,15 @@
                 <div class="col-sm-12 border-right">
                   <div class="description-block">
                     <h5 class="description-header">BIO</h5>
-                    <span class="description-text">Pequeña biografia del usuario...</span>
+                    <span class="description-text">
+                      @if (Auth::user()->bio)
+                      {{ Auth::user()->bio }}
+                      <button type="submit" class="btn btn-primary">Modificar Biografía</button>
+                      @else
+                      Pequeña biografia del usuario...<br>
+                      <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#modal-bio">Agregar Biografía</button>
+                      @endif
+                    </span>
                   </div>
                   <!-- /.description-block -->
                 </div>
@@ -130,5 +138,32 @@
         </div>
     </div>
         <!-- /.modal -->
+        <div class="modal fade" id="modal-bio">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title">Pequeña Biografía del Usuario</h4>
+                </div>
+                <div class="modal-body">
+                  <form method="post" action="{{url('/user/bio')}}">
+                    {{ csrf_field() }}
+                  <p>Escriba porfavor su biografía.</p>
+                  <textarea class="form-control" rows="3" placeholder="Escriba su biografía"></textarea>
+                  <input type="hidden" name="iduser" value="{{ Auth::user()->id }}">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
+                  <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+                </form>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+      </div>
+          <!-- /.modal -->
 </section>
 @stop
