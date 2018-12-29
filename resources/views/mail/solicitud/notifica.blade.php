@@ -7,7 +7,7 @@ Le notificamos que el usuario {{$user->name}} ha dado de alta una nueva solicitu
 {!! $solicitud->concepto !!}
 {{ $solicitud->comentario }}
 
-@component('mail::button', ['url' => '/solfact/'.$solicitud->id ])
+@component('mail::button', ['url' => url('/solfact/'.$solicitud->id) ])
 Detalles de la Solicitud
 @endcomponent
 
