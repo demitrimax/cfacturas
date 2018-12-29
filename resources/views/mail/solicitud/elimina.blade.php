@@ -5,7 +5,7 @@ Estimado Cliente, El Usuario {{$usuarioelimina}} ha eliminado su solictud con ID
 Detalles de la Solicitud:
 {!!$solicitudes->concepto!!}
 
-Si cree que hubo un error, porfavor escribanos a este correo: ejsolicitudes@gmail.com.
+Si cree que hubo un error, porfavor escribanos a este correo: administrator@jmcorporativo.com.mx.
 
 Gracias,<br>
 El Equipo de {{ config('app.name') }}
