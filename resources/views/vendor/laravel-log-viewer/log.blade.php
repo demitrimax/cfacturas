@@ -7,11 +7,11 @@
 @endsection
 
 @section('content')
-
+<section class="content">
 <div class="container-fluid">
   <div class="row">
-    <div class="col sidebar mb-3">
-      <h1><i class="fa fa-calendar" aria-hidden="true"></i> Laravel Log Viewer</h1>
+    <div class="col-md-3">
+      <h3><i class="fa fa-calendar" aria-hidden="true"></i> Laravel Log Viewer</h3>
       <p class="text-muted"><i>by Rap2h</i></p>
       <div class="list-group div-scroll">
         @foreach($folders as $folder)
@@ -39,7 +39,7 @@
         @endforeach
       </div>
     </div>
-    <div class="col-10 table-container">
+    <div class="col-md-9 table-container">
       @if ($logs === null)
         <div>
           Log file >50M, please download it.
@@ -117,6 +117,7 @@
     </div>
   </div>
 </div>
+</section>
 @endsection
 
 @section('scripts')
