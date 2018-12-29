@@ -67,7 +67,7 @@ Route::group(['middleware'=>['auth','verified']], function() {
   Route::resource('pagocondicions', 'pagocondicionController');
   Route::resource('pagometodos', 'pagometodoController');
   Route::resource('facestatuses', 'facestatusController');
+  Route::resource('facturas', 'facturasController');
+
+  Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 });
-
-
-Route::resource('facturas', 'facturasController');
