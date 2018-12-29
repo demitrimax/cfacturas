@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Consorcio Comercial
+                    JM Corporativo
                 </div>
 
                 <div class="links">

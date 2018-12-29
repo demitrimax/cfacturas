@@ -60,7 +60,7 @@
 <li class="{{ Request::is('users*') ? 'active' : '' }}">
     <a href="{!! route('users.index') !!}"><i class="fa fa-edit"></i><span>Usuarios</span></a>
 </li>
-@if( Request::is('user*') || Request::is('permissions*') || Request::is('cattmovimientos*') || Request::is('pagocondicions*') || Request::is('roles*') || Request::is('pagometodo*') || Request::is('facestatuses*') )
+@if( Request::is('user*') || Request::is('permissions*') || Request::is('cattmovimientos*') || Request::is('pagocondicions*') || Request::is('roles*') || Request::is('pagometodo*') || Request::is('facestatuses*') || Request::is('logs*') )
 <li class="treeview active">
 @else
 <li class="treeview">
@@ -77,6 +77,7 @@
             <li class="{{ Request::is('roles*') ? 'active' : '' }}"><a href="{{route('roles.index')}}"><i class="fa fa-group"></i> Roles</a></li>
             <li class="{{ Request::is('routes*') ? 'active' : '' }}"><a href="{{url('routes-explorer')}}"><i class="fa fa-user-secret"></i> Routes Explorer</a></li>
             <li class="{{ Request::is('log-*') ? 'active' : '' }}"><a href="{{url('log-viewer')}}"><i class="fa fa-paw"></i> Log-Viewer</a></li>
+            <li class="{{ Request::is('logs*') ? 'active' : '' }}"><a href="{{url('logs')}}"><i class="fa fa-question-circle"></i> Logs del Sistema</a></li>
 
             @can('cattmovimientos')
             <li class="{{ Request::is('cattmovimientos*') ? 'active' : '' }}"><a href="{{route('cattmovimientos.index')}}"><i class="fa fa-map-pin"></i> Cat. Movimientos</a></li>
