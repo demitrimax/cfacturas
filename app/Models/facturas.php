@@ -34,7 +34,7 @@ class facturas extends Model
     use SoftDeletes;
 
     public $table = 'facturacion';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -50,6 +50,9 @@ class facturas extends Model
         'metodopago_id',
         'condicionpago_id',
         'complementopago_id',
+        'subtotal',
+        'iva',
+        'total',
         'fecha',
         'estatus_id',
         'comprobante'
@@ -69,6 +72,9 @@ class facturas extends Model
         'metodopago_id' => 'integer',
         'condicionpago_id' => 'integer',
         'complementopago_id' => 'integer',
+        'subtotal' => 'float',
+        'iva' => 'float',
+        'total' => 'float',
         'estatus_id' => 'integer',
         'comprobante' => 'string'
     ];
@@ -79,7 +85,7 @@ class facturas extends Model
      * @var array
      */
     public static $rules = [
-        
+
     ];
 
     /**

@@ -11,6 +11,13 @@ use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use Alert;
+use App\Models\clientes;
+use App\Models\direcciones;
+use App\Models\catempresas;
+use App\Models\pagometodo;
+use App\Models\pagocondicion;
+use App\Models\facestatus;
+
 
 class facturasController extends AppBaseController
 {
@@ -20,6 +27,11 @@ class facturasController extends AppBaseController
     public function __construct(facturasRepository $facturasRepo)
     {
         $this->facturasRepository = $facturasRepo;
+        $this->middleware('auth');
+        $this->middleware('permission:facturas-list');
+        $this->middleware('permission:facturas-create', ['only' => ['create','store']]);
+        $this->middleware('permission:facturas-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:facturas-delete', ['only' => ['destroy']]);
     }
 
     /**
@@ -44,7 +56,14 @@ class facturasController extends AppBaseController
      */
     public function create()
     {
-        return view('facturas.create');
+        $clientes = clientes::has('direcciones')->get();
+        $clientes = $clientes->pluck('nomcompleto','id');
+        $direcciones = direcciones::pluck('RFC','id');
+        $empresas = catempresas::pluck('nombre','id');
+        $pagometodo = pagometodo::pluck('nombre','id');
+        $pagocondicion = pagocondicion::pluck('nombre','id');
+        $facestatus = facestatus::pluck('nombre','id');
+        return view('facturas.create')->with(compact('clientes','direcciones','empresas','pagometodo','pagocondicion','facestatus'));
     }
 
     /**
@@ -56,6 +75,7 @@ class facturasController extends AppBaseController
      */
     public function store(CreatefacturasRequest $request)
     {
+
         $input = $request->all();
 
         $facturas = $this->facturasRepository->create($input);
