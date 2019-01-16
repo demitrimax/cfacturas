@@ -139,5 +139,22 @@ class solicitudes extends Model
       return $asignado;
     }
 
+    public function usodecfdi()
+    {
+      return $this->belongsTo('App\Models\usocfdi','usocfdi');
+    }
+    public function GetUsocdecfdicodAttribute()
+    {
+      return $this->usodecfdi->codigo.' '.$this->usodecfdi->descripcion;
+    }
+    public function pagometodo()
+    {
+      return $this->belongsTo('App\Models\pagometodo','metodo');
+    }
+    public function formadepago()
+    {
+      return $this->belongsTo('App\Models\formapago','forma');
+    }
+
 
 }

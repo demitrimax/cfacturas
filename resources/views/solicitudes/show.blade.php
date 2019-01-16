@@ -73,16 +73,29 @@
               <h3 class="box-title">{{$solicitudes->nombre}}</h3>
 
               <div class="box-tools pull-right">
-                <a href="#" class="btn btn-box-tool" data-toggle="tooltip" title="Previous"><i class="fa fa-chevron-left"></i></a>
-                <a href="#" class="btn btn-box-tool" data-toggle="tooltip" title="Next"><i class="fa fa-chevron-right"></i></a>
+                <a href="#" class="btn btn-box-tool" data-toggle="tooltip" title="Anterior"><i class="fa fa-chevron-left"></i></a>
+                <a href="#" class="btn btn-box-tool" data-toggle="tooltip" title="Siguiente"><i class="fa fa-chevron-right"></i></a>
               </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
               <div class="mailbox-read-info">
                 <h3>{{$solicitudes->descripcion}}</h3>
-                <h5>De: {{$solicitudes->correo}} | Teléfono: {{$solicitudes->telefono}}
+                <h5><b>De:</b> {{$solicitudes->correo}} | Teléfono: {{$solicitudes->telefono}}
                   <span class="mailbox-read-time pull-right">{{$solicitudes->fecha}}</span></h5>
+
+
+                  <h5></h5>
+
+              </div>
+              <div class="mailbox-read-info">
+                  <h5><b>Uso de CFDI:</b> {{$solicitudes->usodecfdi->codigo.' '.$solicitudes->usodecfdi->descripcion }}</h5>
+              </div>
+              <div class="mailbox-read-info">
+                  <h5><b>Método de Pago:</b> {{$solicitudes->pagometodo->nombre }}</h5>
+              </div>
+              <div class="mailbox-read-info">
+                  <h5><b>Forma de Pago:</b> {{$solicitudes->formadepago->descripcion }}</h5>
               </div>
 
               <div class="mailbox-read-message">
