@@ -1,98 +1,376 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.frontpage')
 
-        <title>{{ config('app.name')}}</title>
+@section('content')
+<section class="ftco-cover overlay" style="background-image: url({{asset('frontpage/images/bg_1.jpg')}});" id="section-home" data-aos="fade"  data-stellar-background-ratio="0.5">
+  <div class="container">
+    <div class="row align-items-center justify-content-center ftco-vh-100">
+      <div class="col-md-8 text-center">
+        <h1 class="ftco-heading mb-4" data-aos="fade-up" data-aos-delay="500"><img src="img/logo_wide.png" alt="JM Corp Logo" width="350" height="100"></h1>
+        <h2 class="h5 ftco-subheading mb-5" data-aos="fade-up"  data-aos-delay="600">Despacho Contable.</h2>
+        <p data-aos="fade-up"  data-aos-delay="700"><a href="https://free-template.co/" target="_blank" class="btn btn-outline-white px-4 py-3" data-toggle="modal" data-target="#reservationModal">Conocer Más</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- END section -->
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Registro</a>
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    JM Corporativo
-                </div>
-
-                <div class="links">
-                  @if (Auth::user())
-                    <a href="{{ url('/home') }}">Principal</a>
-                  @else
-                    <a href="{{ route('login') }}">Iniciar Sesión</a>
-                  @endif
-                    <a href="{{ route('register') }}">Registrese</a>
-                    <a href="{{ route('solicitud') }}">Nueva Solicitud</a>
-                    <a href="#">Manual de Usuario</a>
-                </div>
-            </div>
+<div class="ftco-section ftco-counter" id="section-counter">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap" data-aos="fade-up">
+        <div class="block-18 d-flex align-items-center">
+          <div class="icon mr-4">
+            <span class=".flaticon-abogado"></span>
+          </div>
+          <div class="text">
+            <strong class="number" data-number="125">0</strong>
+            <span>Contadores Calificados</span>
+          </div>
         </div>
-    </body>
-</html>
+      </div>
+      <div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap" data-aos="fade-up">
+        <div class="block-18 d-flex align-items-center">
+          <div class="icon mr-4">
+            <span class="flaticon-handshake"></span>
+          </div>
+          <div class="text">
+            <strong class="number" data-number="326">0</strong>
+            <span>Clientes Satisfechos</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap" data-aos="fade-up">
+        <div class="block-18 d-flex align-items-center">
+          <div class="icon mr-4">
+            <span class="flaticon-medal"></span>
+          </div>
+          <div class="text">
+            <strong class="number" data-number="15000">0</strong>
+            <span>Balances Generales</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap" data-aos="fade-up">
+        <div class="block-18 d-flex align-items-center">
+          <div class="icon mr-4">
+            <span class="flaticon-trophy"></span>
+          </div>
+          <div class="text">
+            <strong class="number" data-number="12921">5143</strong>
+            <span>Premios &amp; Galardones</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="ftco-section-2">
+  <div class="container-fluid">
+    <div class="section-2-blocks-wrapper row no-gutters">
+      <div class="img col-sm-12 col-md-6" style="background-image: url({{asset('frontpage/images/image_4.jpg')}});" data-aos="fade-right">
+        <a href="https://vimeo.com/45830194" class="button popup-vimeo" data-aos="fade-right" data-aos-delay="700"><span class="ion-ios-play"></span></a>
+      </div>
+      <div class="text col-md-6">
+        <div class="text-inner align-self-start" data-aos="fade-up">
+
+          <h3>Fundada en el año 2013, Nuestro Despacho Contable ha crecido considerablemente</h3>
+          <p>JM Corporativo, S.A. es una firma de contadores públicos certificados, fundada en la Ciudad de Villahermosa, Tabasco en el año 2013 y brindamos a nuestros clientes servicios y asesoría contable, fiscal y administrativa de manera integral dentro de territorio nacional.</p>
+
+          <p>Ofrecemos asesoría y representación legal a empresas extranjeras o transnacionales con participación y operaciones comerciales en México.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ftco-section">
+  <div class="container">
+    <div class="row justify-content-center mb-5 pb-5">
+      <div class="col-md-7 text-center" data-aos="fade-up">
+        <h2>Nuestro Servicios</h2>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-lg-4" data-aos="fade-up">
+        <div class="media block-6 d-block text-center">
+          <div class="icon mb-4"><span class="flaticon-gavel"></span></div>
+          <div class="media-body">
+            <h3 class="heading">Servicios Contables</h3>
+            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="media block-6 d-block text-center">
+          <div class="icon mb-4"><span class="flaticon-balance"></span></div>
+          <div class="media-body">
+            <h3 class="heading">Personal Injury</h3>
+            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="media block-6 d-block text-center">
+          <div class="icon mb-4"><span class="flaticon-lawyer"></span></div>
+          <div class="media-body">
+            <h3 class="heading">Legal Counseling</h3>
+            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="media block-6 d-block text-center">
+          <div class="icon mb-4"><span class="flaticon-courthouse"></span></div>
+          <div class="media-body">
+            <h3 class="heading">Civil Ligitation</h3>
+            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
+        <div class="media block-6 d-block text-center">
+          <div class="icon mb-4"><span class="flaticon-handshake"></span></div>
+          <div class="media-body">
+            <h3 class="heading">Business Law</h3>
+            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
+        <div class="media block-6 d-block text-center">
+          <div class="icon mb-4"><span class="flaticon-health-insurance"></span></div>
+          <div class="media-body">
+            <h3 class="heading">Insurance Defense</h3>
+            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="ftco-section testimony-img" id="ftco-testimony" style="background-image: url({{asset('frontpage/images/image_8.jpg')}});" data-aos="fade"  data-stellar-background-ratio="0.5">
+<div class="container">
+  <div class="row justify-content-center mb-5 pb-5">
+    <div class="col-md-7 text-center heading" data-aos="fade-up">
+      <h2>Testimonials</h2>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row d-flex no-gutters">
+    <div class="col-lg align-self-sm-end" data-aos="fade-up">
+      <div class="testimony">
+         <blockquote>
+            <p>&ldquo;Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small.&rdquo;</p>
+          </blockquote>
+          <div class="author d-flex mt-4">
+            <div class="image mr-3 align-self-center">
+              <img src="{{asset('frontpage/images/person_1.jpg')}}" alt="">
+            </div>
+            <div class="name align-self-center">Louise Kelly <span class="position">Illustrator Designer</span></div>
+          </div>
+      </div>
+    </div>
+    <div class="col-lg align-self-sm-end" data-aos="fade-up">
+      <div class="testimony overlay">
+         <blockquote>
+            <p>&ldquo;Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.&rdquo;</p>
+          </blockquote>
+          <div class="author d-flex mt-4">
+            <div class="image mr-3 align-self-center">
+              <img src="{{asset('frontpage/images/person_2.jpg')}}" alt="">
+            </div>
+            <div class="name align-self-center">Louise Kelly <span class="position">Illustrator Designer</span></div>
+          </div>
+      </div>
+    </div>
+    <div class="col-lg align-self-sm-end" data-aos="fade-up">
+      <div class="testimony">
+         <blockquote>
+            <p>&ldquo;Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small  line of blind text by the name. &rdquo;</p>
+          </blockquote>
+          <div class="author d-flex mt-4">
+            <div class="image mr-3 align-self-center">
+              <img src="{{asset('frontpage/images/person_3.jpg')}}" alt="">
+            </div>
+            <div class="name align-self-center">Louise Kelly <span class="position">Illustrator Designer</span></div>
+          </div>
+      </div>
+    </div>
+    <div class="col-lg align-self-sm-end" data-aos="fade-up">
+      <div class="testimony overlay">
+         <blockquote>
+            <p>&ldquo;Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however.&rdquo;</p>
+          </blockquote>
+          <div class="author d-flex mt-4">
+            <div class="image mr-3 align-self-center">
+              <img src="{{asset('frontpage/images/person_2.jpg')}}" alt="">
+            </div>
+            <div class="name align-self-center">Louise Kelly <span class="position">Illustrator Designer</span></div>
+          </div>
+      </div>
+    </div>
+    <div class="col-lg align-self-sm-end" data-aos="fade-up">
+      <div class="testimony">
+        <blockquote>
+          <p>&ldquo;Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small  line of blind text by the name. &rdquo;</p>
+        </blockquote>
+        <div class="author d-flex mt-4">
+          <div class="image mr-3 align-self-center">
+            <img src="{{asset('frontpage/images/person_3.jpg')}}" alt="">
+          </div>
+          <div class="name align-self-center">Louise Kelly <span class="position">Illustrator Designer</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="ftco-section bg-light">
+<div class="container">
+  <div class="row justify-content-center mb-5 pb-5">
+    <div class="col-md-7 text-center"  data-aos="fade-up">
+      <h2>Nuestros Contadores</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6 col-md-4" data-aos="fade-up">
+      <div class="block-10">
+        <div class="person-info mb-3">
+          <span class="name">Myla Smith</span>
+          <span class="position">Consejero Legal</span>
+        </div>
+        <img src="{{asset('frontpage/images/person_1.jpg')}}" alt="" class="img-fluid">
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-4" data-aos="fade-up">
+      <div class="block-10">
+        <div class="person-info mb-3">
+          <span class="name">Aldin Powell</span>
+          <span class="position">Jefe Principal de Desempeño</span>
+        </div>
+        <img src="{{asset('frontpage/images/person_3.jpg')}}" alt="" class="img-fluid">
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-4" data-aos="fade-up">
+      <div class="block-10">
+        <div class="person-info mb-3">
+          <span class="name">Clarice Clark</span>
+          <span class="position">Socio Directivo, Contador</span>
+        </div>
+        <img src="{{asset('frontpage/images/person_2.jpg')}}" alt="" class="img-fluid">
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="ftco-section">
+<div class="container">
+  <div class="row justify-content-center mb-5 pb-5">
+    <div class="col-md-7 text-center"  data-aos="fade-up">
+      <h2>Consultenos sin compromiso</h2>
+    </div>
+  </div>
+  <div class="row block-9" data-aos="fade-up">
+    <div class="col-md-6 pr-md-5">
+      <form action="#">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Nombre">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Correo electrónico">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Asunto">
+        </div>
+        <div class="form-group">
+          <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Mensaje"></textarea>
+        </div>
+        <div class="form-group">
+          <input type="submit" value="Enviar Mensaje" class="btn btn-primary">
+        </div>
+      </form>
+    </div>
+    <div class="col-md-6" data-aos="fade-up" id="mapid"></div>
+  </div>
+</div>
+</div>
+
+<div class="ftco-section bg-light">
+<div class="container">
+  <div class="row justify-content-center mb-5 pb-5">
+    <div class="col-md-7 text-center"  data-aos="fade-up">
+      <h2>Nuestro Blog</h2>
+    </div>
+  </div>
+  <div class="row" data-aos="fade-up">
+    <div class="carousel owl-carousel ftco-owl">
+      <div class="item">
+        <div class="blog-entry" data-aos="fade-up">
+          <a href="blog-single.html" class="block-20" style="background-image: url({{asset('frontpage/images/image_5.jpg')}});">
+          </a>
+          <div class="text">
+            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+            <div class="meta">
+              <div><a href="#"><span class="icon-calendar"></span> June 29, 2018</a></div>
+              <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+              <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="blog-entry" data-aos="fade-up" data-aos-delay="100">
+          <a href="blog-single.html" class="block-20" style="background-image: url({{asset('frontpage/images/image_6.jpg')}});">
+          </a>
+          <div class="text">
+            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+            <div class="meta">
+              <div><a href="#"><span class="icon-calendar"></span> June 29, 2018</a></div>
+              <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+              <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="blog-entry" data-aos="fade-up" data-aos-delay="200">
+          <a href="blog-single.html" class="block-20" style="background-image: url({{asset('frontpage/images/image_7.jpg')}});">
+          </a>
+          <div class="text">
+            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+            <div class="meta">
+              <div><a href="#"><span class="icon-calendar"></span> June 29, 2018</a></div>
+              <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+              <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="blog-entry" data-aos="fade-up" data-aos-delay="200">
+          <a href="blog-single.html" class="block-20" style="background-image: url({{asset('frontpage/images/image_8.jpg')}});">
+          </a>
+          <div class="text">
+            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+            <div class="meta">
+              <div><a href="#"><span class="icon-calendar"></span> June 29, 2018</a></div>
+              <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+              <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+@endsection

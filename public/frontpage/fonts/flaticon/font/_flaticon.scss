@@ -1,0 +1,118 @@
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 16/01/2019 20:22
+    */
+
+    @font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff2") format("woff2"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
+
+    .flaticon-ley-1:before { content: "\f100"; }
+.flaticon-ley:before { content: "\f101"; }
+.flaticon-negocios-y-finanzas:before { content: "\f102"; }
+.flaticon-acuerdo:before { content: "\f103"; }
+.flaticon-salud:before { content: "\f104"; }
+.flaticon-medalla:before { content: "\f105"; }
+.flaticon-courthouse:before { content: "\f106"; }
+.flaticon-abogado:before { content: "\f107"; }
+.flaticon-trofeo:before { content: "\f108"; }
+.flaticon-equilibrar:before { content: "\f109"; }
+.flaticon-contabilidad:before { content: "\f10a"; }
+.flaticon-contabilidad-1:before { content: "\f10b"; }
+.flaticon-relacion:before { content: "\f10c"; }
+.flaticon-equipo:before { content: "\f10d"; }
+.flaticon-dinero:before { content: "\f10e"; }
+.flaticon-metodo-de-pago:before { content: "\f10f"; }
+.flaticon-dinero-1:before { content: "\f110"; }
+.flaticon-proyecto-de-ley:before { content: "\f111"; }
+.flaticon-pagar:before { content: "\f112"; }
+.flaticon-factura-aprobada:before { content: "\f113"; }
+.flaticon-factura:before { content: "\f114"; }
+.flaticon-impuesto:before { content: "\f115"; }
+.flaticon-personas-comerciando:before { content: "\f116"; }
+.flaticon-fecha-tope:before { content: "\f117"; }
+.flaticon-acuerdo-1:before { content: "\f118"; }
+.flaticon-proyecto-de-ley-1:before { content: "\f119"; }
+.flaticon-hipoteca:before { content: "\f11a"; }
+.flaticon-deuda:before { content: "\f11b"; }
+.flaticon-anadir:before { content: "\f11c"; }
+.flaticon-factura-1:before { content: "\f11d"; }
+.flaticon-recepcion:before { content: "\f11e"; }
+.flaticon-proyecto-de-ley-2:before { content: "\f11f"; }
+.flaticon-billete:before { content: "\f120"; }
+.flaticon-contabilidad-2:before { content: "\f121"; }
+.flaticon-contabilidad-3:before { content: "\f122"; }
+.flaticon-contabilidad-4:before { content: "\f123"; }
+.flaticon-trazar:before { content: "\f124"; }
+.flaticon-contabilidad-5:before { content: "\f125"; }
+.flaticon-cuenta:before { content: "\f126"; }
+    
+    $font-Flaticon-ley-1: "\f100";
+    $font-Flaticon-ley: "\f101";
+    $font-Flaticon-negocios-y-finanzas: "\f102";
+    $font-Flaticon-acuerdo: "\f103";
+    $font-Flaticon-salud: "\f104";
+    $font-Flaticon-medalla: "\f105";
+    $font-Flaticon-courthouse: "\f106";
+    $font-Flaticon-abogado: "\f107";
+    $font-Flaticon-trofeo: "\f108";
+    $font-Flaticon-equilibrar: "\f109";
+    $font-Flaticon-contabilidad: "\f10a";
+    $font-Flaticon-contabilidad-1: "\f10b";
+    $font-Flaticon-relacion: "\f10c";
+    $font-Flaticon-equipo: "\f10d";
+    $font-Flaticon-dinero: "\f10e";
+    $font-Flaticon-metodo-de-pago: "\f10f";
+    $font-Flaticon-dinero-1: "\f110";
+    $font-Flaticon-proyecto-de-ley: "\f111";
+    $font-Flaticon-pagar: "\f112";
+    $font-Flaticon-factura-aprobada: "\f113";
+    $font-Flaticon-factura: "\f114";
+    $font-Flaticon-impuesto: "\f115";
+    $font-Flaticon-personas-comerciando: "\f116";
+    $font-Flaticon-fecha-tope: "\f117";
+    $font-Flaticon-acuerdo-1: "\f118";
+    $font-Flaticon-proyecto-de-ley-1: "\f119";
+    $font-Flaticon-hipoteca: "\f11a";
+    $font-Flaticon-deuda: "\f11b";
+    $font-Flaticon-anadir: "\f11c";
+    $font-Flaticon-factura-1: "\f11d";
+    $font-Flaticon-recepcion: "\f11e";
+    $font-Flaticon-proyecto-de-ley-2: "\f11f";
+    $font-Flaticon-billete: "\f120";
+    $font-Flaticon-contabilidad-2: "\f121";
+    $font-Flaticon-contabilidad-3: "\f122";
+    $font-Flaticon-contabilidad-4: "\f123";
+    $font-Flaticon-trazar: "\f124";
+    $font-Flaticon-contabilidad-5: "\f125";
+    $font-Flaticon-cuenta: "\f126";
