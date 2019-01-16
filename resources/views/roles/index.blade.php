@@ -9,7 +9,7 @@
         <!-- left column -->
         <div class="col-md-12">
           <!-- general form elements -->
-          <div class="box box-primary">
+          <div class="box box-primary table-responsive no-padding">
             <div class="box-header with-border">
               <h3 class="box-title">Role Management</h3>
               <div class="pull-right">

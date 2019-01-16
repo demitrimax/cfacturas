@@ -27,7 +27,7 @@
             </div>
             @endif
             <!-- /.box-header -->
-            <div class="table-responsive">
+            <div class="table-responsive no-padding">
                 <table class="table table-bordered table-striped" id="permisos-table">
                     <thead>
                         <tr>

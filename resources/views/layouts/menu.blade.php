@@ -60,7 +60,7 @@
 <li class="{{ Request::is('users*') ? 'active' : '' }}">
     <a href="{!! route('users.index') !!}"><i class="fa fa-edit"></i><span>Usuarios</span></a>
 </li>
-@if( Request::is('user*') || Request::is('permissions*') || Request::is('cattmovimientos*') || Request::is('pagocondicions*') || Request::is('roles*') || Request::is('pagometodo*') || Request::is('facestatuses*') || Request::is('logs*') || Request::is('blog*') )
+@if( Request::is('user*') || Request::is('permissions*') || Request::is('cattmovimientos*') || Request::is('pagocondicions*') || Request::is('roles*') || Request::is('pagometodo*') || Request::is('facestatuses*') || Request::is('logs*') || Request::is('blog*') || Request::is('formapagos*') )
 <li class="treeview active">
 @else
 <li class="treeview">
@@ -82,6 +82,11 @@
 
             @can('cattmovimientos')
             <li class="{{ Request::is('cattmovimientos*') ? 'active' : '' }}"><a href="{{route('cattmovimientos.index')}}"><i class="fa fa-map-pin"></i> Cat. Movimientos</a></li>
+            @endcan
+            @can('formapagos')
+            <li class="{{ Request::is('formapagos*') ? 'active' : '' }}">
+                <a href="{!! route('formapagos.index') !!}"><i class="fa fa-credit-card"></i><span>Forma de pagos</span></a>
+            </li>
             @endcan
             @can('pagocondicion')
             <li class="{{ Request::is('pagocondicions*') ? 'active' : '' }}">

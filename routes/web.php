@@ -74,3 +74,5 @@ Route::group(['middleware'=>['auth','verified']], function() {
 
 
 Route::resource('blogs', 'blogController');
+
+Route::resource('formapagos', 'formapagoController');
