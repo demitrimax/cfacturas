@@ -98,6 +98,11 @@
                 <a href="{!! route('pagometodos.index') !!}"><i class="fa fa-bookmark-o"></i><span>Métodos de pago</span></a>
             </li>
             @endcan
+            @can('usocfdi')
+            <li class="{{ Request::is('usocfdis*') ? 'active' : '' }}">
+                <a href="{!! route('usocfdis.index') !!}"><i class="fa fa-paper-plane-o"></i><span>Uso de CFDI</span></a>
+            </li>
+            @endcan
             @can('estatusfac')
             <li class="{{ Request::is('facestatuses*') ? 'active' : '' }}">
                 <a href="{!! route('facestatuses.index') !!}"><i class="fa fa-glass"></i><span>Estatus de Facturas</span></a>
