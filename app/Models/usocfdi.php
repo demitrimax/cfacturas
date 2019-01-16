@@ -20,7 +20,7 @@ class usocfdi extends Model
     use SoftDeletes;
 
     public $table = 'usocfdi';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -50,8 +50,13 @@ class usocfdi extends Model
      * @var array
      */
     public static $rules = [
-        
+
     ];
 
-    
+    public function getUsocfdicodAttribute()
+    {
+      return $this->codigo.' '.$this->descripcion;
+    }
+
+
 }

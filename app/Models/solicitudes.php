@@ -16,6 +16,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property string correo
  * @property string telefono
  * @property string rfc
+ * @property integer usocfdi
  * @property string condicion
  * @property string metodo
  * @property string forma
@@ -47,6 +48,7 @@ class solicitudes extends Model
         'correo',
         'telefono',
         'rfc',
+        'usocfdi',
         'condicion',
         'metodo',
         'forma',
@@ -74,9 +76,10 @@ class solicitudes extends Model
         'correo' => 'string',
         'telefono' => 'string',
         'rfc' => 'string',
+        'usocfdi' => 'integer',
         'condicion' => 'string',
-        'metodo' => 'string',
-        'forma' => 'string',
+        'metodo' => 'integer',
+        'forma' => 'integer',
         'concepto' => 'string',
         'comentario' => 'string',
         'adjunto' => 'string',

@@ -19,6 +19,9 @@ use Auth;
 use App\Models\users;
 use App\User;
 use App\Models\facsolicitud;
+use App\Models\usocfdi;
+use App\Models\pagometodo;
+use App\Models\formapago;
 
 class solicitudesController extends AppBaseController
 {
@@ -75,7 +78,11 @@ class solicitudesController extends AppBaseController
      */
     public function create()
     {
-        return view('solicitudes.solicitud');
+        $usocfdi = usocfdi::all();
+        $usocfdi = $usocfdi->pluck('usocfdicod','id');
+        $metodo = pagometodo::pluck('nombre','id');
+        $forma = formapago::pluck('descripcion','id');
+        return view('solicitudes.solicitud')->with(compact('usocfdi','metodo','forma'));
     }
 
     /**
@@ -87,6 +94,22 @@ class solicitudesController extends AppBaseController
      */
     public function store(CreatesolicitudesRequest $request)
     {
+      $rules = [
+        'nombre' => 'required',
+        'user_id' => 'required',
+        'correo' => 'required',
+        //'rfc' => 'exists:direcciones,RFC',
+        'telefono' => 'required',
+        //'condicion' => 'required',
+        'metodo' => 'required'
+      ];
+      $messages = [
+        'nombre.required' => 'Es necesario un nombre',
+        'correo.required' => 'El correo es requerido',
+        //'rfc.exists' => 'El RFC no existe en nuestros registros',
+        'user_id.required' => 'Se requiere un ID de usuario registrado',
+      ];
+
         $input = $request->all();
 
         $solicitudes = $this->solicitudesRepository->create($input);

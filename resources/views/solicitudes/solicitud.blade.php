@@ -4,9 +4,11 @@
 
 @section('css')
 <script src="{{asset('adminlte/bower_components/ckeditor/ckeditor.js')}}"></script>
-<script src="{{asset('adminlte/bower_components/ckeditor/samples/js/sample.js')}}"></script>
-<link rel="stylesheet" href="{{asset('adminlte/bower_components/ckeditor/samples/css/samples.css')}}">
 <link rel="stylesheet" href="{{asset('adminlte/bower_components/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css')}}">
+<!-- select 2-->
+<link href="{{asset('adminlte/bower_components/select2/dist/css/select2.min.css')}}" rel="stylesheet" />
+<!-- iCheck for checkboxes and radio inputs -->
+ <link rel="stylesheet" href="{{asset('adminlte/bower_components/iCheck/skins/all.css')}}">
 @endsection
 
 @section('content')
@@ -55,17 +57,19 @@
           {!! Form::label('rfc', 'RFC:*') !!}
           {!! Form::text('rfc', null, ['class' => 'form-control', 'maxlength' =>'13','placeholder'=>'RFC registrado', 'required']) !!}
       </div>
+
       <div class="form-group">
-          {!! Form::label('condicion', 'Condición de Pago:*') !!}
-          {!! Form::select('condicion', ['Efectivo'=>'Efectivo','Credito' =>'Credito','No Aplica' => 'No Aplica', 'Otro' =>'Otro'],null, ['class' => 'form-control','placeholder'=>'Seleccione uno', 'required']) !!}
+          {!! Form::label('usocfdi', 'Uso que se le dará al CFDI:*') !!}
+          {!! Form::select('usocfdi', $usocfdi, null, ['class' => 'form-control select2','placeholder'=>'Seleccione uno', 'required']) !!}
       </div>
+
       <div class="form-group">
           {!! Form::label('metodo', 'Metodo de Pago:*') !!}
-          {!! Form::select('metodo', ['PPD'=>'PPD','PUE' =>'PUE'],null, ['class' => 'form-control','placeholder'=>'Seleccione uno', 'required']) !!}
+          {!! Form::select('metodo', $metodo, null, ['class' => 'form-control','placeholder'=>'Seleccione uno', 'required']) !!}
       </div>
       <div class="form-group">
           {!! Form::label('forma', 'Forma de Pago:*') !!}
-          {!! Form::select('forma', ['Efectivo'=>'Efectivo','Cheque' =>'Cheque', 'Transferencia'=>'Transferencia','Por definir' => 'Por Definir'],null, ['class' => 'form-control','placeholder'=>'Seleccione uno', 'required']) !!}
+          {!! Form::select('forma', $forma,null, ['class' => 'form-control','placeholder'=>'Seleccione uno', 'required']) !!}
       </div>
         <div class="form-group">
             {!! Form::label('concepto', 'Concepto:*') !!}
@@ -102,7 +106,11 @@
 <script src="{{asset('adminlte/bower_components/ckeditor/ckeditor.js')}}"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="{{asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
+<script src="{{asset('adminlte/bower_components/select2/dist/js/select2.full.min.js')}}"></script>
 <script>
+$(document).ready(function() {
+    $('.select2').select2();
+});
   $(function () {
     // Replace the <textarea id="editor1"> with a CKEditor
     // instance, using default configuration.

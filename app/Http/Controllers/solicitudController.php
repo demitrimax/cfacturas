@@ -35,7 +35,7 @@ class solicitudController extends Controller
         'correo' => 'required',
         //'rfc' => 'exists:direcciones,RFC',
         'telefono' => 'required',
-        'condicion' => 'required',
+        //'condicion' => 'required',
         'metodo' => 'required'
       ];
       $messages = [
