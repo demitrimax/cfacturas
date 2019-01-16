@@ -89,7 +89,7 @@
                     <a href="{{ route('login') }}">Iniciar Sesión</a>
                   @endif
                     <a href="{{ route('register') }}">Registrese</a>
-                    <a href="{{ route('solicitud') }}">Solicitud Factura</a>
+                    <a href="{{ route('solicitud') }}">Nueva Solicitud</a>
                     <a href="#">Manual de Usuario</a>
                 </div>
             </div>

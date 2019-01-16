@@ -71,3 +71,6 @@ Route::group(['middleware'=>['auth','verified']], function() {
 
   Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 });
+
+
+Route::resource('blogs', 'blogController');

@@ -31,6 +31,7 @@
           <div class="box box-primary">
               <div class="box-body">
                 @include('accomercials.informacion')
+                {!! $blog->cuerpo !!}
               </div>
             </div>
         </div>

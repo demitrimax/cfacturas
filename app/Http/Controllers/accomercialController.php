@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\acuerdocomer;
 use App\Mail\acuerdocomerinter;
 use App\User;
+use App\Models\blog;
 
 class accomercialController extends AppBaseController
 {
@@ -66,8 +67,9 @@ class accomercialController extends AppBaseController
         $clientes = $sociocomer;
         $usuarios = users::pluck('name','id');
         $empresas = catempresas::pluck('nombre','id');
+        $blog = blog::find(1);
 
-        return view('accomercials.create')->with(compact('sociocomer','clientes','empresas','usuarios'));
+        return view('accomercials.create')->with(compact('sociocomer','clientes','empresas','usuarios', 'blog'));
     }
 
     /**
