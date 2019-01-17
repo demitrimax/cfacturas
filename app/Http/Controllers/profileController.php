@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\User;
 use Intervention\Image\ImageManager;
 use Auth;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Traits\HasRoles;
 
 class profileController extends Controller
 {
@@ -15,8 +18,8 @@ class profileController extends Controller
       }
     //
     public function index() {
-
-    	return view('users.profile');
+      $user = User::find(Auth::user()->id);
+    	return view('users.profile')->with(compact('user'));
     }
 
      public function avatarchange(Request $request)

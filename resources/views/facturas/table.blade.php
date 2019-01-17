@@ -1,17 +1,14 @@
 <table class="table table-responsive" id="facturas-table">
     <thead>
         <tr>
-            <th>Cliente Id</th>
-        <th>Direccion Id</th>
-        <th>Empresa Id</th>
-        <th>Concepto</th>
-        <th>Metodopago Id</th>
-        <th>Condicionpago Id</th>
-        <th>Complementopago Id</th>
-        <th>Fecha</th>
-        <th>Estatus Id</th>
-        <th>Comprobante</th>
-            <th colspan="3">Action</th>
+          <th>Cliente</th>
+          <th>Direccion</th>
+          <th>Empresa</th>
+          <th>Concepto</th>
+          <th>Fecha</th>
+          <th>Estatus</th>
+          <th>Comprobante</th>
+          <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -21,9 +18,6 @@
             <td>{!! $facturas->direccion_id !!}</td>
             <td>{!! $facturas->empresa_id !!}</td>
             <td>{!! $facturas->concepto !!}</td>
-            <td>{!! $facturas->metodopago_id !!}</td>
-            <td>{!! $facturas->condicionpago_id !!}</td>
-            <td>{!! $facturas->complementopago_id !!}</td>
             <td>{!! $facturas->fecha !!}</td>
             <td>{!! $facturas->estatus_id !!}</td>
             <td>{!! $facturas->comprobante !!}</td>

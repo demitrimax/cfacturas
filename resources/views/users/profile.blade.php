@@ -74,8 +74,12 @@
                 <!-- /.col -->
                 <div class="col-sm-4">
                   <div class="description-block">
-                    <h5 class="description-header">{{ Auth::user()->rol }}</h5>
-                    <span class="description-text">ROL</span>
+                    <h5 class="description-header">@if(!empty($user->getRoleNames()))
+                        @foreach($user->getRoleNames() as $v)
+                            <label class="badge badge-success">{{ $v }}</label>
+                        @endforeach
+                    @endif</h5>
+                    <span class="description-text">ROLES</span>
                   </div>
                   <!-- /.description-block -->
                 </div>

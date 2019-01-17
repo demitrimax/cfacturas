@@ -6,7 +6,7 @@
 
 <!-- Direccion Id Field -->
 <div class="form-group">
-    {!! Form::label('direccion_id', 'RFC:') !!}
+    {!! Form::label('direccion_id', 'RFC - Razon Social:') !!}
     {!! Form::select('direccion_id', $direcciones, null, ['class' => 'form-control select2', 'placeholder'=>'Seleccione un RFC', 'required']) !!}
 </div>
 

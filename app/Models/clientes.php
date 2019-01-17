@@ -73,6 +73,11 @@ class clientes extends Model
         return "{$this->nombre} {$this->apellidopat} {$this->apellidomat}";
     }
 
+    public function getNombrerfcAttribute()
+    {
+      return $this->RFC.'-'.$this->nombre.' '.$this->apellidopat.' '.$this->apellidomat;
+    }
+
     public function datcontacto() {
       return $this->hasMany('App\Models\datcontacto','cliente_id');
     }

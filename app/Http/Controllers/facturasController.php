@@ -57,7 +57,7 @@ class facturasController extends AppBaseController
     public function create()
     {
         $clientes = clientes::has('direcciones')->get();
-        $clientes = $clientes->pluck('nomcompleto','id');
+        $clientes = $clientes->pluck('nombrerfc','id');
         $direcciones = direcciones::pluck('RFC','id');
         $empresas = catempresas::pluck('nombre','id');
         $pagometodo = pagometodo::pluck('nombre','id');
