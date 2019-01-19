@@ -17,32 +17,10 @@
             Clientes
         </h1>
     </section>
-  <div class="content">
-    <div class="box box-primary">
-      <div class="box box-widget widget-user-2">
-            <!-- Add the bg color to the header using any of the bg-* classes -->
-            <div class="widget-user-header bg-aqua">
-              <a href="#" data-toggle="modal" data-target="#modal-fotoperfil">
-              <div class="widget-user-image">
-                <img class="img-circle" src="{{asset($avatar)}}" alt="User Avatar" width="40">
-              </div>
-              </a>
-              <!-- /.widget-user-image -->
-              <h3 class="widget-user-username" id="nombreClient">{!! $clientes->nombre." ".$clientes->apellidopat." ".$clientes->apellidomat !!}</h3>
-              <h5 class="widget-user-desc">Cliente desde: {!! $clientes->created_at->format('M. Y') !!}</h5>
-            </div>
-            <div class="box-footer no-padding">
-              <ul class="nav nav-stacked">
-                <li><a href="#">Feha de Nacimiento <span class="pull-right">{{$edad}}</span></a></li>
-                <li><a href="#">RFC <span class="pull-right" id="clientRFC">{!! $clientes->RFC !!}</span></a></li>
-                <li><a href="#">CURP <span class="pull-right">{!! $clientes->CURP !!}</span></a></li>
-                <li><a href="#">Fecha de Alta <span class="pull-right">{!! $clientes->created_at !!}</span></a></li>
-                <li><a href="{!! route('clientes.index') !!}" class="btn btn-success pull-right">Regresar</a></li>
-              </ul>
 
-            </div>
-          </div>
-        </div>
+  <div class="content">
+      @include('clientes.tabs')
+
       </div>
     <div class="content">
         @can('contacto-list')
@@ -151,119 +129,10 @@
 
             </div>
             @endcan
-            @can('documentos-list')
-            <div class="box box-default">
-                <div class="box-header">
-                  <h3 class="box-title">Documentos del Cliente</h3>
-                  <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-                </button>
-              </div>
-                </div>
-                <!-- /.box-header -->
 
-                <div class="box-body">
-                  @if($clientes->catdocumentos->count()>0)
-                  <table class="table table-condensed">
-                    <tbody><tr>
-                      <th style="width: 10px">#</th>
-                      <th>Tipo de Documento</th>
-                      <th>Documento</th>
-                      <th>Nota</th>
-                      <th>Acciones</th>
-                    </tr>
-                  @foreach($clientes->catdocumentos as$key=>$documento)
-                    <tr>
-                      <td>{{$key+1}}</td>
-                      <td>{{$documento->cattipodoc->tipo}}</td>
-                      <td><a href="{!! asset($documento->archivo) !!}" target="_blank"> Documento </a></td>
-                      <td>{{$documento->nota}}</td>
-                      <td>
-                        {!! Form::open(['route' => ['catdocumentos.destroy', $documento->id], 'method' => 'delete', 'id'=>'delDocumento'.$documento->id]) !!}
-                        @can('documentos-edit')
-                        <button type="button" class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i> </button>
-                        @endcan
-                        @can('documentos-delete')
-                        <button type="button" class="btn btn-danger" rel="tooltip" title="Eliminar" Onclick="ConfirmDeleteDocumento({{$documento->id}})"> <i class="fa fa-remove"></i></button>
-                          {!! Form::hidden('redirect', 'clientes.show') !!}
-                          {!! Form::hidden('cliente_id', $clientes->id) !!}
-                          @endcan
-                        {!! Form::close() !!}
-                      </td>
-                    </tr>
-                    @endforeach
-                  </tbody>
-                </table>
-                @else
-                <p>No existen documentos del cliente.</p>
-                @endif
-                  <h1 class="pull-right">
-                    @can('documentos-create')
-                     <button type="button" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-documento">Agregar Documento</button>
-                    @endcan
-                  </h1>
-                </div>
-                <!-- /.box-body -->
 
-              </div>
-              @endcan
-              @can('catcuentas-list')
-              <div class="box box-primary">
-                  <div class="box-header">
-                    <h3 class="box-title">Cuentas del Cliente</h3>
-                    <div class="box-tools pull-right">
-                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-                  </button>
-                </div>
-                  </div>
-                  <!-- /.box-header -->
-                  <div class="box-body">
-                    @if($clientes->catcuentas->count()>0)
-                    <table class="table table-condensed">
-                      <tbody><tr>
-                        <th style="width: 10px">#</th>
-                        <th>Número de Cuenta</th>
-                        <th>Banco</th>
-                        <th>Sucursal</th>
-                        <th>Acciones</th>
-                      </tr>
-                    @foreach($clientes->catcuentas as$key=>$cuenta)
-                      <tr>
-                        <td>{{$key+1}}</td>
-                        <td>{{$cuenta->numcuenta}}</td>
-                        <td>{{$cuenta->catBanco->nombre}} </a></td>
-                        <td>{{$cuenta->sucursal}}</td>
-                        <td>
-                          {!! Form::open(['route' => ['catcuentas.destroy', $cuenta->id], 'method' => 'delete', 'id'=>'delCuenta'.$cuenta->id]) !!}
-                          @can('catcuentas-edit')
-                          <button type="button" class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i> </button>
-                          @endcan
-                          @can('catcuentas-delete')
-                          <button type="button" class="btn btn-danger" rel="tooltip" title="Eliminar" Onclick="ConfirmDeleteCuenta({{$cuenta->id}})"> <i class="fa fa-remove"></i></button>
-                            {!! Form::hidden('redirect', 'clientes.show') !!}
-                            {!! Form::hidden('cliente_id', $clientes->id) !!}
-                          @endcan
-                          {!! Form::close() !!}
-                        </td>
-                      </tr>
-                      @endforeach
-                    </tbody>
-                  </table>
-                  @else
-                  <p>No existen cuentas asociadas al cliente.</p>
-                  @endif
-                    <h1 class="pull-right">
-                      @can('catcuentas-create')
-                       <button type="button" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-cuenta">Agregar Cuenta</button>
-                      @endcan
-                    </h1>
-                  </div>
-                  <!-- /.box-body -->
-
-                </div>
-                @endcan
     </div>
-
+@stack ('modals')
     <div class="modal fade" id="modal-datcontacto">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -390,139 +259,8 @@
           <!-- /.modal -->
         </div>
         @endcan
-        @can('clientes-edit')
-        <div class="modal fade" id="modal-fotoperfil">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Modificar Foto de Perfil</h4>
-                  </div>
-                  <div class="modal-body">
-                      {!! Form::open(['url' => 'clientes/avatarchange', 'enctype' => 'multipart/form-data']) !!}
-                  <div>
-                      Actualice la foto del cliente.
-                      {!! Form::file('avatarimg',['accept'=>'image/*']) !!}
-                      {!! Form::hidden('cliente_id', $clientes->id) !!}
-                      <img class="profile-user-img img-responsive img-circle" src="{{asset($avatar)}}" alt="User profile picture">
-                  </div>
 
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
-                    @can('clientes-edit')
-                    <button type="submit" class="btn btn-primary" id="actualizafoto">Actualizar Foto</button>
-                    @endcan
-                  </div>
-                  {!! Form::close() !!}
-                </div>
-                <!-- /.modal-content -->
-              </div>
-              <!-- /.modal-dialog -->
-            </div>
-            <!-- /.modal -->
-          </div>
-          @endcan
-
-          <div class="modal fade" id="modal-documento">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title">Agregar Documento</h4>
-                    </div>
-                    <div class="modal-body">
-                        {!! Form::open(['route' => 'catdocumentos.store', 'enctype' => 'multipart/form-data']) !!}
-
-                    {!! Form::hidden('cliente_id', $clientes->id) !!}
-                    {!! Form::hidden('redirect', 'clientes.show') !!}
-                    <div class="form-group">
-                        {!! Form::label('tipodoc', 'Tipo de Documento:') !!}
-                        {!! Form::select('tipodoc', $tipodocs, null, ['class' => 'form-control']) !!}
-                    </div>
-
-                    <!-- Archivo Field -->
-                    <div class="form-group">
-                        {!! Form::label('archivo', 'Archivo:') !!}
-                        {!! Form::file('archivo', ['class' => 'form-control'])!!}
-                    </div>
-                    <div class="clearfix"></div>
-
-                    <!-- Nota Field -->
-                    <div class="form-group">
-                        {!! Form::label('nota', 'Nota:') !!}
-                        {!! Form::text('nota', null, ['class' => 'form-control']) !!}
-                    </div>
-                  </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
-                      <button type="submit" class="btn btn-primary" id="agregardoc">Agregar Documento</button>
-                    </div>
-                    {!! Form::close() !!}
-
-                  <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-              </div>
-              <!-- /.modal -->
-            </div>
-
-            <div class="modal fade" id="modal-cuenta">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Agregar Cuenta Bancaria</h4>
-                      </div>
-                      <div class="modal-body">
-                          {!! Form::open(['route' => 'catcuentas.store']) !!}
-
-                      {!! Form::hidden('cliente_id', $clientes->id) !!}
-                      {!! Form::hidden('redirect', 'clientes.show') !!}
-                      <!-- Banco Id Field -->
-                      <div class="form-group">
-                          {!! Form::label('banco_id', 'Banco:') !!}
-                          {!! Form::select('banco_id', $bancos, null, ['class' => 'form-control']) !!}
-                      </div>
-
-                      <!-- Numcuenta Field -->
-                      <div class="form-group">
-                          {!! Form::label('numcuenta', 'Número de cuenta:') !!}
-                          {!! Form::text('numcuenta', null, ['class' => 'form-control', 'required'=>'true', 'maxlength'=>'10']) !!}
-                      </div>
-
-                      <!-- Clabeinterbancaria Field -->
-                      <div class="form-group">
-                          {!! Form::label('clabeinterbancaria', 'Clabe Interbancaria:') !!}
-                          {!! Form::text('clabeinterbancaria', null, ['class' => 'form-control', 'maxlength'=>'18']) !!}
-                      </div>
-
-                      <!-- Sucursal Field -->
-                      <div class="form-group">
-                          {!! Form::label('sucursal', 'Sucursal:') !!}
-                          {!! Form::text('sucursal', null, ['class' => 'form-control', 'maxlength'=>'5']) !!}
-                      </div>
-
-                      <!-- Swift Field -->
-                      <div class="form-group">
-                          {!! Form::label('swift', 'Swift:') !!}
-                          {!! Form::text('swift', null, ['class' => 'form-control', 'maxlength'=>'30']) !!}
-                      </div>
-                    </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary" id="agregardoc">Agregar Cuenta</button>
-                      </div>
-                      {!! Form::close() !!}
-
-                    <!-- /.modal-content -->
-                  </div>
-                  <!-- /.modal-dialog -->
-                </div>
-                <!-- /.modal -->
-              </div>
+            
 @endsection
 @section('scripts')
 <script>

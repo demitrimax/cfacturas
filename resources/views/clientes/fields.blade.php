@@ -1,19 +1,13 @@
 <!-- Nombre Field -->
 <div class="form-group">
-    {!! Form::label('nombre', 'Nombre:*') !!}
+    {!! Form::label('nombre', 'Nombre/Razon:*') !!}
     {!! Form::text('nombre', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
-<!-- Apellidopat Field -->
+<!-- Nombre Comercial Field -->
 <div class="form-group">
-    {!! Form::label('apellidopat', 'Apellido Paterno:*') !!}
-    {!! Form::text('apellidopat', null, ['class' => 'form-control', 'required']) !!}
-</div>
-
-<!-- Apellidomat Field -->
-<div class="form-group">
-    {!! Form::label('apellidomat', 'Apellido Materno:*') !!}
-    {!! Form::text('apellidomat', null, ['class' => 'form-control', 'required']) !!}
+    {!! Form::label('nomcomercial', 'Nombre Comercial:') !!}
+    {!! Form::text('nomcomercial', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Rfc Field -->
@@ -21,13 +15,40 @@
     {!! Form::label('RFC', 'RFC:*') !!}
     {!! Form::text('RFC', null, ['class' => 'form-control', 'maxlength'=>'13', 'required']) !!}
 </div>
+<!-- Persona Fisica Field -->
+<div class="form-group">
+    {!! Form::checkbox('persfisica', 'false', null, ['onclick'=>'curpenable(this)']) !!}
+    {!! Form::label('persfisica', 'Persona Fisica') !!}
+</div>
 
 <!-- Curp Field -->
-<div class="form-group">
-    {!! Form::label('CURP', 'CURP:*') !!}
-    {!! Form::text('CURP', null, ['class' => 'form-control', 'maxlength'=>'18', 'onchange'=>'validarInput(this)', 'required']) !!}
+<div class="form-group" style="display:none;" id="curpfield">
+    {!! Form::label('CURP', 'CURP:') !!}
+    {!! Form::text('CURP', null, ['class' => 'form-control', 'maxlength'=>'18', 'onchange'=>'validarInput(this)']) !!}
     <!-- <pre id="resultado"></pre> -->
 </div>
+
+<!-- Correo Field -->
+<div class="form-group">
+    {!! Form::label('correo', 'Correo:*') !!}
+    {!! Form::text('correo', null, ['class' => 'form-control', 'maxlength'=>'120', 'required']) !!}
+</div>
+<!-- Direccion Field -->
+<div class="form-group">
+    {!! Form::label('direccion', 'Dirección:') !!}
+    {!! Form::text('direccion', null, ['class' => 'form-control']) !!}
+</div>
+<!-- Direccion Field -->
+<div class="form-group">
+    {!! Form::label('telefono', 'Teléfono:') !!}
+    {!! Form::text('telefono', null, ['class' => 'form-control']) !!}
+</div>
+<!-- Direccion Field -->
+<div class="form-group">
+    {!! Form::label('giroempresa', 'Giro Empresa:') !!}
+    {!! Form::text('giroempresa', null, ['class' => 'form-control']) !!}
+</div>
+
 <p><strong>*</strong> Datos Requeridos.</p>
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
@@ -80,6 +101,23 @@ function validarInput(input) {
     }
 
     resultado.innerText = "CURP: " + curp + "\nFormato: " + valido;
+}
+
+function curpenable(cheked) {
+     curpfield = document.getElementById('curpfield');
+     //var checkfield = document.getElementById("persfisica").checked;
+     var checkfield = cheked.checked;
+    //console.log(checkfield);
+  if (checkfield == true){
+    curpfield.style.display ='block';
+    document.getElementById("CURP").required = true;
+  }
+  else
+  {
+    curpfield.style.display = 'none';
+    document.getElementById("CURP").required = false;
+  }
+
 }
 </script>
 @endsection

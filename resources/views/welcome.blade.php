@@ -5,7 +5,7 @@
   <div class="container">
     <div class="row align-items-center justify-content-center ftco-vh-100">
       <div class="col-md-8 text-center">
-        <h1 class="ftco-heading mb-4" data-aos="fade-up" data-aos-delay="500"><img src="img/logo_wide.png" alt="JM Corp Logo" width="350" height="100"></h1>
+        <h1 class="ftco-heading mb-4" data-aos="fade-up" data-aos-delay="500"><img src="img/logo_wide_white.png" alt="JM Corp Logo" width="350" height="100"></h1>
         <h2 class="h5 ftco-subheading mb-5" data-aos="fade-up"  data-aos-delay="600">Despacho Contable.</h2>
         <p data-aos="fade-up"  data-aos-delay="700"><a href="https://free-template.co/" target="_blank" class="btn btn-outline-white px-4 py-3" data-toggle="modal" data-target="#reservationModal">Conocer Más</a></p>
       </div>

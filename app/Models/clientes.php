@@ -37,6 +37,11 @@ class clientes extends Model
         'apellidomat',
         'RFC',
         'CURP',
+        'persfisica',
+        'direccion',
+        'telefono',
+        'correo',
+        'giroempresa',
         'avatar'
     ];
     protected static $logAttributes = ['*'];
@@ -53,7 +58,11 @@ class clientes extends Model
         'apellidomat' => 'string',
         'RFC' => 'string',
         'CURP' => 'string',
-        'avatar' => 'string'
+        'persfisica' => 'integer',
+        'avatar' => 'string',
+        'correo' => 'string',
+        'telefono' => 'string',
+        'giroempresa' => 'integer'
     ];
 
     /**
@@ -63,9 +72,13 @@ class clientes extends Model
      */
     public static $rules = [
         'nombre' => 'required',
-        'apellidopat' => 'required',
-        'RFC' => 'max:15|required',
-        'CURP' => 'max:18|required'
+        'RFC' => 'max:15|required|unique:clientes',
+        'CURP' => 'max:18|unique:clientes'
+    ];
+
+    public static $messages = [
+        'RFC.unique' => 'El RFC escrito ya existe en la base de datos de clientes',
+        'RFC.required' => 'El RFC es un valor requerido',
     ];
 
     public function getNomcompletoAttribute()
