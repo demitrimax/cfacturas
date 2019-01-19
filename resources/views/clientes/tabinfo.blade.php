@@ -15,7 +15,7 @@
           <li><a href="#">Feha de Nacimiento <span class="pull-right">{{$edad}}</span></a></li>
           <li><a href="#">RFC <span class="pull-right" id="clientRFC">{!! $clientes->RFC !!}</span></a></li>
           <li><a href="#">CURP <span class="pull-right">{!! $clientes->CURP !!}</span></a></li>
-          <li><a href="#">Fecha de Alta <span class="pull-right">{!! $clientes->created_at !!}</span></a></li>
+          <li><a href="#">Fecha de Alta <span class="pull-right">{!! $clientes->created_at->format('d/m/Y h:i:s') !!}</span></a></li>
           <li><a href="{!! route('clientes.index') !!}" class="btn btn-success pull-right">Regresar</a></li>
         </ul>
 
@@ -23,7 +23,7 @@
     </div>
 
     <!-- Foto de Perfil -->
-    @push('modals')
+@push('modals')
     @can('clientes-edit')
     <div class="modal fade" id="modal-fotoperfil">
           <div class="modal-dialog">
@@ -57,4 +57,4 @@
         <!-- /.modal -->
       </div>
       @endcan
-      @endpush
+  @endpush

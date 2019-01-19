@@ -28,10 +28,10 @@
                 @include('clientes.tabdocumentos')
               </div>
               <div class="tab-pane" id="tab_6">
-                Datos Fiscales
+                @include('clientes.tabdireccion')
               </div>
               <div class="tab-pane" id="tab_7">
-                Datos de Contacto
+                @include('clientes.tabdatoscontacto')
               </div>
               <!-- /.tab-pane -->
             </div>

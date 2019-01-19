@@ -109,3 +109,23 @@
       </div>
       <!-- /.modal -->
     </div>
+
+    @push('scripts')
+    <script>
+    function ConfirmDeleteCuenta(id) {
+    swal({
+          title: '¿Estás seguro?',
+          text: 'Se eliminará la cuenta bancaria seleccinada.',
+          type: 'warning',
+          showCancelButton: true,
+          cancelButtonText: 'Cancelar',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Continuar',
+          }).then((result) => {
+    if (result.value) {
+      document.forms['delCuenta'+id].submit();
+      }
+    })
+    }
+    </script>
+    @endpush

@@ -99,3 +99,23 @@
     <!-- /.modal -->
   </div>
   @endpush
+
+  @push('scripts')
+  <script>
+  function ConfirmDeleteDocumento(id) {
+  swal({
+        title: '¿Estás seguro?',
+        text: 'Se eliminará el documento seleccionado.',
+        type: 'warning',
+        showCancelButton: true,
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Continuar',
+        }).then((result) => {
+  if (result.value) {
+    document.forms['delDocumento'+id].submit();
+    }
+  })
+  }
+  </script>
+  @endpush
