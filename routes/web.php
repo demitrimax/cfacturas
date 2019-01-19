@@ -24,7 +24,7 @@ Route::get('/privacidad', function() {
 });
 
 
-Route::group(['middleware'=>['auth','verified']], function() {
+Route::group(['middleware'=>['auth','verified','activity']], function() {
   Route::resource('clientes', 'clientesController');
   Route::resource('datcontactos', 'datcontactoController');
   Route::resource('direcciones', 'direccionesController');
@@ -70,11 +70,7 @@ Route::group(['middleware'=>['auth','verified']], function() {
   Route::resource('facturas', 'facturasController');
 
   Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+  Route::resource('blogs', 'blogController');
+  Route::resource('formapagos', 'formapagoController');
+  Route::resource('usocfdis', 'usocfdiController');
 });
-
-
-Route::resource('blogs', 'blogController');
-
-Route::resource('formapagos', 'formapagoController');
-
-Route::resource('usocfdis', 'usocfdiController');
