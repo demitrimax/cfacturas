@@ -5,6 +5,7 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
+use App\Models\clientes;
 
 /**
  * Class accomercial
@@ -160,8 +161,16 @@ class accomercial extends Model
     {
       $socioid = $this->sociocomer_id;
       $nomsocio = "N/D";
+
       if($socioid) {
-        $nomsocio = $this->sociocomer->nomcompleto;
+        $socio = clientes::where('id',$socioid)->first();
+        $nomsocio = "N/D";
+        //si existe
+        if(count($socio)>0)
+        {
+          $nomsocio = $this->sociocomer->nomcompleto;
+        }
+
       }
       return $nomsocio;
     }
