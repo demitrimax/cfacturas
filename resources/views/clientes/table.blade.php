@@ -2,8 +2,6 @@
     <thead>
         <tr>
           <th>Nombre</th>
-          <th>Apellido Paterno</th>
-          <th>Apellido Materno</th>
           <th>RFC</th>
           <th>CURP</th>
           <th>Acciones</th>
@@ -12,9 +10,7 @@
     <tbody>
     @foreach($clientes as $clientes)
         <tr>
-            <td>{!! $clientes->nombre !!}</td>
-            <td>{!! $clientes->apellidopat !!}</td>
-            <td>{!! $clientes->apellidomat !!}</td>
+            <td>{!! $clientes->nomcompleto !!}</td>
             <td>{!! $clientes->RFC !!}</td>
             <td>{!! $clientes->CURP !!}</td>
             <td>

@@ -15,8 +15,14 @@
           <li><a href="#">Feha de Nacimiento <span class="pull-right">{{$edad}}</span></a></li>
           <li><a href="#">RFC <span class="pull-right" id="clientRFC">{!! $clientes->RFC !!}</span></a></li>
           <li><a href="#">CURP <span class="pull-right">{!! $clientes->CURP !!}</span></a></li>
+          <li><a href="#">Correo Electronico <span class="pull-right">{!! $clientes->correo !!}</span></a></li>
+          <li><a href="#">Dirección <span class="pull-right">{!! $clientes->direccion !!}</span></a></li>
+          <li><a href="#">Teléfono <span class="pull-right">{!! $clientes->telefono !!}</span></a></li>
           <li><a href="#">Fecha de Alta <span class="pull-right">{!! $clientes->created_at->format('d/m/Y h:i:s') !!}</span></a></li>
-          <li><a href="{!! route('clientes.index') !!}" class="btn btn-success pull-right">Regresar</a></li>
+          <li>
+            <a href="{!! route('clientes.edit', [$clientes->id]) !!}" class="btn bg-purple btn-flat margin pull-right">Editar</a>
+            <a href="{!! route('clientes.index') !!}" class="btn bg-olive btn-flat margin pull-right">Regresar</a>
+          </li>
         </ul>
 
       </div>
