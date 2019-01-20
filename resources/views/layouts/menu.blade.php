@@ -25,6 +25,11 @@
           </a>
         </li>
         @endcan
+        @can('sociocomercial-list')
+        <li class="{{ Request::is('sociocomercials*') ? 'active' : '' }}">
+            <a href="{!! route('sociocomercials.index') !!}"><i class="fa fa-user-plus"></i><span>Socios Comerciales</span></a>
+        </li>
+        @endcan
         @can('empresas-list')
         <li class="{{ Request::is('catempresas*') ? 'active' : '' }}">
           <a href="{{url('/catempresas')}}">

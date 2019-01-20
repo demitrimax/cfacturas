@@ -73,4 +73,5 @@ Route::group(['middleware'=>['auth','verified','activity']], function() {
   Route::resource('blogs', 'blogController');
   Route::resource('formapagos', 'formapagoController');
   Route::resource('usocfdis', 'usocfdiController');
+  Route::resource('sociocomercials', 'sociocomercialController');
 });
