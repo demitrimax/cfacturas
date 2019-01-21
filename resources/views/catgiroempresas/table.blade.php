@@ -24,3 +24,17 @@
     @endforeach
     </tbody>
 </table>
+@section('scripts')
+<!-- DataTables -->
+<script src="{{asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+<script>
+  $(function () {
+    $('#catgiroempresas-table').DataTable({
+      "language": {
+                "url": "{{asset('adminlte/bower_components/datatables.net/Spanish.json')}}"
+            }
+    })
+  })
+</script>
+@endsection
