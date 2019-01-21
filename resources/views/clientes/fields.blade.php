@@ -6,7 +6,7 @@
 
 <!-- Nombre Comercial Field -->
 <div class="form-group">
-    {!! Form::label('nomcomercial', 'Nombre Comercial:') !!}
+    {!! Form::label('nomcomercial', 'Nombre Comercial:*') !!}
     {!! Form::text('nomcomercial', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
@@ -17,12 +17,13 @@
 </div>
 <!-- Persona Fisica Field -->
 <div class="form-group">
-    {!! Form::checkbox('persfisica', 'false', null, ['onclick'=>'curpenable(this)']) !!}
+    {!! Form::hidden('persfisica', false) !!}
+    {!! Form::checkbox('persfisica', '1', null, ['onclick'=>'curpenable(this)']) !!}
     {!! Form::label('persfisica', 'Persona Fisica') !!}
 </div>
 
 <!-- Curp Field -->
-<div class="form-group" style="display:none;" id="curpfield">
+<div class="form-group" id="curpfield" {!! ($clientes->persfisica == 1) ? "" : "style='display:none;'" !!}>
     {!! Form::label('CURP', 'CURP:') !!}
     {!! Form::text('CURP', null, ['class' => 'form-control', 'maxlength'=>'18', 'onchange'=>'validarInput(this)']) !!}
     <!-- <pre id="resultado"></pre> -->

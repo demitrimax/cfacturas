@@ -3,7 +3,8 @@
         <tr>
           <th>Nombre</th>
           <th>RFC</th>
-          <th>CURP</th>
+          <th>Giro</th>
+          <th>Tipo</th>
           <th>Acciones</th>
         </tr>
     </thead>
@@ -12,7 +13,10 @@
         <tr>
             <td>{!! $clientes->nomcompleto !!}</td>
             <td>{!! $clientes->RFC !!}</td>
-            <td>{!! $clientes->CURP !!}</td>
+            <td>{!! $clientes->giro !!}</td>
+            <td>
+              {!! ($clientes->persfisica == 1) ? '<span class="badge bg-blue"><i class="fa fa-toggle-on"></i> Persona Física</span>' : '<span class="badge bg-primary"><i class="fa fa-toggle-off"></i> Empresa</span>' !!}
+            </td>
             <td>
                 {!! Form::open(['route' => ['clientes.destroy', $clientes->id], 'method' => 'delete', 'id'=>'form'.$clientes->id]) !!}
                 <div class='btn-group'>
@@ -32,10 +36,9 @@
     <tfoot>
         <tr>
           <th>Nombre</th>
-          <th>Apellido Paterno</th>
-          <th>Apellido Materno</th>
           <th>RFC</th>
           <th>CURP</th>
+          <th>Persona Física</th>
           <th>Acciones</th>
         </tr>
     </tfoot>

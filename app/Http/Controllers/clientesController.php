@@ -69,6 +69,18 @@ class clientesController extends AppBaseController
      */
     public function store(CreateclientesRequest $request)
     {
+
+      $rules = [
+          'nombre' => 'required',
+          'RFC' => 'max:15|required|unique:clientes',
+          'CURP' => 'max:18|unique:clientes'
+      ];
+
+      $messages = [
+          'RFC.unique' => 'El RFC escrito ya existe en la base de datos de clientes',
+          'RFC.required' => 'El RFC es un valor requerido',
+      ];
+
         $input = $request->all();
 
         $clientes = $this->clientesRepository->create($input);

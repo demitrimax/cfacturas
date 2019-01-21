@@ -29,12 +29,11 @@ class clientes extends Model
 
     protected $softCascade = ['accomerciales@restrict'];
 
-
-
     public $fillable = [
         'nombre',
         'apellidopat',
         'apellidomat',
+        'nomcomercial',
         'RFC',
         'CURP',
         'persfisica',
@@ -54,11 +53,12 @@ class clientes extends Model
     protected $casts = [
         'id' => 'integer',
         'nombre' => 'string',
+        'nomcomercial' => 'string',
         'apellidopat' => 'string',
         'apellidomat' => 'string',
         'RFC' => 'string',
         'CURP' => 'string',
-        'persfisica' => 'integer',
+        'persfisica' => 'boolean',
         'avatar' => 'string',
         'correo' => 'string',
         'telefono' => 'string',
@@ -71,15 +71,9 @@ class clientes extends Model
      * @var array
      */
     public static $rules = [
-        'nombre' => 'required',
-        'RFC' => 'max:15|required|unique:clientes',
-        'CURP' => 'max:18|unique:clientes'
+
     ];
 
-    public static $messages = [
-        'RFC.unique' => 'El RFC escrito ya existe en la base de datos de clientes',
-        'RFC.required' => 'El RFC es un valor requerido',
-    ];
 
     public function getNomcompletoAttribute()
     {
