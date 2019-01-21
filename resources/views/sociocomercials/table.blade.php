@@ -16,9 +16,9 @@
             <td>
                 {!! Form::open(['route' => ['sociocomercials.destroy', $sociocomercial->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
-                    <a href="{!! route('sociocomercials.show', [$sociocomercial->id]) !!}" class='btn btn-default'><i class="glyphicon glyphicon-eye-open"></i></a>
+                    <a href="{!! route('sociocomercials.show', [$sociocomercial->id]) !!}" class='btn btn-info'><i class="glyphicon glyphicon-eye-open"></i></a>
                     @can('sociocomercial-edit')
-                    <a href="{!! route('sociocomercials.edit', [$sociocomercial->id]) !!}" class='btn btn-default'><i class="glyphicon glyphicon-edit"></i></a>
+                    <a href="{!! route('sociocomercials.edit', [$sociocomercial->id]) !!}" class='btn btn-primary'><i class="glyphicon glyphicon-edit"></i></a>
                     @endcan
                     @can('sociocomercial-delete')
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger', 'onclick' => "return confirm('Are you sure?')"]) !!}

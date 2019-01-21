@@ -31,7 +31,7 @@
             </div>
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
-                <li><a href="mailbox.html"><i class="fa fa-clock-o"></i> Creada hace:
+                <li><a href="#"><i class="fa fa-clock-o"></i> Creada hace:
                   <span class="label label-{{$solicitudes->semaforofecha}} pull-right">{{$solicitudes->created_at->diffForHumans()}}</span></a></li>
                 <li><a href="#"><i class="fa fa-hand-o-right"></i> Asignada a: <span class="label label-primary pull-right">{{$solicitudes->asignado}}</span></a></a></li>
                 <li><a href="#"><i class="fa fa-wrench"></i> Estado</a></li>
@@ -125,7 +125,7 @@
             <div class="box-footer">
               <div class="pull-right">
                 <a href="{{url('/solfact')}}" type="button" class="btn btn-default"><i class="fa fa-reply"></i> Regresar </a>
-                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-primary"><i class="fa fa-share"></i> Asignar</button>
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-primary"><i class="fa fa-street-view"></i> Asignar</button>
 
               </div>
               @can('solicitud-delete')

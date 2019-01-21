@@ -106,5 +106,10 @@ class clientes extends Model
       return $this->hasMany('App\Models\accomercial', 'cliente_id');
     }
 
+    public function giroempresas()
+    {
+      return $this->belongsTo('App\Models\catgiroempresa', 'giroempresa');
+    }
+
 
 }

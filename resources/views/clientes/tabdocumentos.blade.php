@@ -49,9 +49,10 @@
         @endcan
       </h1>
     <!-- /.box-body -->
+  </div>
+  </div>
   @endcan
-</div>
-</div>
+
 
 <!--modal -->
 @push('modals')

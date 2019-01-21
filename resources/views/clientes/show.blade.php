@@ -21,7 +21,7 @@
   <div class="content">
       @include('clientes.tabs')
 
-      </div>
+  </div>
 
 @stack('modals')
 

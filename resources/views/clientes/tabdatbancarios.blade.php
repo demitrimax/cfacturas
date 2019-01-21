@@ -50,9 +50,9 @@
       </h1>
     </div>
     <!-- /.box-body -->
-
   </div>
   @endcan
+
 <!-- Modal Cuenta Bancaria -->
   <div class="modal fade" id="modal-cuenta">
         <div class="modal-dialog">
@@ -63,7 +63,7 @@
               <h4 class="modal-title">Agregar Cuenta Bancaria</h4>
             </div>
             <div class="modal-body">
-                {!! Form::open(['route' => 'catcuentas.store']) !!}
+        {!! Form::open(['route' => 'catcuentas.store']) !!}
 
             {!! Form::hidden('cliente_id', $clientes->id) !!}
             {!! Form::hidden('redirect', 'clientes.show') !!}

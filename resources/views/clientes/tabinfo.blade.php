@@ -12,12 +12,14 @@
       </div>
       <div class="box-footer no-padding">
         <ul class="nav nav-stacked">
+          <li><a href="#">Nombre Comercial: <span class="pull-right" id="clientRFC">{!! $clientes->nomcomercial !!}</span></a></li>
           <li><a href="#">Feha de Nacimiento <span class="pull-right">{{$edad}}</span></a></li>
           <li><a href="#">RFC <span class="pull-right" id="clientRFC">{!! $clientes->RFC !!}</span></a></li>
           <li><a href="#">CURP <span class="pull-right">{!! $clientes->CURP !!}</span></a></li>
           <li><a href="#">Correo Electronico <span class="pull-right">{!! $clientes->correo !!}</span></a></li>
           <li><a href="#">Dirección <span class="pull-right">{!! $clientes->direccion !!}</span></a></li>
           <li><a href="#">Teléfono <span class="pull-right">{!! $clientes->telefono !!}</span></a></li>
+          <li><a href="#">Giro <span class="pull-right">{!! $clientes->giroempresas->descripcion !!}</span></a></li>
           <li><a href="#">Fecha de Alta <span class="pull-right">{!! $clientes->created_at->format('d/m/Y h:i:s') !!}</span></a></li>
           <li>
             <a href="{!! route('clientes.edit', [$clientes->id]) !!}" class="btn bg-purple btn-flat margin pull-right">Editar</a>
@@ -28,9 +30,10 @@
       </div>
     </div>
 
-    <!-- Foto de Perfil -->
+
 @push('modals')
     @can('clientes-edit')
+        <!-- Foto de Perfil -->
     <div class="modal fade" id="modal-fotoperfil">
           <div class="modal-dialog">
             <div class="modal-content">

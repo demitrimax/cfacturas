@@ -55,6 +55,7 @@
   @endcan
 
   @can('direccion-create')
+  @push('modals')
   <div class="modal fade" id="modal-direccion">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -145,6 +146,7 @@
       </div>
       <!-- /.modal -->
     </div>
+    @endpush
     @push('scripts')
     <script>
     $('#estado_id').on('change', function(e) {
