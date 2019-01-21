@@ -19,6 +19,7 @@ use Intervention\Image\ImageManager;
 use App\Models\cattipodoc;
 use App\Models\cat_bancos;
 use App\Helpers\VerificaRFC;
+use App\Models\catgiroempresa;
 
 class clientesController extends AppBaseController
 {
@@ -57,7 +58,9 @@ class clientesController extends AppBaseController
      */
     public function create()
     {
-        return view('clientes.create');
+        $giro = catgiroempresa::pluck('descripcion','id');
+        //$clientes = null;
+        return view('clientes.create')->with(compact('giro'));
     }
 
     /**
@@ -171,8 +174,8 @@ class clientesController extends AppBaseController
 
             return redirect(route('clientes.index'));
         }
-
-        return view('clientes.edit')->with('clientes', $clientes);
+        $giro = catgiroempresa::pluck('descripcion','id');
+        return view('clientes.edit')->with(compact('clientes','giro'));
     }
 
     /**

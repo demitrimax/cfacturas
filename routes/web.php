@@ -75,3 +75,6 @@ Route::group(['middleware'=>['auth','verified','activity']], function() {
   Route::resource('usocfdis', 'usocfdiController');
   Route::resource('sociocomercials', 'sociocomercialController');
 });
+
+
+Route::resource('catgiroempresas', 'catgiroempresaController');

@@ -65,7 +65,7 @@
 <li class="{{ Request::is('users*') ? 'active' : '' }}">
     <a href="{!! route('users.index') !!}"><i class="fa fa-edit"></i><span>Usuarios</span></a>
 </li>
-@if( Request::is('user*') || Request::is('permissions*') || Request::is('cattmovimientos*') || Request::is('pagocondicions*') || Request::is('roles*') || Request::is('pagometodo*') || Request::is('facestatuses*') || Request::is('logs*') || Request::is('blog*') || Request::is('formapagos*') )
+@if( Request::is('user*') || Request::is('permissions*') || Request::is('cattmovimientos*') || Request::is('pagocondicions*') || Request::is('roles*') || Request::is('pagometodo*') || Request::is('facestatuses*') || Request::is('logs*') || Request::is('blog*') || Request::is('formapagos*') || Request::is('catgiroempresas*') )
 <li class="treeview active">
 @else
 <li class="treeview">
@@ -90,27 +90,32 @@
             @endcan
             @can('formapagos')
             <li class="{{ Request::is('formapagos*') ? 'active' : '' }}">
-                <a href="{!! route('formapagos.index') !!}"><i class="fa fa-credit-card"></i><span>Forma de pagos</span></a>
+                <a href="{!! route('formapagos.index') !!}"><i class="fa fa-credit-card"></i><span>Cat. Forma de pagos</span></a>
             </li>
             @endcan
             @can('pagocondicion')
             <li class="{{ Request::is('pagocondicions*') ? 'active' : '' }}">
-                <a href="{!! route('pagocondicions.index') !!}"><i class="fa fa-dot-circle-o"></i><span>Condiciones de Pago</span></a>
+                <a href="{!! route('pagocondicions.index') !!}"><i class="fa fa-dot-circle-o"></i><span>Cat. Condiciones de Pago</span></a>
             </li>
             @endcan
             @can('pagometodo')
             <li class="{{ Request::is('pagometodos*') ? 'active' : '' }}">
-                <a href="{!! route('pagometodos.index') !!}"><i class="fa fa-bookmark-o"></i><span>Métodos de pago</span></a>
+                <a href="{!! route('pagometodos.index') !!}"><i class="fa fa-bookmark-o"></i><span>Cat. Métodos de pago</span></a>
             </li>
             @endcan
             @can('usocfdi')
             <li class="{{ Request::is('usocfdis*') ? 'active' : '' }}">
-                <a href="{!! route('usocfdis.index') !!}"><i class="fa fa-paper-plane-o"></i><span>Uso de CFDI</span></a>
+                <a href="{!! route('usocfdis.index') !!}"><i class="fa fa-paper-plane-o"></i><span>Cat. Uso de CFDI</span></a>
             </li>
             @endcan
             @can('estatusfac')
             <li class="{{ Request::is('facestatuses*') ? 'active' : '' }}">
-                <a href="{!! route('facestatuses.index') !!}"><i class="fa fa-glass"></i><span>Estatus de Facturas</span></a>
+                <a href="{!! route('facestatuses.index') !!}"><i class="fa fa-glass"></i><span>Cat. Estatus de Facturas</span></a>
+            </li>
+            @endcan
+            @can('catgiro')
+            <li class="{{ Request::is('catgiroempresas*') ? 'active' : '' }}">
+                <a href="{!! route('catgiroempresas.index') !!}"><i class="fa fa-edit"></i><span>Cat. Giro Empresas</span></a>
             </li>
             @endcan
 

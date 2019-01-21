@@ -1,3 +1,6 @@
+@section('css')
+<link href="{{asset('adminlte/bower_components/select2/dist/css/select2.min.css')}}" rel="stylesheet" />
+@endsection
 <!-- Nombre Field -->
 <div class="form-group">
     {!! Form::label('nombre', 'Nombre/Razon:*') !!}
@@ -18,12 +21,12 @@
 <!-- Persona Fisica Field -->
 <div class="form-group">
     {!! Form::hidden('persfisica', false) !!}
-    {!! Form::checkbox('persfisica', '1', null, ['onclick'=>'curpenable(this)']) !!}
+    {!! Form::checkbox('persfisica', '1', 1, ['onclick'=>'curpenable(this)']) !!}
     {!! Form::label('persfisica', 'Persona Fisica') !!}
 </div>
 
 <!-- Curp Field -->
-<div class="form-group" id="curpfield" {!! ($clientes->persfisica == 1) ? "" : "style='display:none;'" !!}>
+<div class="form-group" id="curpfield">
     {!! Form::label('CURP', 'CURP:') !!}
     {!! Form::text('CURP', null, ['class' => 'form-control', 'maxlength'=>'18', 'onchange'=>'validarInput(this)']) !!}
     <!-- <pre id="resultado"></pre> -->
@@ -47,7 +50,7 @@
 <!-- Direccion Field -->
 <div class="form-group">
     {!! Form::label('giroempresa', 'Giro Empresa:') !!}
-    {!! Form::text('giroempresa', null, ['class' => 'form-control']) !!}
+    {!! Form::select('giroempresa', $giro, null, ['class' => 'form-control select2']) !!}
 </div>
 
 <p><strong>*</strong> Datos Requeridos.</p>
@@ -58,7 +61,11 @@
 </div>
 
 @section('scripts')
+<script src="{{asset('adminlte/bower_components/select2/dist/js/select2.full.min.js')}}"></script>
 <script>
+$(document).ready(function() {
+    $('.select2').select2();
+});
 //Función para validar una CURP
 function curpValida(curp) {
     var re = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/,
