@@ -131,7 +131,12 @@ class solicitudesController extends AppBaseController
         $solicitudes = $this->solicitudesRepository->findWithoutFail($id);
         if (!empty($solicitudes))
         {
-          $tamanoadjunto = SomeClass::bytesToHuman(filesize($solicitudes->adjunto));
+          $tamanoadjunto = "(No Existe Archivo)";
+          if (file_exists($solicitudes->adjunto))
+          {
+              $tamanoadjunto = SomeClass::bytesToHuman(filesize($solicitudes->adjunto));
+          }
+
           $empleados = User::role(['empleado','gerente'])->get();
           $empleados = $empleados->pluck('name','id');
           $borrados = facsolicitud::onlyTrashed()->count();
