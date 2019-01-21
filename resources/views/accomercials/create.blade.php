@@ -51,6 +51,7 @@ function sociocomercialremove(index)
   var sel = document.getElementById("cliente_id");
   sel.remove(index);
 }
+
 $('#cliente_id').on('change', function(e) {
   //console.log(e);
   var cliente_id = e.target.value;
@@ -64,6 +65,7 @@ $('#cliente_id').on('change', function(e) {
     });
   });
 });
+
 $('#cliente_id').on('change', function(e) {
   //console.log(e);
   var cliente_id = e.target.value;
@@ -77,6 +79,7 @@ $('#cliente_id').on('change', function(e) {
     });
   });
 });
+
  $(function () {
 //iCheck for checkbox and radio inputs
 $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
@@ -94,6 +97,7 @@ $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
   radioClass   : 'iradio_flat-green'
 })
 })
+
 </script>
 
 @endsection

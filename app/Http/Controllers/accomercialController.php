@@ -23,6 +23,7 @@ use App\Mail\acuerdocomer;
 use App\Mail\acuerdocomerinter;
 use App\User;
 use App\Models\blog;
+use App\Models\sociocomercial;
 
 class accomercialController extends AppBaseController
 {
@@ -61,10 +62,10 @@ class accomercialController extends AppBaseController
      */
     public function create()
     {
-        $sociocomer = clientes::all();
-        $sociocomer = $sociocomer->pluck('nomcompleto','id');
+        $sociocomer = sociocomercial::all();
+        $sociocomer = $sociocomer->pluck('nombre','id');
         $clientes = clientes::all();
-        $clientes = $sociocomer;
+        $clientes = $clientes->pluck('nomcompleto','id');
         $usuarios = users::pluck('name','id');
         $empresas = catempresas::pluck('nombre','id');
         $blog = blog::find(1);
