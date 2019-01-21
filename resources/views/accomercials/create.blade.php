@@ -52,6 +52,17 @@ function sociocomercialremove(index)
   sel.remove(index);
 }
 
+$('#sociocomer_id').on('change', function(e) {
+  //console.log(e);
+  var sociocomer_id = e.target.value;
+  //ajax
+  $.get('/GetComisiones/'+sociocomer_id, function(data) {
+    //exito al obtener los datos
+    console.log(data);
+    $('#asoc_comision').val(data[0]['comision']);
+  });
+});
+
 $('#cliente_id').on('change', function(e) {
   //console.log(e);
   var cliente_id = e.target.value;

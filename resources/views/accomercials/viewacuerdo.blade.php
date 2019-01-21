@@ -17,13 +17,10 @@
           <address>
             <strong>{{$accomercial->cliente->nomcompleto}}</strong><br>
             <hr>
-            <strong>Datos Fiscales Referido</strong><br>
-            {{$accomercial->direccion->razonsocial ." | ".$accomercial->direccion->RFC}}<br>
-            {{$accomercial->direccion->calle.' '.$accomercial->direccion->numeroExt.' '.$accomercial->direccion->numeroInt}}<br>
-            @foreach($accomercial->cliente->datcontacto as $datcontacto)
-            {{$datcontacto->tipo.' : '.$datcontacto->contacto}}<br>
-            @endforeach
-            {{$accomercial->direccion->municipios->nomMunicipio.', '.$accomercial->direccion->estados->nombre}}<br>
+            <strong>Datos Fiscales</strong><br>
+            {{$accomercial->cliente->RFC}}<br>
+            {{$accomercial->cliente->direccion}}<br>
+            {{$accomercial->correo}}<br>
           </address>
         </div>
         <!-- /.col -->
@@ -148,10 +145,10 @@
         <div class="col-sm-4 invoice-col">
           Supervisa
           <address>
-            <strong>{{$accomercial->autuser->name}} </strong><br>
+            <strong>{{$accomercial->aut_user_id}} </strong><br>
             <br>
             <hr>
-            <b>{{$accomercial->autuser->cargo}}</b>
+            <b>{{$accomercial->aut_user_id}}</b>
           </address>
         </div>
 
@@ -160,10 +157,10 @@
         <div class="col-sm-4 invoice-col">
           Autoriza
           <address>
-            <strong>{{$accomercial->autuser2->name}} </strong><br>
+            <strong>{{$accomercial->aut_user2_id}} </strong><br>
             <br>
             <hr>
-            <b>{{$accomercial->autuser2->cargo}}</b>
+            <b>{{$accomercial->aut_user2_id}}</b>
           </address>
         </div>
 

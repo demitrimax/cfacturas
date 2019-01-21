@@ -48,6 +48,7 @@ Route::group(['middleware'=>['auth','verified','activity']], function() {
   Route::get('accomercials/notificaralta/{id}', 'accomercialController@notificaralta');
   Route::get('GetDirecciones/{id}','accomercialController@GetDirecciones');
   Route::get('GetCuentas/{id}','accomercialController@GetCuentas');
+  Route::get('GetComisiones/{id}','accomercialController@GetComisiones');
 
 
   Route::resource('roles','RoleController');

@@ -33,16 +33,10 @@
     {!! Form::select('cliente_id', $clientes, null, ['class' => 'form-control select2', 'style'=>'width: 100%;', 'required', 'placeholder'=>'Seleccione uno']) !!}
 </div>
 
-<!-- Direccion Id Field -->
-<div class="form-group">
-    {!! Form::label('direccion_id', 'Razón Social:*') !!}
-    {!! Form::select('direccion_id', [''=>'Seleccione un cliente'],null, ['class' => 'form-control', 'required']) !!}
-</div>
-
 <!-- Cuenta Id Field -->
 <div class="form-group">
     {!! Form::label('cuenta_id', 'Cuenta asociada:*') !!}
-    {!! Form::select('cuenta_id', [''=>'Seleccione un cliente'], null, ['class' => 'form-control', 'required']) !!}
+    {!! Form::select('cuenta_id', [''=>'Seleccione una cuenta'], null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Empresas Asociadas al Acuerdo Comercial -->
@@ -59,7 +53,7 @@
 
 <!-- Informacion Field -->
 <div class="form-group">
-    {!! Form::label('informacion', 'Informacion:') !!}
+    {!! Form::label('informacion', 'Observaciones:') !!}
     {!! Form::text('informacion', null, ['class' => 'form-control', 'maxlength' =>'150']) !!}
 </div>
 
@@ -75,8 +69,6 @@
     {!! Form::number('ac_secundarioporc', null, ['class' => 'form-control', 'step'=>'0.01', 'max' => '15.00', 'min'=>'0.09']) !!}
 </div>
 
-
-
 <!-- Elab User Id Field -->
 <div class="form-group">
     {!! Form::label('elab_user_id0', 'Usuario que Elabora:*') !!}
@@ -86,8 +78,8 @@
 @can('accomerciales-authorized')
 <!-- Aut User Id Field -->
 <div class="form-group">
-    {!! Form::label('aut_user_id', 'Usuario que Supervis:') !!}
-    {!! Form::select('aut_user_id', $usuarios,null, ['class' => 'form-control', 'required']) !!}
+    {!! Form::label('aut_user_id', 'Usuario que Supervisa:') !!}
+    {!! Form::select('aut_user_id', $usuarios, null, ['class' => 'form-control', 'required']) !!}
 </div>
 @endcan
 @can('accomerciales-supervised')
@@ -101,5 +93,5 @@
 <!-- Submit Field -->
 <div class="form-group">
     {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
-    <a href="{!! route('accomercials.index') !!}" class="btn btn-default">Cancel</a>
+    <a href="{!! route('accomercials.index') !!}" class="btn btn-default">Cancelar</a>
 </div>

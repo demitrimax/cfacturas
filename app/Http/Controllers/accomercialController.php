@@ -86,11 +86,11 @@ class accomercialController extends AppBaseController
           //'fechasolicitud' => 'required',
           'sociocomer_id' => 'integer|nullable',
           'cliente_id' => 'required',
-          'direccion_id' => 'required',
+          //'direccion_id' => 'required',
           'cuenta_id' => 'required',
           'descripcion' => 'required',
           'ac_principalporc' => 'required',
-          'aut_user_id' => 'required',
+          //'aut_user_id' => 'required',
           'empresasasoc' => 'required',
         ];
         $this->validate($request, $rules);
@@ -113,8 +113,14 @@ class accomercialController extends AppBaseController
         $accomercial->ac_secundarioporc = $request->input('ac_secundarioporc');
         $accomercial->autorizado = $request->input('autorizado');
         $accomercial->elab_user_id = $request->input('elab_user_id');
-        $accomercial->aut_user_id = $request->input('aut_user_id');
-        $accomercial->aut_user2_id = $request->input('aut_user2_id');
+        if ($request->input('aut_user_id'))
+        {
+            $accomercial->aut_user_id = $request->input('aut_user_id');
+        }
+        if ($request->input('aut_user2_id'))
+        {
+              $accomercial->aut_user2_id = $request->input('aut_user2_id');
+        }
         $accomercial->save();
 
         foreach ($request->input('empresasasoc') as $empresas)
@@ -134,7 +140,7 @@ class accomercialController extends AppBaseController
         $cliente = $accomercial->cliente->datcontacto->where('tipo','email')->first();
         $usuarioelabora = $accomercial->elabuser;
         //dd($cliente->contacto);
-        Mail::to($cliente->contacto)->send(new acuerdocomer($accomercial));
+        //Mail::to($cliente->correo)->send(new acuerdocomer($accomercial));
         Mail::to($usuarioelabora)->send(new acuerdocomerinter($accomercial));
         Mail::to($gerentes)->send(new acuerdocomerinter($accomercial));
         //return (new \App\Mail\acuerdocomer($accomercial))->render();
@@ -248,6 +254,11 @@ class accomercialController extends AppBaseController
     {
       $cuentas = catcuentas::where('cliente_id',$id)->select('id','numcuenta')->get();
       return $cuentas;
+    }
+    public function GetComisiones($id)
+    {
+      $comisiones = sociocomercial::where('id',$id)->select('id','comision')->get();
+      return $comisiones;
     }
     //MUESTRA LA VERSION IMPRIMIBLE
     public function verprint($id)

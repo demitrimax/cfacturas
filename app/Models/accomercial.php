@@ -184,4 +184,5 @@ class accomercial extends Model
       }
       return $nomcliente;
     }
+    
 }

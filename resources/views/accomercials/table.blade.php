@@ -22,9 +22,9 @@
             <td>
               {!! ($accomercial->autorizado == 1) ? '<span class="badge bg-blue"><i class="fa fa-check"></i></span>' : '<span class="badge bg-red"><i class="fa fa-close"></i></span>' !!}
             </td>
-            <td>{!! $accomercial->elabuser->name !!}</td>
-            <td>{!! $accomercial->autuser->name !!}</td>
-            <td>{!! $accomercial->autuser2->name !!}</td>
+            <td>{!! $accomercial->elabuser->name  !!}</td>
+            <td>{!! $accomercial->aut_user_id !!}</td>
+            <td>{!! $accomercial->aut_user_id2 !!}</td>
             <td>
                 {!! Form::open(['route' => ['accomercials.destroy', $accomercial->id], 'method' => 'delete', 'id'=>'form'.$accomercial->id]) !!}
                 <div class='btn-group'>
