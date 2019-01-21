@@ -35,7 +35,7 @@
                     @can('solicitud-edit')
                     <a href="{!! route('solfact.edit', [$solicitudes->id]) !!}" class='btn btn-primary'><i class="glyphicon glyphicon-edit"></i></a>
                     @endcan
-                    @can('solcitud-delete')
+                    @can('solicitud-delete')
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'button', 'class' => 'btn btn-danger', 'onclick' => "ConfirmDelete(".$solicitudes->id.")"]) !!}
                     @endcan
                 </div>

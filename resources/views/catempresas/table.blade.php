@@ -22,9 +22,9 @@
             <td>
                 {!! Form::open(['route' => ['catempresas.destroy', $catempresas->id], 'method' => 'delete', 'id' => 'form'.$catempresas->id]) !!}
                 <div class='btn-group'>
-                    <a href="{!! route('catempresas.show', [$catempresas->id]) !!}" class='btn btn-default'><i class="glyphicon glyphicon-eye-open"></i></a>
+                    <a href="{!! route('catempresas.show', [$catempresas->id]) !!}" class='btn btn-info'><i class="glyphicon glyphicon-eye-open"></i></a>
                     @can('empresas-edit')
-                    <a href="{!! route('catempresas.edit', [$catempresas->id]) !!}" class='btn btn-default'><i class="glyphicon glyphicon-edit"></i></a>
+                    <a href="{!! route('catempresas.edit', [$catempresas->id]) !!}" class='btn btn-primary><i class="glyphicon glyphicon-edit"></i></a>
                     @endcan
                     @can('empresas-delete')
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'button', 'class' => 'btn btn-danger', 'onclick' => "ConfirmDelete($catempresas->id)"]) !!}
