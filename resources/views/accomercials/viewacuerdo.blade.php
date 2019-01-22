@@ -29,11 +29,11 @@
         @if($accomercial->sociocomer_id)
           Asociado Comercial {{ $accomercial->asoc_comision."%" }}
           <address>
-            <strong>{{ $accomercial->sociocomer->nomcompleto }}</strong><br>
-            @foreach($accomercial->sociocomer->datcontacto as $datcontacto)
-            {{$datcontacto->tipo.' : '.$datcontacto->contacto}}<br>
-            @endforeach
+            <strong>{{ $accomercial->sociocomer->nombre }}</strong><br>
             {{$accomercial->sociocomer->RFC}}<br>
+            {{$accomercial->sociocomer->direccion}}<br>
+            {{$accomercial->correo}}<br>
+            <br>
           </address>
         @endif
         </div>
@@ -43,7 +43,7 @@
         <div class="col-sm-4 invoice-col">
           <b>AC No. #{{ date('y').str_pad($accomercial->id,3,"0",STR_PAD_LEFT) }}</b><br>
           <br>
-          <b>Autorizado por:</b> {{ $accomercial->aut_user2_id}}<br>
+          <b>Autorizado por:</b> {{ $accomercial->nomautoriza}}<br>
           <b>Creado el: </b> {{ $accomercial->created_at->format('d/m/Y')}}<br>
           @if( $accomercial->created_at <> $accomercial->updated_at )
           <b>Actualizado el :</b> {{ $accomercial->updated_at->format('d/m/Y')}} <br>
@@ -145,10 +145,12 @@
         <div class="col-sm-4 invoice-col">
           Supervisa
           <address>
-            <strong>{{$accomercial->aut_user_id}} </strong><br>
+            <strong>{{$accomercial->nomsupervisor }} </strong><br>
             <br>
             <hr>
-            <b>{{$accomercial->aut_user_id}}</b>
+            @if ($accomercial->nomsupervisor<>"N/D")
+            <b>{{$accomercial->autuser->cargo}}</b>
+            @endif
           </address>
         </div>
 
@@ -157,10 +159,12 @@
         <div class="col-sm-4 invoice-col">
           Autoriza
           <address>
-            <strong>{{$accomercial->aut_user2_id}} </strong><br>
+            <strong>{{$accomercial->nomautoriza}} </strong><br>
             <br>
             <hr>
-            <b>{{$accomercial->aut_user2_id}}</b>
+            @if ($accomercial->nomsupervisor<>"N/D")
+            <b>{{$accomercial->autuser2->cargo}}</b>
+            @endif
           </address>
         </div>
 

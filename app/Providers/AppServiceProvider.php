@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Carbon;
 use App\Models\solicitudes;
 use Illuminate\Support\Facades\View;
 use Auth;
@@ -20,6 +21,8 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Schema::defaultStringLength(191);
+        //Carbon::setlocale(LC_ALL,'es_ES');
+        setlocale(LC_ALL,"es_ES");
 
         view()->composer('*', function($view)
       {

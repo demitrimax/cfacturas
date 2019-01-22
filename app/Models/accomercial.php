@@ -6,6 +6,8 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
 use App\Models\clientes;
+use App\Models\sociocomer;
+use App\Models\users;
 
 /**
  * Class accomercial
@@ -109,7 +111,7 @@ class accomercial extends Model
      **/
     public function sociocomer()
     {
-        return $this->belongsTo('App\Models\clientes','sociocomer_id');
+        return $this->belongsTo('App\Models\sociocomercial','sociocomer_id');
     }
 
     /**
@@ -163,12 +165,12 @@ class accomercial extends Model
       $nomsocio = "N/D";
 
       if($socioid) {
-        $socio = clientes::where('id',$socioid)->first();
+        $socio = sociocomercial::where('id',$socioid)->first();
         $nomsocio = "N/D";
         //si existe
         if(count($socio)>0)
         {
-          $nomsocio = $this->sociocomer->nomcompleto;
+          $nomsocio = $this->sociocomer->nombre;
         }
 
       }
@@ -184,5 +186,33 @@ class accomercial extends Model
       }
       return $nomcliente;
     }
-    
+    public function getNomsupervisorAttribute()
+    {
+      $nomsupervisor = "N/D";
+      $autoriza1_id = $this->aut_user_id;
+      if ($autoriza1_id)
+      {
+        $autoriza1 = users::where('id',$autoriza1_id)->first();
+        if (count($autoriza1)>0)
+        {
+          $nomsupervisor = $this->autuser->name;
+        }
+      }
+      return $nomsupervisor;
+    }
+    public function getNomautorizaAttribute()
+    {
+      $nomautoriza = "N/D";
+      $autoriza2_id = $this->aut_user2_id;
+      if ($autoriza2_id)
+      {
+        $autoriza2 = users::where('id',$autoriza2_id)->first();
+        if (count($autoriza2)>0)
+        {
+          $nomautoriza = $this->autuser->name;
+        }
+      }
+      return $nomautoriza;
+    }
+
 }

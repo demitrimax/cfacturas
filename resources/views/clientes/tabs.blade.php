@@ -15,7 +15,7 @@
               </div>
               <!-- /.tab-pane -->
               <div class="tab-pane" id="tab_2">
-                No existen acuerdo comercial con el usuario.
+                @include('clientes.tabacuerdos')
               </div>
               <!-- /.tab-pane -->
               <div class="tab-pane" id="tab_3">

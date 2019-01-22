@@ -16,6 +16,6 @@
           <li class="active">Acuerdo</li>
       </ol>
 
-                    @include('accomercials.viewacuerdo')
+@include('accomercials.viewacuerdo')
 
 @endsection

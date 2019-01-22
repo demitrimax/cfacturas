@@ -6,7 +6,7 @@
 
         <h1 class="pull-right">
             @can('sociocomercial-create')
-           <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('sociocomercials.create') !!}">Agregar Nuevo</a>
+           <a class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('sociocomercials.create') !!}">Agregar Nuevo</a>
             @endcan
         </h1>
     </section>
