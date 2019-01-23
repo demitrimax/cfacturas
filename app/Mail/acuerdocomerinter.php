@@ -31,6 +31,6 @@ class acuerdocomerinter extends Mailable
      */
     public function build()
     {
-        return $this->markdown('acuerdo.comercial.creadointerno');
+        return $this->markdown('acuerdo.comercial.creadointerno')->subject('Nuevo Acuerdo Comercial');
     }
 }

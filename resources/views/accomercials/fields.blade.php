@@ -1,3 +1,8 @@
+@section('css')
+<link href="{{asset('adminlte/bower_components/select2/dist/css/select2.min.css')}}" rel="stylesheet" />
+<!-- iCheck for checkboxes and radio inputs -->
+ <link rel="stylesheet" href="{{asset('adminlte/bower_components/iCheck/skins/all.css')}}">
+@endsection
 @can('accomerciales-authorized')
 <!-- Autorizado Field -->
 <div class="form-group">
@@ -18,7 +23,7 @@
 <!-- Sociocomer Id Field -->
 <div class="form-group">
     {!! Form::label('sociocomer_id', 'Socio Comercial:') !!}
-    {!! Form::select('sociocomer_id', $sociocomer, null, ['class' => 'form-control select2', 'style'=>'width: 100%;','placeholder'=>'Seleccione uno']) !!}
+    {!! Form::select('sociocomer_id', $sociocomer, null, ['class' => 'form-control select2', 'style'=>'width: 100%;','placeholder'=>'Seleccione uno (opcional)']) !!}
 </div>
 
 <!-- Sociocomer Id Field -->
@@ -71,22 +76,22 @@
 
 <!-- Elab User Id Field -->
 <div class="form-group">
-    {!! Form::label('elab_user_id0', 'Usuario que Elabora:*') !!}
-    {!! Form::select('elab_user_id0', $usuarios, Auth::user()->id, ['class' => 'form-control', 'readonly','required']) !!}
-    {!! Form::hidden('elab_user_id', Auth::user()->id) !!}
+    {!! Form::label('elab_user_id', 'Usuario que Elabora:*') !!}
+    {!! Form::select('elab_user_id', $usuarios, Auth::user()->id, ['class' => 'form-control', 'disabled','required', 'onsubmit'=>'enableElabUser();' ]) !!}
+    <!-- {!! Form::hidden('elab_user_id', Auth::user()->id) !!} -->
 </div>
 @can('accomerciales-authorized')
 <!-- Aut User Id Field -->
 <div class="form-group">
     {!! Form::label('aut_user_id', 'Usuario que Supervisa:') !!}
-    {!! Form::select('aut_user_id', $usuarios, null, ['class' => 'form-control', 'required']) !!}
+    {!! Form::select('aut_user_id', $userSupervisor, null, ['class' => 'form-control', 'required']) !!}
 </div>
 @endcan
 @can('accomerciales-supervised')
 <!-- Aut User2 Id Field -->
 <div class="form-group">
     {!! Form::label('aut_user2_id', 'Usuario que Autoriza:') !!}
-    {!! Form::select('aut_user2_id', $usuarios,null, ['class' => 'form-control', 'required']) !!}
+    {!! Form::select('aut_user2_id', $userGerente, null, ['class' => 'form-control', 'required']) !!}
 </div>
 @endcan
 
@@ -95,3 +100,82 @@
     {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
     <a href="{!! route('accomercials.index') !!}" class="btn btn-default">Cancelar</a>
 </div>
+
+@section('scripts')
+<script src="{{asset('adminlte/bower_components/select2/dist/js/select2.full.min.js')}}"></script>
+<!-- iCheck 1.0.1 -->
+<script src="{{asset('adminlte/bower_components/iCheck/icheck.min.js')}}"></script>
+<script>
+$(document).ready(function() {
+    $('.select2').select2();
+});
+function sociocomercialremove(index)
+{
+  var sel = document.getElementById("cliente_id");
+  sel.remove(index);
+}
+
+$('#sociocomer_id').on('change', function(e) {
+  //console.log(e);
+  var sociocomer_id = e.target.value;
+  //ajax
+  $.get('/GetComisiones/'+sociocomer_id, function(data) {
+    //exito al obtener los datos
+    console.log(data);
+    $('#asoc_comision').val(data[0]['comision']);
+  });
+});
+
+$('#cliente_id').on('change', function(e) {
+  //console.log(e);
+  var cliente_id = e.target.value;
+  //ajax
+  $.get('/GetDirecciones/'+cliente_id, function(data) {
+    //exito al obtener los datos
+    //console.log(data);
+    $('#direccion_id').empty();
+    $.each(data, function(index, direcciones) {
+      $('#direccion_id').append('<option value ="' + direcciones.id + '">'+direcciones.razonsocial+'</option>' );
+    });
+  });
+});
+
+$('#cliente_id').on('change', function(e) {
+  //console.log(e);
+  var cliente_id = e.target.value;
+  //ajax
+  $.get('/GetCuentas/'+cliente_id, function(data) {
+    //exito al obtener los datos
+    //console.log(data);
+    $('#cuenta_id').empty();
+    $.each(data, function(index, cuenta) {
+      $('#cuenta_id').append('<option value ="' + cuenta.id + '">'+cuenta.numcuenta+'</option>' );
+    });
+  });
+});
+
+ $(function () {
+//iCheck for checkbox and radio inputs
+$('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+  checkboxClass: 'icheckbox_minimal-blue',
+  radioClass   : 'iradio_minimal-blue'
+})
+//Red color scheme for iCheck
+$('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+  checkboxClass: 'icheckbox_minimal-red',
+  radioClass   : 'iradio_minimal-red'
+})
+//Flat red color scheme for iCheck
+$('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+  checkboxClass: 'icheckbox_flat-green',
+  radioClass   : 'iradio_flat-green'
+})
+})
+//habilitar el select
+function enableElabUser() {
+document.getElementById('elab_user_id').disabled=false;
+}
+
+</script>
+
+@endsection

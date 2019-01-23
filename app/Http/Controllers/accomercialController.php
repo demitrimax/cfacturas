@@ -67,10 +67,12 @@ class accomercialController extends AppBaseController
         $clientes = clientes::all();
         $clientes = $clientes->pluck('nomcompleto','id');
         $usuarios = users::pluck('name','id');
+        $userSupervisor = User::role('Supervisor')->pluck('name','id');
+        $userGerente = User::role('gerente')->pluck('name','id');
         $empresas = catempresas::pluck('nombre','id');
         $blog = blog::find(1);
 
-        return view('accomercials.create')->with(compact('sociocomer','clientes','empresas','usuarios', 'blog'));
+        return view('accomercials.create')->with(compact('sociocomer','clientes','empresas','usuarios', 'blog','userSupervisor','userGerente'));
     }
 
     /**
@@ -164,7 +166,7 @@ class accomercialController extends AppBaseController
 
         if (empty($accomercial)) {
             Flash::error('Acuerdo Comercial no encontrado.');
-
+            Alert::error('Acuerdo Comercial no encontrado');
             return redirect(route('accomercials.index'));
         }
 
@@ -191,10 +193,12 @@ class accomercialController extends AppBaseController
         $sociocomer = $sociocomer->pluck('nomcompleto','id');
         $clientes = clientes::all();
         $clientes = $sociocomer;
+        $userSupervisor = User::role('Supervisor')->pluck('name','id');
+        $userGerente = User::role('gerente')->pluck('name','id');
         $usuarios = users::pluck('name','id');
         $empresas = catempresas::pluck('nombre','id');
 
-        return view('accomercials.edit')->with(compact('accomercial','sociocomer','clientes', 'empresas', 'usuarios'));
+        return view('accomercials.edit')->with(compact('accomercial','sociocomer','clientes', 'empresas', 'usuarios','userSupervisor','userGerente'));
     }
 
     /**
