@@ -211,7 +211,7 @@ class accomercial extends Model
         $autoriza2 = users::where('id',$autoriza2_id)->first();
         if ($autoriza2->count()>0)
         {
-          $nomautoriza = $this->autuser->name;
+          $nomautoriza = $this->autuser2->name;
         }
       }
       return $nomautoriza;

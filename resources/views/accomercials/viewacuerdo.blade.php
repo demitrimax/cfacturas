@@ -108,14 +108,15 @@
                 <td>{{$accomercial->ac_principalporc}}%</td>
               </tr>
               <tr>
-                <th>Secundario</th>
+                <th>Secundario:</th>
                 <td>{{$accomercial->ac_secundarioporc}}%</td>
               </tr>
-              <!--
+
               <tr>
-                <th>Shipping:</th>
-                <td>$5.80</td>
+                <th>Base del Porcentaje:</th>
+                <td>{{$accomercial->base}}</td>
               </tr>
+              <!--
               <tr>
                 <th>Total:</th>
                 <td>$265.24</td>
