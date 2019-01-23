@@ -7,8 +7,6 @@
         <tr>
           <th>Banco</th>
           <th>Número de cuenta</th>
-          <th>Clabe Interbancaria</th>
-          <th>Sucursal</th>
           <th>Cliente</th>
           <th>Empresa</th>
           <th>Acciones</th>
@@ -19,8 +17,6 @@
         <tr>
             <td>{!! $catcuentas->catBanco->nombre !!}</td>
             <td>{!! $catcuentas->numcuenta !!}</td>
-            <td>{!! $catcuentas->clabeinterbancaria !!}</td>
-            <td>{!! $catcuentas->sucursal !!}</td>
             <td>{!! $catcuentas->nombrecliente !!}</td>
             <td>{!! $catcuentas->nombreempresa !!}</td>
             <td>
