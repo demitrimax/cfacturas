@@ -111,6 +111,7 @@ class accomercialController extends AppBaseController
         $accomercial->cuenta_id = $request->input('cuenta_id');
         $accomercial->descripcion = $request->input('descripcion');
         $accomercial->informacion = $request->input('informacion');
+        $accomercial->base = $request->input('base');
         $accomercial->ac_principalporc = $request->input('ac_principalporc');
         $accomercial->ac_secundarioporc = $request->input('ac_secundarioporc');
         $accomercial->autorizado = $request->input('autorizado');
@@ -215,15 +216,16 @@ class accomercialController extends AppBaseController
 
         if (empty($accomercial)) {
             Flash::error('Acuerdo Comercial no encontrado.');
-
-            return redirect(route('accomercials.index'));
+            $sweeterror = 'Acuerdo Comercial no encontrado.';
+            return redirect(route('accomercials.index'))->with(compact($sweeterror));
         }
 
         $accomercial = $this->accomercialRepository->update($request->all(), $id);
 
         Flash::success('Acuerdo Comercial actualizado correctamente.');
+        $sweet = 'Acuerdo Comercial actualizado correctamente';
 
-        return redirect(route('accomercials.index'));
+        return redirect(route('accomercials.index'))->with(compact('$sweet'));
     }
 
     /**

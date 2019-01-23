@@ -64,20 +64,34 @@
 
 <!-- Ac Principalporc Field -->
 <div class="form-group">
-    {!! Form::label('ac_principalporc', 'Porcentaje Principal:*') !!}
+{!! Form::label('ac_principalporc', 'Porcentaje Principal:*') !!}
+<div class="input-group">
+    <span class="input-group-addon">Porcentaje Principal:*</span>
     {!! Form::number('ac_principalporc', null, ['class' => 'form-control', 'required', 'step'=>'0.01', 'max' => '15.00', 'min'=>'0.09']) !!}
+    <span class="input-group-addon">%</span>
+</div>
 </div>
 
 <!-- Ac Secundarioporc Field -->
 <div class="form-group">
     {!! Form::label('ac_secundarioporc', 'Porcentaje Secundario:') !!}
+    <div class="input-group">
+        <span class="input-group-addon">Porcentaje Secundario:*</span>
     {!! Form::number('ac_secundarioporc', null, ['class' => 'form-control', 'step'=>'0.01', 'max' => '15.00', 'min'=>'0.09']) !!}
+    <span class="input-group-addon">%</span>
+</div>
+</div>
+
+<!-- Base del porcentaje Field -->
+<div class="form-group">
+    {!! Form::label('base', 'Base del porcentaje:') !!}
+    {!! Form::select('base', ['SUBTOTAL'=>'SUBTOTAL','DEVOLUCION'=>'DEVOLUCION','TOTAL'=>'TOTAL'],null, ['class' => 'form-control', 'required', 'placeholder'=>'Seleccione']) !!}
 </div>
 
 <!-- Elab User Id Field -->
 <div class="form-group">
     {!! Form::label('elab_user_id', 'Usuario que Elabora:*') !!}
-    {!! Form::select('elab_user_id', $usuarios, Auth::user()->id, ['class' => 'form-control', 'disabled','required', 'onsubmit'=>'enableElabUser();' ]) !!}
+    {!! Form::select('elab_user_id', $usuarios, Auth::user()->id, ['class' => 'form-control', 'readonly','required', 'onsubmit'=>'enableElabUser();' ]) !!}
     <!-- {!! Form::hidden('elab_user_id', Auth::user()->id) !!} -->
 </div>
 @can('accomerciales-authorized')
@@ -173,7 +187,7 @@ $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
 })
 //habilitar el select
 function enableElabUser() {
-document.getElementById('elab_user_id').disabled=false;
+  document.getElementById('elab_user_id').disabled=false;
 }
 
 </script>

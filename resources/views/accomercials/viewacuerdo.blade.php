@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-xs-12">
           <h2 class="page-header">
-            <i class="fa fa-check-square"></i> {{ config('app.name')}} | Acuerdo Comercial
+            <i class="fa fa-check-square"></i> {{ config('app.name')}} | Acuerdo Comercial {{ ($accomercial->autorizado==1)? '': '(PENDIENTE)' }}
             <small class="pull-right">Fecha Solicitud: {{$accomercial->fechasolicitud->format('d-m-Y')}}</small>
           </h2>
         </div>
