@@ -58,6 +58,7 @@
                 </div>
                 <!-- /.tab-content -->
               </div>
+              <a href="{!! route('catempresas.index') !!}" class="btn btn-default">Regresar</a>
 </div>
 @endsection
 
