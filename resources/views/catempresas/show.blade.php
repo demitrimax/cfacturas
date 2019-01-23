@@ -24,7 +24,9 @@
                   <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Acuerdos</a></li>
                   <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Datos Bancarios</a></li>
                   <li class=""><a href="#tab_4" data-toggle="tab" aria-expanded="false">Expediente</a></li>
+                  @can('empdatfiscales-list')
                   <li class=""><a href="#tab_6" data-toggle="tab" aria-expanded="false">Datos Fiscales</a></li>
+                  @endcan
                   <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
                 </ul>
                 <div class="tab-content">
@@ -42,10 +44,7 @@
                   <div class="tab-pane" id="tab_4">
                       @include('catempresas.tabdocumentos')
                   </div>
-                  <div class="tab-pane" id="tab_5">
-
-                  </div>
-                  @can('datosfiscales-list')
+                  @can('empdatfiscales-list')
                   <div class="tab-pane" id="tab_6">
                     @include('catempresas.tabdatfiscales')
                   </div>

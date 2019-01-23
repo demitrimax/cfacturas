@@ -4,19 +4,19 @@
 <!-- Nombre Field -->
 <div class="form-group">
     {!! Form::label('nombre', 'Nombre/Razon:*') !!}
-    {!! Form::text('nombre', null, ['class' => 'form-control', 'required']) !!}
+    {!! Form::text('nombre', null, ['class' => 'form-control', 'required', 'oninput'=>'this.value = this.value.toUpperCase()']) !!}
 </div>
 
 <!-- Nombre Comercial Field -->
 <div class="form-group">
     {!! Form::label('nomcomercial', 'Nombre Comercial:*') !!}
-    {!! Form::text('nomcomercial', null, ['class' => 'form-control', 'required']) !!}
+    {!! Form::text('nomcomercial', null, ['class' => 'form-control', 'required', 'oninput'=>'this.value = this.value.toUpperCase()']) !!}
 </div>
 
 <!-- Rfc Field -->
 <div class="form-group">
     {!! Form::label('RFC', 'RFC:*') !!}
-    {!! Form::text('RFC', null, ['class' => 'form-control', 'maxlength'=>'13', 'required']) !!}
+    {!! Form::text('RFC', null, ['class' => 'form-control', 'maxlength'=>'13', 'required', 'oninput'=>'this.value = this.value.toUpperCase()']) !!}
 </div>
 <!-- Persona Fisica Field -->
 <div class="form-group">
@@ -28,7 +28,7 @@
 <!-- Curp Field -->
 <div class="form-group" id="curpfield">
     {!! Form::label('CURP', 'CURP:') !!}
-    {!! Form::text('CURP', null, ['class' => 'form-control', 'maxlength'=>'18', 'onchange'=>'validarInput(this)']) !!}
+    {!! Form::text('CURP', null, ['class' => 'form-control', 'maxlength'=>'18', 'onchange'=>'validarInput(this)', 'oninput'=>'this.value = this.value.toUpperCase()']) !!}
     <!-- <pre id="resultado"></pre> -->
 </div>
 
