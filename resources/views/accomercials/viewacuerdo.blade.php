@@ -162,7 +162,7 @@
             <strong>{{$accomercial->nomautoriza}} </strong><br>
             <br>
             <hr>
-            @if ($accomercial->nomsupervisor<>"N/D")
+            @if ($accomercial->nomautoriza<>"N/D")
             <b>{{$accomercial->autuser2->cargo}}</b>
             @endif
           </address>
