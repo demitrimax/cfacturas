@@ -27,9 +27,9 @@
                 {!! Form::open(['route' => ['catcuentas.destroy', $catcuentas->id], 'method' => 'delete', 'id'=>'form'.$catcuentas->id]) !!}
                 <div class='btn-group'>
 
-                    <a href="{!! route('catcuentas.show', [$catcuentas->id]) !!}" class='btn btn-default'><i class="glyphicon glyphicon-eye-open"></i></a>
+                    <a href="{!! route('catcuentas.show', [$catcuentas->id]) !!}" class='btn btn-info'><i class="glyphicon glyphicon-eye-open"></i></a>
                     @can('catcuentas-edit')
-                    <a href="{!! route('catcuentas.edit', [$catcuentas->id]) !!}" class='btn btn-default'><i class="glyphicon glyphicon-edit"></i></a>
+                    <a href="{!! route('catcuentas.edit', [$catcuentas->id]) !!}" class='btn btn-primary'><i class="glyphicon glyphicon-edit"></i></a>
                     @endcan
                     @can('catcuentas-delete')
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'button', 'class' => 'btn btn-danger', 'onclick' => "ConfirmDelete($catcuentas->id)"]) !!}

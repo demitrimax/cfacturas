@@ -11,7 +11,7 @@
     <tbody>
     @foreach($clientes as $clientes)
         <tr>
-            <td>{!! $clientes->nomcompleto !!}</td>
+            <td><a href="{!! route('clientes.show', [$clientes->id]) !!}">{!! $clientes->nomcompleto !!}</a></td>
             <td>{!! $clientes->RFC !!}</td>
             <td title="{!! $clientes->giroempresas->descripcion !!}">{!! $clientes->giroempresas->codigo !!}</td>
             <td>

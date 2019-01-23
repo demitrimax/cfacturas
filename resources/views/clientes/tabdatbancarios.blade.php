@@ -26,8 +26,9 @@
           <td>{{$cuenta->sucursal}}</td>
           <td>
             {!! Form::open(['route' => ['catcuentas.destroy', $cuenta->id], 'method' => 'delete', 'id'=>'delCuenta'.$cuenta->id]) !!}
+            <button type="button" class="btn btn-info" rel="tooltip" title="Detalles" Onclick="MostrarDetalles({{$cuenta->id}},'{{$cuenta->catBanco->nombre}}',{{$cuenta->numcuenta}},{{$cuenta->clabeinterbancaria}},{{$cuenta->sucursal}})"> <i class="fa fa-exclamation-circle"></i> </button>
             @can('catcuentas-edit')
-            <button type="button" class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i> </button>
+            <button type="button" class="btn btn-warning" rel="tooltip" title="Editar" Onclick="editarCuenta({{$cuenta->id}})"> <i class="fa fa-pencil"></i> </button>
             @endcan
             @can('catcuentas-delete')
             <button type="button" class="btn btn-danger" rel="tooltip" title="Eliminar" Onclick="ConfirmDeleteCuenta({{$cuenta->id}})"> <i class="fa fa-remove"></i></button>
@@ -45,7 +46,7 @@
     @endif
       <h1 class="pull-right">
         @can('catcuentas-create')
-         <button type="button" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-cuenta">Agregar Cuenta</button>
+         <button type="button" class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-cuenta">Agregar Cuenta</button>
         @endcan
       </h1>
     </div>
@@ -126,6 +127,33 @@
       document.forms['delCuenta'+id].submit();
       }
     })
+    }
+    function MostrarDetalles(id,banco,numcuenta,clabeinterbancaria,sucursal) {
+      Swal.fire({
+          title: 'Detalles de la Cuenta',
+          type: 'info',
+          html:
+          '<dl class="dl-horizontal">'+
+            '<dt>Banco</dt>'+
+            '<dd>'+banco+'</dd>'+
+            '<dt>Número de Cuenta</dt>'+
+            '<dd>'+numcuenta+'</dd>'+
+            '<dt>Clabe Interbancaria</dt>'+
+            '<dd>'+clabeinterbancaria+'</dd>'+
+            '<dt>Sucursal</dt>'+
+            '<dd>'+sucursal+'</dd>'+
+          '</dl>',
+          showCloseButton: true,
+          showCancelButton: true,
+          focusConfirm: false,
+          confirmButtonText:
+            '<i class="fa fa-thumbs-up"></i> Ok!',
+          confirmButtonAriaLabel: 'Enterado, ok!',
+        })
+    }
+    function editarCuenta(id)
+    {
+      location.href ="{!!url('/')!!}/catcuentas/"+id+"/edit";
     }
     </script>
     @endpush
