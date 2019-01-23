@@ -227,7 +227,8 @@ class solicitudesController extends AppBaseController
         $usuario = $solicitudes->usuario;
         $usuarioelimina = Auth::user()->name;
         //SE ENVIA ANTES QUE SE ELIMINE
-        Mail::to($usuario,$cliente)->send(new SolicitudEliminada($solicitudes,$usuarioelimina));
+        //YA NO ENVIARA CORREO PARA INFORMAR DE ELIMINACION
+        //Mail::to($usuario,$cliente)->send(new SolicitudEliminada($solicitudes,$usuarioelimina));
 
         $this->solicitudesRepository->delete($id);
 
