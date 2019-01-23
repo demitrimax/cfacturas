@@ -193,7 +193,7 @@ class accomercial extends Model
       if ($autoriza1_id)
       {
         $autoriza1 = users::where('id',$autoriza1_id)->first();
-        if (count($autoriza1)>0)
+        if ($autoriza1->count()>0)
         {
           $nomsupervisor = $this->autuser->name;
         }
@@ -207,7 +207,7 @@ class accomercial extends Model
       if ($autoriza2_id)
       {
         $autoriza2 = users::where('id',$autoriza2_id)->first();
-        if (count($autoriza2)>0)
+        if ($autoriza2->count()>0)
         {
           $nomautoriza = $this->autuser->name;
         }
