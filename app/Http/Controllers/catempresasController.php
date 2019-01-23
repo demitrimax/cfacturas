@@ -15,6 +15,8 @@ use App\catmunicipios;
 use App\Models\cattipodoc;
 use App\Models\catdocumentos;
 use App\Models\cat_bancos;
+use App\Models\catgiroempresa;
+use Alert;
 
 class catempresasController extends AppBaseController
 {
@@ -53,7 +55,8 @@ class catempresasController extends AppBaseController
      */
     public function create()
     {
-        return view('catempresas.create');
+        $giro = catgiroempresa::pluck('descripcion','id');
+        return view('catempresas.create')->with(compact('giro'));
     }
 
     /**
@@ -70,6 +73,7 @@ class catempresasController extends AppBaseController
         $catempresas = $this->catempresasRepository->create($input);
 
         Flash::success('Empresa guardada correctamente.');
+        Alert::success('Empresa guardada correctamente.','Muy Bien!');
 
         return redirect(route('catempresas.index'));
     }
@@ -87,6 +91,7 @@ class catempresasController extends AppBaseController
 
         if (empty($catempresas)) {
             Flash::error('Empresa no encontrada');
+            Alert::error('Empresa no encontrada','Ha ocurrido un error');
 
             return redirect(route('catempresas.index'));
         }
@@ -112,8 +117,8 @@ class catempresasController extends AppBaseController
 
             return redirect(route('catempresas.index'));
         }
-
-        return view('catempresas.edit')->with('catempresas', $catempresas);
+        $giro = catgiroempresa::pluck('descripcion','id');
+        return view('catempresas.edit')->with(compact('catempresas','giro'));
     }
 
     /**
@@ -130,6 +135,7 @@ class catempresasController extends AppBaseController
 
         if (empty($catempresas)) {
             Flash::error('Empresa no encontrada');
+            Alert::error('Empresa no encontrada');
 
             return redirect(route('catempresas.index'));
         }
@@ -137,6 +143,7 @@ class catempresasController extends AppBaseController
         $catempresas = $this->catempresasRepository->update($request->all(), $id);
 
         Flash::success('Empresa actualizada correctamente.');
+        Alert::success('Empresa actualizada correctamente.','Datos Actualizados');
 
         return redirect(route('catempresas.index'));
     }
@@ -154,13 +161,15 @@ class catempresasController extends AppBaseController
 
         if (empty($catempresas)) {
             Flash::error('Empresa no encontrada');
+            Alert::error('Empresa no encontrada','Error');
 
             return redirect(route('catempresas.index'));
         }
 
         $this->catempresasRepository->delete($id);
 
-        Flash::success('Catempresas deleted successfully.');
+        Flash::success('Empresa borrada correctamente.');
+        Alert::success('Empresa borrada correctamente.','Borrado');
 
         return redirect(route('catempresas.index'));
     }

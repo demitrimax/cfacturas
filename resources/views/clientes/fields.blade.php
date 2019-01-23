@@ -42,12 +42,12 @@
     {!! Form::label('direccion', 'Dirección:') !!}
     {!! Form::text('direccion', null, ['class' => 'form-control']) !!}
 </div>
-<!-- Direccion Field -->
+<!-- Telefono Field -->
 <div class="form-group">
     {!! Form::label('telefono', 'Teléfono:') !!}
     {!! Form::text('telefono', null, ['class' => 'form-control']) !!}
 </div>
-<!-- Direccion Field -->
+<!-- Giro de la Empresa Field -->
 <div class="form-group">
     {!! Form::label('giroempresa', 'Giro Empresa:') !!}
     {!! Form::select('giroempresa', $giro, null, ['class' => 'form-control select2']) !!}

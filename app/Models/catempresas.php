@@ -31,10 +31,17 @@ class catempresas extends Model
 
     public $fillable = [
         'nombre',
+        'rfc',
+        'telefono',
+        'direccion',
+        'comision',
+        'cliente_id',
+        'apoderadolegal',
+        'giroempresa',
         'correo_factura',
         'correo_notifica',
-        'telefono',
-        'comision'
+
+
     ];
     protected static $logAttributes = ['*'];
 
@@ -46,10 +53,15 @@ class catempresas extends Model
     protected $casts = [
         'id' => 'integer',
         'nombre' => 'string',
+        'rfc' => 'string',
+        'telefono' => 'string',
+        'direccion' => 'string',
+        'apoderadolegal' => 'string',
+        'comision' => 'float',
+        'giroempresa' => 'integer',
         'correo_factura' => 'string',
         'correo_notifica' => 'string',
-        'telefono' => 'string',
-        'comision' => 'float'
+
     ];
 
     /**
@@ -71,6 +83,19 @@ class catempresas extends Model
 
     public function catcuentas() {
       return $this->hasMany('App\Models\catcuentas', 'empresa_id');
+    }
+    public function girodeempresa()
+    {
+      return $this->belongsTo('App\Models\catgiroempresa','giroempresa');
+    }
+    public function getGiroempresasAttribute()
+    {
+      $giro = "N/D";
+      if ($this->giroempresa)
+      {
+        $giro = $this->girodeempresa->descripcion;
+      }
+      return $giro;
     }
 
 }

@@ -5,6 +5,30 @@
     <p>{!! $catempresas->nombre !!}</p>
 </div>
 
+<!-- RFC Field -->
+<div class="form-group">
+    {!! Form::label('rfc', 'RFC:') !!}
+    <p>{!! $catempresas->rfc !!}</p>
+</div>
+
+<!-- Direccion Field -->
+<div class="form-group">
+    {!! Form::label('direccion', 'Dirección:') !!}
+    <p>{!! $catempresas->direccion !!}</p>
+</div>
+
+<!-- Apoderado Legal Field -->
+<div class="form-group">
+    {!! Form::label('apoderadolegal', 'Apoderado Legal:') !!}
+    <p>{!! $catempresas->apoderadolegal !!}</p>
+</div>
+
+<!-- Giro de la Empresa Field -->
+<div class="form-group">
+    {!! Form::label('giroempresa', 'Giro de la Empresa:') !!}
+    <p>{!! $catempresas->giroempresas !!}</p>
+</div>
+
 <!-- Correo Factura Field -->
 <div class="form-group">
     {!! Form::label('correo_factura', 'Correo de Facturación:') !!}
