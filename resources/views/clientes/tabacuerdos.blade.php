@@ -45,7 +45,7 @@
     @endif
       <h1 class="pull-right">
         @can('accomerciales-create')
-         <button type="button" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-acuerdo">Agregar Cuenta</button>
+         <button type="button" class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-acuerdo">Agregar Acuerdo</button>
         @endcan
       </h1>
     </div>

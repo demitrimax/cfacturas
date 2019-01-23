@@ -7,8 +7,7 @@
         <th>Observaciones</th>
         <th>Autorizado</th>
         <th>Elaborado:</th>
-        <th>Visto bueno:</th>
-        <th>Autorizado: </th>
+        <th>Empresas:</th>
         <th>Acciones</th>
         </tr>
     </thead>
@@ -23,8 +22,11 @@
               {!! ($accomercial->autorizado == 1) ? '<span class="badge bg-blue"><i class="fa fa-check"></i></span>' : '<span class="badge bg-red"><i class="fa fa-close"></i></span>' !!}
             </td>
             <td>{!! $accomercial->elabuser->name  !!}</td>
-            <td>{!! $accomercial->nomsupervisor !!}</td>
-            <td>{!! $accomercial->nomautoriza !!}</td>
+            <td>
+              @foreach ($accomercial->empresasfact as $empresas)
+              <span class="badge">{!! $empresas->empresa->nombre !!}</span>
+              @endforeach
+            </td>
             <td>
                 {!! Form::open(['route' => ['accomercials.destroy', $accomercial->id], 'method' => 'delete', 'id'=>'form'.$accomercial->id]) !!}
                 <div class='btn-group'>
