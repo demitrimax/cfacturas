@@ -29,7 +29,11 @@
 <!-- Sociocomer Id Field -->
 <div class="form-group">
     {!! Form::label('asoc_comision', 'Comisión Socio:') !!}
+    <div class="input-group">
+        <span class="input-group-addon">Comisión Socio:</span>
     {!! Form::number('asoc_comision', null, ['class' => 'form-control', 'step'=>'0.01', 'max' => '15.00', 'placeholder'=>'Porcentaje comisionable']) !!}
+    <span class="input-group-addon">%</span>
+</div>
 </div>
 
 <!-- Cliente Id Field -->
