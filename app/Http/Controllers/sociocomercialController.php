@@ -14,6 +14,11 @@ use Alert;
 use App\Models\cattipodoc;
 use App\Models\sociocomercial;
 use App\Models\catdocumentos;
+use App\Models\cat_bancos;
+use App\Models\catcuentas;
+use App\Repositories\catcuentasRepository;
+use App\Http\Requests\CreatecatcuentasRequest;
+use App\Http\Requests\UpdatecatcuentasRequest;
 
 class sociocomercialController extends AppBaseController
 {
@@ -91,8 +96,9 @@ class sociocomercialController extends AppBaseController
             return redirect(route('sociocomercials.index'));
         }
         $tipodocs = cattipodoc::pluck('tipo','id');
+        $bancos = cat_bancos::pluck('nombrecorto','id');
 
-        return view('sociocomercials.show')->with(compact('sociocomercial','tipodocs'));
+        return view('sociocomercials.show')->with(compact('sociocomercial','tipodocs','bancos'));
     }
 
     /**
@@ -197,5 +203,58 @@ class sociocomercialController extends AppBaseController
         $showid = $input['socio_id'];
 
         return redirect(route($redirectroute, $showid))->with(compact('sweet'));
+    }
+
+    public function guardaCuenta(Request $request)
+    {
+      $cuentas = catcuentas::where('numcuenta', $request->input('numcuenta'))->where('banco_id',$request->input('banco_id'))->first();
+
+      if ($cuentas) {
+        Flash::error('Ya existe una Cuenta Bancaria en el mismo Banco');
+        $sweeterror = "Cuenta existente";
+        return back()->with($sweeterror);
+      }
+
+      $rules = [
+        'banco_id' => 'required',
+        'numcuenta' => 'required|max:10',
+        'clabeinterbancaria' => 'nullable|digits:18|unique:catcuentas',
+        'sucursal' => 'max:5',
+      ];
+      $this->validate($request, $rules);
+
+      $input = $request->all();
+      $socio_id = $input['empresa_id'];
+      $sociocomercial = $this->sociocomercialRepository->findWithoutFail($socio_id);
+
+      //$catcuentas = $this->catcuentasRepository->create($input);
+      $catcuentas = new catcuentas;
+      $catcuentas->banco_id = $input['banco_id'];
+      $catcuentas->numcuenta = $input['numcuenta'];
+      $catcuentas->clabeinterbancaria = $input['clabeinterbancaria'];
+      $catcuentas->sucursal = $input['sucursal'];
+      $catcuentas->swift = $input['swift'];
+      $catcuentas->save();
+      $sociocomercial->cuentas()->attach($catcuentas);
+
+
+      Flash::success('Cuenta guardada correctamente.');
+      $sweet = 'Cuenta guardada correctamente';
+      if(isset($input['redirect'])){
+        $redirect = $input['redirect'];
+        if (isset($input['cliente_id']))
+        {
+          $retornaid =$input['cliente_id'];
+        }
+        if (isset($input['empresa_id']))
+        {
+          $retornaid = $input['empresa_id'];
+        }
+        return redirect(route($redirect, [$retornaid]))->with(compact('sweet'));
+      }
+      else {
+
+      return redirect(route('catcuentas.index'));
+    }
     }
 }

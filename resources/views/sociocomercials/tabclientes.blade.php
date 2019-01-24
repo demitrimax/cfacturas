@@ -25,9 +25,8 @@
             <td>{{$acuerdos->cliente->RFC}}</td>
             <td>{{$acuerdos->cliente->nomcomercial}}</td>
             <td>
-              <button type="button" class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i> </button>
 
-              <button type="button" class="btn btn-danger" rel="tooltip" title="Eliminar" Onclick="ConfirmDeleteCuenta({{$acuerdos->id}})"> <i class="fa fa-remove"></i></button>
+              <button type="button" class="btn btn-info" rel="tooltip" title="Detalles" Onclick="ViewCliente({{$acuerdos->cliente_id}})"> <i class="fa fa-search-plus"></i></button>
 
             </td>
           </tr>
@@ -49,20 +48,10 @@
 
 @push('scripts')
 <script>
-function ConfirmDeleteCuenta(id) {
-  swal({
-        title: '¿Estás seguro?',
-        text: 'Se eliminará la cuenta bancaria.',
-        type: 'warning',
-        showCancelButton: true,
-        cancelButtonText: 'Cancelar',
-        confirmButtonColor: '#3085d6',
-        confirmButtonText: 'Continuar',
-        }).then((result) => {
-  if (result.value) {
-    document.forms['delcuenta'+id].submit();
-    }
-  })
+function ViewCliente(id)
+{
+  location.href ="{!!url('/')!!}/clientes/"+id;
 }
+
 </script>
 @endpush

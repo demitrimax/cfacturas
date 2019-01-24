@@ -25,7 +25,7 @@
               </div>
               <!-- /.tab-pane -->
               <div class="tab-pane" id="tab_5">
-                @include('sociocomercials.tabacuerdos')
+                @include('sociocomercials.tabcuentas')
               </div>
               <!-- /.tab-pane -->
             </div>
