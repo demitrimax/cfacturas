@@ -29,6 +29,7 @@ class catcuentas extends Model
     use SoftDeletes;
     use LogsActivity;
     use DatesTranslator;
+
     public $table = 'catcuentas';
 
     const CREATED_AT = 'created_at';
