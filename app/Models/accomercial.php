@@ -67,7 +67,7 @@ class accomercial extends Model
         'autorizado',
         'elab_user_id',
         'aut_user_id',
-        'aut_user2_id'
+        'aut_user2_id',
     ];
     protected static $logAttributes = ['*'];
 
@@ -91,7 +91,9 @@ class accomercial extends Model
         'autorizado' => 'boolean',
         'elab_user_id' => 'integer',
         'aut_user_id' => 'integer',
-        'aut_user2_id' => 'integer'
+        'aut_user2_id' => 'integer',
+        'aut1_at' => 'date',
+        'aut2_at' => 'date',
     ];
 
     /**
@@ -223,5 +225,6 @@ class accomercial extends Model
     {
       return new Date($fechasolicitud);
     }
+    
 
 }

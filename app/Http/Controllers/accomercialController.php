@@ -24,6 +24,8 @@ use App\Mail\acuerdocomerinter;
 use App\User;
 use App\Models\blog;
 use App\Models\sociocomercial;
+use Carbon\Carbon;
+use Auth;
 
 class accomercialController extends AppBaseController
 {
@@ -38,6 +40,8 @@ class accomercialController extends AppBaseController
         $this->middleware('permission:accomerciales-create', ['only' => ['create','store']]);
         $this->middleware('permission:accomerciales-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:accomerciales-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:accomerciales-supervised', ['only' => ['autoriza1']]);
+        $this->middleware('permission:accomerciales-authorized', ['only' => ['autoriza2']]);
     }
 
     /**
@@ -326,5 +330,25 @@ class accomercialController extends AppBaseController
       $accomercial = $this->accomercialRepository->findWithoutFail($id);
       //$dataccomercial = $accomercial->pluck('id','')->get();
       return $accomercial;
+    }
+
+    public function autoriza1($id)
+    {
+          $accomercial = accomercial::find($id);
+          $accomercial->aut1_at = Carbon::now()->toDateTimeString();
+          $accomercial->aut_user_id = Auth::user()->id;
+          $accomercial->save();
+          $sweet = 'Acuerdo comercial Autorizado por Supervisor';
+          return back()->with(compact('sweet'));
+    }
+    public function autoriza2($id)
+    {
+          $accomercial = accomercial::find($id);
+          $accomercial->aut2_at = Carbon::now()->toDateTimeString();
+          $accomercial->aut_user2_id = Auth::user()->id;
+          $accomercial->save();
+          $sweet = 'Acuerdo comercial Autorizado por Gerente';
+          return back()->with(compact('sweet'));
+
     }
 }

@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-xs-12">
           <h2 class="page-header">
-            <i class="fa fa-check-square"></i> {{ config('app.name')}} | Acuerdo Comercial {{ ($accomercial->autorizado==1)? '': '(PENDIENTE)' }}
+            <i class="fa fa-check-square"></i> {{ config('app.name')}} | Acuerdo Comercial {{ ($accomercial->aut1_at && $accomercial->aut2_at )? '': '(PENDIENTE)' }}
             <small class="pull-right">Fecha Solicitud: {{$accomercial->fechasolicitud->format('d-m-Y')}}</small>
           </h2>
         </div>
@@ -39,7 +39,7 @@
         </div>
 
         <!-- /.col -->
-        @if($accomercial->autorizado)
+        @if($accomercial->aut1_at && $accomercial->aut2_at)
         <div class="col-sm-4 invoice-col">
           <b>AC No. #{{ $accomercial->created_at->format('y').str_pad($accomercial->id,3,"0",STR_PAD_LEFT) }}</b><br>
           <br>
@@ -136,6 +136,7 @@
           <address>
             <strong>{{$accomercial->elabuser->name}}</strong><br>
             <br>
+            {{$accomercial->created_at->format('d-m-Y')}}
             <hr>
             <b>{{$accomercial->elabuser->cargo}}</b>
 
@@ -148,6 +149,9 @@
           <address>
             <strong>{{$accomercial->nomsupervisor }} </strong><br>
             <br>
+            @if($accomercial->aut1_at)
+            {{$accomercial->aut1_at->format('d-m-Y')}}
+            @endif
             <hr>
             @if ($accomercial->nomsupervisor<>"N/D")
             <b>{{$accomercial->autuser->cargo}}</b>
@@ -162,6 +166,9 @@
           <address>
             <strong>{{$accomercial->nomautoriza}} </strong><br>
             <br>
+            @if($accomercial->aut2_at)
+            {{$accomercial->aut2_at->format('d-m-Y')}}
+            @endif
             <hr>
             @if ($accomercial->nomautoriza<>"N/D")
             <b>{{$accomercial->autuser2->cargo}}</b>
