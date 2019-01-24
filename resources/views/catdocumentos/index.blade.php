@@ -1,10 +1,10 @@
 @extends('layouts.app')
-
+@section('title',config('app.name').' | Catálogo de Documentos ')
 @section('content')
     <section class="content-header">
-        <h1 class="pull-left">Catdocumentos</h1>
+        <h1 class="pull-left">Catálogo de Documentos</h1>
         <h1 class="pull-right">
-           <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('catdocumentos.create') !!}">Add New</a>
+           <a class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('catdocumentos.create') !!}">Agregar Nuevo</a>
         </h1>
     </section>
     <div class="content">
@@ -12,15 +12,10 @@
 
         @include('flash::message')
 
-        <div class="clearfix"></div>
-        <div class="box box-primary">
-            <div class="box-body">
+            <div class="box box-primary">
+              <div class="box-body">
                     @include('catdocumentos.table')
-            </div>
-        </div>
-        <div class="text-center">
-        
-        </div>
+              </div>
+          </div>
     </div>
 @endsection
-

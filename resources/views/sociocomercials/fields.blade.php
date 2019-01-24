@@ -17,15 +17,6 @@
 </div>
 
 
-<!-- Persfisica Field -->
-<div class="checkbox">
-    <label class="checkbox-inline">
-        {!! Form::hidden('persfisica', false) !!}
-        {!! Form::checkbox('persfisica', '1', null) !!}
-        {!! Form::label('persfisica', 'Persona Física') !!}
-    </label>
-</div>
-
 <!-- Direccion Field -->
 <div class="form-group">
     {!! Form::label('direccion', 'Dirección:') !!}
@@ -46,7 +37,7 @@
 
 <!-- COMISION Field -->
 <div class="form-group">
-    {!! Form::label('comision', 'Porcentaje de Comisión:') !!}
+    {!! Form::label('comision', 'Porcentaje de Comisión:*') !!}
     <div class="input-group">
       {!! Form::number('comision', null, ['class' => 'form-control', 'required', 'step'=>'0.01', 'max' => '15.00', 'min'=>'0.09']) !!}
       <span class="input-group-addon">%</span>

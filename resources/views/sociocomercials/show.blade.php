@@ -3,17 +3,15 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Socio Comercial
+            Socio Comercial {{$sociocomercial->nombre}}
         </h1>
     </section>
     <div class="content">
-        <div class="box box-primary">
-            <div class="box-body">
-                <div class="row" style="padding-left: 20px">
-                    @include('sociocomercials.show_fields')
-                    <a href="{!! route('sociocomercials.index') !!}" class="btn btn-default">Regresar</a>
-                </div>
-            </div>
-        </div>
+        @include('sociocomercials.tabs')
+        <a href="{!! route('sociocomercials.index') !!}" class="btn btn-default">Regresar</a>
     </div>
+@endsection
+
+@section('scripts')
+@stack('scripts')
 @endsection

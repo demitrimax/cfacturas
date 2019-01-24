@@ -19,10 +19,12 @@
 
 
 <!-- Persfisica Field -->
+<!--
 <div class="form-group">
     {!! Form::label('persfisica', 'Persona Física:') !!}
     {!! ($sociocomercial->persfisica == 1) ? '<span class="badge bg-blue"><i class="fa fa-check"></i></span>' : '<span class="badge bg-red"><i class="fa fa-close"></i></span>' !!}
 </div>
+-->
 
 <!-- Direccion Field -->
 <div class="form-group">

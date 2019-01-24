@@ -75,5 +75,10 @@ class sociocomercial extends Model
 
     ];
 
+    public function acuerdoscom()
+    {
+      return $this->hasMany('App\Models\accomercial', 'sociocomer_id');  
+    }
+
 
 }
