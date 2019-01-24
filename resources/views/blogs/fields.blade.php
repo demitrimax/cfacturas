@@ -24,7 +24,8 @@
 <!-- Usuario Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('usuario_id', 'Usuario:') !!}
-    {!! Form::number('usuario_id', Auth::user()->id, ['class' => 'form-control']) !!}
+    {!! Form::text('usuario_id0', Auth::user()->name, ['class' => 'form-control', 'readonly']) !!}
+    {!! Form::hidden('usuario_id', Auth::user()->id, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Submit Field -->
