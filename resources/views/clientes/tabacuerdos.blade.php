@@ -60,7 +60,8 @@
     @endif
       <h1 class="pull-right">
         @can('accomerciales-create')
-         <button type="button" class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-acuerdo">Agregar Acuerdo</button>
+         <!-- <button type="button" class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px" onclick="">Agregar Acuerdo</button> -->
+          <a class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('accomercials.create') !!}">Alta de Nuevo Acuerdo</a>
         @endcan
       </h1>
     </div>
@@ -107,6 +108,7 @@
           <!-- /.modal-dialog -->
         </div>
         <!-- /.modal -->
+
 
 
   @endcan
