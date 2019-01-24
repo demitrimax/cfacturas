@@ -187,8 +187,8 @@ class accomercialController extends AppBaseController
 
         if (empty($accomercial)) {
             Flash::error('Acuerdo Comercial no encontado.');
-
-            return redirect(route('accomercials.index'));
+            $sweeterror = 'Acuerdo Comercial no encontrado';
+            return redirect(route('accomercials.index'))->with(compact('sweeterror'));
         }
         $sociocomer = clientes::all();
         $sociocomer = $sociocomer->pluck('nomcompleto','id');
@@ -241,15 +241,17 @@ class accomercialController extends AppBaseController
 
         if (empty($accomercial)) {
             Flash::error('Acuerdo Comercial no encontrado.');
+            $sweeterror = 'Acuerdo Comercial no encontrado';
 
-            return redirect(route('accomercials.index'));
+            return redirect(route('accomercials.index'))->with(compact('sweeterror'));
         }
 
         $this->accomercialRepository->delete($id);
 
         Flash::success('Acuerdo comercial borrado correctamente.');
+        $sweet = 'Acuerdo comercial borrado correctamente';
 
-        return redirect(route('accomercials.index'));
+        return redirect(route('accomercials.index'))->with(compact('sweet'));
     }
     public function GetDirecciones($id)
     {
@@ -316,5 +318,13 @@ class accomercialController extends AppBaseController
             $mensaje = 'Se han enviado correctamente notificaciones a los usuarios';
             return back()->with(compact('mensaje'));
 
+    }
+
+    public function GetAjaxAcuerdo($id)
+    {
+      //$accomercial = accomercial::where('id',$id)->get();
+      $accomercial = $this->accomercialRepository->findWithoutFail($id);
+      //$dataccomercial = $accomercial->pluck('id','')->get();
+      return $accomercial;
     }
 }

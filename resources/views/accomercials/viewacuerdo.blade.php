@@ -41,14 +41,14 @@
         <!-- /.col -->
         @if($accomercial->autorizado)
         <div class="col-sm-4 invoice-col">
-          <b>AC No. #{{ date('y').str_pad($accomercial->id,3,"0",STR_PAD_LEFT) }}</b><br>
+          <b>AC No. #{{ $accomercial->created_at->format('y').str_pad($accomercial->id,3,"0",STR_PAD_LEFT) }}</b><br>
           <br>
           <b>Autorizado por:</b> {{ $accomercial->nomautoriza}}<br>
           <b>Creado el: </b> {{ $accomercial->created_at->format('d/m/Y')}}<br>
           @if( $accomercial->created_at <> $accomercial->updated_at )
           <b>Actualizado el :</b> {{ $accomercial->updated_at->format('d/m/Y')}} <br>
           @endif
-          <b>ID Folio:</b> {{ 'AC'.date('y') .'-'. str_pad($accomercial->id,3,"0",STR_PAD_LEFT) }}
+          <b>ID Folio:</b> {{ 'AC'.$accomercial->created_at->format('y') .'-'. str_pad($accomercial->id,3,"0",STR_PAD_LEFT) }}
         </div>
         @endif
         <!-- /.col -->

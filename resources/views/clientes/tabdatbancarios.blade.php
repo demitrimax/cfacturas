@@ -26,7 +26,7 @@
           <td>{{$cuenta->sucursal}}</td>
           <td>
             {!! Form::open(['route' => ['catcuentas.destroy', $cuenta->id], 'method' => 'delete', 'id'=>'delCuenta'.$cuenta->id]) !!}
-            <button type="button" class="btn btn-info" rel="tooltip" title="Detalles" Onclick="MostrarDetalles({{$cuenta->id}},'{{$cuenta->catBanco->nombre}}',{{$cuenta->numcuenta}},{{$cuenta->clabeinterbancaria}},{{$cuenta->sucursal}})"> <i class="fa fa-exclamation-circle"></i> </button>
+            <button type="button" class="btn btn-info" rel="tooltip" title="Detalles" Onclick="MostrarDetalles({{$cuenta->id}},'{{$cuenta->catBanco->nombre}}','{{$cuenta->numcuenta}}','{{$cuenta->clabeinterbancaria}}','{{$cuenta->sucursal}}')"> <i class="fa fa-exclamation-circle"></i> </button>
             @can('catcuentas-edit')
             <button type="button" class="btn btn-warning" rel="tooltip" title="Editar" Onclick="editarCuenta({{$cuenta->id}})"> <i class="fa fa-pencil"></i> </button>
             @endcan
