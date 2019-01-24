@@ -46,7 +46,7 @@ function human_filesize($bytes, $decimals = 2) {
             @can('documentos-delete')
             <button type="button" class="btn btn-danger" rel="tooltip" title="Eliminar" Onclick="ConfirmDeleteDocumento({{$documento->id}})"> <i class="fa fa-remove"></i></button>
               {!! Form::hidden('redirect', 'sociocomercials.show') !!}
-              {!! Form::hidden('user_id', $sociocomercial->id) !!}
+              {!! Form::hidden('cliente_id', $sociocomercial->id) !!}
               @endcan
             {!! Form::close() !!}
           </td>
