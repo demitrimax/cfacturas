@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Catempresas
+            Editar Empresa {{$catempresas->nombre }}
         </h1>
    </section>
    <div class="content">
