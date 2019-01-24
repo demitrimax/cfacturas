@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\DatesTranslator;
 
 /**
  * Class blog
@@ -21,6 +22,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class blog extends Model
 {
     use SoftDeletes;
+    use DatesTranslator;
 
     public $table = 'blog';
 

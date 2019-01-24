@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\DatesTranslator;
 use Illuminate\Database\Eloquent\Model as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
@@ -25,6 +26,8 @@ class clientes extends Model
 
     use SoftDeletes;
     use LogsActivity;
+    use DatesTranslator;
+
     public $table = 'clientes';
 
     protected $softCascade = ['accomerciales@restrict'];

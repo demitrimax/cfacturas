@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
+use App\Traits\DatesTranslator;
 
 /**
  * Class cat_bancos
@@ -26,6 +27,7 @@ class cat_bancos extends Model
 
     use SoftDeletes;
     use LogsActivity;
+    use DatesTranslator;
     public $table = 'cat_bancos';
 
     const CREATED_AT = 'created_at';

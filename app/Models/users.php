@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\DatesTranslator;
 use Eloquent as Model;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -31,6 +32,7 @@ class users extends Model
     use SoftDeletes;
     use HasRoles;
     use LogsActivity;
+    use DatesTranslator;
 
     public $table = 'users';
 

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Traits\DatesTranslator;
+use Jenssegers\Date\Date;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -40,6 +42,7 @@ class accomercial extends Model
 {
     use SoftDeletes;
     use LogsActivity;
+    use DatesTranslator;
 
     public $table = 'acuerdoscomerciales';
 
@@ -215,6 +218,10 @@ class accomercial extends Model
         }
       }
       return $nomautoriza;
+    }
+    public function getFechasolicitudAttribute($fechasolicitud)
+    {
+      return new Date($fechasolicitud);
     }
 
 }

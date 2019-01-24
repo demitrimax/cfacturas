@@ -5,6 +5,7 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
+use App\Traits\DatesTranslator;
 
 /**
  * Class mbanca
@@ -28,6 +29,7 @@ class mbanca extends Model
 {
     use SoftDeletes;
     use LogsActivity;
+    use DatesTranslator;
 
     public $table = 'mbanca';
 

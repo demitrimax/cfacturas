@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\DatesTranslator;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -18,6 +19,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasRoles;
     use SoftDeletes;
     use LogsActivity;
+    use DatesTranslator;
 
     protected $dates = ['deleted_at'];
     /**

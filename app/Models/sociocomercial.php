@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\DatesTranslator;
 
 /**
  * Class sociocomercial
@@ -77,7 +78,7 @@ class sociocomercial extends Model
 
     public function acuerdoscom()
     {
-      return $this->hasMany('App\Models\accomercial', 'sociocomer_id');  
+      return $this->hasMany('App\Models\accomercial', 'sociocomer_id');
     }
 
 
