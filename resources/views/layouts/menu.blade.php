@@ -65,7 +65,9 @@
 <li class="{{ Request::is('users*') ? 'active' : '' }}">
     <a href="{!! route('users.index') !!}"><i class="fa fa-edit"></i><span>Usuarios</span></a>
 </li>
-@if( Request::is('user*') || Request::is('permissions*') || Request::is('cattmovimientos*') || Request::is('pagocondicions*') || Request::is('roles*') || Request::is('pagometodo*') || Request::is('facestatuses*') || Request::is('logs*') || Request::is('blog*') || Request::is('formapagos*') || Request::is('catgiroempresas*') )
+@if( Request::is('user*') || Request::is('permissions*') || Request::is('cattmovimientos*') || Request::is('pagocondicions*')
+  || Request::is('roles*') || Request::is('pagometodo*') || Request::is('facestatuses*') || Request::is('logs*') || Request::is('blog*')
+  || Request::is('formapagos*') || Request::is('catgiroempresas*') || Request::is('activity*') )
 <li class="treeview active">
 @else
 <li class="treeview">
@@ -83,6 +85,7 @@
             <li class="{{ Request::is('routes*') ? 'active' : '' }}"><a href="{{url('routes-explorer')}}"><i class="fa fa-user-secret"></i> Routes Explorer</a></li>
             <li class="{{ Request::is('log-*') ? 'active' : '' }}"><a href="{{url('log-viewer')}}"><i class="fa fa-paw"></i> Log-Viewer</a></li>
             <li class="{{ Request::is('logs*') ? 'active' : '' }}"><a href="{{url('logs')}}"><i class="fa fa-question-circle"></i> Logs del Sistema</a></li>
+            <li class="{{ Request::is('activity*') ? 'active' : '' }}"><a href="{!! route('activity') !!}"><i class="fa fa-edit"></i><span>Actividad en el Sistema</span></a></li>
             <li class="{{ Request::is('blogs*') ? 'active' : '' }}"><a href="{!! route('blogs.index') !!}"><i class="fa fa-edit"></i><span>Blogs</span></a></li>
 
             @can('cattmovimientos')
