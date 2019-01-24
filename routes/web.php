@@ -76,5 +76,6 @@ Route::group(['middleware'=>['auth','verified','activity']], function() {
   Route::resource('formapagos', 'formapagoController');
   Route::resource('usocfdis', 'usocfdiController');
   Route::resource('sociocomercials', 'sociocomercialController');
+  Route::post('sociocomercial/documento', 'sociocomercialController@guardaDocumento');
   Route::resource('catgiroempresas', 'catgiroempresaController');
 });

@@ -10,6 +10,7 @@
         @include('sociocomercials.tabs')
         <a href="{!! route('sociocomercials.index') !!}" class="btn btn-default">Regresar</a>
     </div>
+@stack('modals')
 @endsection
 
 @section('scripts')

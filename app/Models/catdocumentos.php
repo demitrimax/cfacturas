@@ -61,5 +61,10 @@ class catdocumentos extends Model
           return $this->belongsTo('App\Models\cattipodoc','tipodoc');
     }
 
+    public function socios()
+    {
+        return $this->belongsToMany('App\Models\sociocomercial');
+    }
+
 
 }

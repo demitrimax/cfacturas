@@ -11,6 +11,9 @@ use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use Alert;
+use App\Models\cattipodoc;
+use App\Models\sociocomercial;
+use App\Models\catdocumentos;
 
 class sociocomercialController extends AppBaseController
 {
@@ -87,8 +90,9 @@ class sociocomercialController extends AppBaseController
 
             return redirect(route('sociocomercials.index'));
         }
+        $tipodocs = cattipodoc::pluck('tipo','id');
 
-        return view('sociocomercials.show')->with('sociocomercial', $sociocomercial);
+        return view('sociocomercials.show')->with(compact('sociocomercial','tipodocs'));
     }
 
     /**
@@ -163,5 +167,35 @@ class sociocomercialController extends AppBaseController
         Alert::success('Socio Comercial borrado correctamente.');
 
         return redirect(route('sociocomercials.index'));
+    }
+
+    public function guardaDocumento(Request $request)
+    {
+      $input = $request->all();
+      $socio_id = $input['socio_id'];
+      $sociocomercial = $this->sociocomercialRepository->findWithoutFail($socio_id);
+
+      $tipodoc = cattipodoc::find($request->input('tipodoc'));
+      $file = $request->file('archivo');
+      $path = public_path() . '/documents/' . $tipodoc->carpeta;
+      $nombre = uniqid().$file->getClientOriginalName();
+      $file->move($path, $nombre);
+
+      $catdocumentos = new catdocumentos();
+      $catdocumentos->tipodoc = $request->input('tipodoc');
+      $catdocumentos->archivo = 'documents/'.$tipodoc->carpeta.'/'.$nombre;
+      $catdocumentos->nota = $request->input('nota');
+      $catdocumentos->save();
+      $sociocomercial->documentos()->attach($catdocumentos);
+      //$catdocumentos = $this->catdocumentosRepository->create($input);
+
+
+      Flash::success('Documento guardado correctamente.');
+      $sweet = 'Documento guardado correctamente';
+
+        $redirectroute = $input['redirect'];
+        $showid = $input['socio_id'];
+
+        return redirect(route($redirectroute, $showid))->with(compact('sweet'));
     }
 }

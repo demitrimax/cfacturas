@@ -81,5 +81,10 @@ class sociocomercial extends Model
       return $this->hasMany('App\Models\accomercial', 'sociocomer_id');
     }
 
+    public function documentos()
+    {
+      return $this->belongsToMany('App\Models\catdocumentos');
+    }
+
 
 }
