@@ -159,11 +159,20 @@ class catempresasController extends AppBaseController
     {
         $catempresas = $this->catempresasRepository->findWithoutFail($id);
 
+
+
         if (empty($catempresas)) {
             Flash::error('Empresa no encontrada');
             Alert::error('Empresa no encontrada','Error');
 
             return redirect(route('catempresas.index'));
+        }
+        //verificar que la empresa no tenga acuerdos comerciales
+        if ($catempresas->acuerdosvinculo()->count()>0)
+        {
+            Flash::error('La empresa no puede ser eliminada, tiene Acuerdos Comerciales Activos');
+            $sweeterror='La empresa no puede ser eliminada, tiene Acuerdos Comerciales Activos';
+            return redirect(route('catempresas.index'))->with(compact('sweeterror'));
         }
 
         $this->catempresasRepository->delete($id);
