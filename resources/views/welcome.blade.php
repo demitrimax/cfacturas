@@ -20,7 +20,7 @@
       <div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap" data-aos="fade-up">
         <div class="block-18 d-flex align-items-center">
           <div class="icon mr-4">
-            <span class=".flaticon-abogado"></span>
+            <span class="flaticon-abogado"></span>
           </div>
           <div class="text">
             <strong class="number" data-number="125">0</strong>
@@ -31,7 +31,7 @@
       <div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap" data-aos="fade-up">
         <div class="block-18 d-flex align-items-center">
           <div class="icon mr-4">
-            <span class="flaticon-handshake"></span>
+            <span class="flaticon-acuerdo"></span>
           </div>
           <div class="text">
             <strong class="number" data-number="326">0</strong>
@@ -42,7 +42,7 @@
       <div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap" data-aos="fade-up">
         <div class="block-18 d-flex align-items-center">
           <div class="icon mr-4">
-            <span class="flaticon-medal"></span>
+            <span class="flaticon-salud"></span>
           </div>
           <div class="text">
             <strong class="number" data-number="15000">0</strong>
@@ -53,7 +53,7 @@
       <div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap" data-aos="fade-up">
         <div class="block-18 d-flex align-items-center">
           <div class="icon mr-4">
-            <span class="flaticon-trophy"></span>
+            <span class="flaticon-medalla"></span>
           </div>
           <div class="text">
             <strong class="number" data-number="12921">5143</strong>
@@ -95,7 +95,7 @@
     <div class="row">
       <div class="col-md-6 col-lg-4" data-aos="fade-up">
         <div class="media block-6 d-block text-center">
-          <div class="icon mb-4"><span class="flaticon-gavel"></span></div>
+          <div class="icon mb-4"><span class="flaticon-negocios-y-finanzas"></span></div>
           <div class="media-body">
             <h3 class="heading">Servicios Contables</h3>
             <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
@@ -104,7 +104,7 @@
       </div>
       <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
         <div class="media block-6 d-block text-center">
-          <div class="icon mb-4"><span class="flaticon-balance"></span></div>
+          <div class="icon mb-4"><span class="flaticon-acuerdo-1"></span></div>
           <div class="media-body">
             <h3 class="heading">Personal Injury</h3>
             <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
@@ -113,9 +113,9 @@
       </div>
       <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
         <div class="media block-6 d-block text-center">
-          <div class="icon mb-4"><span class="flaticon-lawyer"></span></div>
+          <div class="icon mb-4"><span class="flaticon-pagar"></span></div>
           <div class="media-body">
-            <h3 class="heading">Legal Counseling</h3>
+            <h3 class="heading">Pago de Impuestos</h3>
             <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
           </div>
         </div>
@@ -123,25 +123,25 @@
 
       <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
         <div class="media block-6 d-block text-center">
-          <div class="icon mb-4"><span class="flaticon-courthouse"></span></div>
+          <div class="icon mb-4"><span class="flaticon-contabilidad-2"></span></div>
           <div class="media-body">
-            <h3 class="heading">Civil Ligitation</h3>
+            <h3 class="heading">Control de Contabilidad</h3>
             <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
           </div>
         </div>
       </div>
       <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
         <div class="media block-6 d-block text-center">
-          <div class="icon mb-4"><span class="flaticon-handshake"></span></div>
+          <div class="icon mb-4"><span class="flaticon-proyecto-de-ley-1"></span></div>
           <div class="media-body">
-            <h3 class="heading">Business Law</h3>
+            <h3 class="heading">Capacitaciones en materia contable</h3>
             <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
           </div>
         </div>
       </div>
       <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
         <div class="media block-6 d-block text-center">
-          <div class="icon mb-4"><span class="flaticon-health-insurance"></span></div>
+          <div class="icon mb-4"><span class="flaticon-anadir"></span></div>
           <div class="media-body">
             <h3 class="heading">Insurance Defense</h3>
             <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
@@ -281,18 +281,20 @@
   </div>
   <div class="row block-9" data-aos="fade-up">
     <div class="col-md-6 pr-md-5">
-      <form action="#">
+      <form action="https://twitter.us18.list-manage.com/subscribe/post" method="POST">
+        <input type="hidden" name="u" value="2de5772e8859289dfd4246ee7">
+        <input type="hidden" name="id" value="100fe9b535">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Nombre">
+          <input type="text" class="form-control" placeholder="Nombre" name="MERGE1" id="MERGE1" required>
         </div>
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Correo electrónico">
+          <input type="email" class="form-control" placeholder="Correo electrónico" name="MERGE0" id="MERGE0" required>
         </div>
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Asunto">
+          <input type="text" class="form-control" placeholder="Asunto" name="MERGE2" id="MERGE2" required>
         </div>
         <div class="form-group">
-          <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Mensaje"></textarea>
+          <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Mensaje" name="MERGE3" id="MERGE3" required></textarea>
         </div>
         <div class="form-group">
           <input type="submit" value="Enviar Mensaje" class="btn btn-primary">
