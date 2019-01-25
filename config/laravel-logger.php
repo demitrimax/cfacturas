@@ -17,7 +17,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'rolesEnabled'   => env('LARAVEL_LOGGER_ROLES_ENABLED', false),
+    'rolesEnabled'   => env('LARAVEL_LOGGER_ROLES_ENABLED', true),
     'rolesMiddlware' => env('LARAVEL_LOGGER_ROLES_MIDDLWARE', 'role:admin'),
 
     /*
@@ -104,7 +104,7 @@ return [
     'loggerBladeExtended'       => env('LARAVEL_LOGGER_LAYOUT', 'layouts.app'),
 
     // Switch Between bootstrap 3 `panel` and bootstrap 4 `card` classes
-    'bootstapVersion'           => env('LARAVEL_LOGGER_BOOTSTRAP_VERSION', '4'),
+    'bootstapVersion'           => env('LARAVEL_LOGGER_BOOTSTRAP_VERSION', '3'),
 
     // Additional Card classes for styling -
     // See: https://getbootstrap.com/docs/4.0/components/card/#background-and-color
@@ -127,9 +127,9 @@ return [
     'JQueryCDN'                 => env('LARAVEL_LOGGER_JQUERY_CDN_URL', 'https://code.jquery.com/jquery-3.2.1.slim.min.js'),
 
     // Bootstrap
-    'enableBootstrapCssCDN'     => env('LARAVEL_LOGGER_BOOTSTRAP_CSS_CDN_ENABLED', true),
+    'enableBootstrapCssCDN'     => env('LARAVEL_LOGGER_BOOTSTRAP_CSS_CDN_ENABLED', false),
     'bootstrapCssCDN'           => env('LARAVEL_LOGGER_BOOTSTRAP_CSS_CDN_URL', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'),
-    'enableBootstrapJsCDN'      => env('LARAVEL_LOGGER_BOOTSTRAP_JS_CDN_ENABLED', true),
+    'enableBootstrapJsCDN'      => env('LARAVEL_LOGGER_BOOTSTRAP_JS_CDN_ENABLED', false),
     'bootstrapJsCDN'            => env('LARAVEL_LOGGER_BOOTSTRAP_JS_CDN_URL', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'),
     'enablePopperJsCDN'         => env('LARAVEL_LOGGER_POPPER_JS_CDN_ENABLED', true),
     'popperJsCDN'               => env('LARAVEL_LOGGER_POPPER_JS_CDN_URL', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js'),

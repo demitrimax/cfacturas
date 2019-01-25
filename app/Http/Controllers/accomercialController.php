@@ -21,6 +21,7 @@ use PDF;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\acuerdocomer;
 use App\Mail\acuerdocomerinter;
+use App\Mail\acuerdocomerinterno;
 use App\User;
 use App\Models\blog;
 use App\Models\sociocomercial;
@@ -144,17 +145,18 @@ class accomercialController extends AppBaseController
         if ($accomercial->sociocomer_id) {
           $sociocomercial = $accomercial->sociocomer->datcontacto->where('tipo','email');
         }
-        $cliente = $accomercial->cliente->datcontacto->where('tipo','email')->first();
+        $clientemail = $accomercial->cliente->correo;
         $usuarioelabora = $accomercial->elabuser;
         //dd($cliente->contacto);
-        if ($cliente->correo)
+        if (!empty($clientemail))
         {
-          Mail::to($cliente->correo)->send(new acuerdocomer($accomercial));
+          //Mail::to($cliente->correo)->send(new acuerdocomer($accomercial));
         }
-          Mail::to($usuarioelabora)->send(new acuerdocomerinter($accomercial));
+          //Mail::to($usuarioelabora)->send(new acuerdocomerinter($accomercial));
+
         foreach($gerentes as $gerente)
         {
-            Mail::to($gerentes)->send(new acuerdocomerinter($accomercial));
+            Mail::to($gerente)->send(new acuerdocomerinterno($accomercial,$gerente));
         }
 
         //return (new \App\Mail\acuerdocomer($accomercial))->render();
@@ -319,12 +321,19 @@ class accomercialController extends AppBaseController
             if ($accomercial->sociocomer_id) {
               $sociocomercial = $accomercial->sociocomer->datcontacto->where('tipo','email');
             }
-            $cliente = $accomercial->cliente->datcontacto->where('tipo','email')->first();
+            $clientemail = $accomercial->cliente->correo;
             $usuarioelabora = $accomercial->elabuser;
             //dd($cliente->contacto);
-            Mail::to($cliente->contacto)->send(new acuerdocomer($accomercial));
+            if (!empty($clientemail))
+            {
+              Mail::to($clientemail)->send(new acuerdocomer($accomercial));
+            }
             Mail::to($usuarioelabora)->send(new acuerdocomerinter($accomercial));
-            Mail::to($gerentes)->send(new acuerdocomerinter($accomercial));
+
+            foreach($gerentes as $gerente)
+            {
+                Mail::to($gerente)->send(new acuerdocomerinterno($accomercial,$gerente));
+            }
             //return (new \App\Mail\acuerdocomer($accomercial))->render();
             $mensaje = 'Se han enviado correctamente notificaciones a los usuarios';
             return back()->with(compact('mensaje'));

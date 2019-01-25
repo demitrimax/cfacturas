@@ -1,9 +1,9 @@
 @component('mail::message')
-# Nuevo Acuerdo Comercial
+# Alta de Nuevo Acuerdo Comercial
 
-Estimado cliente {{$accomercial->nomcliente}},
+Estimado gerente {{$user->name}},
 
-El motivo de este correo es para hacerle de su conocimiento que se ha creado un nuevo ACUERDO COMERCIAL entre {{config('app.name')}} y {{$accomercial->nomcliente}}.
+Por este medio se le informa que se ha creado un nuevo ACUERDO COMERCIAL entre {{config('app.name')}} y {{$accomercial->nomcliente}}.
 
 Si desea ver los detalles del acuerdo:
 @component('mail::button', ['url' => url('accomercials/'.$accomercial->id)])
