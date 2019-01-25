@@ -288,8 +288,8 @@ class accomercialController extends AppBaseController
 
       if (empty($accomercial)) {
           Flash::error('Acuerdo Comercial no encontrado.');
-
-          return redirect(route('accomercials.index'));
+          $sweeterror = "Acuerdo comercial no encontrado";
+          return redirect(route('accomercials.index'))->with(compact('sweeterror'));
       }
 
       return view('accomercials.viewacuerdoprint')->with('accomercial', $accomercial);
@@ -303,7 +303,7 @@ class accomercialController extends AppBaseController
 
           return redirect(route('accomercials.index'));
       }
-      $pdf = \PDF::loadView('accomercials.viewacuerdoprint',compact('accomercial'));
+      $pdf = PDF::loadView('accomercials.viewacuerdoprint',compact('accomercial'));
       return $pdf->download('acuerdo.pdf');
       //return view('accomercials.viewacuerdoprint')->with(compact('accomercial'));
     }
