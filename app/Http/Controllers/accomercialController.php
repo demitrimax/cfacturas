@@ -147,9 +147,16 @@ class accomercialController extends AppBaseController
         $cliente = $accomercial->cliente->datcontacto->where('tipo','email')->first();
         $usuarioelabora = $accomercial->elabuser;
         //dd($cliente->contacto);
-        //Mail::to($cliente->correo)->send(new acuerdocomer($accomercial));
-        Mail::to($usuarioelabora)->send(new acuerdocomerinter($accomercial));
-        Mail::to($gerentes)->send(new acuerdocomerinter($accomercial));
+        if ($cliente->correo)
+        {
+          Mail::to($cliente->correo)->send(new acuerdocomer($accomercial));
+        }
+          Mail::to($usuarioelabora)->send(new acuerdocomerinter($accomercial));
+        foreach($gerentes as $gerente)
+        {
+            Mail::to($gerentes)->send(new acuerdocomerinter($accomercial));
+        }
+
         //return (new \App\Mail\acuerdocomer($accomercial))->render();
         $sweet = 'Se han enviado correctamente notificaciones a los usuarios';
 
