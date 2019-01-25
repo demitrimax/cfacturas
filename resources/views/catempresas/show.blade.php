@@ -35,7 +35,7 @@
                   </div>
                   <!-- /.tab-pane -->
                   <div class="tab-pane" id="tab_2">
-
+                      @include('catempresas.tabacuerdos')
                   </div>
                   <!-- /.tab-pane -->
                   <div class="tab-pane" id="tab_3">

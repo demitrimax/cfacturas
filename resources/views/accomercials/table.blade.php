@@ -24,7 +24,7 @@
             <td>{!! $accomercial->elabuser->name  !!}</td>
             <td>
               @foreach ($accomercial->empresasfact as $empresas)
-              <span class="badge">{!! $empresas->empresa->nombre !!}</span>
+              <span class="badge">{!! $empresas->nombre !!}</span>
               @endforeach
             </td>
             <td>

@@ -97,9 +97,9 @@ class catempresas extends Model
       }
       return $giro;
     }
-    public function acuerdosvinculo()
+    public function acuerdos()
     {
-      return $this->hasMany('App\acempresas','empresa_id');
+      return $this->BelongsToMany('App\Models\accomercial','ac_empresas','empresa_id','acuerdoc_id');
     }
 
 }

@@ -71,9 +71,9 @@
               @foreach ($accomercial->empresasfact as $key=>$empresaria)
             <tr>
               <td>{{$key+1}}</td>
-              <td>{{$empresaria->empresa->nombre}}</td>
-              <td>{{$empresaria->empresa->correo_notifica}}</td>
-              <td>{{$empresaria->empresa->correo_factura}}</td>
+              <td>{{$empresaria->nombre}}</td>
+              <td>{{$empresaria->correo_notifica}}</td>
+              <td>{{$empresaria->correo_factura}}</td>
             </tr>
               @endforeach
             </tbody>

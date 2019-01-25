@@ -55,4 +55,5 @@ class acempresas extends Model
     {
       return $this->belongsTo('App\Models\catempresas','empresa_id');
     }
+
 }
