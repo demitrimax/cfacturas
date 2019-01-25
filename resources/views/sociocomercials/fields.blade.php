@@ -44,6 +44,15 @@
   </div>
 </div>
 
+<!-- COMISION Field -->
+<div class="form-group">
+    {!! Form::label('base', 'Base del porcentaje:') !!}
+    <div class="input-group">
+      {!! Form::select('base', ['SUBTOTAL'=>'SUBTOTAL','DEVOLUCION'=>'DEVOLUCION','TOTAL'=>'TOTAL'],null, ['class' => 'form-control', 'required', 'placeholder'=>'Seleccione']) !!}
+      <span class="input-group-addon">%</span>
+  </div>
+</div>
+
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}

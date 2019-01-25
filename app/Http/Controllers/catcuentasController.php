@@ -85,7 +85,7 @@ class catcuentasController extends AppBaseController
         $rules = [
           'banco_id' => 'required',
           'numcuenta' => 'required|max:10',
-          'clabeinterbancaria' => 'nullable|digits:18|unique:catcuentas,slug,id,id,deleted_at,NULL',
+          'clabeinterbancaria' => 'nullable|digits:18',
           'sucursal' => 'max:5',
         ];
         $this->validate($request, $rules);

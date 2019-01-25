@@ -43,7 +43,8 @@ class sociocomercial extends Model
         'direccion',
         'correo',
         'telefono',
-        'comision'
+        'comision',
+        'base'
     ];
 
     /**
@@ -61,7 +62,8 @@ class sociocomercial extends Model
         'direccion' => 'string',
         'correo' => 'string',
         'telefono' => 'string',
-        'comision' => 'float'
+        'comision' => 'float',
+        'base' => 'string'
     ];
 
     /**

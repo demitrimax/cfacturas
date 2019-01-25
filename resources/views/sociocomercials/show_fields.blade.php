@@ -47,5 +47,5 @@
 <!-- Porcentaje de Comisión Field -->
 <div class="form-group">
     {!! Form::label('comision', 'Porcentaje de Comisión:') !!}
-    <p>{!! $sociocomercial->comision !!}%</p>
+    <p>{!! $sociocomercial->comision !!}% {{$sociocomercial->base}}</p>
 </div>
