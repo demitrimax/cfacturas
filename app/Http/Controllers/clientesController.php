@@ -216,13 +216,14 @@ class clientesController extends AppBaseController
 
         if (empty($clientes)) {
             Flash::error('Cliente no encontrado');
-
-            return redirect(route('clientes.index'));
+            $sweeterror = 'Cliente no encontrado';
+            return redirect(route('clientes.index'))->with(compact('sweeterror'));
         }
         if ($clientes->accomerciales->count()>0)
         {
             Flash::error('Cliente no puede ser eliminado, tiene Acuerdos Comerciales Activos');
-            return redirect(route('clientes.index'));
+            $sweeterror = 'Cliente no puede ser eliminado, tiene Acuerdos Comerciales Activos';
+            return redirect(route('clientes.index'))->with(compact('sweeterror'));
         }
 
         $this->clientesRepository->delete($id);
