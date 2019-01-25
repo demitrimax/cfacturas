@@ -3,15 +3,7 @@
 <!-- iCheck for checkboxes and radio inputs -->
  <link rel="stylesheet" href="{{asset('adminlte/bower_components/iCheck/skins/all.css')}}">
 @endsection
-@can('accomerciales-authorized')
-<!-- Autorizado Field -->
-<div class="form-group">
-    <label class="checkbox-inline">
-        {!! Form::hidden('autorizado', false) !!}
-        {!! Form::checkbox('autorizado', '1', null, ['class'=>'flat-red']) !!} {!! Form::label('autorizado', 'Autorizado') !!}
-    </label>
-</div>
-@endcan
+
 
 <!-- Fechasolicitud Field -->
 <div class="form-group">
@@ -20,20 +12,30 @@
     {!! Form::hidden('fechasolicitud', date("Y-m-d")) !!}
 </div>
 
-<!-- Sociocomer Id Field -->
+<!-- Checlbox Requiere Socio Comercial Field -->
 <div class="form-group">
-    {!! Form::label('sociocomer_id', 'Socio Comercial:') !!}
-    {!! Form::select('sociocomer_id', $sociocomer, null, ['class' => 'form-control select2', 'style'=>'width: 100%;','placeholder'=>'Seleccione uno (opcional)']) !!}
+    <label class="checkbox-inline">
+        {!! Form::hidden('rsocio', false) !!}
+        {!! Form::checkbox('rsocio', '1', 1, ['onclick'=>'reqsocio(this)']) !!}
+        {!! Form::label('roscoio', 'Requiere Socio Comercial') !!}
+    </label>
 </div>
+<div id="requieresocio">
+<!-- Sociocomer Id Field -->
+  <div class="form-group">
+      {!! Form::label('sociocomer_id', 'Socio Comercial:') !!}
+      {!! Form::select('sociocomer_id', $sociocomer, null, ['class' => 'form-control select2', 'style'=>'width: 100%;','placeholder'=>'Seleccione uno', 'required']) !!}
+  </div>
 
-<!-- Sociocomer Id Field -->
-<div class="form-group">
-    {!! Form::label('asoc_comision', 'Comisión Socio:') !!}
-    <div class="input-group">
-        <span class="input-group-addon">Comisión Socio:</span>
-    {!! Form::number('asoc_comision', null, ['class' => 'form-control', 'step'=>'0.01', 'max' => '15.00', 'placeholder'=>'Porcentaje comisionable']) !!}
-    <span class="input-group-addon">%</span>
-</div>
+  <!-- Sociocomer Id Field -->
+  <div class="form-group">
+      {!! Form::label('asoc_comision', 'Comisión Socio:') !!}
+      <div class="input-group">
+          <span class="input-group-addon">Comisión Socio:</span>
+        {!! Form::number('asoc_comision', null, ['class' => 'form-control', 'step'=>'0.01', 'max' => '15.00', 'placeholder'=>'Porcentaje comisionable']) !!}
+        <span class="input-group-addon">%</span>
+    </div>
+  </div>
 </div>
 
 <!-- Cliente Id Field -->
@@ -42,11 +44,6 @@
     {!! Form::select('cliente_id', $clientes, null, ['class' => 'form-control select2', 'style'=>'width: 100%;', 'required', 'placeholder'=>'Seleccione uno']) !!}
 </div>
 
-<!-- Cuenta Id Field -->
-<div class="form-group">
-    {!! Form::label('cuenta_id', 'Cuenta asociada:*') !!}
-    {!! Form::select('cuenta_id', [''=>'Seleccione una cuenta'], null, ['class' => 'form-control', 'required']) !!}
-</div>
 
 <!-- Empresas Asociadas al Acuerdo Comercial -->
 <div class="form-group">
@@ -98,20 +95,7 @@
     {!! Form::select('elab_user_id', $usuarios, Auth::user()->id, ['class' => 'form-control', 'readonly','required', 'onsubmit'=>'enableElabUser();' ]) !!}
     <!-- {!! Form::hidden('elab_user_id', Auth::user()->id) !!} -->
 </div>
-@can('accomerciales-authorized')
-<!-- Aut User Id Field -->
-<div class="form-group">
-    {!! Form::label('aut_user_id', 'Usuario que Supervisa:') !!}
-    {!! Form::select('aut_user_id', $userSupervisor, null, ['class' => 'form-control', 'required']) !!}
-</div>
-@endcan
-@can('accomerciales-supervised')
-<!-- Aut User2 Id Field -->
-<div class="form-group">
-    {!! Form::label('aut_user2_id', 'Usuario que Autoriza:') !!}
-    {!! Form::select('aut_user2_id', $userGerente, null, ['class' => 'form-control', 'required']) !!}
-</div>
-@endcan
+
 
 <!-- Submit Field -->
 <div class="form-group">
@@ -127,11 +111,7 @@
 $(document).ready(function() {
     $('.select2').select2();
 });
-function sociocomercialremove(index)
-{
-  var sel = document.getElementById("cliente_id");
-  sel.remove(index);
-}
+
 
 $('#sociocomer_id').on('change', function(e) {
   //console.log(e);
@@ -144,33 +124,6 @@ $('#sociocomer_id').on('change', function(e) {
   });
 });
 
-$('#cliente_id').on('change', function(e) {
-  //console.log(e);
-  var cliente_id = e.target.value;
-  //ajax
-  $.get('/GetDirecciones/'+cliente_id, function(data) {
-    //exito al obtener los datos
-    //console.log(data);
-    $('#direccion_id').empty();
-    $.each(data, function(index, direcciones) {
-      $('#direccion_id').append('<option value ="' + direcciones.id + '">'+direcciones.razonsocial+'</option>' );
-    });
-  });
-});
-
-$('#cliente_id').on('change', function(e) {
-  //console.log(e);
-  var cliente_id = e.target.value;
-  //ajax
-  $.get('/GetCuentas/'+cliente_id, function(data) {
-    //exito al obtener los datos
-    //console.log(data);
-    $('#cuenta_id').empty();
-    $.each(data, function(index, cuenta) {
-      $('#cuenta_id').append('<option value ="' + cuenta.id + '">'+cuenta.numcuenta+'</option>' );
-    });
-  });
-});
 
  $(function () {
 //iCheck for checkbox and radio inputs
@@ -189,9 +142,29 @@ $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
   radioClass   : 'iradio_flat-green'
 })
 })
+
 //habilitar el select
 function enableElabUser() {
   document.getElementById('elab_user_id').disabled=false;
+}
+
+//checkbox requiere socio comercial
+function reqsocio(cheked) {
+     reqsocioe = document.getElementById('requieresocio');
+     var checkfield = cheked.checked;
+    console.log(checkfield);
+  if (checkfield == true){
+    reqsocioe.style.display ='block';
+    document.getElementById("sociocomer_id").required = true;
+  }
+  else
+  {
+    reqsocioe.style.display = 'none';
+    document.getElementById("sociocomer_id").required = false;
+    document.getElementById("sociocomer_id").selectedIndex = "0";
+    document.getElementById("asoc_comision").value = null;
+  }
+
 }
 
 </script>

@@ -40,9 +40,6 @@ function human_filesize($bytes, $decimals = 2) {
           <td>{{$documento->nota}}</td>
           <td>
             {!! Form::open(['route' => ['catdocumentos.destroy', $documento->id], 'method' => 'delete', 'id'=>'delDocumento'.$documento->id]) !!}
-            @can('documentos-edit')
-            <button type="button" class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i> </button>
-            @endcan
             @can('documentos-delete')
             <button type="button" class="btn btn-danger" rel="tooltip" title="Eliminar" Onclick="ConfirmDeleteDocumento({{$documento->id}})"> <i class="fa fa-remove"></i></button>
               {!! Form::hidden('redirect', 'clientes.show') !!}

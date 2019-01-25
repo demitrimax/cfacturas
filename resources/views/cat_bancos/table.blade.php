@@ -18,9 +18,9 @@
             <td>
                 {!! Form::open(['route' => ['catBancos.destroy', $catBancos->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
-                    <a href="{!! route('catBancos.show', [$catBancos->id]) !!}" class='btn btn-default'><i class="glyphicon glyphicon-eye-open"></i></a>
+                    <a href="{!! route('catBancos.show', [$catBancos->id]) !!}" class='btn btn-info'><i class="glyphicon glyphicon-eye-open"></i></a>
                     @can('catbancos-edit')
-                    <a href="{!! route('catBancos.edit', [$catBancos->id]) !!}" class='btn btn-default'><i class="glyphicon glyphicon-edit"></i></a>
+                    <a href="{!! route('catBancos.edit', [$catBancos->id]) !!}" class='btn btn-primary'><i class="glyphicon glyphicon-edit"></i></a>
                     @endcan
                     @can('catbancos-delete')
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger', 'onclick' => "return confirm('Esta usted seguro?')"]) !!}

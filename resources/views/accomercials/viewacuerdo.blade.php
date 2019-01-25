@@ -184,6 +184,7 @@
       <div class="row no-print">
         <div class="col-xs-12">
           <a href="{{url('accomercials/print/'.$accomercial->id)}}" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Imprimir</a>
+          @include('accomercials.botonesautoriza')
           <a href="{{url('accomercials/notificaralta/'.$accomercial->id)}}" type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Enviar Copias Involucrados
           </a>
           <a href="{{url('accomercials/pdf/'.$accomercial->id)}}" type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">

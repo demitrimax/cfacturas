@@ -26,7 +26,7 @@
           <td>{{$key+1}}</td>
           <td>{{$acuerdos->fechasolicitud->format('d-M-Y')}}</td>
           <td>{{$acuerdos->nomsocio}} </a></td>
-          <td>{!! ($acuerdos->autorizado == 1) ? '<span class="badge bg-blue"><i class="fa fa-check"></i></span>' : '<span class="badge bg-red"><i class="fa fa-close"></i></span>' !!}</td>
+          <td title="{!! ($acuerdos->autorizado == 1) ? 'AUTORIZADO' : 'PENDIENTE' !!}">{!! ($acuerdos->autorizado == 1) ? '<span class="badge bg-blue"><i class="fa fa-check"></i></span>' : '<span class="badge bg-red"><i class="fa fa-close"></i></span>' !!}</td>
           <td>{{$acuerdos->ac_principalporc}}% : {{$acuerdos->base}}</td>
           <td></td>
           <td>
@@ -41,14 +41,15 @@
               '{{$acuerdos->ac_principalporc}}',
               '{{$acuerdos->ac_secundariopor}}',
               '{{$acuerdos->base}}')"> <i class="fa fa-search-plus"></i> </button>
-            @can('accomerciales-edit')
-            <button type="button" class="btn btn-warning" rel="tooltip" title="Editar" Onclick="IrEditarAcuerdo({{$acuerdos->id}})"> <i class="fa fa-pencil"></i> </button>
-            @endcan
+
+            <button type="button" class="btn btn-warning" rel="tooltip" title="Visualizar" Onclick="VisualizarAcuerdo({{$acuerdos->id}})"> <i class="fa fa-eye"></i> </button>
+
             @can('accomerciales-delete')
             <button type="button" class="btn btn-danger" rel="tooltip" title="Eliminar" Onclick="ConfirmDeleteAcuerdo({{$acuerdos->id}})"> <i class="fa fa-remove"></i></button>
               {!! Form::hidden('redirect', 'clientes.show') !!}
               {!! Form::hidden('cliente_id', $acuerdos->id) !!}
             @endcan
+            @include('clientes.botonesautoriza')
             {!! Form::close() !!}
           </td>
         </tr>
@@ -116,9 +117,9 @@
 
   @push('scripts')
   <script>
-  function IrEditarAcuerdo(id)
+  function VisualizarAcuerdo(id)
   {
-    location.href ="{!!url('/')!!}/accomercials/"+id+"/edit";
+    location.href ="{!!url('/')!!}/accomercials/"+id;
   }
   function ConfirmDeleteAcuerdo(id) {
   swal({

@@ -225,6 +225,15 @@ class accomercial extends Model
     {
       return new Date($fechasolicitud);
     }
-    
+    public function getAutorizadoAttribute()
+    {
+        $resultado = false;
+      if($this->aut1_at && $this->aut2_at)
+      {
+        $resultado = true;
+      }
+      return $resultado;
+    }
+
 
 }

@@ -93,7 +93,7 @@ class accomercialController extends AppBaseController
           'sociocomer_id' => 'integer|nullable',
           'cliente_id' => 'required',
           //'direccion_id' => 'required',
-          'cuenta_id' => 'required',
+          //'cuenta_id' => 'required',
           'descripcion' => 'required',
           'ac_principalporc' => 'required',
           //'aut_user_id' => 'required',
@@ -112,7 +112,7 @@ class accomercialController extends AppBaseController
         $accomercial->asoc_comision = $request->input('asoc_comision');
         $accomercial->cliente_id = $request->input('cliente_id');
         $accomercial->direccion_id = $request->input('direccion_id');
-        $accomercial->cuenta_id = $request->input('cuenta_id');
+        //$accomercial->cuenta_id = $request->input('cuenta_id');
         $accomercial->descripcion = $request->input('descripcion');
         $accomercial->informacion = $request->input('informacion');
         $accomercial->base = $request->input('base');
