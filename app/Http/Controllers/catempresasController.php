@@ -168,7 +168,7 @@ class catempresasController extends AppBaseController
             return redirect(route('catempresas.index'));
         }
         //verificar que la empresa no tenga acuerdos comerciales
-        if ($catempresas->acuerdosvinculo()->count()>0)
+        if ($catempresas->acuerdos->count()>0)
         {
             Flash::error('La empresa no puede ser eliminada, tiene Acuerdos Comerciales Activos');
             $sweeterror='La empresa no puede ser eliminada, tiene Acuerdos Comerciales Activos';

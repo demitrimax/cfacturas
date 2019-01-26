@@ -18,12 +18,12 @@
           <th>Correos</th>
         </tr>
       @foreach($clientes->accomerciales as $acuerdos)
-        @foreach($acuerdos->empresasfact as $key=>$empresas)
+        @foreach ($acuerdos->empresasfact as $key=>$empresas)
         <tr>
           <td>{{$key+1}}</td>
-          <td>{{$empresas->empresa->nombre }}</td>
-          <td>{{ number_format($empresas->empresa->comision,2) }} </a></td>
-          <td>{!! $empresas->empresa->correo_factura !!}</td>
+          <td>{{$empresas->nombre }}</td>
+          <td>{{ number_format($empresas->comision,2) }} </a></td>
+          <td>{!! $empresas->correo_factura !!}</td>
         </tr>
           @endforeach
         @endforeach
