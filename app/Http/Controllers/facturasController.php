@@ -17,6 +17,8 @@ use App\Models\catempresas;
 use App\Models\pagometodo;
 use App\Models\pagocondicion;
 use App\Models\facestatus;
+use App\Models\accomercial;
+use App\Models\formapago;
 
 
 class facturasController extends AppBaseController
@@ -56,14 +58,15 @@ class facturasController extends AppBaseController
      */
     public function create()
     {
-        $clientes = clientes::has('direcciones')->get();
+        //$clientes = clientes::has('direcciones')->get();
+        $clientes = clientes::all();
         $clientes = $clientes->pluck('nombrerfc','id');
         $direcciones = direcciones::pluck('RFC','id');
         $empresas = catempresas::pluck('nombre','id');
         $pagometodo = pagometodo::pluck('nombre','id');
-        $pagocondicion = pagocondicion::pluck('nombre','id');
+        $pagoforma = formapago::pluck('descripcion','id');
         $facestatus = facestatus::pluck('nombre','id');
-        return view('facturas.create')->with(compact('clientes','direcciones','empresas','pagometodo','pagocondicion','facestatus'));
+        return view('facturas.create')->with(compact('clientes','direcciones','empresas','pagometodo','pagocondicion','facestatus','pagoforma'));
     }
 
     /**
@@ -173,5 +176,17 @@ class facturasController extends AppBaseController
         Flash::success('Facturas deleted successfully.');
 
         return redirect(route('facturas.index'));
+    }
+
+    public function getAcuerdosCliente($id)
+    {
+      $acuerdoArray[] =  ['id' => 999, 'numacuerdo' => 'Sin Acuerdos'];
+      $acuerdos= accomercial::where('cliente_id',$id)->whereNotNull('aut1_at')->get();
+      if ($acuerdos){
+        foreach($acuerdos as $key=>$acuerdo){
+          $acuerdoArray[] = ['id' => $acuerdo->id, 'numacuerdo' => $acuerdo->numacuerdo.' - '.$acuerdo->ac_principalporc.'%-'.$acuerdo->base ];
+        }
+      }
+      return $acuerdoArray;
     }
 }

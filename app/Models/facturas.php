@@ -55,7 +55,9 @@ class facturas extends Model
         'total',
         'fecha',
         'estatus_id',
-        'comprobante'
+        'comprobante',
+        'formapago_id',
+        'foliofac'
     ];
 
     /**
@@ -76,7 +78,9 @@ class facturas extends Model
         'iva' => 'float',
         'total' => 'float',
         'estatus_id' => 'integer',
-        'comprobante' => 'string'
+        'comprobante' => 'string',
+        'formapago_id' => 'integer',
+        'foliofac' => 'string'
     ];
 
     /**

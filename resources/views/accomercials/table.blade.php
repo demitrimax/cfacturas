@@ -14,7 +14,7 @@
     <tbody>
     @foreach($accomercials as $accomercial)
         <tr>
-            <td>{!! $accomercial->fechasolicitud->format('d-M-Y') !!}</td>
+            <td width="100">{!! ($accomercial->autorizado) ? $accomercial->numacuerdo : $accomercial->fechasolicitud->format('d-M-Y') !!}</td>
             <td>{!! $accomercial->nomsocio !!}</td>
             <td>{!! $accomercial->nomcliente !!}</td>
             <td>{!! $accomercial->informacion !!}</td>

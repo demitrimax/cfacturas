@@ -1,24 +1,36 @@
-<!-- Cliente Id Field -->
-<div class="form-group">
-    {!! Form::label('cliente_id', 'Cliente:') !!}
-    {!! Form::select('cliente_id', $clientes, null, ['class' => 'form-control select2', 'placeholder' => 'Seleccione un cliente', 'required']) !!}
+<div class="panel panel-default">
+  <div class="panel-heading">Datos del Acuerdo</div>
+  <div class="panel-body">
+    <!-- Cliente Id Field -->
+    <div class="form-group">
+        {!! Form::label('cliente_id', 'Cliente:') !!}
+        {!! Form::select('cliente_id', $clientes, null, ['class' => 'form-control select2', 'placeholder' => 'Seleccione un cliente', 'required', 'style'=>'width: 100%;']) !!}
+    </div>
+
+    <!-- Acuerdo Comercial Id Field -->
+    <div class="form-group">
+        {!! Form::label('accomercial_id', 'Acuerdo Comercial:') !!}
+        {!! Form::select('accomercial_id', [''],null, ['class' => 'form-control select2', 'placeholder'=>'Seleccione un Acuerdo', 'required', 'style'=>'width: 100%;']) !!}
+    </div>
+
+    <!-- Empresa Id Field -->
+    <div class="form-group">
+        {!! Form::label('empresa_id', 'Empresa:') !!}
+        {!! Form::select('empresa_id', $empresas, null, ['class' => 'form-control select2', 'placeholder'=>'Seleccione una Empresa', 'required', 'style'=>'width: 100%;']) !!}
+    </div>
+  </div>
 </div>
 
-<!-- Direccion Id Field -->
-<div class="form-group">
-    {!! Form::label('direccion_id', 'RFC - Razon Social:') !!}
-    {!! Form::select('direccion_id', $direcciones, null, ['class' => 'form-control select2', 'placeholder'=>'Seleccione un RFC', 'required']) !!}
-</div>
 
-<!-- Empresa Id Field -->
+<!-- Concepto Field -->
 <div class="form-group">
-    {!! Form::label('empresa_id', 'Empresa:') !!}
-    {!! Form::select('empresa_id', $empresas, null, ['class' => 'form-control select2', 'placeholder'=>'Seleccione una Empresa', 'required']) !!}
+    {!! Form::label('foliofac', 'Folio de factura:') !!}
+    {!! Form::text('foliofac', null, ['class' => 'form-control', 'required', 'maxlength'=>'35']) !!}
 </div>
 
 <!-- Concepto Field -->
 <div class="form-group">
-    {!! Form::label('concepto', 'Concepto:') !!}
+    {!! Form::label('concepto', 'Observaciones:') !!}
     {!! Form::text('concepto', null, ['class' => 'form-control', 'required', 'maxlength'=>'190']) !!}
 </div>
 
@@ -28,10 +40,10 @@
     {!! Form::select('metodopago_id', $pagometodo, null, ['class' => 'form-control', 'required']) !!}
 </div>
 
-<!-- Condicionpago Id Field -->
+<!-- forma de pago Id Field -->
 <div class="form-group">
-    {!! Form::label('condicionpago_id', 'Condicion de pago:') !!}
-    {!! Form::select('condicionpago_id', $pagocondicion, null, ['class' => 'form-control', 'required']) !!}
+    {!! Form::label('formapago_id', 'Forma de pago:') !!}
+    {!! Form::select('formapago_id', $pagoforma, null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Complementopago Id Field -->
@@ -79,3 +91,44 @@
     {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
     <a href="{!! route('facturas.index') !!}" class="btn btn-default">Cancel</a>
 </div>
+
+@push('scripts')
+<script src="{{asset('adminlte/bower_components/select2/dist/js/select2.full.min.js')}}"></script>
+<!-- iCheck 1.0.1 -->
+<script src="{{asset('adminlte/bower_components/iCheck/icheck.min.js')}}"></script>
+<script>
+$(document).ready(function() {
+    $('.select2').select2();
+});
+$('#cliente_id').on('change', function(e) {
+  //console.log(e);
+  var cliente_id = e.target.value;
+  //ajax
+  $.get('/facturas/GetAcuerdosCliente/'+cliente_id, function(data) {
+    //exito al obtener los datos
+    console.log(data);
+    $('#accomercial_id').empty();
+    $.each(data, function(index, acuerdo) {
+      $('#accomercial_id').append('<option value ="' + acuerdo.id + '">'+acuerdo.numacuerdo+'</option>' );
+    });
+  });
+});
+ $(function () {
+//iCheck for checkbox and radio inputs
+$('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+  checkboxClass: 'icheckbox_minimal-blue',
+  radioClass   : 'iradio_minimal-blue'
+})
+//Red color scheme for iCheck
+$('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+  checkboxClass: 'icheckbox_minimal-red',
+  radioClass   : 'iradio_minimal-red'
+})
+//Flat red color scheme for iCheck
+$('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+  checkboxClass: 'icheckbox_flat-green',
+  radioClass   : 'iradio_flat-green'
+})
+})
+</script>
+@endpush

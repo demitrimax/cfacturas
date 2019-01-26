@@ -235,6 +235,9 @@ class accomercial extends Model
       }
       return $resultado;
     }
-
+  public function getNumacuerdoAttribute()
+  {
+    return 'AC No. #'.$this->created_at->format('y').str_pad($this->id,3,"0",STR_PAD_LEFT);
+  }
 
 }
