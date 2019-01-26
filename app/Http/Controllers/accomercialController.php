@@ -142,9 +142,6 @@ class accomercialController extends AppBaseController
         //A quienes se les envía email del alta de correo
         $gerentes = User::role('gerente')->get();
         $sociocomercial = '';
-        if ($accomercial->sociocomer_id) {
-          $sociocomercial = $accomercial->sociocomer->datcontacto->where('tipo','email');
-        }
         $clientemail = $accomercial->cliente->correo;
         $usuarioelabora = $accomercial->elabuser;
         //dd($cliente->contacto);
@@ -318,9 +315,6 @@ class accomercialController extends AppBaseController
             //A quienes se les envía email del alta de correo
             $gerentes = User::role('gerente')->get();
             $sociocomercial = '';
-            if ($accomercial->sociocomer_id) {
-              $sociocomercial = $accomercial->sociocomer->datcontacto->where('tipo','email');
-            }
             $clientemail = $accomercial->cliente->correo;
             $usuarioelabora = $accomercial->elabuser;
             //dd($cliente->contacto);
