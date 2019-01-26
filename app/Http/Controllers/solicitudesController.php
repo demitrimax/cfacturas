@@ -22,6 +22,7 @@ use App\Models\facsolicitud;
 use App\Models\usocfdi;
 use App\Models\pagometodo;
 use App\Models\formapago;
+use App\Models\clientes;
 
 class solicitudesController extends AppBaseController
 {
@@ -82,7 +83,9 @@ class solicitudesController extends AppBaseController
         $usocfdi = $usocfdi->pluck('usocfdicod','id');
         $metodo = pagometodo::pluck('nombre','id');
         $forma = formapago::pluck('descripcion','id');
-        return view('solicitudes.solicitud')->with(compact('usocfdi','metodo','forma'));
+        $clientes = clientes::all();
+        $clientes = $clientes->pluck('nomcompleto','RFC');
+        return view('solicitudes.solicitud')->with(compact('usocfdi','metodo','forma','clientes'));
     }
 
     /**
@@ -97,15 +100,15 @@ class solicitudesController extends AppBaseController
       $rules = [
         'nombre' => 'required',
         'user_id' => 'required',
-        'correo' => 'required',
+        //'correo' => 'required',
         //'rfc' => 'exists:direcciones,RFC',
-        'telefono' => 'required',
+        //'telefono' => 'required',
         //'condicion' => 'required',
         'metodo' => 'required'
       ];
       $messages = [
         'nombre.required' => 'Es necesario un nombre',
-        'correo.required' => 'El correo es requerido',
+        //'correo.required' => 'El correo es requerido',
         //'rfc.exists' => 'El RFC no existe en nuestros registros',
         'user_id.required' => 'Se requiere un ID de usuario registrado',
       ];

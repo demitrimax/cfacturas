@@ -32,9 +32,9 @@ class solicitudController extends Controller
       $rules = [
         'nombre' => 'required',
         'user_id' => 'required',
-        'correo' => 'required',
+        //'correo' => 'required',
         //'rfc' => 'exists:direcciones,RFC',
-        'telefono' => 'required',
+        //'telefono' => 'required',
         //'condicion' => 'required',
         'metodo' => 'required'
       ];
@@ -49,8 +49,8 @@ class solicitudController extends Controller
       $solicitudfac = new facsolicitud();
       $solicitudfac->nombre = $request->input('nombre');
       $solicitudfac->user_id = $request->input('user_id');
-      $solicitudfac->correo = $request->input('correo');
-      $solicitudfac->telefono = $request->input('telefono');
+      //$solicitudfac->correo = $request->input('correo');
+      //$solicitudfac->telefono = $request->input('telefono');
       $solicitudfac->rfc = $request->input('rfc');
       $solicitudfac->condicion = $request->input('condicion');
       $solicitudfac->metodo = $request->input('metodo');
@@ -77,7 +77,7 @@ class solicitudController extends Controller
       {
         Mail::to($enviara)->send(new NotificaSolicitudFactura($usuario, $solicitudfac));
       }
-      Mail::to($solicitudfac->correo)->send(new NuevaSolicitud($usuario, $solicitudfac));
+      //Mail::to($solicitudfac->correo)->send(new NuevaSolicitud($usuario, $solicitudfac));
       $sweet = 'Solicitud Creada';
 
       return back()->with(compact('mensaje','sweet'));
