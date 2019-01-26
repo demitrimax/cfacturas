@@ -176,7 +176,7 @@ class accomercial extends Model
         $socio = sociocomercial::where('id',$socioid)->first();
         $nomsocio = "N/D";
         //si existe
-        if($socio->count()>0)
+        if(!empty($socio))
         {
           $nomsocio = $this->sociocomer->nombre;
         }
