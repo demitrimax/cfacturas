@@ -59,7 +59,8 @@ class facturasController extends AppBaseController
     public function create()
     {
         //$clientes = clientes::has('direcciones')->get();
-        $clientes = clientes::all();
+        $clientes = clientes::has('accomerciales')->get();
+        //$clientes = $clientes->where()
         $clientes = $clientes->pluck('nombrerfc','id');
         $direcciones = direcciones::pluck('RFC','id');
         $empresas = catempresas::pluck('nombre','id');
@@ -78,7 +79,21 @@ class facturasController extends AppBaseController
      */
     public function store(CreatefacturasRequest $request)
     {
-
+      $rules = [
+        //'fechasolicitud' => 'required',
+        'cliente_id' => 'required',
+        'accomercial_id' => 'required',
+        'empresa_id' => 'required',
+        'fecha' => 'required',
+        'foliofac' => 'required',
+        'observaciones' => 'required',
+        'subtotal' => 'required',
+        'iva' => 'required',
+        'total' => 'required',
+        'comprobante' => 'required',
+        'user_id' => 'required'
+      ];
+      $this->validate($request, $rules);
         $input = $request->all();
 
         $facturas = $this->facturasRepository->create($input);
@@ -183,6 +198,8 @@ class facturasController extends AppBaseController
       $acuerdoArray[] =  ['id' => 999, 'numacuerdo' => 'Sin Acuerdos'];
       $acuerdos= accomercial::where('cliente_id',$id)->whereNotNull('aut1_at')->get();
       if ($acuerdos){
+        unset($acuerdosArray);
+        $acuerdoArray = array();
         foreach($acuerdos as $key=>$acuerdo){
           $acuerdoArray[] = ['id' => $acuerdo->id, 'numacuerdo' => $acuerdo->numacuerdo.' - '.$acuerdo->ac_principalporc.'%-'.$acuerdo->base ];
         }

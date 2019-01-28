@@ -33,7 +33,7 @@ class HomeController extends Controller
         activity()->log('Home Dashboard')->causedBy(Auth::user());
         $nclientes = clientes::count();
         $nsolicitudes = facsolicitud::count();
-        $detsolicitudes = facsolicitud::where('atendido',null)->paginate(10);
+        $detsolicitudes = facsolicitud::where('atendido',null)->orwhereNotNull('atendido')->paginate(10);
         $acuerdosactivos = accomercial::get()->where('autorizado',1);
         return view('home')->with(compact('nclientes','nsolicitudes','detsolicitudes','acuerdosactivos'));
     }

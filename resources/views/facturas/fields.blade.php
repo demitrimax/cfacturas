@@ -3,88 +3,81 @@
   <div class="panel-body">
     <!-- Cliente Id Field -->
     <div class="form-group">
-        {!! Form::label('cliente_id', 'Cliente:') !!}
+        {!! Form::label('cliente_id', 'Cliente:*') !!}
         {!! Form::select('cliente_id', $clientes, null, ['class' => 'form-control select2', 'placeholder' => 'Seleccione un cliente', 'required', 'style'=>'width: 100%;']) !!}
     </div>
 
     <!-- Acuerdo Comercial Id Field -->
     <div class="form-group">
-        {!! Form::label('accomercial_id', 'Acuerdo Comercial:') !!}
+        {!! Form::label('accomercial_id', 'Acuerdo Comercial:*') !!}
         {!! Form::select('accomercial_id', [''],null, ['class' => 'form-control select2', 'placeholder'=>'Seleccione un Acuerdo', 'required', 'style'=>'width: 100%;']) !!}
     </div>
 
     <!-- Empresa Id Field -->
     <div class="form-group">
-        {!! Form::label('empresa_id', 'Empresa:') !!}
+        {!! Form::label('empresa_id', 'Empresa:*') !!}
         {!! Form::select('empresa_id', $empresas, null, ['class' => 'form-control select2', 'placeholder'=>'Seleccione una Empresa', 'required', 'style'=>'width: 100%;']) !!}
     </div>
   </div>
 </div>
 
+<div class="panel panel-default">
+  <div class="panel-heading">Datos de la Factura</div>
+  <div class="panel-body">
+    <!-- Fecha Field -->
+    <div class="form-group">
+        {!! Form::label('fecha', 'Fecha:*') !!}
+        {!! Form::date('fecha',  date("Y-m-d"), ['class' => 'form-control', 'required']) !!}
+    </div>
+    <!-- Folio Field -->
+    <div class="form-group">
+        {!! Form::label('foliofac', 'Folio de factura:*') !!}
+        {!! Form::text('foliofac', null, ['class' => 'form-control', 'required', 'maxlength'=>'35']) !!}
+    </div>
+    <!-- Subtotal Field -->
+    <div class="form-group">
+        {!! Form::label('subtotal', 'Subtotal:*') !!}
+        {!! Form::number('subtotal', null, ['class' => 'form-control', 'step'=>'0.01', 'min'=>0, 'required', 'onKeyup' => 'calculoiva()']) !!}
+    </div>
+    <!-- IVA Field -->
+    <div class="form-group">
+        {!! Form::label('iva', 'IVA:*') !!}
+        {!! Form::number('iva', null, ['class' => 'form-control', 'step'=>'0.01', 'min'=>0, 'required']) !!}
+    </div>
+    <!-- TOTAL Field -->
+    <div class="form-group">
+        {!! Form::label('total', 'Total:*') !!}
+        {!! Form::number('total', null, ['class' => 'form-control', 'step'=>'0.01', 'min'=>0, 'required']) !!}
+    </div>
 
-<!-- Concepto Field -->
-<div class="form-group">
-    {!! Form::label('foliofac', 'Folio de factura:') !!}
-    {!! Form::text('foliofac', null, ['class' => 'form-control', 'required', 'maxlength'=>'35']) !!}
-</div>
+    <!-- Observaciones Field -->
+    <div class="form-group">
+        {!! Form::label('observaciones', 'Observaciones:*') !!}
+        {!! Form::text('observaciones', null, ['class' => 'form-control', 'required', 'maxlength'=>'190']) !!}
+    </div>
 
-<!-- Concepto Field -->
-<div class="form-group">
-    {!! Form::label('concepto', 'Observaciones:') !!}
-    {!! Form::text('concepto', null, ['class' => 'form-control', 'required', 'maxlength'=>'190']) !!}
-</div>
+    <!-- Metodopago Id Field -->
+    <div class="form-group">
+        {!! Form::label('metodopago_id', 'Método de Pago:*') !!}
+        {!! Form::select('metodopago_id', $pagometodo, null, ['class' => 'form-control', 'required']) !!}
+    </div>
 
-<!-- Metodopago Id Field -->
-<div class="form-group">
-    {!! Form::label('metodopago_id', 'Método de Pago:') !!}
-    {!! Form::select('metodopago_id', $pagometodo, null, ['class' => 'form-control', 'required']) !!}
+    <!-- forma de pago Id Field -->
+    <div class="form-group">
+        {!! Form::label('formapago_id', 'Forma de pago:*') !!}
+        {!! Form::select('formapago_id', $pagoforma, null, ['class' => 'form-control', 'required']) !!}
+    </div>
+    <!-- Comprobante Field -->
+    <div class="form-group">
+        {!! Form::label('comprobante', 'Comprobante:*') !!}
+        {!! Form::file('comprobante', null, ['class' => 'form-control', 'required']) !!}
+    </div>
+        {!! Form::hidden('user_id', Auth::user()->id) !!}
 </div>
-
-<!-- forma de pago Id Field -->
-<div class="form-group">
-    {!! Form::label('formapago_id', 'Forma de pago:') !!}
-    {!! Form::select('formapago_id', $pagoforma, null, ['class' => 'form-control', 'required']) !!}
-</div>
-
-<!-- Complementopago Id Field -->
-<div class="form-group">
-    {!! Form::label('complementopago_id', 'Complementopago Id:') !!}
-    {!! Form::number('complementopago_id', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Fecha Field -->
-<div class="form-group">
-    {!! Form::label('fecha', 'Fecha:') !!}
-    {!! Form::date('fecha', null, ['class' => 'form-control', 'required']) !!}
-</div>
-
-<!-- Subtotal Field -->
-<div class="form-group">
-    {!! Form::label('subtotal', 'Subtotal:') !!}
-    {!! Form::number('subtotal', null, ['class' => 'form-control', 'step'=>'0.01', 'min'=>0, 'required']) !!}
-</div>
-<!-- IVA Field -->
-<div class="form-group">
-    {!! Form::label('iva', 'IVA:') !!}
-    {!! Form::number('iva', null, ['class' => 'form-control', 'step'=>'0.01', 'min'=>0, 'required']) !!}
-</div>
-<!-- TOTAL Field -->
-<div class="form-group">
-    {!! Form::label('total', 'Total:') !!}
-    {!! Form::number('total', null, ['class' => 'form-control', 'step'=>'0.01', 'min'=>0, 'required']) !!}
-</div>
-
-<!-- Estatus Id Field -->
-<div class="form-group">
-    {!! Form::label('estatus_id', 'Estatus Id:') !!}
-    {!! Form::select('estatus_id', $facestatus, null, ['class' => 'form-control', 'required']) !!}
 </div>
 
-<!-- Comprobante Field -->
-<div class="form-group">
-    {!! Form::label('comprobante', 'Comprobante:') !!}
-    {!! Form::file('comprobante', null, ['class' => 'form-control', 'required']) !!}
-</div>
+
+
 
 <!-- Submit Field -->
 <div class="form-group">
@@ -130,5 +123,22 @@ $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
   radioClass   : 'iradio_flat-green'
 })
 })
+function calculoiva(){
+	//tasa de impuesto
+  var tasa = 15;
+
+  //monto a calcular el impuesto
+  var monto = $("input[name=subtotal]").val();
+
+  //calsulo del impuesto
+  var iva = (monto * tasa)/100;
+
+  //se carga el iva en el campo correspondien te
+  $("input[name=iva]").val(iva);
+
+  //se carga el total en el campo correspondiente
+  $("input[name=total]").val(parseInt(monto)+parseInt(iva));
+
+}
 </script>
 @endpush
