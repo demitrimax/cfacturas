@@ -95,9 +95,11 @@ class facturasController extends AppBaseController
       ];
       $this->validate($request, $rules);
         $input = $request->all();
-
+        if($request->has('comprobante'))
+        {
+          //$facturas->comprobante
+        }
         $facturas = $this->facturasRepository->create($input);
-
         Flash::success('Factura guardada correctamente.');
         Alert::success('Factura guardada correctamente.', 'Facturas');
 
