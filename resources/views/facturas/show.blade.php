@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Facturas
+            Factura {{ $facturas->foliofac }}
         </h1>
     </section>
     <div class="content">
@@ -11,7 +11,7 @@
             <div class="box-body">
                 <div class="row" style="padding-left: 20px">
                     @include('facturas.show_fields')
-                    <a href="{!! route('facturas.index') !!}" class="btn btn-default">Back</a>
+                    <a href="{!! route('facturas.index') !!}" class="btn btn-default">Regresar</a>
                 </div>
             </div>
         </div>

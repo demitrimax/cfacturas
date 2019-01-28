@@ -84,7 +84,7 @@ class solicitudesController extends AppBaseController
         $metodo = pagometodo::pluck('nombre','id');
         $forma = formapago::pluck('descripcion','id');
         $clientes = clientes::all();
-        $clientes = $clientes->pluck('nomcompleto','RFC');
+        $clientes = $clientes->pluck('nombrerfc','RFC');
         return view('solicitudes.solicitud')->with(compact('usocfdi','metodo','forma','clientes'));
     }
 

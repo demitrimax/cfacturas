@@ -10,7 +10,7 @@
     <!-- Acuerdo Comercial Id Field -->
     <div class="form-group">
         {!! Form::label('accomercial_id', 'Acuerdo Comercial:*') !!}
-        {!! Form::select('accomercial_id', [''],null, ['class' => 'form-control select2', 'placeholder'=>'Seleccione un Acuerdo', 'required', 'style'=>'width: 100%;']) !!}
+        {!! Form::select('accomercial_id', [], null, ['class' => 'form-control select2', 'placeholder'=>'Seleccione un Acuerdo', 'required', 'style'=>'width: 100%;']) !!}
     </div>
 
     <!-- Empresa Id Field -->
@@ -137,8 +137,25 @@ function calculoiva(){
   $("input[name=iva]").val(iva);
 
   //se carga el total en el campo correspondiente
-  $("input[name=total]").val(parseInt(monto)+parseInt(iva));
-
+  $("input[name=total]").val(parseFloat(monto)+parseFloat(iva));
 }
+ @if(Request::old('cliente_id') != NULL)
+   if($('select[name="cliente_id"]').val()) {
+      var cliente_id = $('select[name="cliente_id"]').val();
+      cargarlista(cliente_id);
+  }
+  function cargarlista(cliente_id)
+  {
+    $.get('/facturas/GetAcuerdosCliente/'+cliente_id, function(data) {
+      //exito al obtener los datos
+      console.log(data);
+      $('#accomercial_id').empty();
+      $.each(data, function(index, acuerdo) {
+        $('#accomercial_id').append('<option value ="' + acuerdo.id + '">'+acuerdo.numacuerdo+'</option>' );
+      });
+    })
+  }
+ @endif
+//si ya se tiene un id seleccionado
 </script>
 @endpush

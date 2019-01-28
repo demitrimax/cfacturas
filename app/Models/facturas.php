@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\DatesTranslator;
+use Date;
 
 /**
  * Class facturas
@@ -32,6 +34,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class facturas extends Model
 {
     use SoftDeletes;
+    use DatesTranslator;
 
     public $table = 'facturas';
 
@@ -39,7 +42,7 @@ class facturas extends Model
     const UPDATED_AT = 'updated_at';
 
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at','fecha'];
 
 
     public $fillable = [
@@ -58,7 +61,8 @@ class facturas extends Model
         'comprobante',
         'formapago_id',
         'foliofac',
-        'user_id'
+        'user_id',
+        'savedas'
     ];
 
     /**
@@ -83,7 +87,8 @@ class facturas extends Model
         'comprobante' => 'string',
         'formapago_id' => 'integer',
         'foliofac' => 'string',
-        'user_id' => 'integer'
+        'user_id' => 'integer',
+        'savedas' => 'string'
     ];
 
     /**
@@ -100,23 +105,23 @@ class facturas extends Model
      **/
     public function cliente()
     {
-        return $this->belongsTo(\App\Models\Cliente::class);
+        return $this->belongsTo(\App\Models\clientes::class);
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function direccione()
+    public function acuerdo()
     {
-        return $this->belongsTo(\App\Models\Direccione::class);
+        return $this->belongsTo('App\Models\accomercial','accomercial_id');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function catempresa()
+    public function empresa()
     {
-        return $this->belongsTo(\App\Models\Catempresa::class);
+        return $this->belongsTo(\App\Models\catempresas::class);
     }
 
     /**
@@ -124,15 +129,15 @@ class facturas extends Model
      **/
     public function pagoMetodo()
     {
-        return $this->belongsTo(\App\Models\PagoMetodo::class);
+        return $this->belongsTo('App\Models\pagometodo','metodopago_id');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function pagoCondicion()
+    public function pagoForma()
     {
-        return $this->belongsTo(\App\Models\PagoCondicion::class);
+        return $this->belongsTo('App\Models\formapago','formapago_id');
     }
 
     /**
@@ -140,6 +145,11 @@ class facturas extends Model
      **/
     public function facEstatus()
     {
-        return $this->belongsTo(\App\Models\FacEstatus::class);
+        return $this->belongsTo(\App\Models\facestatus::class);
+    }
+
+    public function getFechaAttribute($fecha)
+    {
+      return new Date($fecha);
     }
 }

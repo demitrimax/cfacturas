@@ -14,7 +14,7 @@
 @section('content')
 
   <div class="content">
-    <h3>Enviar Solicitud</h3>
+    <h3>Alta de Solicitud</h3>
     @if ($errors->any())
        <div class="alert alert-danger">
            <ul>

@@ -7,6 +7,7 @@ use App\Http\Requests\UpdatefacturasRequest;
 use App\Repositories\facturasRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
@@ -19,6 +20,7 @@ use App\Models\pagocondicion;
 use App\Models\facestatus;
 use App\Models\accomercial;
 use App\Models\formapago;
+
 
 
 class facturasController extends AppBaseController
@@ -95,11 +97,19 @@ class facturasController extends AppBaseController
       ];
       $this->validate($request, $rules);
         $input = $request->all();
+
+        $facturas = $this->facturasRepository->create($input);
+        //dd($facturas);
         if($request->has('comprobante'))
         {
           //$facturas->comprobante
+          $factura = $request->file('comprobante')->store('comprobantes');
+          $facturas->comprobante = $request->file('comprobante')->getClientOriginalName();
+          $facturas->savedas = $factura;
+          $facturas->save();
         }
-        $facturas = $this->facturasRepository->create($input);
+
+
         Flash::success('Factura guardada correctamente.');
         Alert::success('Factura guardada correctamente.', 'Facturas');
 
@@ -118,12 +128,13 @@ class facturasController extends AppBaseController
         $facturas = $this->facturasRepository->findWithoutFail($id);
 
         if (empty($facturas)) {
-            Flash::error('Facturas not found');
+          Flash::error('Factura no encontrada');
+          Alert::error('Factura no encontrada.');
 
             return redirect(route('facturas.index'));
         }
 
-        return view('facturas.show')->with('facturas', $facturas);
+        return view('facturas.show')->with(compact('facturas'));
     }
 
     /**
@@ -138,7 +149,8 @@ class facturasController extends AppBaseController
         $facturas = $this->facturasRepository->findWithoutFail($id);
 
         if (empty($facturas)) {
-            Flash::error('Facturas not found');
+          Flash::error('Factura no encontrada');
+          Alert::error('Factura no encontrada.');
 
             return redirect(route('facturas.index'));
         }
@@ -159,14 +171,16 @@ class facturasController extends AppBaseController
         $facturas = $this->facturasRepository->findWithoutFail($id);
 
         if (empty($facturas)) {
-            Flash::error('Facturas not found');
+            Flash::error('Factura no encontrada');
+            Alert::error('Factura no encontrada.');
 
             return redirect(route('facturas.index'));
         }
 
         $facturas = $this->facturasRepository->update($request->all(), $id);
 
-        Flash::success('Facturas updated successfully.');
+        Flash::success('Factura actualizada correctamente.');
+        Alert::success('Factura actualizada correctamente.');
 
         return redirect(route('facturas.index'));
     }
@@ -183,21 +197,32 @@ class facturasController extends AppBaseController
         $facturas = $this->facturasRepository->findWithoutFail($id);
 
         if (empty($facturas)) {
-            Flash::error('Facturas not found');
+            Flash::error('Factura no encontrada');
+            Alert::error('Factura no encontrada.');
 
             return redirect(route('facturas.index'));
         }
+        /* TRABAJAR EN ESTA PARTE LUEGO YA QUE SI PERTENECE A UN SOLICITUD NO PUEDE ELIMINARSE
+        if ($facturas->has('solicitud'))
+        {
+          Flash::error('No se puede eliminar la factura.');
+          Alert::error('No se puede eliminar la factura.');
+
+          return redirect(route('facturas.index'));
+        }
+        */
 
         $this->facturasRepository->delete($id);
 
-        Flash::success('Facturas deleted successfully.');
+        Flash::success('Factura Borrada Correctamente.');
+        Alert::success('Factura Borrada Correctamente.');
 
         return redirect(route('facturas.index'));
     }
 
     public function getAcuerdosCliente($id)
     {
-      $acuerdoArray[] =  ['id' => 999, 'numacuerdo' => 'Sin Acuerdos'];
+      $acuerdoArray[] =  ['id' => 0, 'numacuerdo' => 'Sin Acuerdos'];
       $acuerdos= accomercial::where('cliente_id',$id)->whereNotNull('aut1_at')->get();
       if ($acuerdos){
         unset($acuerdosArray);
@@ -207,5 +232,19 @@ class facturasController extends AppBaseController
         }
       }
       return $acuerdoArray;
+    }
+
+    public function getComprobante($id)
+    {
+      $facturas = $this->facturasRepository->findWithoutFail($id);
+
+      if (empty($facturas)) {
+          Flash::error('Factura no encontrada');
+          Alert::error('Factura no encontrada.');
+
+          return redirect(route('facturas.index'));
+      }
+
+      return Storage::download($facturas->savedas,$facturas->comprobante);
     }
 }
