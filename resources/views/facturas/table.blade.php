@@ -3,6 +3,7 @@
         <tr>
           <th>Cliente</th>
           <th>Empresa</th>
+          <th>Acuerdo</th>
           <th>Fecha</th>
           <th>Folio</th>
           <th>Total</th>
@@ -14,6 +15,7 @@
         <tr>
             <td>{!! $facturas->cliente->nomcompleto !!}</td>
             <td>{!! $facturas->empresa->nombre !!}</td>
+            <td>{!! $facturas->acuerdo->numacuerdo !!}</td>
             <td>{!! $facturas->fecha->format('d-M-Y') !!}</td>
             <td>{!! $facturas->foliofac !!}</td>
             <td>${!! number_format($facturas->total,2) !!}</td>

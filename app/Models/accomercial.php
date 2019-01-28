@@ -166,6 +166,11 @@ class accomercial extends Model
         return $this->belongsToMany('App\Models\catempresas','ac_empresas','acuerdoc_id','empresa_id');
     }
 
+    public function facturas()
+    {
+      return $this->hasMany('App\Models\facturas','accomercial_id');
+    }
+
 
     public function getNomsocioAttribute()
     {

@@ -47,7 +47,7 @@
 function ConfirmaEliminar(id) {
 swal({
       title: '¿Estás seguro de eliminar?',
-      text: 'Se eliminará los datos de la solicitud.',
+      text: 'Se eliminará el Acuerdo Comercial.',
       type: 'warning',
       showCancelButton: true,
       cancelButtonText: 'Cancelar',

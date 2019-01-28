@@ -8,6 +8,7 @@ use App\Repositories\accomercialRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use RealRashid\SweetAlert\Facades\Alert;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\Models\clientes;
@@ -27,6 +28,7 @@ use App\Models\blog;
 use App\Models\sociocomercial;
 use Carbon\Carbon;
 use Auth;
+
 
 class accomercialController extends AppBaseController
 {
@@ -254,6 +256,12 @@ class accomercialController extends AppBaseController
             $sweeterror = 'Acuerdo Comercial no encontrado';
 
             return redirect(route('accomercials.index'))->with(compact('sweeterror'));
+        }
+        if ($accomercial->facturas->count()>0) {
+            Flash::error('No se puede eliminar el Acuerdo Comercial '.$accomercial->numacuerdo.', ya tiene facturas relacionadas.');
+            Alert::error('No se puede eliminar el Acuerdo Comercial '.$accomercial->numacuerdo.', ya tiene facturas relacionadas.');
+
+            return redirect(route('accomercials.index'));
         }
 
         $this->accomercialRepository->delete($id);
