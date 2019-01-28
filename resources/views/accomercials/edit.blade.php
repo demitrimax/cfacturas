@@ -15,7 +15,7 @@
 
                    {!! Form::model($accomercial, ['route' => ['accomercials.update', $accomercial->id], 'method' => 'patch']) !!}
 
-                        @include('accomercials.fields')
+                        @include('accomercials.editaracuerdo')
 
                    {!! Form::close() !!}
                </div>

@@ -185,10 +185,15 @@
         <div class="col-xs-12">
           <a href="{{url('accomercials/print/'.$accomercial->id)}}" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Imprimir</a>
           @include('accomercials.botonesautoriza')
+          @if($accomercial->autorizado)
           <a href="{{url('accomercials/notificaralta/'.$accomercial->id)}}" type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Enviar Copias Involucrados
           </a>
+          @endif
           <a href="{{url('accomercials/pdf/'.$accomercial->id)}}" type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
             <i class="fa fa-download"></i> Generar PDF
+          </a>
+          <a href="{{url('accomercials/'.$accomercial->id.'/edit')}}" type="button" class="btn btn-warning pull-right" style="margin-right: 5px;">
+            <i class="fa fa-exclamation-triangle"></i> Editar Acuerdo
           </a>
         </div>
       </div>

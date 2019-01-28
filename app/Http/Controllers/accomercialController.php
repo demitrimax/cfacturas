@@ -210,8 +210,10 @@ class accomercialController extends AppBaseController
         $userGerente = User::role('gerente')->pluck('name','id');
         $usuarios = users::pluck('name','id');
         $empresas = catempresas::pluck('nombre','id');
+        $empresassel = $accomercial->empresasfact;
+        //dd($empresassel);
 
-        return view('accomercials.edit')->with(compact('accomercial','sociocomer','clientes', 'empresas', 'usuarios','userSupervisor','userGerente'));
+        return view('accomercials.edit')->with(compact('accomercial','sociocomer','clientes', 'empresas', 'usuarios','userSupervisor','userGerente','empresassel'));
     }
 
     /**
