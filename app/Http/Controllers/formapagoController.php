@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
-use Alert;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class formapagoController extends AppBaseController
 {

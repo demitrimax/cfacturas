@@ -16,7 +16,7 @@ use App\Models\cattipodoc;
 use App\Models\catdocumentos;
 use App\Models\cat_bancos;
 use App\Models\catgiroempresa;
-use Alert;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class catempresasController extends AppBaseController
 {

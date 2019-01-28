@@ -219,7 +219,7 @@
       </script>
     @endif
     <!-- Include this after the sweet alert js file -->
-    @include('sweet::alert')
+    @include('sweetalert::alert')
 
     @yield('scripts')
 </body>
