@@ -25,6 +25,13 @@
           </a>
         </li>
         @endcan
+        @can('asimsal-list')
+        <li class="{{ Request::is('asimilados*') ? 'active' : '' }}">
+          <a href="{{url('/asimilados')}}">
+            <i class="fa fa-male"></i> <span>Asimilados a Salarios</span>
+          </a>
+        </li>
+        @endcan
         @can('sociocomercial-list')
         <li class="{{ Request::is('sociocomercials*') ? 'active' : '' }}">
             <a href="{!! route('sociocomercials.index') !!}"><i class="fa fa-user-plus"></i><span>Socios Comerciales</span></a>

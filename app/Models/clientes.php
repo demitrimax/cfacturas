@@ -44,7 +44,8 @@ class clientes extends Model
         'telefono',
         'correo',
         'giroempresa',
-        'avatar'
+        'avatar',
+        'asimsal'
     ];
     protected static $logAttributes = ['*'];
 
@@ -65,7 +66,8 @@ class clientes extends Model
         'avatar' => 'string',
         'correo' => 'string',
         'telefono' => 'string',
-        'giroempresa' => 'integer'
+        'giroempresa' => 'integer',
+        'asimsal' => 'boolean'
     ];
 
     /**

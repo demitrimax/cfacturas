@@ -84,4 +84,6 @@ Route::group(['middleware'=>['auth','verified','activity']], function() {
   Route::post('sociocomercial/documento', 'sociocomercialController@guardaDocumento');
   Route::post('sociocomercial/cuenta', 'sociocomercialController@guardaCuenta');
   Route::resource('catgiroempresas', 'catgiroempresaController');
+
+  Route::resource('asimilados', 'asimsalController');
 });

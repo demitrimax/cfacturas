@@ -46,7 +46,7 @@ class clientesController extends AppBaseController
     {
         $this->clientesRepository->pushCriteria(new RequestCriteria($request));
         $clientes = $this->clientesRepository->all();
-
+        $clientes = $clientes->where('asimsal',null)->all();
         return view('clientes.index')
             ->with(compact('clientes'));
     }
