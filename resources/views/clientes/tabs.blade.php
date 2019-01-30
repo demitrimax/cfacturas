@@ -4,7 +4,9 @@
               <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Acuerdos</a></li>
               <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Datos Bancarios</a></li>
               <li class=""><a href="#tab_4" data-toggle="tab" aria-expanded="false">Empresas Facturadoras</a></li>
+              @can('documentos-list')
               <li class=""><a href="#tab_5" data-toggle="tab" aria-expanded="false">Expediente</a></li>
+              @endcan
               @can('datosfiscales-list')
               <li class=""><a href="#tab_6" data-toggle="tab" aria-expanded="false">Datos Fiscales</a></li>
               @endcan
@@ -29,7 +31,9 @@
                 @include('clientes.tabempfac')
               </div>
               <div class="tab-pane" id="tab_5">
-                @include('clientes.tabdocumentos')
+                @can('documentos-list')
+                  @include('clientes.tabdocumentos')
+                @endcan
               </div>
               @can('datosfiscales-list')
               <div class="tab-pane" id="tab_6">

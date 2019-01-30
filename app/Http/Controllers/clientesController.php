@@ -8,6 +8,7 @@ use App\Repositories\clientesRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use RealRashid\SweetAlert\Facades\Alert;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\catestados;
@@ -58,9 +59,11 @@ class clientesController extends AppBaseController
      */
     public function create()
     {
-        $giro = catgiroempresa::pluck('descripcion','id');
+        //$giro = catgiroempresa::pluck('descripcion','id'); //ya no se utiliza
         //$clientes = null;
-        return view('clientes.create')->with(compact('giro'));
+        $estados = catestados::pluck('nombre','id');
+        $municipios = catmunicipios::get()->where('id_edo',1)->pluck('nomMunicipio','id');
+        return view('clientes.create')->with(compact('giro','estados','municipios'));
     }
 
     /**
@@ -74,23 +77,44 @@ class clientesController extends AppBaseController
     {
 
       $rules = [
-          'nombre' => 'required',
-          'RFC' => 'max:15|required|unique:clientes',
-          'CURP' => 'max:18|unique:clientes'
+          'nombre'       => 'required',
+          'RFC'          => 'max:15|required',
+          'CURP'         => 'max:18|nullable',
+          'estado_id'    => 'required',
+          'municipio_id' => 'required',
       ];
 
       $messages = [
-          'RFC.unique' => 'El RFC escrito ya existe en la base de datos de clientes',
-          'RFC.required' => 'El RFC es un valor requerido',
+          'RFC.unique'              => 'El RFC escrito ya existe en la base de datos de clientes',
+          'RFC.required'            => 'El RFC es un valor requerido',
+          'CURP.unique'             => 'La CURP que escribió ya esta en uso.',
+          'estado_id.required'      => 'Es requerido el Estado',
+          'municipio_id.required'   => 'Es requerido el Municipio',
+
       ];
+
+      $this->validate($request, $rules,$messages);
 
         $input = $request->all();
 
         $clientes = $this->clientesRepository->create($input);
-        $sweet = "Se agregó correctamente.";
-        Flash::success('Cliente guardado correctamente');
+        $direccion = new direcciones();
+        $direccion->cliente_id = $clientes->id;
+        $direccion->calle = $input['calle'];
+        $direccion->RFC = $input['RFC'];
+        $direccion->numeroExt = $input['numeroExt'];
+        $direccion->numeroInt = $input['numeroInt'];
+        $direccion->estado_id = $input['estado_id'];
+        $direccion->municipio_id = $input['municipio_id'];
+        $direccion->colonia = $input['colonia'];
+        $direccion->codpostal = $input['codpostal'];
+        $direccion->referencias = $input['referencias'];
+        $direccion->save();
 
-        return redirect(route('clientes.index'))->with(compact('sweet'));
+        Flash::success('Cliente guardado correctamente');
+        Alert::success('Cliente guardado correctamente');
+
+        return redirect(route('clientes.index'));
     }
 
     /**
@@ -174,8 +198,10 @@ class clientesController extends AppBaseController
 
             return redirect(route('clientes.index'));
         }
-        $giro = catgiroempresa::pluck('descripcion','id');
-        return view('clientes.edit')->with(compact('clientes','giro'));
+        //$giro = catgiroempresa::pluck('descripcion','id');
+        $estados = catestados::pluck('nombre','id');
+        $municipios = catmunicipios::get()->where('id_edo',1)->pluck('nomMunicipio','id');
+        return view('clientes.edit')->with(compact('clientes','estados','municipios'));
     }
 
     /**

@@ -45,7 +45,8 @@ class direcciones extends Model
         'municipio_id',
         'colonia',
         'codpostal',
-        'referencias'
+        'referencias',
+        'localidad'
     ];
     protected static $logAttributes = ['*'];
 
@@ -65,7 +66,8 @@ class direcciones extends Model
         'municipio_id' => 'integer',
         'colonia'      => 'string',
         'codpostal'    => 'integer',
-        'referencias'  => 'string'
+        'referencias'  => 'string',
+        'localidad'    => 'integer'
     ];
 
     /**

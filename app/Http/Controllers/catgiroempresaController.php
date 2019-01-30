@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Models\catgiroempresa;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class catgiroempresaController extends AppBaseController
@@ -158,5 +159,22 @@ class catgiroempresaController extends AppBaseController
         Alert::success('Giro de Empresa borrado correctamente','Borrado Ok!');
 
         return redirect(route('catgiroempresas.index'));
+    }
+    public function GetGiros(Request $request)
+    {
+        $catgiroempresas = catgiroempresa::where('id',1)->get();
+        $palabra = $request['word'];
+      if (!empty($palabra))
+      {
+        if (strlen($palabra) >= 3)
+        {
+          $catgiroempresas = catgiroempresa::where('descripcion','like','%'.$request['word'].'%')->select('descripcion','codigo')->limit(50)->get();
+        }
+      }
+      if (empty($catgiroempresas))
+      {
+        $catgiroempresas[] = ['descripcion'=>'Ninguna'];
+      }
+      return $catgiroempresas;
     }
 }

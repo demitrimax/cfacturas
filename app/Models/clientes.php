@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
 use Spatie\Activitylog\Traits\LogsActivity;
+use App\Models\catgiroempresa;
 
 
 /**
@@ -66,7 +67,7 @@ class clientes extends Model
         'avatar' => 'string',
         'correo' => 'string',
         'telefono' => 'string',
-        'giroempresa' => 'integer',
+        'giroempresa' => 'string',
         'asimsal' => 'boolean'
     ];
 
@@ -110,11 +111,18 @@ class clientes extends Model
     {
       return $this->hasMany('App\Models\accomercial', 'cliente_id');
     }
-
-    public function giroempresas()
+  public function getCodigogiroAttribute()
+  {
+    $girocod = catgiroempresa::where('descripcion', $this->giroempresa)->first();
+    if ($girocod)
     {
-      return $this->belongsTo('App\Models\catgiroempresa', 'giroempresa');
+      return $girocod->codigo;
+    }
+    else
+    {
+      $girocod = substr($this->giroempresa,0,3);
+      return $girocod;
     }
 
-
+  }
 }

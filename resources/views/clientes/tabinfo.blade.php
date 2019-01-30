@@ -19,7 +19,7 @@
           <li><a href="#">Correo Electronico <span class="pull-right">{!! $clientes->correo !!}</span></a></li>
           <li><a href="#">Dirección <span class="pull-right">{!! $clientes->direccion !!}</span></a></li>
           <li><a href="#">Teléfono <span class="pull-right">{!! $clientes->telefono !!}</span></a></li>
-          <li><a href="#">Giro <span class="pull-right">{!! $clientes->giroempresas->descripcion !!}</span></a></li>
+          <li><a href="#">Giro <span class="pull-right">{!! $clientes->giroempresa !!}</span></a></li>
           <li><a href="#">Fecha de Alta <span class="pull-right">{!! $clientes->created_at->format('d/m/Y h:i:s') !!}</span></a></li>
           <li>
             <a href="{!! route('clientes.edit', [$clientes->id]) !!}" class="btn bg-purple margin pull-right">Editar</a>
