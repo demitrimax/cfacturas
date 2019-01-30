@@ -121,7 +121,7 @@ class clientes extends Model
     else
     {
       $girocod = substr($this->giroempresa,0,3);
-      return $girocod;
+      return strtoupper($girocod);
     }
 
   }

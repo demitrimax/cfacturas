@@ -104,11 +104,19 @@
                       {!! Form::text('numeroInt', null, ['class' => 'form-control', 'maxlength'=>'5', 'placeholder'=>'Núm Interior']) !!}
                   </div>
               </div>
+              <div class="row">
+                  <!-- Codpostal Field -->
+                  <div class="form-group col-xs-6">
+                      {!! Form::label('codpostal', 'Código postal:') !!}
+                      {!! Form::text('codpostal', null, ['class' => 'form-control']) !!}
+                  </div>
+                  <!-- Codpostal Field -->
+                  <div class="form-group col-xs-6">
+                      {!! Form::label('ciudad', 'Ciudad:') !!}
+                      {!! Form::text('ciudad', null, ['class' => 'form-control', 'list'=>'listaciudad']) !!}
+                  </div>
+                  <datalist id="listaciudad"></datalist>
 
-              <!-- Codpostal Field -->
-              <div class="form-group">
-                  {!! Form::label('codpostal', 'Código postal:') !!}
-                  {!! Form::text('codpostal', null, ['class' => 'form-control']) !!}
               </div>
 
               <!-- Localidad Field -->
@@ -319,22 +327,35 @@ function curpenable(cheked) {
   }
 
 }
+// Init a timeout variable to be used below
+var timeout = null;
+// Listen for keystroke events
 $('#giroempresa').on('change keyup paste', function(e) {
   //console.log(e);
   var palabra = e.target.value;
-  //ajax
-  if (palabra.length >= 3  ) {
-    $.get('/GetGiro?word='+palabra, function(data) {
-      //exito al obtener los datos
-      // request.readyState === 4
-      // request.status = 200 //que los datos esten listos entonces
-      console.log(data);
-      $('#giros').empty();
-       $.each(data, function(index, palabras) {
-        $('#giros').append('<option value ="' + palabras.descripcion + '">');
-      });
-    });
-  }
+  // Clear the timeout if it has already been set.
+  // This will prevent the previous task from executing
+  // if it has been less than <MILLISECONDS>
+  clearTimeout(timeout);
+      // Make a new timeout set to go off in 800ms
+  timeout = setTimeout(function () {
+      console.log('Input Value:', palabra);
+      //ajax
+      if (palabra.length >= 3  ) {
+        $.get('/GetGiro?word='+palabra, function(data) {
+          //exito al obtener los datos
+          // request.readyState === 4
+          // request.status = 200 //que los datos esten listos entonces
+          console.log(data);
+          $('#giros').empty();
+           $.each(data, function(index, palabras) {
+            $('#giros').append('<option value ="' + palabras.descripcion + '">');
+          });
+        });
+      }
+  }, 500);
+
+
   });
 
   $('#estado_id').on('change', function(e) {
