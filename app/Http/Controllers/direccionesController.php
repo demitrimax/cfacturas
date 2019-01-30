@@ -13,6 +13,7 @@ use Response;
 use App\Models\clientes;
 use App\catestados;
 use App\catmunicipios;
+use App\catsepomex;
 
 class direccionesController extends AppBaseController
 {
@@ -203,5 +204,27 @@ class direccionesController extends AppBaseController
       return response()->json($data);
       */
       return $municipios;
+    }
+    public function GetCiudades(Request $request)
+    {
+          $ciudades = catsepomex::where('cp',10000)->get();
+          $codigo = $request['cp'];
+        if (!empty($codigo))
+        {
+          if (strlen($codigo) >= 5)
+          {
+            $ciudades = catsepomex::select('ciudad','estado_id','municipio_id')
+                                    ->where('cp','like','%'.$codigo.'%')
+                                    ->limit(50)
+                                    ->groupBy('ciudad','estado_id','municipio_id')
+                                    ->get();
+          }
+        }
+        //dd($ciudades);
+        if (empty($ciudades))
+        {
+          $ciudades[] = ['ciudad'=>'Ninguna'];
+        }
+        return $ciudades;
     }
 }

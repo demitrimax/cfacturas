@@ -372,5 +372,27 @@ $('#giroempresa').on('change keyup paste', function(e) {
     });
   });
 
+  $('#codpostal').on('change', function(e) {
+    //console.log(e);
+    var codpostal = e.target.value;
+    var estadoid;
+    if (codpostal.length >= 5  ) {
+    //ajax
+    $.get('/GetCiudades?cp='+codpostal, function(data) {
+      //exito al obtener los datos
+      //console.log(data);
+      $('#listaciudad').empty();
+      $.each(data, function(index, ciudad) {
+        $('#listaciudad').append('<option value ="' + ciudad.ciudad + '">' );
+        estadoid = ciudad.estado_id;
+      });
+      console.log(estadoid);
+      //cambiar el combobox del estado que esta en la variable estado_id
+      $('#estado_id').eq(estadoid).prop('selected',true);
+    });
+
+  }
+  });
+
 </script>
 @endsection

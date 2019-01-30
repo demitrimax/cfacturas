@@ -29,6 +29,7 @@ Route::group(['middleware'=>['auth','verified','activity']], function() {
   Route::resource('datcontactos', 'datcontactoController');
   Route::resource('direcciones', 'direccionesController');
   Route::get('GetMunicipios/{id}', 'direccionesController@GetMunicipios');
+  Route::get('GetCiudades','direccionesController@GetCiudades');
   Route::resource('catdocumentos', 'catdocumentosController');
   Route::post('clientes/avatarchange', 'clientesController@avatar');
   Route::resource('catempresas', 'catempresasController');
