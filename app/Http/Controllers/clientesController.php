@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateclientesRequest;
 use App\Http\Requests\UpdateclientesRequest;
 use App\Repositories\clientesRepository;
+//repositorio de direcciones
+use App\Http\Requests\CreatedireccionesRequest;
+use App\Http\Requests\UpdatedireccionesRequest;
+use App\Repositories\direccionesRepository;
+
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
@@ -26,10 +31,12 @@ class clientesController extends AppBaseController
 {
     /** @var  clientesRepository */
     private $clientesRepository;
+    private $direccionesRepository;
 
-    public function __construct(clientesRepository $clientesRepo)
+    public function __construct(clientesRepository $clientesRepo, direccionesRepository $direccionesRepo)
     {
         $this->clientesRepository = $clientesRepo;
+        $this->direccionesRepository = $direccionesRepo;
         $this->middleware('auth');
         $this->middleware('permission:clientes-list');
         $this->middleware('permission:clientes-create', ['only' => ['create','store']]);
@@ -193,15 +200,28 @@ class clientesController extends AppBaseController
     {
         $clientes = $this->clientesRepository->findWithoutFail($id);
 
+        if(!empty($clientes->direcciones->id))
+        {
+          $direcciones = $this->direccionesRepository->findWithoutFail($clientes->direcciones->id);
+        }
+
+
         if (empty($clientes)) {
             Flash::error('Cliente no encontrado.');
-
+            Alert::error('Cliente no encontrado');
             return redirect(route('clientes.index'));
         }
+
         //$giro = catgiroempresa::pluck('descripcion','id');
         $estados = catestados::pluck('nombre','id');
-        $municipios = catmunicipios::get()->where('id_edo',1)->pluck('nomMunicipio','id');
-        return view('clientes.edit')->with(compact('clientes','estados','municipios'));
+
+        $municipios = catmunicipios::where('id_edo',1)->pluck('nomMunicipio','id');
+        if (!empty($clientes->direcciones->municipio_id))
+        {
+          $municipios = catmunicipios::where('id_edo',$clientes->direcciones->municipio_id)->pluck('nomMunicipio','id');
+        }
+
+        return view('clientes.edit')->with(compact('clientes','estados','municipios','direcciones'));
     }
 
     /**
@@ -221,8 +241,45 @@ class clientesController extends AppBaseController
             $sweeterror = 'Cliente no encontrado';
             return redirect(route('clientes.index'))->with(compact('sweeterror'));
         }
+        $rules = [
+            'nombre'       => 'required',
+            'RFC'          => 'max:15|required',
+            'CURP'         => 'max:18|nullable',
+            'estado_id'    => 'required',
+            'municipio_id' => 'required',
+        ];
+
+        $messages = [
+            'RFC.unique'              => 'El RFC escrito ya existe en la base de datos de clientes',
+            'RFC.required'            => 'El RFC es un valor requerido',
+            'CURP.unique'             => 'La CURP que escribió ya esta en uso.',
+            'estado_id.required'      => 'Es requerido el Estado',
+            'municipio_id.required'   => 'Es requerido el Municipio',
+
+        ];
+
+        $this->validate($request, $rules,$messages);
 
         $clientes = $this->clientesRepository->update($request->all(), $id);
+        if(isset($clientes->direcciones->id))
+        {
+          $direccion = direcciones::find($clientes->direcciones->id);
+        }
+        else {
+          $direccion = new direcciones();
+        }
+          $direccion->cliente_id = $clientes->id;
+          $direccion->calle = $request['calle'];
+          $direccion->RFC = $request['RFC'];
+          $direccion->numeroExt = $request['numeroExt'];
+          $direccion->numeroInt = $request['numeroInt'];
+          $direccion->estado_id = $request['estado_id'];
+          $direccion->municipio_id = $request['municipio_id'];
+          $direccion->colonia = $request['colonia'];
+          $direccion->codpostal = $request['codpostal'];
+          $direccion->referencias = $request['referencias'];
+          $direccion->save();
+
 
         Flash::success('Clientes actualizado correctamente.');
         $sweet = 'Cliente actualizado correctamente';

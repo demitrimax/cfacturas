@@ -20,7 +20,16 @@
                       {!! Form::label('nombre', 'Nombre/Razon:*') !!}
                       {!! Form::text('nombre', null, ['class' => 'form-control', 'required', 'oninput'=>'this.value = this.value.toUpperCase()', 'maxlength'=>'191']) !!}
                   </div>
-                  <div id="apellidos" style="display:none;">
+                  @php
+                    $claseapellidos = 'none';
+                    $clasecomercial = 'none';
+                    if (isset($clientes->RFC))
+                    {
+                      $claseapellidos = (strlen($clientes->RFC)>12) ? 'block' : 'none';
+                      $clasecomercial = (strlen($clientes->RFC)<=12) ? 'block' : 'none';
+                    }
+                  @endphp
+                  <div id="apellidos" style="display:{!! $claseapellidos !!};">
                       <div class="form-group">
                           {!! Form::label('apellidopat', 'Apellido Paterno:*') !!}
                           {!! Form::text('apellidopat', null, ['class' => 'form-control', 'oninput'=>'this.value = this.value.toUpperCase()', 'maxlength'=>'191']) !!}
@@ -38,7 +47,7 @@
                   </div>
 
                   <!-- Nombre Comercial Field -->
-                  <div class="form-group" style="display:none;" id="bloqnombrecomercial">
+                  <div class="form-group" style="display:{!! $clasecomercial !!};" id="bloqnombrecomercial">
                       {!! Form::label('nomcomercial', 'Nombre Comercial:*') !!}
                       {!! Form::text('nomcomercial', null, ['class' => 'form-control', 'oninput'=>'this.value = this.value.toUpperCase()', 'maxlength'=>'191']) !!}
                   </div>
@@ -89,7 +98,7 @@
               <!-- Direccion Field -->
               <div class="form-group">
                   {!! Form::label('calle', 'Calle:') !!}
-                  {!! Form::text('calle', null, ['class' => 'form-control']) !!}
+                  {!! Form::text('calle', null, ['class' => 'form-control', 'placeholder'=>'Calle']) !!}
               </div>
               <div class="row">
                   <!-- Numeroext Field -->
@@ -108,28 +117,23 @@
                   <!-- Codpostal Field -->
                   <div class="form-group col-xs-6">
                       {!! Form::label('codpostal', 'Código postal:') !!}
-                      {!! Form::text('codpostal', null, ['class' => 'form-control']) !!}
+                      {!! Form::text('codpostal', null, ['class' => 'form-control', 'placeholder'=>'Código Postal']) !!}
                   </div>
                   <!-- Codpostal Field -->
                   <div class="form-group col-xs-6">
                       {!! Form::label('ciudad', 'Ciudad:') !!}
-                      {!! Form::text('ciudad', null, ['class' => 'form-control', 'list'=>'listaciudad']) !!}
+                      {!! Form::text('ciudad', null, ['class' => 'form-control', 'list'=>'listaciudad', 'placeholder'=>'ciudad']) !!}
                   </div>
                   <datalist id="listaciudad"></datalist>
 
               </div>
 
-              <!-- Localidad Field -->
-              <div class="form-group">
-                  {!! Form::label('localidad', 'Localidad:') !!}
-                  {!! Form::text('localidad', null, ['class' => 'form-control']) !!}
-              </div>
-
               <!-- Colonia Field -->
               <div class="form-group">
                   {!! Form::label('colonia', 'Colonia:') !!}
-                  {!! Form::text('colonia', null, ['class' => 'form-control']) !!}
+                  {!! Form::text('colonia', null, ['class' => 'form-control', 'list'=>'listacolonias', 'placeholder'=>'Colonia']) !!}
               </div>
+              <datalist id="listacolonias"></datalist>
 
               <!-- Estado Id Field -->
               <div class="form-group">
@@ -346,7 +350,7 @@ $('#giroempresa').on('change keyup paste', function(e) {
           //exito al obtener los datos
           // request.readyState === 4
           // request.status = 200 //que los datos esten listos entonces
-          console.log(data);
+          //console.log(data);
           $('#giros').empty();
            $.each(data, function(index, palabras) {
             $('#giros').append('<option value ="' + palabras.descripcion + '">');
@@ -376,6 +380,7 @@ $('#giroempresa').on('change keyup paste', function(e) {
     //console.log(e);
     var codpostal = e.target.value;
     var estadoid;
+    var municipioid;
     if (codpostal.length >= 5  ) {
     //ajax
     $.get('/GetCiudades?cp='+codpostal, function(data) {
@@ -385,10 +390,21 @@ $('#giroempresa').on('change keyup paste', function(e) {
       $.each(data, function(index, ciudad) {
         $('#listaciudad').append('<option value ="' + ciudad.ciudad + '">' );
         estadoid = ciudad.estado_id;
+        municipioid = ciudad.municipio_id;
       });
       console.log(estadoid);
       //cambiar el combobox del estado que esta en la variable estado_id
-      $('#estado_id').eq(estadoid).prop('selected',true);
+      $('select#estado_id').val(estadoid);
+      $('#estado_id').change();
+      $('select#municipio_id').val(municipioid);
+    });
+    $.get('/GetAsentamientos?cp='+codpostal, function(data) {
+      //exito al obtener los datos
+      console.log(data);
+      $('#listacolonias').empty();
+      $.each(data, function(index, colonias) {
+        $('#listacolonias').append('<option value ="' + colonias.asentamiento + '">' );
+      });
     });
 
   }

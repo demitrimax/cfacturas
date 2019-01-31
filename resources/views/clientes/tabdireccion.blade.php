@@ -5,7 +5,7 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-      @if($clientes->direcciones->count()>0)
+      @if($clientes->direcciones)
       <table class="table table-condensed">
         <tbody><tr>
           <th style="width: 10px">#</th>
@@ -16,28 +16,28 @@
           <th>Municipio</th>
           <th>Acciones</th>
         </tr>
-      @foreach($clientes->direcciones as$key=>$direccion)
+
         <tr>
-          <td>{{$key+1}}</td>
-          <td>{{$direccion->RFC}}</td>
-          <td>{{$direccion->razonsocial}}</td>
-          <td>{{$direccion->calle.' '.$direccion->numeroExt.' '.$direccion->numeroInt}}</td>
-          <td>{{$direccion->estados->nombre}}</td>
-          <td>{{$direccion->municipios->nomMunicipio}}</td>
+          <td>{{$clientes->direcciones->id}}</td>
+          <td>{{$clientes->direcciones->RFC}}</td>
+          <td>{{$clientes->direcciones->razonsocial}}</td>
+          <td>{{$clientes->direcciones->calle.' '.$clientes->direcciones->numeroExt.' '.$clientes->direcciones->numeroInt}}</td>
+          <td>{{$clientes->direcciones->estados->nombre}}</td>
+          <td>{{$clientes->direcciones->municipios->nomMunicipio}}</td>
           <td>
-              {!! Form::open(['route' => ['direcciones.destroy', $direccion->id], 'method' => 'delete', 'id'=>'datFiscalesForm'.$direccion->id]) !!}
+              {!! Form::open(['route' => ['direcciones.destroy', $clientes->direcciones->id], 'method' => 'delete', 'id'=>'datFiscalesForm'.$clientes->direcciones->id]) !!}
             @can('direccion-edit')
             <button type="button" class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i></button>
             @endcan
             @can('direccion-delete')
-            <button type="button" class="btn btn-danger" rel="tooltip" title="Eliminar" Onclick="ConfirmDeletedatFiscales({{$direccion->id}})"> <i class="fa fa-remove"></i></button>
+            <button type="button" class="btn btn-danger" rel="tooltip" title="Eliminar" Onclick="ConfirmDeletedatFiscales({{$clientes->direcciones->id}})"> <i class="fa fa-remove"></i></button>
               {!! Form::hidden('redirect', 'clientes.show') !!}
               {!! Form::hidden('cliente_id', $clientes->id) !!}
               {!! Form::close() !!}
               @endcan
           </td>
         </tr>
-        @endforeach
+
       </tbody>
     </table>
     @else

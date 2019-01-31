@@ -227,4 +227,20 @@ class direccionesController extends AppBaseController
         }
         return $ciudades;
     }
+
+    public function GetAsentamientos(Request $request)
+    {
+      $asentamientos = catsepomex::where('cp',10000)->get();
+      $codigo = $request['cp'];
+      if (!empty($codigo)){
+        if (strlen($codigo)>=5){
+          $asentamientos = catsepomex::select('asentamiento')
+                                      ->where('cp','like','%'.$codigo.'%')
+                                      ->groupBy('asentamiento')
+                                      ->get();
+        }
+
+      }
+      return $asentamientos;
+    }
 }

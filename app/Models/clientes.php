@@ -96,7 +96,7 @@ class clientes extends Model
     }
 
     public function direcciones() {
-      return $this->hasMany('App\Models\direcciones','cliente_id');
+      return $this->hasOne('App\Models\direcciones','cliente_id');
     }
 
     public function catdocumentos() {

@@ -45,8 +45,7 @@ class direcciones extends Model
         'municipio_id',
         'colonia',
         'codpostal',
-        'referencias',
-        'localidad'
+        'referencias'
     ];
     protected static $logAttributes = ['*'];
 
@@ -66,8 +65,7 @@ class direcciones extends Model
         'municipio_id' => 'integer',
         'colonia'      => 'string',
         'codpostal'    => 'integer',
-        'referencias'  => 'string',
-        'localidad'    => 'integer'
+        'referencias'  => 'string'
     ];
 
     /**
@@ -76,15 +74,7 @@ class direcciones extends Model
      * @var array
      */
     public static $rules = [
-        'cliente_id'    => 'required',
-        'RFC'           => 'required|unique:direcciones',
-        'razonsocial'   => 'required',
-        'calle'         => 'required',
-        'estado_id'     => 'required',
-        'municipio_id'  => 'required',
-        'numeroExt'     => 'max:5',
-        'numeroInt'     => 'max:5',
-        'codpostal'     => 'numeric',
+
     ];
 
     public function clientes() {

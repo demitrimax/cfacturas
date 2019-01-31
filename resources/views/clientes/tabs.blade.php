@@ -7,9 +7,6 @@
               @can('documentos-list')
               <li class=""><a href="#tab_5" data-toggle="tab" aria-expanded="false">Expediente</a></li>
               @endcan
-              @can('datosfiscales-list')
-              <li class=""><a href="#tab_6" data-toggle="tab" aria-expanded="false">Datos Fiscales</a></li>
-              @endcan
               @can('datoscontacto-list')
               <li class=""><a href="#tab_7" data-toggle="tab" aria-expanded="false">Datos de Contacto</a></li>
               @endcan
@@ -35,11 +32,6 @@
                   @include('clientes.tabdocumentos')
                 @endcan
               </div>
-              @can('datosfiscales-list')
-              <div class="tab-pane" id="tab_6">
-                @include('clientes.tabdireccion')
-              </div>
-              @endcan
               @can('datoscontacto-list')
               <div class="tab-pane" id="tab_7">
                 @include('clientes.tabdatoscontacto')
