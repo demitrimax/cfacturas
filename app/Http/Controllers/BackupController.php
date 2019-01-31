@@ -1,5 +1,9 @@
 <?php
 namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+use App\Http\Requests;
 use Alert;
 use Artisan;
 use Carbon\Carbon;
@@ -32,6 +36,7 @@ class BackupController extends Controller
         }
         // reverse the backups, so the newest one would be on top
         $backups = array_reverse($backups);
+        //dd($backups);
         return view("backupv.backups")->with(compact('backups'));
     }
     public function create()

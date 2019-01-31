@@ -10,6 +10,7 @@
                     </a>
                 </li>
             @endcomponent
+                    @include('flash::message')
             <div class="py-4"></div>
             @include('backupv.backups-table')
             <div class="py-3"></div>
