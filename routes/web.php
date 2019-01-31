@@ -88,4 +88,9 @@ Route::group(['middleware'=>['auth','verified','activity']], function() {
   Route::get('GetGiro','catgiroempresaController@GetGiros');
 
   Route::resource('asimilados', 'asimsalController');
+
+  Route::get('backup', 'BackupController@index');
+  Route::get('backup/create', 'BackupController@create');
+  Route::get('backup/download/{file_name}', 'BackupController@download');
+  Route::get('backup/delete/{file_name}', 'BackupController@delete');
 });

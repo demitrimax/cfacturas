@@ -128,7 +128,7 @@
                 <a href="{!! route('catgiroempresas.index') !!}"><i class="fa fa-edit"></i><span>Cat. Giro Empresas</span></a>
             </li>
             @endcan
-
+            
           </ul>
         </li>
 @endcan
