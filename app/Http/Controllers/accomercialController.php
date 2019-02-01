@@ -202,10 +202,10 @@ class accomercialController extends AppBaseController
             $sweeterror = 'Acuerdo Comercial no encontrado';
             return redirect(route('accomercials.index'))->with(compact('sweeterror'));
         }
-        $sociocomer = clientes::all();
-        $sociocomer = $sociocomer->pluck('nomcompleto','id');
+        $sociocomer = sociocomercial::all();
+        $sociocomer = $sociocomer->pluck('nombre','id');
         $clientes = clientes::all();
-        $clientes = $sociocomer;
+        $clientes = $clientes->pluck('nomcompleto','id');
         $userSupervisor = User::role('Supervisor')->pluck('name','id');
         $userGerente = User::role('gerente')->pluck('name','id');
         $usuarios = users::pluck('name','id');
@@ -235,6 +235,7 @@ class accomercialController extends AppBaseController
         }
 
         $accomercial = $this->accomercialRepository->update($request->all(), $id);
+        $accomercial->empresasfact()->sync($request->input('empresasasoc'));
 
         Flash::success('Acuerdo Comercial actualizado correctamente.');
         $sweet = 'Acuerdo Comercial actualizado correctamente';

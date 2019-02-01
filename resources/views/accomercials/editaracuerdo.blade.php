@@ -24,7 +24,7 @@
 <!-- Sociocomer Id Field -->
   <div class="form-group">
       {!! Form::label('sociocomer_id', 'Socio Comercial:') !!}
-      {!! Form::select('sociocomer_id', $sociocomer, null, ['class' => 'form-control select2', 'style'=>'width: 100%;','placeholder'=>'Seleccione uno', 'required']) !!}
+      {!! Form::select('sociocomer_id', $sociocomer,  $accomercial->sociocomer_id, ['class' => 'form-control select2', 'style'=>'width: 100%;','placeholder'=>'Seleccione uno', 'required']) !!}
   </div>
 
   <!-- Sociocomer Id Field -->
@@ -32,7 +32,7 @@
       {!! Form::label('asoc_comision', 'Comisión Socio:') !!}
       <div class="input-group">
           <span class="input-group-addon">Comisión Socio:</span>
-        {!! Form::number('asoc_comision', null, ['class' => 'form-control', 'step'=>'0.01', 'max' => '15.00', 'placeholder'=>'Porcentaje comisionable']) !!}
+        {!! Form::number('asoc_comision', $accomercial->asoc_comision, ['class' => 'form-control', 'step'=>'0.01', 'max' => '15.00', 'placeholder'=>'Porcentaje comisionable']) !!}
         <span class="input-group-addon">%</span>
     </div>
   </div>

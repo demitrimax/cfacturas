@@ -26,7 +26,7 @@
         <!-- /.col -->
 
         <div class="col-sm-4 invoice-col">
-        @if($accomercial->sociocomer_id)
+        @isset($accomercial->sociocomer->nombre)
           Asociado Comercial {{ $accomercial->asoc_comision."%" }}
           <address>
             <strong>{{ $accomercial->sociocomer->nombre }}</strong><br>
@@ -35,7 +35,7 @@
             {{$accomercial->correo}}<br>
             <br>
           </address>
-        @endif
+        @endisset
         </div>
 
         <!-- /.col -->
