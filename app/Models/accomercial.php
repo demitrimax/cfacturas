@@ -81,7 +81,7 @@ class accomercial extends Model
         'id' => 'integer',
         'fechasolicitud'     => 'date',
         'sociocomer_id'      => 'integer',
-        'asoc_comision'      =>  'float',
+        'asoc_comision'      => 'float',
         'cliente_id'         => 'integer',
         'direccion_id'       => 'integer',
         'cuenta_id'          => 'integer',
