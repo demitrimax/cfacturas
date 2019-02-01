@@ -199,8 +199,12 @@ class clientesController extends AppBaseController
     public function edit($id)
     {
         $clientes = $this->clientesRepository->findWithoutFail($id);
-        $direcciones = $this->direccionesRepository->findWithoutFail(2);
         $municipios = catmunicipios::where('id_edo',1)->pluck('nomMunicipio','id');
+        if (empty($clientes->direcciones->id))
+        {
+            $direcciones = new direcciones();
+            $direcciones->calle = '';
+        }
         if(!empty($clientes->direcciones->id))
         {
           $direcciones = $this->direccionesRepository->findWithoutFail($clientes->direcciones->id);
