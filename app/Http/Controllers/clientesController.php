@@ -199,12 +199,13 @@ class clientesController extends AppBaseController
     public function edit($id)
     {
         $clientes = $this->clientesRepository->findWithoutFail($id);
-
+        $direcciones = $this->direccionesRepository->findWithoutFail(2);
+        $municipios = catmunicipios::where('id_edo',1)->pluck('nomMunicipio','id');
         if(!empty($clientes->direcciones->id))
         {
           $direcciones = $this->direccionesRepository->findWithoutFail($clientes->direcciones->id);
+          $municipios = catmunicipios::where('id_edo',$direcciones->estado_id)->pluck('nomMunicipio','id');
         }
-
 
         if (empty($clientes)) {
             Flash::error('Cliente no encontrado.');
@@ -214,12 +215,6 @@ class clientesController extends AppBaseController
 
         //$giro = catgiroempresa::pluck('descripcion','id');
         $estados = catestados::pluck('nombre','id');
-
-        $municipios = catmunicipios::where('id_edo',1)->pluck('nomMunicipio','id');
-        if (!empty($clientes->direcciones->municipio_id))
-        {
-          $municipios = catmunicipios::where('id_edo',$clientes->direcciones->municipio_id)->pluck('nomMunicipio','id');
-        }
 
         return view('clientes.edit')->with(compact('clientes','estados','municipios','direcciones'));
     }

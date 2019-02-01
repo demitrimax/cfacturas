@@ -12,7 +12,7 @@
 
                    {!! Form::model($clientes, ['route' => ['clientes.update', $clientes->id], 'method' => 'patch']) !!}
 
-                        @include('clientes.fields')
+                        @include('clientes.fupdatedir')
 
                    {!! Form::close() !!}
 
