@@ -1,8 +1,3 @@
-<!-- Id Field -->
-<div class="form-group">
-    {!! Form::label('id', 'Id:') !!}
-    <p>{!! $direcciones->id !!}</p>
-</div>
 
 <!-- Cliente Id Field -->
 <div class="form-group">
@@ -68,16 +63,4 @@
 <div class="form-group">
     {!! Form::label('referencias', 'Referencias:') !!}
     <p>{!! $direcciones->referencias !!}</p>
-</div>
-
-<!-- Created At Field -->
-<div class="form-group">
-    {!! Form::label('created_at', 'Created At:') !!}
-    <p>{!! $direcciones->created_at !!}</p>
-</div>
-
-<!-- Updated At Field -->
-<div class="form-group">
-    {!! Form::label('updated_at', 'Updated At:') !!}
-    <p>{!! $direcciones->updated_at !!}</p>
 </div>

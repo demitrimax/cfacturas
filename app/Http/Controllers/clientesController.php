@@ -89,6 +89,7 @@ class clientesController extends AppBaseController
           'CURP'         => 'max:18|nullable',
           'estado_id'    => 'required',
           'municipio_id' => 'required',
+          'giroempresa' => 'required',
       ];
 
       $messages = [
@@ -97,6 +98,7 @@ class clientesController extends AppBaseController
           'CURP.unique'             => 'La CURP que escribió ya esta en uso.',
           'estado_id.required'      => 'Es requerido el Estado',
           'municipio_id.required'   => 'Es requerido el Municipio',
+          'giroempresa.required'    => 'Es necesario que ingrese el giro de la empresa',
 
       ];
 
@@ -311,6 +313,7 @@ class clientesController extends AppBaseController
         $this->clientesRepository->delete($id);
 
         Flash::success('Cliente borrado correctamente.');
+        Alert::success('Cliente borrado correctamente.');
 
         return redirect(route('clientes.index'));
     }

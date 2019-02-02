@@ -40,6 +40,7 @@ class catempresas extends Model
         'giroempresa',
         'correo_factura',
         'correo_notifica',
+        'logoimg',
 
 
     ];
@@ -51,16 +52,17 @@ class catempresas extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
-        'nombre' => 'string',
-        'rfc' => 'string',
-        'telefono' => 'string',
-        'direccion' => 'string',
+        'id'             => 'integer',
+        'nombre'         => 'string',
+        'rfc'            => 'string',
+        'telefono'       => 'string',
+        'direccion'      => 'string',
         'apoderadolegal' => 'string',
-        'comision' => 'float',
-        'giroempresa' => 'integer',
+        'comision'       => 'float',
+        'giroempresa'    => 'string',
         'correo_factura' => 'string',
-        'correo_notifica' => 'string',
+        'correo_notifica'=> 'string',
+        'logoimg'        => 'string',
 
     ];
 
@@ -75,6 +77,9 @@ class catempresas extends Model
 
     public function emp_datfiscales() {
       return $this->hasMany('App\Models\emp_datfiscales','empresa_id');
+    }
+    public function direcciones(){
+      return $this->hasOne('App\Models\direcciones','empresa_id');
     }
 
     public function catdocumentos() {

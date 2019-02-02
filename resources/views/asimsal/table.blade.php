@@ -13,9 +13,9 @@
         <tr>
             <td><a href="{!! route('asimilados.show', [$clientes->id]) !!}">{!! $clientes->nomcompleto !!}</a></td>
             <td>{!! $clientes->RFC !!}</td>
-            <td title="{!! $clientes->giroempresas->descripcion !!}">{!! $clientes->giroempresas->codigo !!}</td>
+            <td title="{!! $clientes->giroempresa !!}">{!! $clientes->codigogiro !!}</td>
             <td>
-              {!! ($clientes->persfisica == 1) ? '<span class="badge bg-blue"><i class="fa fa-toggle-on"></i> Persona Física</span>' : '<span class="badge bg-primary"><i class="fa fa-toggle-off"></i> Empresa</span>' !!}
+              {!! ($clientes->personafisica == 1) ? '<span class="badge bg-blue"><i class="fa fa-toggle-on"></i> Persona Física</span>' : '<span class="badge bg-primary"><i class="fa fa-toggle-off"></i> Empresa</span>' !!}
             </td>
             <td>
                 {!! Form::open(['route' => ['asimilados.destroy', $clientes->id], 'method' => 'delete', 'id'=>'form'.$clientes->id]) !!}

@@ -8,15 +8,17 @@ use App\Repositories\catempresasRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use RealRashid\SweetAlert\Facades\Alert;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\catestados;
 use App\catmunicipios;
+use App\Models\direcciones;
 use App\Models\cattipodoc;
 use App\Models\catdocumentos;
 use App\Models\cat_bancos;
 use App\Models\catgiroempresa;
-use RealRashid\SweetAlert\Facades\Alert;
+
 
 class catempresasController extends AppBaseController
 {
@@ -56,7 +58,9 @@ class catempresasController extends AppBaseController
     public function create()
     {
         $giro = catgiroempresa::pluck('descripcion','id');
-        return view('catempresas.create')->with(compact('giro'));
+        $estados = catestados::pluck('nombre','id');
+        $municipios = catmunicipios::get()->where('id_edo',1)->pluck('nomMunicipio','id');
+        return view('catempresas.create')->with(compact('giro','estados','municipios'));
     }
 
     /**
@@ -68,9 +72,39 @@ class catempresasController extends AppBaseController
      */
     public function store(CreatecatempresasRequest $request)
     {
+
+        $rules = [
+            'nombre'       => 'required',
+            'rfc'          => 'max:15|required',
+            'estado_id'    => 'required',
+            'municipio_id' => 'required',
+        ];
+
+        $messages = [
+            'rfc.unique'              => 'El RFC escrito ya existe en la base de datos de clientes',
+            'rfc.required'            => 'El RFC es un valor requerido',
+            'estado_id.required'      => 'Es requerido el Estado',
+            'municipio_id.required'   => 'Es requerido el Municipio',
+
+        ];
+        $this->validate($request, $rules,$messages);
+
         $input = $request->all();
 
         $catempresas = $this->catempresasRepository->create($input);
+
+        $direccion = new direcciones();
+        $direccion->empresa_id = $catempresas->id;
+        $direccion->calle = $input['calle'];
+        $direccion->RFC = $input['rfc'];
+        $direccion->numeroExt = $input['numeroExt'];
+        $direccion->numeroInt = $input['numeroInt'];
+        $direccion->estado_id = $input['estado_id'];
+        $direccion->municipio_id = $input['municipio_id'];
+        $direccion->colonia = $input['colonia'];
+        $direccion->codpostal = $input['codpostal'];
+        $direccion->referencias = $input['referencias'];
+        $direccion->save();
 
         Flash::success('Empresa guardada correctamente.');
         Alert::success('Empresa guardada correctamente.','Muy Bien!');
@@ -95,10 +129,14 @@ class catempresasController extends AppBaseController
 
             return redirect(route('catempresas.index'));
         }
+        $logoempresa = 'avatar/'.$catempresas->logoimg;
+      if (empty($catempresas->logoimg)) {
+        $logoempresa = 'avatar/av_empresa.png';
+      }
         $tipodocs = cattipodoc::pluck('tipo','id');
         $estados = catestados::pluck('nombre','id');
         $bancos = cat_bancos::pluck('nombrecorto','id');
-        return view('catempresas.show')->with(compact('catempresas','estados','tipodocs','bancos'));
+        return view('catempresas.show')->with(compact('catempresas','estados','tipodocs','bancos','logoempresa'));
     }
 
     /**
@@ -111,14 +149,27 @@ class catempresasController extends AppBaseController
     public function edit($id)
     {
         $catempresas = $this->catempresasRepository->findWithoutFail($id);
+        $municipios = catmunicipios::where('id_edo',1)->pluck('nomMunicipio','id');
+        if (empty($clientes->direcciones->id))
+        {
+            $direcciones = new direcciones();
+            $direcciones->calle = '';
+        }
+        if(!empty($catempresas->direcciones->id))
+        {
+          $direcciones = direcciones::find($catempresas->direcciones->id);
+          $municipios = catmunicipios::where('id_edo',$direcciones->estado_id)->pluck('nomMunicipio','id');
+        }
 
         if (empty($catempresas)) {
             Flash::error('Empresa no encontrada');
+            Alert::error('Empresa no encontrada');
 
             return redirect(route('catempresas.index'));
         }
         $giro = catgiroempresa::pluck('descripcion','id');
-        return view('catempresas.edit')->with(compact('catempresas','giro'));
+        $estados = catestados::pluck('nombre','id');
+        return view('catempresas.edit')->with(compact('catempresas','giro','estados','municipios','direcciones'));
     }
 
     /**
@@ -133,6 +184,7 @@ class catempresasController extends AppBaseController
     {
         $catempresas = $this->catempresasRepository->findWithoutFail($id);
 
+
         if (empty($catempresas)) {
             Flash::error('Empresa no encontrada');
             Alert::error('Empresa no encontrada');
@@ -140,7 +192,43 @@ class catempresasController extends AppBaseController
             return redirect(route('catempresas.index'));
         }
 
+        $rules = [
+            'nombre'       => 'required',
+            'rfc'          => 'max:15|required',
+            'estado_id'    => 'required',
+            'municipio_id' => 'required',
+        ];
+
+        $messages = [
+            'RFC.unique'              => 'El RFC escrito ya existe en la base de datos de clientes',
+            'RFC.required'            => 'El RFC es un valor requerido',
+            'CURP.unique'             => 'La CURP que escribió ya esta en uso.',
+            'estado_id.required'      => 'Es requerido el Estado',
+            'municipio_id.required'   => 'Es requerido el Municipio',
+
+        ];
+
+        $this->validate($request, $rules,$messages);
+
         $catempresas = $this->catempresasRepository->update($request->all(), $id);
+        if(isset($catempresas->direcciones->id))
+        {
+          $direccion = direcciones::find($catempresas->direcciones->id);
+        }
+        else {
+          $direccion = new direcciones();
+        }
+        $direccion->empresa_id = $catempresas->id;
+        $direccion->calle = $request['calle'];
+        $direccion->RFC = $request['rfc'];
+        $direccion->numeroExt = $request['numeroExt'];
+        $direccion->numeroInt = $request['numeroInt'];
+        $direccion->estado_id = $request['estado_id'];
+        $direccion->municipio_id = $request['municipio_id'];
+        $direccion->colonia = $request['colonia'];
+        $direccion->codpostal = $request['codpostal'];
+        $direccion->referencias = $request['referencias'];
+        $direccion->save();
 
         Flash::success('Empresa actualizada correctamente.');
         Alert::success('Empresa actualizada correctamente.','Datos Actualizados');

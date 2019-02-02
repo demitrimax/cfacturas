@@ -125,4 +125,15 @@ class clientes extends Model
     }
 
   }
+  public function getPersonafisicaAttribute()
+  {
+    if (strlen($this->RFC)>12)
+    {
+      return true;
+    }
+    else {
+      return false;
+    }    
+  }
+
 }

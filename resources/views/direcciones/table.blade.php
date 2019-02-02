@@ -1,7 +1,7 @@
 <table class="table table-responsive" id="direcciones-table">
     <thead>
         <tr>
-        <th>Cliente Id</th>
+        <th>Cliente</th>
         <th>RFC</th>
         <th>Razon Social</th>
         <th>Dirección</th>
@@ -15,7 +15,7 @@
     <tbody>
     @foreach($direcciones as $direcciones)
         <tr>
-            <td>{!! $direcciones->clientes->nomcompleto !!}</td>
+            <td>{!! $direcciones->clientenombre !!}</td>
             <td>{!! $direcciones->rfc !!}</td>
             <td>{!! $direcciones->razonsocial !!}</td>
             <td>{!! $direcciones->calle. ' '. $direcciones->numeroExt!!}</td>
@@ -26,9 +26,9 @@
             <td>
                 {!! Form::open(['route' => ['direcciones.destroy', $direcciones->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
-                    <a href="{!! route('direcciones.show', [$direcciones->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
-                    <a href="{!! route('direcciones.edit', [$direcciones->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
-                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                    <a href="{!! route('direcciones.show', [$direcciones->id]) !!}" class='btn btn-info'><i class="glyphicon glyphicon-eye-open"></i></a>
+                    <a href="{!! route('direcciones.edit', [$direcciones->id]) !!}" class='btn btn-primary'><i class="glyphicon glyphicon-edit"></i></a>
+                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger', 'onclick' => "return confirm('Are you sure?')"]) !!}
                 </div>
                 {!! Form::close() !!}
             </td>

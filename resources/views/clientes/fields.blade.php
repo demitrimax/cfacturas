@@ -20,16 +20,8 @@
                       {!! Form::label('nombre', 'Nombre/Razon:*') !!}
                       {!! Form::text('nombre', null, ['class' => 'form-control', 'required', 'oninput'=>'this.value = this.value.toUpperCase()', 'maxlength'=>'191']) !!}
                   </div>
-                  @php
-                    $claseapellidos = 'none';
-                    $clasecomercial = 'none';
-                    if (isset($clientes->RFC))
-                    {
-                      $claseapellidos = (strlen($clientes->RFC)>12) ? 'block' : 'none';
-                      $clasecomercial = (strlen($clientes->RFC)<=12) ? 'block' : 'none';
-                    }
-                  @endphp
-                  <div id="apellidos" style="display:{!! $claseapellidos !!};">
+
+                  <div id="apellidos" style="display:none;">
                       <div class="form-group">
                           {!! Form::label('apellidopat', 'Apellido Paterno:*') !!}
                           {!! Form::text('apellidopat', null, ['class' => 'form-control', 'oninput'=>'this.value = this.value.toUpperCase()', 'maxlength'=>'191']) !!}
@@ -44,18 +36,19 @@
                           {!! Form::text('CURP', null, ['class' => 'form-control', 'maxlength'=>'18', 'onchange'=>'validarInput(this)', 'oninput'=>'this.value = this.value.toUpperCase()']) !!}
                           <!-- <pre id="resultado"></pre> -->
                       </div>
+                      {!! Form::hidden('persfisica',1) !!}
                   </div>
 
                   <!-- Nombre Comercial Field -->
-                  <div class="form-group" style="display:{!! $clasecomercial !!};" id="bloqnombrecomercial">
+                  <div class="form-group" style="display:none;" id="bloqnombrecomercial">
                       {!! Form::label('nomcomercial', 'Nombre Comercial:*') !!}
                       {!! Form::text('nomcomercial', null, ['class' => 'form-control', 'oninput'=>'this.value = this.value.toUpperCase()', 'maxlength'=>'191']) !!}
                   </div>
 
                   <!-- Giro de la Empresa Field -->
                   <div class="form-group">
-                      {!! Form::label('giroempresa', 'Giro Empresa:') !!}
-                      {!! Form::text('giroempresa',  null, ['class' => 'form-control', 'list'=>'giros']) !!}
+                      {!! Form::label('giroempresa', 'Giro Empresa:*') !!}
+                      {!! Form::text('giroempresa',  null, ['class' => 'form-control', 'list'=>'giros', 'required']) !!}
                       <datalist id="giros">
                       </datalist>
                   </div>
@@ -138,12 +131,12 @@
               <!-- Estado Id Field -->
               <div class="form-group">
                   {!! Form::label('estado_id', 'Estado:') !!}
-                  {!! Form::select('estado_id',  $estados, null, ['class' => 'form-control', 'placeholder'=>'Seleccione']) !!}
+                  {!! Form::select('estado_id',  $estados, null, ['class' => 'form-control', 'placeholder'=>'Seleccione','required']) !!}
               </div>
               <!-- Municipio Id Field -->
               <div class="form-group">
                   {!! Form::label('municipio_id', 'Municipio:') !!}
-                  {!! Form::select('municipio_id',  $municipios, null, ['class' => 'form-control', 'placeholder'=>'Seleccione']) !!}
+                  {!! Form::select('municipio_id',  $municipios, null, ['class' => 'form-control', 'placeholder'=>'Seleccione','required']) !!}
               </div>
 
               <!-- Referencias Field -->
@@ -279,9 +272,11 @@ function validarRFC(input) {
       console.log(rfc.length);
       if (rfc.length > 12) {
         tipopersona = 'Física';
+        document.getElementsByClassName('persfisica').value = 1;
       }
       if (rfc.length <= 12) {
         tipopersona = 'Moral';
+        document.getElementsByClassName('persfisica').value = 0;
       }
       //document.getElementById("GuardarD").removeAttribute("disabled");
     } else {
@@ -358,8 +353,6 @@ $('#giroempresa').on('change keyup paste', function(e) {
         });
       }
   }, 500);
-
-
   });
 
   $('#estado_id').on('change', function(e) {

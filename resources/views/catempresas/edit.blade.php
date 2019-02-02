@@ -9,18 +9,14 @@
    <div class="content">
        @include('adminlte-templates::common.errors')
     <div class="row">
-      <div class="col-md-12">
-       <div class="box box-primary">
-           <div class="box-body">
+
 
                    {!! Form::model($catempresas, ['route' => ['catempresas.update', $catempresas->id], 'method' => 'patch']) !!}
 
-                        @include('catempresas.fields')
+                        @include('catempresas.updatefields')
 
                    {!! Form::close() !!}
-               </div>
-           </div>
-       </div>
+
      </div>
    </div>
 @endsection

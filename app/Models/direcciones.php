@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
 use App\Traits\DatesTranslator;
+use App\Models\clientes;
 
 /**
  * Class direcciones
@@ -87,6 +88,17 @@ class direcciones extends Model
     }
     public function municipios() {
       return $this->belongsTo('App\catmunicipios','municipio_id');
+    }
+
+    public function getClientenombreAttribute()
+    {
+      $cliente = clientes::find($this->cliente_id);
+      $clientenom = 'N/D';
+      if(!empty($cliente))
+      {
+        $clientenom = $cliente->nombre.' '.$cliente->apellidopat.' '.$cliente->apellidomat;
+      }
+      return $clientenom;
     }
 
 }

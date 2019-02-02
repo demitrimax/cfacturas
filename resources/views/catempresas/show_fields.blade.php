@@ -37,7 +37,7 @@
 
 <!-- Correo Notifica Field -->
 <div class="form-group">
-    {!! Form::label('Correo_notifica', 'Correo Notificaciones:') !!}
+    {!! Form::label('correo_notifica', 'Correo Notificaciones:') !!}
     <p>{!! $catempresas->correo_notifica !!}</p>
 </div>
 
