@@ -5,7 +5,7 @@
         @endcan
         @can('facturas-list')
         <li class="{{ Request::is('facturas*') ? 'active' : '' }}">
-            <a href="{!! route('facturas.index') !!}"><i class="fa fa-diamond"></i><span>Facturas</span></a>
+            <a href="{!! route('facturas.index') !!}"><i class="fa fa-file-text-o"></i><span>Facturas</span></a>
         </li>
         @endcan
         @can('solicitud-list')

@@ -26,13 +26,13 @@ Route::get('/privacidad', function() {
 
 Route::group(['middleware'=>['auth','verified','activity']], function() {
   Route::resource('clientes', 'clientesController');
+  Route::post('clientes/avatarchange', 'clientesController@avatar');
   Route::resource('datcontactos', 'datcontactoController');
   Route::resource('direcciones', 'direccionesController');
   Route::get('GetMunicipios/{id}', 'direccionesController@GetMunicipios');
   Route::get('GetCiudades','direccionesController@GetCiudades');
   Route::get('GetAsentamientos','direccionesController@GetAsentamientos');
   Route::resource('catdocumentos', 'catdocumentosController');
-  Route::post('clientes/avatarchange', 'clientesController@avatar');
   Route::resource('catempresas', 'catempresasController');
   Route::resource('empDatfiscales', 'emp_datfiscalesController');
   Route::resource('catBancos', 'cat_bancosController');
@@ -89,4 +89,5 @@ Route::group(['middleware'=>['auth','verified','activity']], function() {
   Route::get('GetGiro','catgiroempresaController@GetGiros');
 
   Route::resource('asimilados', 'asimsalController');
+  Route::post('asimilados/avatarchange', 'asimsalController@avatar');
 });

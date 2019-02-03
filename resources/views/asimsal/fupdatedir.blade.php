@@ -17,11 +17,19 @@
                     </div>
                   <!-- Nombre Field -->
                   <div class="form-group">
-                      {!! Form::label('nombre', 'Nombre:*') !!}
+                      {!! Form::label('nombre', 'Nombre/Razon:*') !!}
                       {!! Form::text('nombre', null, ['class' => 'form-control', 'required', 'oninput'=>'this.value = this.value.toUpperCase()', 'maxlength'=>'191']) !!}
                   </div>
-
-                  <div id="apellidos">
+                  @php
+                    $claseapellidos = 'none';
+                    $clasecomercial = 'none';
+                    if (isset($clientes->RFC))
+                    {
+                      $claseapellidos = (strlen($clientes->RFC)>12) ? 'block' : 'none';
+                      $clasecomercial = (strlen($clientes->RFC)<=12) ? 'block' : 'none';
+                    }
+                  @endphp
+                  <div id="apellidos" style="display:{!! $claseapellidos !!};">
                       <div class="form-group">
                           {!! Form::label('apellidopat', 'Apellido Paterno:*') !!}
                           {!! Form::text('apellidopat', null, ['class' => 'form-control', 'oninput'=>'this.value = this.value.toUpperCase()', 'maxlength'=>'191']) !!}
@@ -36,14 +44,18 @@
                           {!! Form::text('CURP', null, ['class' => 'form-control', 'maxlength'=>'18', 'onchange'=>'validarInput(this)', 'oninput'=>'this.value = this.value.toUpperCase()']) !!}
                           <!-- <pre id="resultado"></pre> -->
                       </div>
-                      {!! Form::hidden('persfisica',1) !!}
-                      {!! Form::hidden('asimsal',1) !!}
+                  </div>
+
+                  <!-- Nombre Comercial Field -->
+                  <div class="form-group" style="display:{!! $clasecomercial !!};" id="bloqnombrecomercial">
+                      {!! Form::label('nomcomercial', 'Nombre Comercial:*') !!}
+                      {!! Form::text('nomcomercial', null, ['class' => 'form-control', 'oninput'=>'this.value = this.value.toUpperCase()', 'maxlength'=>'191']) !!}
                   </div>
 
                   <!-- Giro de la Empresa Field -->
                   <div class="form-group">
-                      {!! Form::label('giroempresa', 'Giro Empresa:*') !!}
-                      {!! Form::text('giroempresa',  null, ['class' => 'form-control', 'list'=>'giros', 'required']) !!}
+                      {!! Form::label('giroempresa', 'Giro Empresa:') !!}
+                      {!! Form::text('giroempresa',  null, ['class' => 'form-control', 'list'=>'giros']) !!}
                       <datalist id="giros">
                       </datalist>
                   </div>
@@ -86,31 +98,31 @@
               <!-- Direccion Field -->
               <div class="form-group">
                   {!! Form::label('calle', 'Calle:') !!}
-                  {!! Form::text('calle', null, ['class' => 'form-control', 'placeholder'=>'Calle']) !!}
+                  {!! Form::text('calle', $direcciones->calle, ['class' => 'form-control', 'placeholder'=>'Calle']) !!}
               </div>
               <div class="row">
                   <!-- Numeroext Field -->
                   <div class="form-group col-xs-6">
                       {!! Form::label('numeroExt', 'Numero Exterior:') !!}
-                      {!! Form::text('numeroExt', null, ['class' => 'form-control', 'maxlength'=>'5', 'placeholder'=>'Núm Exterior']) !!}
+                      {!! Form::text('numeroExt', $direcciones->numeroExt, ['class' => 'form-control', 'maxlength'=>'5', 'placeholder'=>'Núm Exterior']) !!}
                   </div>
 
                   <!-- Numeroint Field -->
                   <div class="form-group col-xs-6">
                       {!! Form::label('numeroInt', 'Numero Interior:') !!}
-                      {!! Form::text('numeroInt', null, ['class' => 'form-control', 'maxlength'=>'5', 'placeholder'=>'Núm Interior']) !!}
+                      {!! Form::text('numeroInt', $direcciones->numeroInt, ['class' => 'form-control', 'maxlength'=>'5', 'placeholder'=>'Núm Interior']) !!}
                   </div>
               </div>
               <div class="row">
                   <!-- Codpostal Field -->
                   <div class="form-group col-xs-6">
                       {!! Form::label('codpostal', 'Código postal:') !!}
-                      {!! Form::text('codpostal', null, ['class' => 'form-control', 'placeholder'=>'Código Postal']) !!}
+                      {!! Form::text('codpostal', $direcciones->codpostal, ['class' => 'form-control', 'placeholder'=>'Código Postal']) !!}
                   </div>
                   <!-- Codpostal Field -->
                   <div class="form-group col-xs-6">
                       {!! Form::label('ciudad', 'Ciudad:') !!}
-                      {!! Form::text('ciudad', null, ['class' => 'form-control', 'list'=>'listaciudad', 'placeholder'=>'ciudad']) !!}
+                      {!! Form::text('ciudad', $direcciones->ciudad, ['class' => 'form-control', 'list'=>'listaciudad', 'placeholder'=>'ciudad']) !!}
                   </div>
                   <datalist id="listaciudad"></datalist>
 
@@ -119,25 +131,25 @@
               <!-- Colonia Field -->
               <div class="form-group">
                   {!! Form::label('colonia', 'Colonia:') !!}
-                  {!! Form::text('colonia', null, ['class' => 'form-control', 'list'=>'listacolonias', 'placeholder'=>'Colonia']) !!}
+                  {!! Form::text('colonia', $direcciones->colonia, ['class' => 'form-control', 'list'=>'listacolonias', 'placeholder'=>'Colonia']) !!}
               </div>
               <datalist id="listacolonias"></datalist>
 
               <!-- Estado Id Field -->
               <div class="form-group">
                   {!! Form::label('estado_id', 'Estado:') !!}
-                  {!! Form::select('estado_id',  $estados, null, ['class' => 'form-control', 'placeholder'=>'Seleccione','required']) !!}
+                  {!! Form::select('estado_id',  $estados, $direcciones->estado_id, ['class' => 'form-control', 'placeholder'=>'Seleccione']) !!}
               </div>
               <!-- Municipio Id Field -->
               <div class="form-group">
                   {!! Form::label('municipio_id', 'Municipio:') !!}
-                  {!! Form::select('municipio_id',  $municipios, null, ['class' => 'form-control', 'placeholder'=>'Seleccione','required']) !!}
+                  {!! Form::select('municipio_id',  $municipios, $direcciones->municipio_id, ['class' => 'form-control', 'placeholder'=>'Seleccione']) !!}
               </div>
 
               <!-- Referencias Field -->
               <div class="form-group col-sm-12 col-lg-12">
                   {!! Form::label('referencias', 'Referencias:') !!}
-                  {!! Form::textarea('referencias', null, ['class' => 'form-control']) !!}
+                  {!! Form::textarea('referencias', $direcciones->referencias, ['class' => 'form-control']) !!}
               </div>
 
 
@@ -154,7 +166,7 @@
 <div class="form-group col-sm-12">
   <p><strong>*</strong> Datos Requeridos.</p>
     {!! Form::submit('Guardar', ['class' => 'btn btn-primary', 'id'=>'GuardarD']) !!}
-    <a href="{!! route('clientes.index') !!}" class="btn btn-default">Cancelar</a>
+    <a href="{!! route('asimilados.index') !!}" class="btn btn-default">Cancelar</a>
 </div>
 
 @section('scripts')
@@ -267,11 +279,9 @@ function validarRFC(input) {
       console.log(rfc.length);
       if (rfc.length > 12) {
         tipopersona = 'Física';
-        document.getElementsByClassName('persfisica').value = 1;
       }
       if (rfc.length <= 12) {
         tipopersona = 'Moral';
-        document.getElementsByClassName('persfisica').value = 0;
       }
       //document.getElementById("GuardarD").removeAttribute("disabled");
     } else {
@@ -348,6 +358,8 @@ $('#giroempresa').on('change keyup paste', function(e) {
         });
       }
   }, 500);
+
+
   });
 
   $('#estado_id').on('change', function(e) {

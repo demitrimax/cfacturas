@@ -7,10 +7,10 @@
 
 @section('content')
     <section class="content-header">
-        <h1 class="pull-left">Clientes</h1>
+        <h1 class="pull-left">Asimilados a Salarios</h1>
         <h1 class="pull-right">
-          @can('asimsal-create')
-           <a class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('asimilados.create') !!}">Agregar Cliente</a>
+          @can('clientes-create')
+           <a class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('asimilados.create') !!}">Agregar Cliente Asimilados a Salarios</a>
           @endcan
         </h1>
     </section>

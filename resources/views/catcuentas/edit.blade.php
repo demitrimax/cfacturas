@@ -15,7 +15,7 @@
 
                    {!! Form::model($catcuentas, ['route' => ['catcuentas.update', $catcuentas->id], 'method' => 'patch']) !!}
 
-                        @include('catcuentas.fields')
+                        @include('catcuentas.upfields')
 
                    {!! Form::close() !!}
                </div>

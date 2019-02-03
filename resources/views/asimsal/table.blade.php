@@ -20,9 +20,9 @@
             <td>
                 {!! Form::open(['route' => ['asimilados.destroy', $clientes->id], 'method' => 'delete', 'id'=>'form'.$clientes->id]) !!}
                 <div class='btn-group'>
-                    <a href="{!! route('clientes.show', [$clientes->id]) !!}" class='btn btn-info'><i class="fa fa-eye"></i></a>
+                    <a href="{!! route('asimilados.show', [$clientes->id]) !!}" class='btn btn-info'><i class="fa fa-eye"></i></a>
                     @can('clientes-edit')
-                    <a href="{!! route('clientes.edit', [$clientes->id]) !!}" class='btn btn-primary'><i class="glyphicon glyphicon-edit"></i></a>
+                    <a href="{!! route('asimilados.edit', [$clientes->id]) !!}" class='btn btn-primary'><i class="glyphicon glyphicon-edit"></i></a>
                     @endcan
                     @can('clientes-delete')
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'button', 'class' => 'btn btn-danger', 'onclick' => "ConfirmDelete(".$clientes->id.")"]) !!}
