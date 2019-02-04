@@ -270,11 +270,10 @@ class sociocomercialController extends AppBaseController
         }
         else {
           $direccion = new direcciones();
+          $direccion->sociocom_id = $sociocomercial->id;
         }
         $input = $request->all();
-        //$direccion->sociocom_id = $sociocomercial->id;
-        //dd($direccion);
-        //dd($input['calle']);
+        
         $direccion->calle = $input['calle'];
         $direccion->RFC = $input['RFC'];
         $direccion->numeroExt = $input['numeroExt'];

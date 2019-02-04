@@ -24,11 +24,11 @@
                   <div id="apellidos">
                       <div class="form-group">
                           {!! Form::label('apellidopat', 'Apellido Paterno:*') !!}
-                          {!! Form::text('apellidopat', null, ['class' => 'form-control', 'oninput'=>'this.value = this.value.toUpperCase()', 'maxlength'=>'191']) !!}
+                          {!! Form::text('apellidopat', null, ['class' => 'form-control', 'oninput'=>'this.value = this.value.toUpperCase()', 'maxlength'=>'191','required']) !!}
                       </div>
                       <div class="form-group">
                           {!! Form::label('apellidomat', 'Apellido Materno:*') !!}
-                          {!! Form::text('apellidomat', null, ['class' => 'form-control', 'oninput'=>'this.value = this.value.toUpperCase()', 'maxlength'=>'191']) !!}
+                          {!! Form::text('apellidomat', null, ['class' => 'form-control', 'oninput'=>'this.value = this.value.toUpperCase()', 'maxlength'=>'191','required']) !!}
                       </div>
                       <!-- Curp Field -->
                       <div class="form-group" id="curpfield">

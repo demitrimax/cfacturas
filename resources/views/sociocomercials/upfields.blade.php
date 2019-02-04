@@ -24,11 +24,11 @@
                   <div id="apellidos">
                       <div class="form-group">
                           {!! Form::label('apellidopat', 'Apellido Paterno:*') !!}
-                          {!! Form::text('apellidopat', null, ['class' => 'form-control', 'oninput'=>'this.value = this.value.toUpperCase()', 'maxlength'=>'191']) !!}
+                          {!! Form::text('apellidopat', null, ['class' => 'form-control', 'oninput'=>'this.value = this.value.toUpperCase()', 'maxlength'=>'191', 'required']) !!}
                       </div>
                       <div class="form-group">
                           {!! Form::label('apellidomat', 'Apellido Materno:*') !!}
-                          {!! Form::text('apellidomat', null, ['class' => 'form-control', 'oninput'=>'this.value = this.value.toUpperCase()', 'maxlength'=>'191']) !!}
+                          {!! Form::text('apellidomat', null, ['class' => 'form-control', 'oninput'=>'this.value = this.value.toUpperCase()', 'maxlength'=>'191', 'required']) !!}
                       </div>
                       <!-- Curp Field -->
                       <div class="form-group" id="curpfield">
@@ -92,7 +92,7 @@
                     <!-- Direccion Field -->
                     <div class="form-group">
                         {!! Form::label('calle', 'Calle:') !!}
-                        {!! Form::text('calle', $direccion->calle, ['class' => 'form-control', 'placeholder'=>'Calle']) !!}
+                        {!! Form::text('calle', $direccion->calle, ['class' => 'form-control', 'placeholder'=>'Calle','maxlength'=>'190']) !!}
                     </div>
                     <div class="row">
                         <!-- Numeroext Field -->
@@ -111,7 +111,7 @@
                         <!-- Codpostal Field -->
                         <div class="form-group col-xs-6">
                             {!! Form::label('codpostal', 'Código postal:') !!}
-                            {!! Form::text('codpostal', $direccion->codpostal, ['class' => 'form-control', 'placeholder'=>'Código Postal']) !!}
+                            {!! Form::text('codpostal', $direccion->codpostal, ['class' => 'form-control', 'placeholder'=>'Código Postal', 'maxlength'=>'6']) !!}
                         </div>
                         <!-- Codpostal Field -->
                         <div class="form-group col-xs-6">
