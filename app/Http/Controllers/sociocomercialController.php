@@ -16,9 +16,15 @@ use App\Models\sociocomercial;
 use App\Models\catdocumentos;
 use App\Models\cat_bancos;
 use App\Models\catcuentas;
+use App\Models\direcciones;
 use App\Repositories\catcuentasRepository;
 use App\Http\Requests\CreatecatcuentasRequest;
 use App\Http\Requests\UpdatecatcuentasRequest;
+use App\Helpers\VerificaRFC;
+use App\catestados;
+use App\catmunicipios;
+use App\catsepomex;
+use Intervention\Image\ImageManager;
 
 class sociocomercialController extends AppBaseController
 {
@@ -56,7 +62,9 @@ class sociocomercialController extends AppBaseController
      */
     public function create()
     {
-        return view('sociocomercials.create');
+        $estados = catestados::pluck('nombre','id');
+        $municipios = catmunicipios::get()->where('id_edo',1)->pluck('nomMunicipio','id');
+        return view('sociocomercials.create')->with(compact('estados','municipios'));
     }
 
     /**
@@ -68,9 +76,45 @@ class sociocomercialController extends AppBaseController
      */
     public function store(CreatesociocomercialRequest $request)
     {
+      $rules = [
+          'nombre'       => 'required',
+          'apellidopat'  => 'required',
+          'apellidomat'  => 'required',
+          'RFC'          => 'max:15|required',
+          'CURP'         => 'max:18|nullable',
+          'estado_id'    => 'required',
+          'municipio_id' => 'required',
+          'codpostal'    => 'numeric',
+      ];
+
+      $messages = [
+          'RFC.unique'              => 'El RFC escrito ya existe en la base de datos de clientes',
+          'RFC.required'            => 'El RFC es un valor requerido',
+          'CURP.unique'             => 'La CURP que escribió ya esta en uso.',
+          'estado_id.required'      => 'Es requerido el Estado',
+          'municipio_id.required'   => 'Es requerido el Municipio',
+          'giroempresa.required'    => 'Es necesario que ingrese el giro de la empresa',
+          'codpostal.numeric'       => 'El Código Postal debe ser un número.',
+
+      ];
+
+      $this->validate($request, $rules,$messages);
+
         $input = $request->all();
 
         $sociocomercial = $this->sociocomercialRepository->create($input);
+        $direccion = new direcciones();
+        $direccion->sociocom_id = $sociocomercial->id;
+        $direccion->calle = $input['calle'];
+        $direccion->RFC = $input['RFC'];
+        $direccion->numeroExt = $input['numeroExt'];
+        $direccion->numeroInt = $input['numeroInt'];
+        $direccion->estado_id = $input['estado_id'];
+        $direccion->municipio_id = $input['municipio_id'];
+        $direccion->colonia = $input['colonia'];
+        $direccion->codpostal = $input['codpostal'];
+        $direccion->referencias = $input['referencias'];
+        $direccion->save();
 
         Flash::success('Socio Comercial guardado correctamente.');
         Alert::success('Socio Comercial guardado correctamente.');
@@ -95,10 +139,54 @@ class sociocomercialController extends AppBaseController
 
             return redirect(route('sociocomercials.index'));
         }
+
+        $avatar = 'avatar/'.$sociocomercial->avatar;
+      if (empty($sociocomercial->avatar)) {
+        $avatar = 'avatar/avatar.png';
+      }
+      $fecnac = 'N/D';
+      $rfc = VerificaRFC::validarRFC($sociocomercial->RFC);
+      if($rfc){
+        $fecnac = 'Verdadero RFC';
+        $anio = substr($sociocomercial->RFC,4,2);
+        $mes = substr($sociocomercial->RFC,6,2);
+        $dia = substr($sociocomercial->RFC,8,2);
+        /*
+        $actdia=date(j);
+        $actmes=date(n);
+        $actanio=date(Y);
+        //si el mes es el mismo pero el día inferior aun no ha cumplido años, le quitaremos un año al actual
+        if (($mes == $actmes) && ($dia > $actdia))
+        {
+          $actanio=($actanio-1);
+        }
+        //si el mes es superior al actual tampoco habrá cumplido años, por eso le quitamos un año al actual
+
+        if ($mes > $actmes) {
+        $actanio=($actanio-1);}
+
+        //ya no habría mas condiciones, ahora simplemente restamos los años y mostramos el resultado como su edad
+
+        $edad=($actanio-$anio);
+        */
+        $fecnac = $dia.'/'.$mes.'/'.$anio;
+
+      }
+      $curp = VerificaRFC::validarCURP($sociocomercial->CURP);
+      if($curp)
+      {
+        $fecnac = 'Verdadero CURP';
+        $anio = substr($sociocomercial->CURP,4,2);
+        $mes = substr($sociocomercial->CURP,6,2);
+        $dia = substr($sociocomercial->CURP,8,2);
+        $fecnac = $dia.'/'.$mes.'/'.$anio;
+      }
+
+
         $tipodocs = cattipodoc::pluck('tipo','id');
         $bancos = cat_bancos::pluck('nombrecorto','id');
 
-        return view('sociocomercials.show')->with(compact('sociocomercial','tipodocs','bancos'));
+        return view('sociocomercials.show')->with(compact('sociocomercial','tipodocs','bancos','avatar','fecnac'));
     }
 
     /**
@@ -111,6 +199,8 @@ class sociocomercialController extends AppBaseController
     public function edit($id)
     {
         $sociocomercial = $this->sociocomercialRepository->findWithoutFail($id);
+        $estados = catestados::pluck('nombre','id');
+        $municipios = catmunicipios::get()->where('id_edo',1)->pluck('nomMunicipio','id');
 
         if (empty($sociocomercial)) {
           Flash::error('Socio comercial no encontrado');
@@ -118,8 +208,19 @@ class sociocomercialController extends AppBaseController
 
             return redirect(route('sociocomercials.index'));
         }
+        if (empty($sociocomercial->direcciones->id))
+        {
+            $direccion = new direcciones();
+            $direccion->calle = '';
+        }
+        if(!empty($sociocomercial->direcciones->id))
+        {
+          $direccion = direcciones::find($sociocomercial->direcciones->id);
+          $municipios = catmunicipios::where('id_edo',$direccion->estado_id)->pluck('nomMunicipio','id');
+        }
 
-        return view('sociocomercials.edit')->with('sociocomercial', $sociocomercial);
+
+        return view('sociocomercials.edit')->with(compact('sociocomercial','estados','municipios','direccion'));
     }
 
     /**
@@ -140,8 +241,50 @@ class sociocomercialController extends AppBaseController
 
             return redirect(route('sociocomercials.index'));
         }
+        $rules = [
+            'nombre'       => 'required',
+            'RFC'          => 'max:15|required',
+            'CURP'         => 'max:18|nullable',
+            'estado_id'    => 'required',
+            'municipio_id' => 'required',
+            'codpostal'    => 'nullable|numeric',
+        ];
+
+        $messages = [
+            'RFC.unique'              => 'El RFC escrito ya existe en la base de datos de clientes',
+            'RFC.required'            => 'El RFC es un valor requerido',
+            'CURP.unique'             => 'La CURP que escribió ya esta en uso.',
+            'estado_id.required'      => 'Es requerido el Estado',
+            'municipio_id.required'   => 'Es requerido el Municipio',
+            'codpostal.numeric'       => 'El Código postal debe ser numerico',
+
+        ];
+
+        $this->validate($request, $rules,$messages);
 
         $sociocomercial = $this->sociocomercialRepository->update($request->all(), $id);
+
+        if(isset($sociocomercial->direcciones->id))
+        {
+          $direccion = direcciones::find($sociocomercial->direcciones->id);
+        }
+        else {
+          $direccion = new direcciones();
+        }
+        $input = $request->all();
+        //$direccion->sociocom_id = $sociocomercial->id;
+        //dd($direccion);
+        //dd($input['calle']);
+        $direccion->calle = $input['calle'];
+        $direccion->RFC = $input['RFC'];
+        $direccion->numeroExt = $input['numeroExt'];
+        $direccion->numeroInt = $input['numeroInt'];
+        $direccion->estado_id = $input['estado_id'];
+        $direccion->municipio_id = $input['municipio_id'];
+        $direccion->colonia = $input['colonia'];
+        $direccion->codpostal = $input['codpostal'];
+        $direccion->referencias = $input['referencias'];
+        $direccion->save();
 
         Flash::success('Socio Comercial actualizado correctamente.');
         Alert::success('Socio Comercial actualizado correctamente.');
@@ -166,7 +309,12 @@ class sociocomercialController extends AppBaseController
 
             return redirect(route('sociocomercials.index'));
         }
-
+        if ($sociocomercial->acuerdoscom->count()>0)
+        {
+            Flash::error('Socio Comercial no puede ser eliminado, tiene Acuerdos Comerciales Activos');
+            $sweeterror = 'Socio Comercial no puede ser eliminado, tiene Acuerdos Comerciales Activos';
+            return redirect(route('sociocomercials.index'))->with(compact('sweeterror'));
+        }
         $this->sociocomercialRepository->delete($id);
 
         Flash::success('Socio Comercial borrado correctamente.');
@@ -210,15 +358,15 @@ class sociocomercialController extends AppBaseController
       $cuentas = catcuentas::where('numcuenta', $request->input('numcuenta'))->where('banco_id',$request->input('banco_id'))->first();
 
       if ($cuentas) {
-        Flash::error('Ya existe una Cuenta Bancaria en el mismo Banco');
-        $sweeterror = "Cuenta existente";
+        Flash::error('Ya existe el misno número Cuenta Bancaria en el mismo Banco');
+        $sweeterror = "Ya existe una cuenta con el mismo banco. Cuenta existente";
         return back()->with($sweeterror);
       }
 
       $rules = [
         'banco_id' => 'required',
         'numcuenta' => 'required|max:10',
-        'clabeinterbancaria' => 'nullable|digits:18|unique:catcuentas',
+        //'clabeinterbancaria' => 'nullable|digits:18|unique:catcuentas',
         'sucursal' => 'max:5',
       ];
       $this->validate($request, $rules);
@@ -255,6 +403,26 @@ class sociocomercialController extends AppBaseController
       else {
 
       return redirect(route('catcuentas.index'));
+      }
     }
+    public function avatar(Request $request)
+    {
+      $sociocomercialid = $request->sociocomercial_id;
+      //$clientes = $this->clientesRepository->findWithoutFail($clienteid);
+      //guardar la imagen en el sistema de archivos
+      $manager = new ImageManager;
+      $file = $request->file('avatarimg');
+      $path = public_path() . '/avatar/';
+
+      $filename = uniqid().$file->getClientOriginalName();
+      //cambiar el tamaño de la imagen
+      $image = $manager->make($file)->resize(400, 400)->save($path.$filename);
+      //$file->move($path,$filename);
+
+      //guardar el registro de la Imagen
+      $avatar = sociocomercial::find($sociocomercialid);
+      $avatar->avatar = $filename;
+      $avatar->save(); //INSERT
+      return back();
     }
 }

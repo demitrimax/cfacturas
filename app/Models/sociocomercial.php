@@ -24,6 +24,7 @@ use App\Traits\DatesTranslator;
 class sociocomercial extends Model
 {
     use SoftDeletes;
+    use DatesTranslator;
 
     public $table = 'sociocomercial';
 
@@ -36,11 +37,12 @@ class sociocomercial extends Model
 
     public $fillable = [
         'nombre',
+        'apellidopat',
+        'apellidomat',
         'RFC',
         'CURP',
         'avatar',
         'persfisica',
-        'direccion',
         'correo',
         'telefono',
         'comision',
@@ -59,7 +61,6 @@ class sociocomercial extends Model
         'CURP' => 'string',
         'avatar' => 'string',
         'persfisica' => 'boolean',
-        'direccion' => 'string',
         'correo' => 'string',
         'telefono' => 'string',
         'comision' => 'float',
@@ -72,9 +73,6 @@ class sociocomercial extends Model
      * @var array
      */
     public static $rules = [
-      'nombre' => 'required',
-      'RFC' => 'required',
-      'comision' => 'required'
 
     ];
 
@@ -91,6 +89,13 @@ class sociocomercial extends Model
     {
       return $this->belongsToMany('App\Models\catcuentas');
     }
-
+    public function direcciones()
+    {
+      return $this->hasOne('App\Models\direcciones','sociocom_id');
+    }
+    public function getNomcompletoAttribute()
+    {
+      return $this->nombre.' '.$this->apellidopat.' '.$this->apellidomat;
+    }
 
 }

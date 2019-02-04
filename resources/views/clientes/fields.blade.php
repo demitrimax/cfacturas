@@ -65,7 +65,7 @@
                 <!-- Correo Field -->
                 <div class="form-group">
                     {!! Form::label('correo', 'Correo:*') !!}
-                    {!! Form::text('correo', null, ['class' => 'form-control', 'maxlength'=>'120', 'required']) !!}
+                    {!! Form::email('correo', null, ['class' => 'form-control', 'maxlength'=>'120', 'required']) !!}
                 </div>
                 <!-- Telefono Field -->
                 <div class="form-group">
@@ -110,12 +110,12 @@
                   <!-- Codpostal Field -->
                   <div class="form-group col-xs-6">
                       {!! Form::label('codpostal', 'Código postal:') !!}
-                      {!! Form::text('codpostal', null, ['class' => 'form-control', 'placeholder'=>'Código Postal']) !!}
+                      {!! Form::text('codpostal', null, ['class' => 'form-control', 'placeholder'=>'Código Postal', 'maxlength'=>'5']) !!}
                   </div>
                   <!-- Codpostal Field -->
                   <div class="form-group col-xs-6">
                       {!! Form::label('ciudad', 'Ciudad:') !!}
-                      {!! Form::text('ciudad', null, ['class' => 'form-control', 'list'=>'listaciudad', 'placeholder'=>'ciudad']) !!}
+                      {!! Form::text('ciudad', null, ['class' => 'form-control', 'list'=>'listaciudad', 'placeholder'=>'ciudad', 'maxlength'=>'191']) !!}
                   </div>
                   <datalist id="listaciudad"></datalist>
 
@@ -124,7 +124,7 @@
               <!-- Colonia Field -->
               <div class="form-group">
                   {!! Form::label('colonia', 'Colonia:') !!}
-                  {!! Form::text('colonia', null, ['class' => 'form-control', 'list'=>'listacolonias', 'placeholder'=>'Colonia']) !!}
+                  {!! Form::text('colonia', null, ['class' => 'form-control', 'list'=>'listacolonias', 'placeholder'=>'Colonia', 'maxlength'=>'191']) !!}
               </div>
               <datalist id="listacolonias"></datalist>
 

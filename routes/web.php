@@ -82,9 +82,12 @@ Route::group(['middleware'=>['auth','verified','activity']], function() {
   Route::resource('blogs', 'blogController');
   Route::resource('formapagos', 'formapagoController');
   Route::resource('usocfdis', 'usocfdiController');
+  //RUTAS PARA SOCIOSCOMERCIALES
   Route::resource('sociocomercials', 'sociocomercialController');
   Route::post('sociocomercial/documento', 'sociocomercialController@guardaDocumento');
   Route::post('sociocomercial/cuenta', 'sociocomercialController@guardaCuenta');
+  Route::post('sociocomercial/avatarchange', 'sociocomercialController@avatar');
+
   Route::resource('catgiroempresas', 'catgiroempresaController');
   Route::get('GetGiro','catgiroempresaController@GetGiros');
 

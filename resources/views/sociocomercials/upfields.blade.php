@@ -92,31 +92,31 @@
                     <!-- Direccion Field -->
                     <div class="form-group">
                         {!! Form::label('calle', 'Calle:') !!}
-                        {!! Form::text('calle', null, ['class' => 'form-control', 'placeholder'=>'Calle']) !!}
+                        {!! Form::text('calle', $direccion->calle, ['class' => 'form-control', 'placeholder'=>'Calle']) !!}
                     </div>
                     <div class="row">
                         <!-- Numeroext Field -->
                         <div class="form-group col-xs-6">
                             {!! Form::label('numeroExt', 'Numero Exterior:') !!}
-                            {!! Form::text('numeroExt', null, ['class' => 'form-control', 'maxlength'=>'5', 'placeholder'=>'Núm Exterior']) !!}
+                            {!! Form::text('numeroExt', $direccion->numeroExt, ['class' => 'form-control', 'maxlength'=>'5', 'placeholder'=>'Núm Exterior']) !!}
                         </div>
 
                         <!-- Numeroint Field -->
                         <div class="form-group col-xs-6">
                             {!! Form::label('numeroInt', 'Numero Interior:') !!}
-                            {!! Form::text('numeroInt', null, ['class' => 'form-control', 'maxlength'=>'5', 'placeholder'=>'Núm Interior']) !!}
+                            {!! Form::text('numeroInt', $direccion->numeroInt, ['class' => 'form-control', 'maxlength'=>'5', 'placeholder'=>'Núm Interior']) !!}
                         </div>
                     </div>
                     <div class="row">
                         <!-- Codpostal Field -->
                         <div class="form-group col-xs-6">
                             {!! Form::label('codpostal', 'Código postal:') !!}
-                            {!! Form::text('codpostal', null, ['class' => 'form-control', 'placeholder'=>'Código Postal']) !!}
+                            {!! Form::text('codpostal', $direccion->codpostal, ['class' => 'form-control', 'placeholder'=>'Código Postal']) !!}
                         </div>
                         <!-- Codpostal Field -->
                         <div class="form-group col-xs-6">
                             {!! Form::label('ciudad', 'Ciudad:') !!}
-                            {!! Form::text('ciudad', null, ['class' => 'form-control', 'list'=>'listaciudad', 'placeholder'=>'ciudad']) !!}
+                            {!! Form::text('ciudad', $direccion->ciudad, ['class' => 'form-control', 'list'=>'listaciudad', 'placeholder'=>'ciudad']) !!}
                         </div>
                         <datalist id="listaciudad"></datalist>
 
@@ -125,25 +125,25 @@
                     <!-- Colonia Field -->
                     <div class="form-group">
                         {!! Form::label('colonia', 'Colonia:') !!}
-                        {!! Form::text('colonia', null, ['class' => 'form-control', 'list'=>'listacolonias', 'placeholder'=>'Colonia']) !!}
+                        {!! Form::text('colonia', $direccion->colonia, ['class' => 'form-control', 'list'=>'listacolonias', 'placeholder'=>'Colonia']) !!}
                     </div>
                     <datalist id="listacolonias"></datalist>
 
                     <!-- Estado Id Field -->
                     <div class="form-group">
                         {!! Form::label('estado_id', 'Estado:') !!}
-                        {!! Form::select('estado_id',  $estados, null, ['class' => 'form-control', 'placeholder'=>'Seleccione','required']) !!}
+                        {!! Form::select('estado_id',  $estados, $direccion->estado_id, ['class' => 'form-control', 'placeholder'=>'Seleccione','required']) !!}
                     </div>
                     <!-- Municipio Id Field -->
                     <div class="form-group">
                         {!! Form::label('municipio_id', 'Municipio:') !!}
-                        {!! Form::select('municipio_id',  $municipios, null, ['class' => 'form-control', 'placeholder'=>'Seleccione','required']) !!}
+                        {!! Form::select('municipio_id',  $municipios, $direccion->municipio_id, ['class' => 'form-control', 'placeholder'=>'Seleccione','required']) !!}
                     </div>
 
                     <!-- Referencias Field -->
                     <div class="form-group col-sm-12 col-lg-12">
                         {!! Form::label('referencias', 'Referencias:') !!}
-                        {!! Form::textarea('referencias', null, ['class' => 'form-control']) !!}
+                        {!! Form::textarea('referencias', $direccion->referencias, ['class' => 'form-control']) !!}
                     </div>
 
 

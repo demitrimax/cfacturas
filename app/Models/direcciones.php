@@ -37,6 +37,8 @@ class direcciones extends Model
 
     public $fillable = [
         'cliente_id',
+        'sociocomer_id',
+        'empresa_id',
         'RFC',
         'razonsocial',
         'calle',
@@ -58,6 +60,8 @@ class direcciones extends Model
      */
     protected $casts = [
         'cliente_id'   => 'integer',
+        'empresa_id'   => 'integer',
+        'sociocomer_id'=> 'integer',
         'RFC'          => 'string',
         'razonsocial'  => 'string',
         'calle'        => 'string',

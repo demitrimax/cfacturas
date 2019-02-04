@@ -10,7 +10,7 @@
     <tbody>
     @foreach($sociocomercials as $sociocomercial)
         <tr>
-            <td>{!! $sociocomercial->nombre !!}</td>
+            <td>{!! $sociocomercial->nomcompleto !!}</td>
             <td>{!! $sociocomercial->correo !!}</td>
             <td>{!! $sociocomercial->telefono !!}</td>
             <td>

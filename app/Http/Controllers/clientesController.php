@@ -89,7 +89,9 @@ class clientesController extends AppBaseController
           'CURP'         => 'max:18|nullable',
           'estado_id'    => 'required',
           'municipio_id' => 'required',
-          'giroempresa' => 'required',
+          'giroempresa'  => 'required',
+          'codpostal'    => 'nullable|numeric',
+          'ciudad'       => 'max:191',
       ];
 
       $messages = [
@@ -99,6 +101,8 @@ class clientesController extends AppBaseController
           'estado_id.required'      => 'Es requerido el Estado',
           'municipio_id.required'   => 'Es requerido el Municipio',
           'giroempresa.required'    => 'Es necesario que ingrese el giro de la empresa',
+          'codpostal.numeric'       => 'El Código Postal debe ser númerico.',
+          'ciudad.max'              => 'El Campo ciudad solo permite 191 carácteres.',
 
       ];
 
@@ -248,6 +252,7 @@ class clientesController extends AppBaseController
             'CURP'         => 'max:18|nullable',
             'estado_id'    => 'required',
             'municipio_id' => 'required',
+            'codpostal'    => 'nullable|numeric'
         ];
 
         $messages = [
@@ -256,12 +261,14 @@ class clientesController extends AppBaseController
             'CURP.unique'             => 'La CURP que escribió ya esta en uso.',
             'estado_id.required'      => 'Es requerido el Estado',
             'municipio_id.required'   => 'Es requerido el Municipio',
+            'codpostal.numeric'       => 'Codigo postal debe ser numérico.'
 
         ];
 
         $this->validate($request, $rules,$messages);
 
         $clientes = $this->clientesRepository->update($request->all(), $id);
+
         if(isset($clientes->direcciones->id))
         {
           $direccion = direcciones::find($clientes->direcciones->id);

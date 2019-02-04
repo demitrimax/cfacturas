@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Socio Comercial {{$sociocomercial->nombre}}
+            Socio Comercial {{$sociocomercial->nomcompleto}}
         </h1>
     </section>
     <div class="content">
