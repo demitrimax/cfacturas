@@ -71,6 +71,26 @@ $('#unidadmedidasat').on('change keyup paste', function(e) {
     }, 500);
     });
 
+    $('#quitarconcepto').click(function(e) {
+      console.log("pruea");
+    });
+
+    //CALCULAR SUBTOTAL, IVA Y TOTAL
+    $('#montoconcepto').on('change keyup paste', function(e) {
+      var subtotal = Number(e.target.value,2);
+      $('#csubtotal').val(subtotal);
+      var civa = parseFloat(subtotal * 1.16);
+      $('#civa').val(civa);
+
+    });
+
+    //calcular el IVA del monto ingresado en subtotal
+    $('#subtotal').on('change', function(e) {
+      var subtotal = e.target.value;
+      var civa = parseFloat(subtotal * 1.16);
+      $('#civa').val(civa);
+    });
+
 var IdRow;
 
 $('#btnagregarotro').click(function() {
@@ -125,7 +145,7 @@ $('#btnagregarotro').click(function() {
     '</td>'+
     '<td style="width:20%">'+
       '<div class="input-group">'+
-        '<input type="text" class="form-control" style="width:100%" id="claveprodsat" list="listcod"></select>'+
+        '<select id="ajax-select" class="selectpicker with-ajax" data-live-search="true"></select>'+
       '</div>'+
     '</td>'+
     '<td style="width:30%">'+
@@ -146,9 +166,6 @@ $('#btnagregarotro').click(function() {
   $(newRow).appendTo($('#conceptos tbody'))
 }) ;
 
-$('#quitarconcepto').click(function(e) {
-  console.log("pruea");
-});
 
 
 //FUNCION SUMAR LOS PRECIOS

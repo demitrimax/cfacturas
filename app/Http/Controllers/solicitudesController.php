@@ -294,7 +294,7 @@ class solicitudesController extends AppBaseController
     {
       $clave = trim($request['q']);
       $clavesdes = catsatprodser::where('nombre','like','%'.$clave.'%')->limit(50)->get();
-      if(empty($clavesdes))
+      if($clavesdes->count()==0)
       {
         $clavesdes = catsatprodser::where('id','like','%'.$clave.'%')->limit(50)->get();
       }

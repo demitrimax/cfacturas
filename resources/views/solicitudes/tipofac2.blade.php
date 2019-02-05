@@ -7,7 +7,7 @@
 </div>
 <div id="conceptostable" style="display:none;">
   <div class="panel panel-primary">
-      <div class="panel-heading">Detalle de la Solicitud</div>
+      <div class="panel-heading">Solicitud InterEmpresas</div>
     <div class="panel-body">
       <div class="row">
         <div class="col-md-12">
@@ -83,7 +83,7 @@
             <td style="width:20%">
               <div class="input-group">
                 <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
-                <input type="number" min="1" class="form-control" id="monto" name="monto" placeholder="monto" required>
+                <input type="number" min="1" class="form-control" id="montoconcepto" name="montoconcepto" placeholder="Monto" required>
                 <span class="input-group-btn">
                   <button type="button" class="btn btn-danger btn" id="bnteliminarotro"><i class="fa fa-times"></i></button>
                   <button type="button" class="btn btn-warning btn" id ="btnagregarotro"><i class="fa fa-plus"></i></button>
@@ -107,7 +107,7 @@
                     <td style="width: 50%">
                      <div class="input-group">
                        <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
-                       <input type="number" min="1" class="form-control" id="nuevoTotalVenta" name="nuevoTotalVenta" placeholder="00000" readonly required>
+                       <input type="number" min="1" class="form-control" id="csubtotal" name="csubtotal" placeholder="00000" readonly required>
                      </div>
                    </td>
                  </tr>
@@ -118,7 +118,7 @@
                    <td>
                      <div class="input-group">
                      <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
-                     <input type="number" min="1" class="form-control" id="nuevoTotalVenta" name="nuevoTotalVenta" placeholder="00000" readonly required>
+                     <input type="number" min="1" class="form-control" id="civa" name="civa" placeholder="00000" readonly required>
                    </div>
                    </td>
                  </tr>
@@ -129,7 +129,7 @@
                    <td style="width: 50%">
                      <div class="input-group">
                      <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
-                     <input type="number" min="1" class="form-control" id="nuevoTotalVenta" name="nuevoTotalVenta" placeholder="00000" readonly required>
+                     <input type="number" min="1" class="form-control" id="cTotal" name="cTotal" placeholder="00000" readonly required>
                    </div>
                    </td>
                  </tr>

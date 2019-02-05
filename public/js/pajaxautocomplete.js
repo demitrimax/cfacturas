@@ -10,9 +10,10 @@ var options = {
         }
     },
     locale        : {
-        emptyTitle: 'Select and Begin Typing'
+        emptyTitle: 'Seleccione y escriba un texto'
     },
     log           : 3,
+    langCode: 'es-ES',
     preprocessData: function (data) {
         var i, l = data.length, array = [];
         if (l) {
