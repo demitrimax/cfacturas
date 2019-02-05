@@ -23,6 +23,8 @@ use App\Models\usocfdi;
 use App\Models\pagometodo;
 use App\Models\formapago;
 use App\Models\clientes;
+use App\catunidmed;
+use App\catsatprodser;
 
 class solicitudesController extends AppBaseController
 {
@@ -85,7 +87,8 @@ class solicitudesController extends AppBaseController
         $forma = formapago::pluck('descripcion','id');
         $clientes = clientes::all();
         $clientes = $clientes->pluck('nombrerfc','RFC');
-        return view('solicitudes.solicitud')->with(compact('usocfdi','metodo','forma','clientes'));
+        $claveunits = catunidmed::pluck('nombre','clave');
+        return view('solicitudes.solicitud')->with(compact('usocfdi','metodo','forma','clientes','claveunits'));
     }
 
     /**
@@ -279,6 +282,24 @@ class solicitudesController extends AppBaseController
     {
       $borrados = facsolicitud::onlyTrashed()->count();
       return $solicitudes;
+    }
+    public function getUmedida(Request $request)
+    {
+      $palabra = $request['word'];
+      $claveunits = catunidmed::where('clave','like','%'.$palabra.'%')->get();
+      return $claveunits;
+
+    }
+    public function getClaveps(Request $request)
+    {
+      $clave = trim($request['q']);
+      $clavesdes = catsatprodser::where('nombre','like','%'.$clave.'%')->get();
+      if(empty($clavedes))
+      {
+        $clavesdes = catsatprodser::where('id','like','%'.$clave.'%')->get();
+      }
+      return $clavesdes;
+
     }
 
 }

@@ -6,7 +6,8 @@
 <script src="{{asset('adminlte/bower_components/ckeditor/ckeditor.js')}}"></script>
 <link rel="stylesheet" href="{{asset('adminlte/bower_components/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css')}}">
 <!-- select 2-->
-<link href="{{asset('adminlte/bower_components/select2/dist/css/select2.min.css')}}" rel="stylesheet" />
+<!--<link href="{{asset('adminlte/bower_components/select2/dist/css/select2.min.css')}}" rel="stylesheet" /> -->
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 <!-- iCheck for checkboxes and radio inputs -->
  <link rel="stylesheet" href="{{asset('adminlte/bower_components/iCheck/skins/all.css')}}">
 @endsection
@@ -47,12 +48,12 @@
     <div class="panel-body">
       <div class="form-group">
           {!! Form::label('rfc', 'RFC:*') !!}
-          {!! Form::select('rfc', $clientes, null, ['class' => 'form-control', 'maxlength' =>'13','placeholder'=>'RFC registrado', 'required']) !!}
+          {!! Form::select('rfc', $clientes, null, ['class' => 'form-control select2', 'style'=>'width:100%' ,'maxlength' =>'13','placeholder'=>'RFC registrado', 'required']) !!}
       </div>
 
       <div class="form-group">
           {!! Form::label('usocfdi', 'Uso que se le dará al CFDI:*') !!}
-          {!! Form::select('usocfdi', $usocfdi, null, ['class' => 'form-control select2','placeholder'=>'Seleccione uno', 'required']) !!}
+          {!! Form::select('usocfdi', $usocfdi, null, ['class' => 'form-control select2', 'style'=>'width:100%', 'placeholder'=>'Seleccione uno', 'required']) !!}
       </div>
 
       <div class="form-group">
@@ -63,6 +64,9 @@
           {!! Form::label('forma', 'Forma de Pago:*') !!}
           {!! Form::select('forma', $forma,null, ['class' => 'form-control','placeholder'=>'Seleccione uno', 'required']) !!}
       </div>
+
+    @include('solicitudes.tipofac2')
+
         <div class="form-group">
             {!! Form::label('concepto', 'Concepto:*') !!}
             {!! Form::textarea('concepto', null, ['class' => 'form-control']) !!}
@@ -78,9 +82,6 @@
 
     </div>
     <div class="panel-footer">
-      <div class="form-group">
-
-    </div>
     <div class="form-group">
         {!! Form::submit('Enviar', ['class' => 'btn btn-primary']) !!}
         <a href="{!! url('/') !!}" class="btn btn-default">Cancelar</a>
@@ -98,7 +99,8 @@
 <script src="{{asset('adminlte/bower_components/ckeditor/ckeditor.js')}}"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="{{asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
-<script src="{{asset('adminlte/bower_components/select2/dist/js/select2.full.min.js')}}"></script>
+<!-- <script src="{{asset('adminlte/bower_components/select2/dist/js/select2.full.min.js')}}"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 <script>
 $(document).ready(function() {
     $('.select2').select2();
@@ -109,6 +111,7 @@ $(document).ready(function() {
     CKEDITOR.replace('concepto')
     //bootstrap WYSIHTML5 - text editor
     $('.textarea').wysihtml5()
-  })
+  });
 </script>
+@stack('scripts')
 @endsection
