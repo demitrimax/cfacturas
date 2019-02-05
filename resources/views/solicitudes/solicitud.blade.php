@@ -8,6 +8,8 @@
 <!-- select 2-->
 <!--<link href="{{asset('adminlte/bower_components/select2/dist/css/select2.min.css')}}" rel="stylesheet" /> -->
  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css"/>
+ <link rel="stylesheet" href="{{asset('adminlte/bower_components/ajaxautocomplete/dist/css/ajax-bootstrap-select.css')}}"/>
 <!-- iCheck for checkboxes and radio inputs -->
  <link rel="stylesheet" href="{{asset('adminlte/bower_components/iCheck/skins/all.css')}}">
 @endsection

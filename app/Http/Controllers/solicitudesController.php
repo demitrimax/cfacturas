@@ -293,10 +293,10 @@ class solicitudesController extends AppBaseController
     public function getClaveps(Request $request)
     {
       $clave = trim($request['q']);
-      $clavesdes = catsatprodser::where('nombre','like','%'.$clave.'%')->get();
-      if(empty($clavedes))
+      $clavesdes = catsatprodser::where('nombre','like','%'.$clave.'%')->limit(50)->get();
+      if(empty($clavesdes))
       {
-        $clavesdes = catsatprodser::where('id','like','%'.$clave.'%')->get();
+        $clavesdes = catsatprodser::where('id','like','%'.$clave.'%')->limit(50)->get();
       }
       return $clavesdes;
 
