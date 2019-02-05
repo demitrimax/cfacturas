@@ -13,7 +13,7 @@
 @endif
     <section class="content-header">
         <h1>
-            Empresa {!! $catempresas->nombre !!}
+            <i class="fa fa-building"></i> Empresa {!! $catempresas->nombre !!}
         </h1>
     </section>
 

@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Factura {{ $facturas->foliofac }}
+            <i class="fa fa-file-text-o"></i> Factura {{ $facturas->foliofac }}
         </h1>
     </section>
     <div class="content">

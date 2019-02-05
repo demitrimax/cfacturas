@@ -1,3 +1,12 @@
+@php
+
+function human_filesize($bytes, $decimals = 2) {
+  $sz = 'BKMGTP';
+  $factor = floor((strlen($bytes) - 1) / 3);
+  return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$sz[$factor];
+}
+
+@endphp
 @can('documentos-list')
   <div class="box box-primary">
       <div class="box-header">
@@ -22,13 +31,15 @@
           <tr>
             <td>{{$key+1}}</td>
             <td>{{$documento->cattipodoc->tipo}}</td>
-            <td><a href="{!! asset($documento->archivo) !!}" target="_blank"> Documento </a></td>
+            <td><a href="{!! asset($documento->archivo) !!}" target="_blank"> Documento </a>
+              @if(file_exists($documento->archivo))
+                : {{ human_filesize(filesize($documento->archivo)) }} bytes.
+              @endif
+            </td>
             <td>{{$documento->nota}}</td>
             <td>
               {!! Form::open(['route' => ['catdocumentos.destroy', $documento->id], 'method' => 'delete', 'id'=>'deldocumento'.$documento->id]) !!}
-              @can('documentos-edit')
-              <button type="button" class="btn btn-warning" rel="tooltip" title="Editar"> <i class="fa fa-pencil"></i> </button>
-              @endcan
+              
               @can('documentos-delete')
               <button type="button" class="btn btn-danger" rel="tooltip" title="Eliminar" Onclick="ConfirmDeleteDocumento({{$documento->id}})"> <i class="fa fa-remove"></i></button>
                     {!! Form::hidden('redirect', 'catempresas.show') !!}
