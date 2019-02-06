@@ -71,7 +71,7 @@
 
         <div class="form-group">
             {!! Form::label('concepto', 'Concepto:*') !!}
-            {!! Form::textarea('concepto', null, ['class' => 'form-control']) !!}
+            {!! Form::textarea('concepto', null, ['class' => 'form-control', 'required']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('comentarios', 'Comentarios:') !!}
@@ -103,6 +103,7 @@
 <script src="{{asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
 <!-- <script src="{{asset('adminlte/bower_components/select2/dist/js/select2.full.min.js')}}"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script src="{{asset('adminlte/bower_components/numeral.js/min/numeral.min.js')}}"></script>
 <script>
 $(document).ready(function() {
     $('.select2').select2();

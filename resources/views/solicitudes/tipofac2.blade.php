@@ -14,18 +14,24 @@
         <table class="table tablaconceptos" id="conceptos">
           <thead>
             <tr>
-              <th>U.Medida</th>
-              <th>Unidad</th>
-              <th>Clave Prod.</th>
-              <th>Descripcion</th>
-              <th>Monto</th>
+              <th style="width:10%">Cantidad</th>
+              <th style="width:10%">U.Medida</th>
+              <th style="width:10%;">Unidad</th>
+              <th style="width:20%;">Clave Prod.</th>
+              <th style="width:30%;">Descripcion</th>
+              <th style="width:20%;">Monto</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td style="width:10%">
+            <td>
                 <div class="input-group">
-                 <input type="text" class="form-control" id="unidadmedidasat" name="unidadmedidasat" placeholder="U. de Medida SAT" required title="Clave de la Unidad de Medida del SAT" list="listumedida" maxlength="5">
+                 <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Cantidad" title="Cantidad" min="1" >
+              </div>
+            </td>
+              <td>
+                <div class="input-group">
+                 <input type="text" class="form-control" id="unidadmedidasat" name="unidadmedidasat" placeholder="U. de Medida SAT" title="Clave de la Unidad de Medida del SAT" list="listumedida" maxlength="5">
                  <datalist id="listumedida">
                     <option value='H87'>
                     <option value='EA'>
@@ -61,29 +67,29 @@
                  </datalist>
               </div>
             </td>
-            <td style="width:10%">
+            <td>
               <div class="input-group">
-               <input type="text" class="form-control" id="unidadmedida" name="unidadmedida" placeholder="U. medida" required title="Unidad de Medida" list="listunidad">
+               <input type="text" class="form-control" id="unidadmedida" name="unidadmedida" placeholder="U. medida" title="Unidad de Medida" list="listunidad">
                <datalist id="listunidad">
                </datalist>
              </div>
             </td>
-            <td style="width:20%">
+            <td>
               <div class="input-group">
-                  <select id="ajax-select" class="selectpicker with-ajax" data-live-search="true"></select>
+                  <select id="ajax-select" class="selectpicker with-ajax" data-live-search="true" id="claveprod" name="claveprod"></select>
               </div>
               <datalist id="listcod">
               </datalist>
             </td>
-            <td style="width:30%">
+            <td>
               <div class="input-group col-md-12">
-                 <input type="text" class="form-control" id="descripcion" name="descripcion"  placeholder="Descripción detallada" title="Descripción detallada del producto o servicio" required>
+                 <input type="text" class="form-control" id="descripcion" name="descripcion"  placeholder="Descripción detallada" title="Descripción detallada del producto o servicio">
               </div>
             </td>
-            <td style="width:20%">
+            <td>
               <div class="input-group">
                 <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
-                <input type="number" min="1" class="form-control" id="montoconcepto" name="montoconcepto" placeholder="Monto" required>
+                <input type="number" min="1" class="form-control" id="montoconcepto" name="montoconcepto" placeholder="Monto">
                 <span class="input-group-btn">
                   <button type="button" class="btn btn-danger btn" id="bnteliminarotro"><i class="fa fa-times"></i></button>
                   <button type="button" class="btn btn-warning btn" id ="btnagregarotro"><i class="fa fa-plus"></i></button>
@@ -107,7 +113,7 @@
                     <td style="width: 50%">
                      <div class="input-group">
                        <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
-                       <input type="number" min="1" class="form-control" id="csubtotal" name="csubtotal" placeholder="00000" readonly required>
+                       <input type="text" min="1" class="form-control" id="csubtotal" name="csubtotal" placeholder="00000" readonly>
                      </div>
                    </td>
                  </tr>
@@ -118,7 +124,7 @@
                    <td>
                      <div class="input-group">
                      <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
-                     <input type="number" min="1" class="form-control" id="civa" name="civa" placeholder="00000" readonly required>
+                     <input type="text" min="1" class="form-control" id="civa" name="civa" placeholder="00000" readonly>
                    </div>
                    </td>
                  </tr>
@@ -129,7 +135,7 @@
                    <td style="width: 50%">
                      <div class="input-group">
                      <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
-                     <input type="number" min="1" class="form-control" id="cTotal" name="cTotal" placeholder="00000" readonly required>
+                     <input type="text" min="1" class="form-control" id="cTotal" name="cTotal" placeholder="00000" readonly>
                    </div>
                    </td>
                  </tr>

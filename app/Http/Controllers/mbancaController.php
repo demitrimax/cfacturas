@@ -136,7 +136,7 @@ class mbancaController extends AppBaseController
         $mbanca = $this->mbancaRepository->update($request->all(), $id);
 
         Flash::success('Movimiento actualizado correctamente.');
-        $sweet = 'Movimiento actualizado correctamente'
+        $sweet = 'Movimiento actualizado correctamente';
         return redirect(route('mbancas.index'))->with(compact('sweet'));
     }
 

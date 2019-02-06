@@ -5,12 +5,30 @@ function reqconcepto(cheked) {
     console.log(checkfield);
   if (checkfield == true){
     rconcepto.style.display ='block';
-    //document.getElementById("sociocomer_id").required = true;
+    document.getElementById("concepto").value = "SOLICITUD INTEREMPRESAS";
+    $('#cantidad').prop('required',true);
+    $('#unidadmedidasat').prop('required',true);
+    $('#cantidad').prop('required',true);
+    $('#claveprod').prop('required',true);
+    $('#descripcion').prop('required',true);
+    $('#montoconcepto').prop('required',true);
+    $('#csubtotal').prop('required',true);
+    $('#civa').prop('required',true);
+    $('#Total').prop('required',true);
   }
   else
   {
     rconcepto.style.display = 'none';
-    //document.getElementById("sociocomer_id").required = false;
+
+    $('#cantidad').prop('required',false);
+    $('#unidadmedidasat').prop('required',false);
+    $('#cantidad').prop('required',false);
+    $('#claveprod').prop('required',false);
+    $('#descripcion').prop('required',false);
+    $('#montoconcepto').prop('required',false);
+    $('#csubtotal').prop('required',false);
+    $('#civa').prop('required',false);
+    $('#Total').prop('required',false);
   }
 
 }
@@ -71,18 +89,25 @@ $('#unidadmedidasat').on('change keyup paste', function(e) {
     }, 500);
     });
 
-    $('#quitarconcepto').click(function(e) {
-      console.log("pruea");
-    });
+    $('#quitarconcepto').click(function() {
+      console.log("prueba");
+    })
 
     //CALCULAR SUBTOTAL, IVA Y TOTAL
     $('#montoconcepto').on('change keyup paste', function(e) {
-      var subtotal = Number(e.target.value,2);
-      $('#csubtotal').val(subtotal);
-      var civa = parseFloat(subtotal * 1.16);
-      $('#civa').val(civa);
-
+      CalcularTotales(e);
     });
+
+function CalcularTotales(e)
+{
+  var subtotal = numeral(e.target.value);
+  $('#csubtotal').val(subtotal.format('0,0.00'));
+  var civa = numeral(parseFloat(subtotal.value() * 0.16));
+  $('#civa').val(civa.format('0,0.00'));
+  var total = numeral(subtotal.value()+civa.value());
+  console.log(total);
+  $('#cTotal').val(total.format('0,0.00'));
+}
 
     //calcular el IVA del monto ingresado en subtotal
     $('#subtotal').on('change', function(e) {
@@ -91,11 +116,11 @@ $('#unidadmedidasat').on('change keyup paste', function(e) {
       $('#civa').val(civa);
     });
 
-var IdRow;
+var IdRow = 0;
 
 $('#btnagregarotro').click(function() {
   //$(this).removeClass("btn-warning");
-    IdRow = IdRow++;
+    IdRow = IdRow+1;
     var newRow =
     '<tr id="r'+IdRow+'">'+
       '<td style="width:10%">'+
@@ -158,7 +183,7 @@ $('#btnagregarotro').click(function() {
         '<span class="input-group-addon"><i class="ion ion-social-usd"></i></span>'+
         '<input type="number" min="1" class="form-control" id="monto" name="monto" placeholder="monto" required>'+
         '<span class="input-group-btn">'+
-          '<button type="button" class="btn btn-danger btn" id="quitarconcepto(this)"><i class="fa fa-times"></i></button>'+
+          '<button type="button" class="btn btn-danger btn" id="quitarconcepto"><i class="fa fa-times"></i></button>'+
         '</span>'+
       '</div>'+
     '</td>'

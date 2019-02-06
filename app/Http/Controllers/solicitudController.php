@@ -36,13 +36,15 @@ class solicitudController extends Controller
         //'rfc' => 'exists:direcciones,RFC',
         //'telefono' => 'required',
         //'condicion' => 'required',
-        'metodo' => 'required'
+        'metodo' => 'required',
+        'concepto' => 'required',
       ];
       $messages = [
         'nombre.required' => 'Es necesario un nombre',
         'correo.required' => 'El correo es requerido',
         //'rfc.exists' => 'El RFC no existe en nuestros registros',
         'user_id.required' => 'Se requiere un ID de usuario registrado',
+        'concepto.required' => 'Por favor se requiere el Campo Concepto.',
       ];
       $this->validate($request, $rules, $messages);
 
@@ -69,6 +71,8 @@ class solicitudController extends Controller
         $solicitudfac->adjunto = 'solicitudes/'.$nombre;
       }
       $solicitudfac->save();
+      //GUARDAR LOS DATOS DE LA SOLICITUD INTEREMPRESA SI FUERON SOLICITADOS
+
       $mensaje = 'Se ha enviado correctamente su solicitud. En breve recibirá un correo electrónico como acuse de recibo.';
       //envío de correo electronico
       $enviomails = User::role('emailnotify')->get();

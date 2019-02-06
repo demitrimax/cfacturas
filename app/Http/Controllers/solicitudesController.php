@@ -107,6 +107,7 @@ class solicitudesController extends AppBaseController
         //'rfc' => 'exists:direcciones,RFC',
         //'telefono' => 'required',
         //'condicion' => 'required',
+        'concepto' => 'required',
         'metodo' => 'required'
       ];
       $messages = [
@@ -114,6 +115,7 @@ class solicitudesController extends AppBaseController
         //'correo.required' => 'El correo es requerido',
         //'rfc.exists' => 'El RFC no existe en nuestros registros',
         'user_id.required' => 'Se requiere un ID de usuario registrado',
+        'concepto.required' => 'Es requerido el campo Concepto.',
       ];
 
         $input = $request->all();

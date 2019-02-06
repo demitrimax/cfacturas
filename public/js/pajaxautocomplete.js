@@ -13,7 +13,7 @@ var options = {
         emptyTitle: 'Seleccione y escriba un texto'
     },
     log           : 3,
-    langCode: 'es-ES',
+    langCode: 'ES',
     preprocessData: function (data) {
         var i, l = data.length, array = [];
         if (l) {
