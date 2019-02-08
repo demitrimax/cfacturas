@@ -35,8 +35,8 @@ function reqconcepto(cheked) {
 // Init a timeout variable to be used below
 var timeout = null;
 // Listen for keystroke events
-$('#unidadmedidasat').on('change keyup paste', function(e) {
-  console.log(e);
+$('.FormSolicitud').on('change keyup paste', 'input.UnidadMedidaSAT', function(e) {
+  //console.log(e);
   var palabra = e.target.value;
   var nombre;
   // Clear the timeout if it has already been set.
@@ -45,18 +45,19 @@ $('#unidadmedidasat').on('change keyup paste', function(e) {
   clearTimeout(timeout);
       // Make a new timeout set to go off in 800ms
   timeout = setTimeout(function () {
-      console.log('Input Value:', palabra);
+      //console.log('Input Value:', palabra);
       //ajax
       if (palabra.length >= 2  ) {
         $.get('/GetUmedida?word='+palabra, function(data) {
           //exito al obtener los datos
           //console.log(data);
-          $('#listunidad').empty();
+          $('this').parent().parent().parent().children(".ColUMedida").children('.UMedida').children('.ListaUnidad').empty();
            $.each(data, function(index, palabras) {
-            $('#listunidad').append('<option value ="' + palabras.nombre + '">');
+            $('this').parent().parent().parent().children('.ColUMedida').children('.UMedida').children('.ListaUnidad').append('<option value ="' + palabras.nombre + '">');
             nombre = palabras.nombre;
+            console.log(nombre);
           });
-          $('#unidadmedida').val(nombre);
+          $('this').parent().parent().parent().children(".ColUMedida").children('.UMedida').children('.UnidadMedida').val(nombre);
         });
       }
   }, 500);
@@ -88,24 +89,67 @@ $('#unidadmedidasat').on('change keyup paste', function(e) {
         }
     }, 500);
     });
-
-    $('#quitarconcepto').click(function() {
+    //ACCION DEL BOTON DE ELIMINAR LINEA DE CONCEPTO
+    $('.FormSolicitud').on('click', 'button.QuitarConcepto', function() {
       console.log("prueba");
+      $(this).parent().parent().parent().parent().remove();
+      SumarTodosLosMontos();
+      CalcularTotales();
     })
 
+    //CALCULAR LA CANTIDAD POR EL PRECIO DEL PRODUCTO
+    $('.FormSolicitud').on('change', 'input.NCantidadProducto', function() {
+      var PUnitario = $(this).parent().parent().parent().children(".ColIngImporte").children(".IngresoImporte").children(".PreUnitario");
+      var Subtotal = $(this).parent().parent().parent().children(".ColNMonto").children(".NSubtotalProducto").children(".NMontoProducto");
+     
+      var precioFinal = Number($(this).val()) * Number(PUnitario.val());
+      //console.log(precioFinal);
+      Subtotal.val(precioFinal);
+      CalcularTotales();
+      SumarTodosLosMontos();
+    })
+
+
     //CALCULAR SUBTOTAL, IVA Y TOTAL
-    $('#montoconcepto').on('change keyup paste', function(e) {
-      CalcularTotales(e);
+    $('.FormSolicitud').on('change', 'input.PreUnitario', function() {
+      var Cantidad = $(this).parent().parent().parent().children(".NCantidadProd").children(".NCantProd").children(".NCantidadProducto");
+      var Subtotal = $(this).parent().parent().parent().children(".ColNMonto").children(".NSubtotalProducto").children(".NMontoProducto");
+       var precioFinal = Number($(this).val()) * Number(Cantidad.val());
+       Subtotal.val(precioFinal);
+       SumarTodosLosMontos();
+     
+      CalcularTotales();
     });
 
-function CalcularTotales(e)
+    //SUMAR TODOS LOS PRECIOS
+    function SumarTodosLosMontos() {
+      var ItemMonto = $('.NMontoProducto');
+      var ArraySumaMonto = [];
+      //console.log(ItemMonto.length);
+      for (var i=0; i < ItemMonto.length; i++  )
+      {
+            ArraySumaMonto.push(Number($(ItemMonto[i]).val()));
+            //console.log($(ItemMonto[i]).val());
+      } 
+      //console.log('ArraySumaMonto',ArraySumaMonto);
+      function sumaArrayMontos(total, numero)
+      {
+        return total + numero;
+      }
+        var SumaTotalMonto = ArraySumaMonto.reduce(sumaArrayMontos);
+        //console.log('SumaTotalMonto',SumaTotalMonto);
+        SumaTotalMonto = numeral(SumaTotalMonto);
+        $("#csubtotal").val(SumaTotalMonto.format('0,0.00'));
+    }
+
+
+function CalcularTotales()
 {
-  var subtotal = numeral(e.target.value);
-  $('#csubtotal').val(subtotal.format('0,0.00'));
-  var civa = numeral(parseFloat(subtotal.value() * 0.16));
+  var Ssubtotal = numeral($("#csubtotal").val());
+  var civa = numeral(parseFloat(Ssubtotal.value() * 0.16));
   $('#civa').val(civa.format('0,0.00'));
-  var total = numeral(subtotal.value()+civa.value());
-  console.log(total);
+  var total = numeral(Ssubtotal.value()+civa.value());
+  //console.log(total);
   $('#cTotal').val(total.format('0,0.00'));
 }
 
@@ -116,16 +160,21 @@ function CalcularTotales(e)
       $('#civa').val(civa);
     });
 
+//AGREGA OTRA LINEA DE PRODUCTOS //PARTE INTEREMPRESAS
 var IdRow = 0;
-
 $('#btnagregarotro').click(function() {
   //$(this).removeClass("btn-warning");
     IdRow = IdRow+1;
     var newRow =
     '<tr id="r'+IdRow+'">'+
-      '<td style="width:10%">'+
+        '<td class="NCantidadProd">'+
+          '<div class="input-group NCantProd">'+
+            '<input type="number" class="form-control NCantidadProducto" id="cantidad" name="cantidad" placeholder="Cantidad" title="Cantidad" min="1" required value=1>'+
+          '</div>'+
+        '</td>'+
+      '<td>'+
         '<div class="input-group">'+
-         '<input type="text" class="form-control" id="unidadmedidasat" name="unidadmedidasat" placeholder="U. de Medida SAT" required title="Clave de la Unidad de Medida del SAT" list="listumedida">'+
+         '<input type="text" class="form-control UnidadMedidaSAT" id="unidadmedidasat" name="unidadmedidasat" placeholder="U. de Medida SAT" required title="Clave de la Unidad de Medida del SAT" list="listumedida">'+
          '<datalist id="listumedida">'+
             '<option value="H87">'+
             '<option value="EA">'+
@@ -161,29 +210,35 @@ $('#btnagregarotro').click(function() {
          '</datalist>'+
       '</div>'+
     '</td>'+
-    '<td style="width:10%">'+
-      '<div class="input-group">'+
-       '<input type="text" class="form-control" id="unidadmedida" name="unidadmedida" placeholder="U. medida" required title="Unidad de Medida" list="listunidad">'+
-       '<datalist id="listunidad">'+
+    '<td class="ColUMedida">'+
+      '<div class="input-group UMedida">'+
+       '<input type="text" class="form-control UnidadMedida" id="unidadmedida" name="unidadmedida" placeholder="U. medida" required title="Unidad de Medida" list="listunidad">'+
+       '<datalist id="listunidad" class="ListaUnidad">'+
        '</datalist>'+
      '</div>'+
     '</td>'+
-    '<td style="width:20%">'+
+    '<td>'+
       '<div class="input-group">'+
-        '<select id="ajax-select" class="selectpicker with-ajax" data-live-search="true"></select>'+
+        '<select id="ajax-select'+IdRow+'" class="selectpicker with-ajax" data-live-search="true"></select>'+
       '</div>'+
     '</td>'+
-    '<td style="width:30%">'+
+    '<td>'+
       '<div class="input-group col-md-12">'+
          '<input type="text" class="form-control" id="descripcion" name="descripcion"  placeholder="Descripción detallada" title="Descripción detallada del producto o servicio" required>'+
       '</div>'+
     '</td>'+
-    '<td style="width:20%">'+
-      '<div class="input-group">'+
+    '<td class="ColIngImporte">'+
+    '<div class="input-group IngresoImporte">'+
+      '<span class="input-group-addon"><i class="ion ion-social-usd"></i></span>'+
+      '<input type="number" min="1" class="form-control PreUnitario" id="importecon" name="importecon" placeholder="Importe">'+
+      '</div>'+
+    '</td>'+
+    '<td class="ColNMonto">'+
+      '<div class="input-group NSubtotalProducto">'+
         '<span class="input-group-addon"><i class="ion ion-social-usd"></i></span>'+
-        '<input type="number" min="1" class="form-control" id="monto" name="monto" placeholder="monto" required>'+
+        '<input type="number" min="1" class="form-control NMontoProducto" id="monto" name="monto" placeholder="monto" required readonly>'+
         '<span class="input-group-btn">'+
-          '<button type="button" class="btn btn-danger btn" id="quitarconcepto"><i class="fa fa-times"></i></button>'+
+          '<button type="button" class="btn btn-danger btn QuitarConcepto" id="quitarconcepto"><i class="fa fa-times"></i></button>'+
         '</span>'+
       '</div>'+
     '</td>'
@@ -191,9 +246,3 @@ $('#btnagregarotro').click(function() {
   $(newRow).appendTo($('#conceptos tbody'))
 }) ;
 
-
-
-//FUNCION SUMAR LOS PRECIOS
-function sumarTotalPrecios() {
-
-}

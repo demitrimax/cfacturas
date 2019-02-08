@@ -14,24 +14,25 @@
         <table class="table tablaconceptos" id="conceptos">
           <thead>
             <tr>
-              <th style="width:10%">Cantidad</th>
+              <th style="width:4%">Cantidad</th>
               <th style="width:10%">U.Medida</th>
               <th style="width:10%;">Unidad</th>
               <th style="width:20%;">Clave Prod.</th>
               <th style="width:30%;">Descripcion</th>
-              <th style="width:20%;">Monto</th>
+              <th style="width:13%;">P. Unitario</th>
+              <th style="width:13%;">Subtotal</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-            <td>
-                <div class="input-group">
-                 <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Cantidad" title="Cantidad" min="1" >
+            <td class="NCantidadProd">
+                <div class="input-group NCantProd">
+                 <input type="number" class="form-control NCantidadProducto" id="cantidad" name="cantidad" placeholder="Cantidad" title="Cantidad" min="1" value=1 >
               </div>
             </td>
               <td>
                 <div class="input-group">
-                 <input type="text" class="form-control" id="unidadmedidasat" name="unidadmedidasat" placeholder="U. de Medida SAT" title="Clave de la Unidad de Medida del SAT" list="listumedida" maxlength="5">
+                 <input type="text" class="form-control UnidadMedidaSAT" id="unidadmedidasat" name="unidadmedidasat" placeholder="U. de Medida SAT" title="Clave de la Unidad de Medida del SAT" list="listumedida" maxlength="5">
                  <datalist id="listumedida">
                     <option value='H87'>
                     <option value='EA'>
@@ -67,10 +68,10 @@
                  </datalist>
               </div>
             </td>
-            <td>
-              <div class="input-group">
-               <input type="text" class="form-control" id="unidadmedida" name="unidadmedida" placeholder="U. medida" title="Unidad de Medida" list="listunidad">
-               <datalist id="listunidad">
+            <td class="ColUMedida">
+              <div class="input-group UMedida">
+               <input type="text" class="form-control UnidadMedida" id="unidadmedida" name="unidadmedida" placeholder="U. medida" title="Unidad de Medida" list="listunidad">
+               <datalist id="listunidad" class="ListaUnidad">
                </datalist>
              </div>
             </td>
@@ -86,12 +87,17 @@
                  <input type="text" class="form-control" id="descripcion" name="descripcion"  placeholder="Descripción detallada" title="Descripción detallada del producto o servicio">
               </div>
             </td>
-            <td>
-              <div class="input-group">
+            <td class="ColIngImporte">
+              <div class="input-group IngresoImporte">
                 <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
-                <input type="number" min="1" class="form-control" id="montoconcepto" name="montoconcepto" placeholder="Monto">
+                <input type="number" min="1" class="form-control PreUnitario" id="importecon" name="importecon" placeholder="Importe">
+              </div>
+            </td>
+            <td class="ColNMonto">
+              <div class="input-group NSubtotalProducto">
+                <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
+                <input type="number" min="1" class="form-control NMontoProducto" id="montoconcepto" name="montoconcepto" placeholder="Monto" readonly>
                 <span class="input-group-btn">
-                  <button type="button" class="btn btn-danger btn" id="bnteliminarotro"><i class="fa fa-times"></i></button>
                   <button type="button" class="btn btn-warning btn" id ="btnagregarotro"><i class="fa fa-plus"></i></button>
                 </span>
               </div>

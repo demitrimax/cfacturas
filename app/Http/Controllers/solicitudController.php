@@ -11,6 +11,7 @@ use App\Mail\SolicitudFactura;
 use App\Mail\NuevaSolicitud;
 use App\Mail\NotificaSolicitudFactura;
 use Mail;
+use App\facdetsolicitud;
 
 class solicitudController extends Controller
 {
@@ -72,7 +73,12 @@ class solicitudController extends Controller
       }
       $solicitudfac->save();
       //GUARDAR LOS DATOS DE LA SOLICITUD INTEREMPRESA SI FUERON SOLICITADOS
-
+      if(!empty($request->input('cantidad')))
+      {
+        $interEmpresa = new facdetsolicitud();
+        $interEmpresa->solicitud_id = $solicitudfac->id;
+        $request->input('cantidad');
+      }
       $mensaje = 'Se ha enviado correctamente su solicitud. En breve recibirá un correo electrónico como acuse de recibo.';
       //envío de correo electronico
       $enviomails = User::role('emailnotify')->get();

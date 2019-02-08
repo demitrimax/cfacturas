@@ -32,7 +32,7 @@
        <a href="#" class="alert-link"> {{ session('mensaje') }}</a>
   </div>
    @endif
-  {!! Form::open(['url' => 'solicitud', 'enctype'=>'multipart/form-data']) !!}
+  {!! Form::open(['url' => 'solicitud', 'enctype'=>'multipart/form-data', 'class'=>'FormSolicitud']) !!}
   <div class="panel panel-primary">
     <div class="panel-heading">Elabora</div>
       <div class="panel-body">
