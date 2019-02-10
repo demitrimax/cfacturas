@@ -47,6 +47,7 @@ class solicitudController extends Controller
         'user_id.required' => 'Se requiere un ID de usuario registrado',
         'concepto.required' => 'Por favor se requiere el Campo Concepto.',
       ];
+      dd($request);
       $this->validate($request, $rules, $messages);
 
       $solicitudfac = new facsolicitud();

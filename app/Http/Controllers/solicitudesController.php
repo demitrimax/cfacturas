@@ -119,7 +119,7 @@ class solicitudesController extends AppBaseController
       ];
 
         $input = $request->all();
-
+        //dd($input);
         $solicitudes = $this->solicitudesRepository->create($input);
 
         Flash::success('Solicitud guardada correctamente.');

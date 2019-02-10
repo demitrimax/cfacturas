@@ -71,7 +71,7 @@
 
         <div class="form-group">
             {!! Form::label('concepto', 'Concepto:*') !!}
-            {!! Form::textarea('concepto', null, ['class' => 'form-control', 'required']) !!}
+            {!! Form::textarea('concepto', 'REFERENCIA DE LA SOLICITUD', ['class' => 'form-control', 'required']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('comentarios', 'Comentarios:') !!}

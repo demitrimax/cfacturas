@@ -39,6 +39,7 @@ $('.FormSolicitud').on('change keyup paste', 'input.UnidadMedidaSAT', function(e
   //console.log(e);
   var palabra = e.target.value;
   var nombre;
+  var UMedida =  $(this).parent().parent().parent().children('.ColUMedida').children('.UMedida').children('.ListaUnidad');
   // Clear the timeout if it has already been set.
   // This will prevent the previous task from executing
   // if it has been less than <MILLISECONDS>
@@ -51,13 +52,13 @@ $('.FormSolicitud').on('change keyup paste', 'input.UnidadMedidaSAT', function(e
         $.get('/GetUmedida?word='+palabra, function(data) {
           //exito al obtener los datos
           //console.log(data);
-          $('this').parent().parent().parent().children(".ColUMedida").children('.UMedida').children('.ListaUnidad').empty();
+          UMedida.empty();
            $.each(data, function(index, palabras) {
-            $('this').parent().parent().parent().children('.ColUMedida').children('.UMedida').children('.ListaUnidad').append('<option value ="' + palabras.nombre + '">');
+            UMedida.append('<option value ="' + palabras.nombre + '">');
             nombre = palabras.nombre;
             console.log(nombre);
           });
-          $('this').parent().parent().parent().children(".ColUMedida").children('.UMedida').children('.UnidadMedida').val(nombre);
+          UMedida.parent().children('.UnidadMedida').val(nombre);
         });
       }
   }, 500);
@@ -169,12 +170,12 @@ $('#btnagregarotro').click(function() {
     '<tr id="r'+IdRow+'">'+
         '<td class="NCantidadProd">'+
           '<div class="input-group NCantProd">'+
-            '<input type="number" class="form-control NCantidadProducto" id="cantidad" name="cantidad" placeholder="Cantidad" title="Cantidad" min="1" required value=1>'+
+            '<input type="number" class="form-control NCantidadProducto" id="cantidad[]" name="cantidad" placeholder="Cantidad" title="Cantidad" min="1" required value=1>'+
           '</div>'+
         '</td>'+
       '<td>'+
         '<div class="input-group">'+
-         '<input type="text" class="form-control UnidadMedidaSAT" id="unidadmedidasat" name="unidadmedidasat" placeholder="U. de Medida SAT" required title="Clave de la Unidad de Medida del SAT" list="listumedida">'+
+         '<input type="text" class="form-control UnidadMedidaSAT" id="unidadmedidasat[]" name="unidadmedidasat" placeholder="U. de Medida SAT" required title="Clave de la Unidad de Medida del SAT" list="listumedida">'+
          '<datalist id="listumedida">'+
             '<option value="H87">'+
             '<option value="EA">'+
@@ -212,31 +213,31 @@ $('#btnagregarotro').click(function() {
     '</td>'+
     '<td class="ColUMedida">'+
       '<div class="input-group UMedida">'+
-       '<input type="text" class="form-control UnidadMedida" id="unidadmedida" name="unidadmedida" placeholder="U. medida" required title="Unidad de Medida" list="listunidad">'+
+       '<input type="text" class="form-control UnidadMedida" id="unidadmedida[]" name="unidadmedida" placeholder="U. medida" required title="Unidad de Medida" list="listunidad">'+
        '<datalist id="listunidad" class="ListaUnidad">'+
        '</datalist>'+
      '</div>'+
     '</td>'+
     '<td>'+
       '<div class="input-group">'+
-        '<select id="ajax-select'+IdRow+'" class="selectpicker with-ajax" data-live-search="true"></select>'+
+        '<select id="ajax-select'+IdRow+'" class="selectpicker'+IdRow+' with-ajax" data-live-search="true" id="claveprod[]"></select>'+
       '</div>'+
     '</td>'+
     '<td>'+
       '<div class="input-group col-md-12">'+
-         '<input type="text" class="form-control" id="descripcion" name="descripcion"  placeholder="Descripción detallada" title="Descripción detallada del producto o servicio" required>'+
+         '<input type="text" class="form-control" id="descripcion[]" name="descripcion"  placeholder="Descripción detallada" title="Descripción detallada del producto o servicio" required>'+
       '</div>'+
     '</td>'+
     '<td class="ColIngImporte">'+
     '<div class="input-group IngresoImporte">'+
       '<span class="input-group-addon"><i class="ion ion-social-usd"></i></span>'+
-      '<input type="number" min="1" class="form-control PreUnitario" id="importecon" name="importecon" placeholder="Importe">'+
+      '<input type="number" min="1" class="form-control PreUnitario" id="importecon[]" name="importecon" placeholder="Importe">'+
       '</div>'+
     '</td>'+
     '<td class="ColNMonto">'+
       '<div class="input-group NSubtotalProducto">'+
         '<span class="input-group-addon"><i class="ion ion-social-usd"></i></span>'+
-        '<input type="number" min="1" class="form-control NMontoProducto" id="monto" name="monto" placeholder="monto" required readonly>'+
+        '<input type="number" min="1" class="form-control NMontoProducto" id="monto[]" name="monto" placeholder="monto" required readonly>'+
         '<span class="input-group-btn">'+
           '<button type="button" class="btn btn-danger btn QuitarConcepto" id="quitarconcepto"><i class="fa fa-times"></i></button>'+
         '</span>'+
@@ -244,5 +245,6 @@ $('#btnagregarotro').click(function() {
     '</td>'
   ;
   $(newRow).appendTo($('#conceptos tbody'))
+  $('body').append('<script> $(".selectpicker'+IdRow+'").selectpicker().filter(".with-ajax").ajaxSelectPicker(options); </script>')
 }) ;
 
