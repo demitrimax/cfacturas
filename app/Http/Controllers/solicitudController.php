@@ -82,17 +82,19 @@ class solicitudController extends Controller
       //dd($input);
       foreach ($input['cantidad'] as $key=>$cantidad )
       {
-        $interEmpresa = new facdetsolicitud();
-        $interEmpresa->solicitud_id = $solicitudfac->id;
-        $interEmpresa->cantidad = $input['cantidad'][$key];
-        $interEmpresa->umedida = $input['unidadmedidasat'][$key];
-        $interEmpresa->unidad = $input['unidadmedida'][$key];
-        $interEmpresa->prodserv_id = $input['claveprod'][$key];
-        $interEmpresa->descripcion = $input['descripcion'][$key];
-        $interEmpresa->punitario = $input['importecon'][$key];
-        $interEmpresa->monto = $input['montoconcepto'][$key];
-        $interEmpresa->save();
-
+        if(!empty($input['claveprod'][$key]))
+        {
+          $interEmpresa = new facdetsolicitud();
+          $interEmpresa->solicitud_id = $solicitudfac->id;
+          $interEmpresa->cantidad = $input['cantidad'][$key];
+          $interEmpresa->umedida = $input['unidadmedidasat'][$key];
+          $interEmpresa->unidad = $input['unidadmedida'][$key];
+          $interEmpresa->prodserv_id = $input['claveprod'][$key];
+          $interEmpresa->descripcion = $input['descripcion'][$key];
+          $interEmpresa->punitario = $input['importecon'][$key];
+          $interEmpresa->monto = $input['montoconcepto'][$key];
+          $interEmpresa->save();
+        }
       }
 
 

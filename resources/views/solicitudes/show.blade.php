@@ -138,8 +138,114 @@
           <!-- /. box -->
         </div>
         <!-- /.col -->
+        @if($solicitudes->detsolicitud->count()>0)
+        <div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Detalles de la Solicitud InterEmpresa</h3>
+
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <div class="mailbox-read-info">
+                <h3>{{$solicitudes->descripcion}}</h3>
+
+              <div class="mailbox-read-message">
+                <table class="table tablaconceptos" id="conceptos">
+                  <thead>
+                    <tr>
+                      <th style="width:4%">Cantidad</th>
+                      <th style="width:10%">U.Medida</th>
+                      <th style="width:10%;">Unidad</th>
+                      <th style="width:20%;">Clave Prod.</th>
+                      <th style="width:30%;">Descripcion</th>
+                      <th style="width:13%;">P. Unitario</th>
+                      <th style="width:13%;">Subtotal</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach($solicitudes->detsolicitud as $detallesol)
+                    <tr>
+                    <td>
+                      {{$detallesol->cantidad}}
+                    </td>
+                    <td>
+                      {{$detallesol->umedida}}
+                    </td>
+                    <td>
+                      {{$detallesol->unidad}}
+                    </td>
+                    <td>
+                        {{$detallesol->prodserv_id}}
+                    </td>
+                    <td>
+                        {{$detallesol->descripcion}}
+                    </td>
+                    <td>
+                        $ {{number_format($detallesol->punitario,2)}}
+                    </td>
+                    <td>
+                        ${{ number_format($detallesol->monto,2)}}
+                    </td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+
+                <div class="row">
+                  <div class="col-xs-4 pull-right">
+                       <table class="table">
+
+                         <tbody>
+                           <tr>
+                             <td style="width: 50%" class="pull-right">
+                              <b>SUBTOTAL:</b>
+                             </td>
+                              <td style="width: 50%">
+                                ${{number_format($solicitudes->subtotal,2)}}
+                             </td>
+                           </tr>
+                           <tr>
+                             <td style="width: 50%" class="pull-right">
+                               <b>IVA:</b>
+                             </td>
+                             <td>
+                                ${{ number_format($solicitudes->iva,2)}}
+                             </td>
+                           </tr>
+                           <tr>
+                             <td style="width: 50%" class="pull-right">
+                               <b>TOTAL</b>
+                             </td>
+                             <td style="width: 50%">
+                              ${{number_format($solicitudes->total,2)}}
+                             </td>
+                           </tr>
+                         </tbody>
+                       </table>
+                     </div>
+                   </div>
+
+              </div>
+              <!-- /.mailbox-read-message -->
+            </div>
+            <!-- /.box-body -->
+            <!-- /.box-footer -->
+            <div class="box-footer">
+              <div class="pull-right">
+                <a href="{{url('/solfact')}}" type="button" class="btn btn-default"><i class="fa fa-reply"></i> Regresar </a>
+
+              </div>
+
+              <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Imprimir</button>
+            </div>
+            <!-- /.box-footer -->
+          </div>
+          <!-- /. box -->
+        </div>
     </div>
-  </div>
+    @endif
+  </section>
 
   <div class="modal modal-primary fade" id="modal-primary">
           <div class="modal-dialog">

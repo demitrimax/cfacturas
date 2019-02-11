@@ -19,6 +19,7 @@
                 {!! str_limit(strip_tags($solicitudes->concepto),30,'...') !!}
               </a>
               {!! ($solicitudes->adjunto) ? '<i class="fa fa-paperclip"></i>' : '' !!}
+              {!! ($solicitudes->detsolicitud->count()>0) ? '<small class="label label-primary"><i class="fa fa-building-o"></i> InterEmpresa</small>' : '' !!}
 
             </td>
             <td>{!! $solicitudes->comentario !!}</td>

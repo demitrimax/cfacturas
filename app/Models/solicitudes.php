@@ -60,7 +60,10 @@ class solicitudes extends Model
         'atendido',
         'fecha',
         'atendidopor',
-        'facturaid'
+        'facturaid',
+        'total',
+        'subtotal',
+        'iva',
     ];
 
      protected static $logAttributes = ['*'];
@@ -72,22 +75,25 @@ class solicitudes extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
-        'user_id' => 'integer',
-        'nombre' => 'string',
-        'correo' => 'string',
-        'telefono' => 'string',
-        'rfc' => 'string',
-        'usocfdi' => 'integer',
-        'condicion' => 'string',
-        'metodo' => 'integer',
-        'forma' => 'integer',
-        'concepto' => 'string',
-        'comentario' => 'string',
-        'adjunto' => 'string',
-        'atendido' => 'boolean',
-        'atendidopor' => 'integer',
-        'facturaid' => 'integer'
+        'id'           => 'integer',
+        'user_id'      => 'integer',
+        'nombre'       => 'string',
+        'correo'       => 'string',
+        'telefono'     => 'string',
+        'rfc'          => 'string',
+        'usocfdi'      => 'integer',
+        'condicion'    => 'string',
+        'metodo'       => 'integer',
+        'forma'        => 'integer',
+        'concepto'     => 'string',
+        'comentario'   => 'string',
+        'adjunto'      => 'string',
+        'atendido'     => 'boolean',
+        'atendidopor'  => 'integer',
+        'facturaid'    => 'integer',
+        'total'        => 'float',
+        'subtotal'     => 'float',
+        'iva'          => 'float',
     ];
 
     /**

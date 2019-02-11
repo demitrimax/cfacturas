@@ -25,6 +25,7 @@ use App\Models\formapago;
 use App\Models\clientes;
 use App\catunidmed;
 use App\catsatprodser;
+use App\facdetsolicitud;
 
 class solicitudesController extends AppBaseController
 {
@@ -51,6 +52,8 @@ class solicitudesController extends AppBaseController
     {
         $this->solicitudesRepository->pushCriteria(new RequestCriteria($request));
         $solicitudes = $this->solicitudesRepository->paginate(10);
+        
+
 
         //$textcorto = RecortarTexto::recortar_texto($solicitudes);
         return view('solicitudes.index')
