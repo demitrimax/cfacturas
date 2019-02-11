@@ -169,7 +169,7 @@ class solicitudesController extends AppBaseController
 
             return redirect(route('solfact.index'))->with(compact('sweeterror'));
         }
-
+        //dd($solicitudes);
         return view('solicitudes.show')->with(compact('solicitudes','tamanoadjunto','empleados','borrados','asignadas','atendidas','borradas'));
 
     }
@@ -307,6 +307,20 @@ class solicitudesController extends AppBaseController
       }
       return $clavesdes;
 
+    }
+
+    public function printInterEmpresa($id)
+    {
+      $solicitudes = $this->solicitudesRepository->findWithoutFail($id);
+
+      if (empty($solicitudes)) {
+          Flash::error('Solicitud no encontrada');
+          $sweeterror = 'Solicitud no encontrada';
+
+          return redirect(route('solfact.index'))->with(compact('sweeterror'));
+      }
+      //dd($solicitudes);
+      return view('solicitudes.printInterEmp')->with(compact('solicitudes'));
     }
 
 }

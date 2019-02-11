@@ -15,6 +15,7 @@ function reqconcepto(cheked) {
     $('#csubtotal').prop('required',true);
     $('#civa').prop('required',true);
     $('#Total').prop('required',true);
+    $('#catemp_id').prop('required',true);
   }
   else
   {
@@ -29,6 +30,7 @@ function reqconcepto(cheked) {
     $('#csubtotal').prop('required',false);
     $('#civa').prop('required',false);
     $('#Total').prop('required',false);
+    $('#catemp_id').prop('required',false);
   }
 
 }

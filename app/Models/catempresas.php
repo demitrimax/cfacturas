@@ -108,5 +108,19 @@ class catempresas extends Model
     {
       return $this->BelongsToMany('App\Models\accomercial','ac_empresas','empresa_id','acuerdoc_id');
     }
+    public function getEmpdireccionAttribute()
+    {
+      $direccion = "Dirección No Disponible";
+      if ($this->direcciones)
+      {
+        $NumeroInterior = "";
+        if(!empty($this->direcciones->numeroInt))
+        {
+          $NumeroInterior = ", No. Int.: ".$this->direcciones->numeroInt;
+        }
+        $direccion = $this->direcciones->calle.' No. Ext. '.$this->direcciones->numeroExt.$NumeroInterior;
+      }
+      return $direccion;
+    }
 
 }

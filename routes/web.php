@@ -62,13 +62,14 @@ Route::group(['middleware'=>['auth','verified','activity']], function() {
 
   Route::get('/solicitud', 'solicitudController@index')->name('solicitud');
   Route::post('/solicitud', 'solicitudController@store');
-  Route::get('/solfactura', 'solicitudController@solfactura');
+  Route::get('/solfactura', 'solicitudesController@create');
 
 
   Route::resource('solfact', 'solicitudesController');
   Route::get('/solfact/deleted/lista', 'solicitudesController@deleted');
   Route::post('/solfact/restaura', 'solicitudesController@restaura');
   Route::post('/solfact/asignar', 'solicitudesController@asignar');
+  Route::get('solfact/InterEmpresa/print/{id}', 'solicitudesController@printInterEmpresa');
   Route::get('/GetUmedida', 'solicitudesController@getUmedida');
   Route::get('/GetClaveps', 'solicitudesController@getClaveps');
 

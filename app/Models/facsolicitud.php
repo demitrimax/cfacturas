@@ -38,18 +38,18 @@ class facsolicitud extends Model
     protected static $logAttributes = ['*'];
 
     protected $casts = [
-        'id' => 'integer',
-        'nombre' => 'string',
-        'correo' => 'string',
-        'telefono' => 'string',
-        'rfc' => 'string',
-        'usocfdi' => 'integer',
-        'condicion' => 'string',
-        'metodo' => 'integer',
-        'forma' => 'integer',
-        'concepto' => 'string',
-        'comentario' =>'string',
-        'adjunto' => 'string',
+        'id'           => 'integer',
+        'nombre'       => 'string',
+        'correo'       => 'string',
+        'telefono'     => 'string',
+        'rfc'          => 'string',
+        'usocfdi'      => 'integer',
+        'condicion'    => 'string',
+        'metodo'       => 'integer',
+        'forma'        => 'integer',
+        'concepto'     => 'string',
+        'comentario'   =>'string',
+        'adjunto'      => 'string',
     ];
 
     public function getSemaforofechaAttribute()

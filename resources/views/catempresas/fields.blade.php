@@ -39,7 +39,7 @@
                   <!-- Comision Field -->
                   <div class="input-group">
                       <span class="input-group-addon">Porcentaje de Comisión</span>
-                      {!! Form::number('comision', null, ['class' => 'form-control', 'step'=>'0.01', 'placeholder'=>'Porcentaje de Comision']) !!}
+                      {!! Form::number('comision', null, ['class' => 'form-control', 'step'=>'0.01', 'min'=>'0', 'placeholder'=>'Porcentaje de Comision']) !!}
                       <span class="input-group-addon">%</span>
                   </div>
 

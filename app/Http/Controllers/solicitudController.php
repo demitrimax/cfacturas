@@ -15,17 +15,8 @@ use App\facdetsolicitud;
 
 class solicitudController extends Controller
 {
-    //
-    public function index()
-    {
-      return view('solicitud');
-    }
+    //CONTROLADOR SOLO PARA GUARDAR UNA NUEVA SOLICITUD
 
-    public function solfactura()
-    {
-        //return "hola";
-      return view('solicitudes.solicitud');
-    }
 
     public function store(request $request)
     {

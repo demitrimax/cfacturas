@@ -169,7 +169,7 @@ class solicitudes extends Model
     {
       return $this->hasMany('App\facdetsolicitud','solicitud_id');
     }
-    public function Empfacturadora()
+    public function empfacturadora()
     {
       return $this->belongsTo('App\Models\catempresas','catemp_id');
     }

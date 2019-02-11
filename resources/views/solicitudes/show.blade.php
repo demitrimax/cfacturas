@@ -149,6 +149,10 @@
             <div class="box-body no-padding">
               <div class="mailbox-read-info">
                 <h3>{{$solicitudes->empresafacturadora}}</h3>
+                @if(!($solicitudes->empresafacturadora == "N/D"))
+                <h4> {{$solicitudes->empfacturadora->rfc}} </h4>
+                <h4> {{$solicitudes->empfacturadora->empdireccion}} </h4>
+                @endif
 
               <div class="mailbox-read-message">
                 <table class="table tablaconceptos" id="conceptos">
@@ -202,7 +206,7 @@
                               <b>SUBTOTAL:</b>
                              </td>
                               <td style="width: 50%">
-                                ${{number_format($solicitudes->subtotal,2)}}
+                                <p class="pull-right">${{number_format($solicitudes->subtotal,2)}}</p>
                              </td>
                            </tr>
                            <tr>
@@ -210,7 +214,7 @@
                                <b>IVA:</b>
                              </td>
                              <td>
-                                ${{ number_format($solicitudes->iva,2)}}
+                                <p class="pull-right">${{ number_format($solicitudes->iva,2) }}</p>
                              </td>
                            </tr>
                            <tr>
@@ -218,7 +222,7 @@
                                <b>TOTAL</b>
                              </td>
                              <td style="width: 50%">
-                              ${{number_format($solicitudes->total,2)}}
+                              <p class="pull-right">${{ number_format($solicitudes->total,2) }}</p>
                              </td>
                            </tr>
                          </tbody>
@@ -237,7 +241,7 @@
 
               </div>
 
-              <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Imprimir</button>
+              <button onclick="location.href='{{url('solfact/InterEmpresa/print/'.$solicitudes->id)}}';" type="button" class="btn btn-default"><i class="fa fa-print"></i> Imprimir</button>
             </div>
             <!-- /.box-footer -->
           </div>
