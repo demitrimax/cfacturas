@@ -151,7 +151,8 @@
                 <h3>{{$solicitudes->empresafacturadora}}</h3>
                 @if(!($solicitudes->empresafacturadora == "N/D"))
                 <h4> {{$solicitudes->empfacturadora->rfc}} </h4>
-                <h4> {{$solicitudes->empfacturadora->empdireccion}} </h4>
+                <h4> {!!$solicitudes->empfacturadora->empdireccion!!} </h4>
+                <h4> {!!$solicitudes->empfacturadora->correo_notifica!!} </h4>
                 @endif
 
               <div class="mailbox-read-message">
@@ -240,8 +241,8 @@
                 <a href="{{url('/solfact')}}" type="button" class="btn btn-default"><i class="fa fa-reply"></i> Regresar </a>
 
               </div>
-
-              <button onclick="location.href='{{url('solfact/InterEmpresa/print/'.$solicitudes->id)}}';" type="button" class="btn btn-default"><i class="fa fa-print"></i> Imprimir</button>
+              <a href="{{url('solfact/InterEmpresa/pdf/'.$solicitudes->id)}}" target="_blank" type="button" class="btn btn-default"><i class="fa fa-file-pdf-o"></i> PDF</a>
+              <a href="{{url('solfact/InterEmpresa/print/'.$solicitudes->id)}}" target="_blank" type="button" class="btn btn-default"><i class="fa fa-print"></i> Imprimir</a>
             </div>
             <!-- /.box-footer -->
           </div>

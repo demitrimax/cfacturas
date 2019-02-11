@@ -27,6 +27,7 @@ use App\Models\catempresas;
 use App\catunidmed;
 use App\catsatprodser;
 use App\facdetsolicitud;
+use PDF;
 
 class solicitudesController extends AppBaseController
 {
@@ -321,6 +322,20 @@ class solicitudesController extends AppBaseController
       }
       //dd($solicitudes);
       return view('solicitudes.printInterEmp')->with(compact('solicitudes'));
+    }
+    public function InterEmpresaPDF($id)
+    {
+      $solicitudes = $this->solicitudesRepository->findWithoutFail($id);
+
+      if (empty($solicitudes)) {
+          Flash::error('Solicitud no encontrada');
+          $sweeterror = 'Solicitud no encontrada';
+
+          return redirect(route('solfact.index'))->with(compact('sweeterror'));
+      }
+      $pdf = PDF::loadView('solicitudes.pdfInterEmp',compact('solicitudes'));
+      return $pdf->download('solinteremp.pdf');
+      //return view('accomercials.viewacuerdoprint')->with(compact('accomercial'));
     }
 
 }

@@ -43,6 +43,7 @@
         <ul class="nav nav-stacked">
           <li><a href="#">Calle y Número: <span class="pull-right">{{$catempresas->direcciones->calle.' '.$catempresas->direcciones->numeroExt.' '.$catempresas->direcciones->numeroInt}}</span></a></li>
           <li><a href="#">Código Postal: <span class="pull-right" >{!! $catempresas->direcciones->codpostal !!}</span></a></li>
+          <li><a href="#">Ciudad: <span class="pull-right" >{!! $catempresas->direcciones->ciudad !!}</span></a></li>
           <li><a href="#">Colonia: <span class="pull-right" >{!! $catempresas->direcciones->colonia !!}</span></a></li>
           <li><a href="#">Estado: <span class="pull-right" >{!! $catempresas->direcciones->estados->nombre !!}</span></a></li>
           <li><a href="#">Municipio: <span class="pull-right" >{!! $catempresas->direcciones->municipios->nomMunicipio !!}</span></a></li>

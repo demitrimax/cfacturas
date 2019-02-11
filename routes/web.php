@@ -70,6 +70,7 @@ Route::group(['middleware'=>['auth','verified','activity']], function() {
   Route::post('/solfact/restaura', 'solicitudesController@restaura');
   Route::post('/solfact/asignar', 'solicitudesController@asignar');
   Route::get('solfact/InterEmpresa/print/{id}', 'solicitudesController@printInterEmpresa');
+  Route::get('solfact/InterEmpresa/pdf/{id}', 'solicitudesController@InterEmpresaPDF');
   Route::get('/GetUmedida', 'solicitudesController@getUmedida');
   Route::get('/GetClaveps', 'solicitudesController@getClaveps');
 

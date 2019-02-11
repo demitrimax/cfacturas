@@ -102,6 +102,7 @@ class catempresasController extends AppBaseController
         $direccion->estado_id = $input['estado_id'];
         $direccion->municipio_id = $input['municipio_id'];
         $direccion->colonia = $input['colonia'];
+        $direccion->ciudad = $input['ciudad'];
         $direccion->codpostal = $input['codpostal'];
         $direccion->referencias = $input['referencias'];
         $direccion->save();
@@ -226,6 +227,7 @@ class catempresasController extends AppBaseController
         $direccion->estado_id = $request['estado_id'];
         $direccion->municipio_id = $request['municipio_id'];
         $direccion->colonia = $request['colonia'];
+        $direccion->ciudad = $request['ciudad'];
         $direccion->codpostal = $request['codpostal'];
         $direccion->referencias = $request['referencias'];
         $direccion->save();

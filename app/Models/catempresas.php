@@ -118,7 +118,10 @@ class catempresas extends Model
         {
           $NumeroInterior = ", No. Int.: ".$this->direcciones->numeroInt;
         }
-        $direccion = $this->direcciones->calle.' No. Ext. '.$this->direcciones->numeroExt.$NumeroInterior;
+        $direccion = $this->direcciones->calle.' No. Ext. '.$this->direcciones->numeroExt.
+        $NumeroInterior.'<br>'
+        .'C.P.: '.$this->direcciones->codpostal.'<br>'
+        .$this->direcciones->ciudad.', '.$this->direcciones->municipios->nomMunicipio.', '.$this->direcciones->estados->nombre.'.';
       }
       return $direccion;
     }
