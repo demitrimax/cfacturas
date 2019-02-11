@@ -64,6 +64,7 @@ class solicitudes extends Model
         'total',
         'subtotal',
         'iva',
+        'catemp_id',
     ];
 
      protected static $logAttributes = ['*'];
@@ -94,6 +95,7 @@ class solicitudes extends Model
         'total'        => 'float',
         'subtotal'     => 'float',
         'iva'          => 'float',
+        'catemp_id'    => 'integer',
     ];
 
     /**
@@ -166,6 +168,19 @@ class solicitudes extends Model
     public function detsolicitud()
     {
       return $this->hasMany('App\facdetsolicitud','solicitud_id');
+    }
+    public function Empfacturadora()
+    {
+      return $this->belongsTo('App\Models\catempresas','catemp_id');
+    }
+    public function getEmpresafacturadoraAttribute()
+    {
+      $nomempresa = "N/D";
+      if($this->catemp_id)
+      {
+        $nomempresa = $this->Empfacturadora->nombre;
+      }
+      return $nomempresa;
     }
 
 

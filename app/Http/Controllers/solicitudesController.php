@@ -23,6 +23,7 @@ use App\Models\usocfdi;
 use App\Models\pagometodo;
 use App\Models\formapago;
 use App\Models\clientes;
+use App\Models\catempresas;
 use App\catunidmed;
 use App\catsatprodser;
 use App\facdetsolicitud;
@@ -52,7 +53,7 @@ class solicitudesController extends AppBaseController
     {
         $this->solicitudesRepository->pushCriteria(new RequestCriteria($request));
         $solicitudes = $this->solicitudesRepository->paginate(10);
-        
+
 
 
         //$textcorto = RecortarTexto::recortar_texto($solicitudes);
@@ -91,7 +92,8 @@ class solicitudesController extends AppBaseController
         $clientes = clientes::all();
         $clientes = $clientes->pluck('nombrerfc','RFC');
         $claveunits = catunidmed::pluck('nombre','clave');
-        return view('solicitudes.solicitud')->with(compact('usocfdi','metodo','forma','clientes','claveunits'));
+        $catempresas = catempresas::pluck('nombre','id');
+        return view('solicitudes.solicitud')->with(compact('usocfdi','metodo','forma','clientes','claveunits','catempresas'));
     }
 
     /**

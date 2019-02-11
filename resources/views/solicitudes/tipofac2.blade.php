@@ -11,6 +11,10 @@
     <div class="panel-body">
       <div class="row">
         <div class="col-md-12">
+          <div class="form-group">
+              {!! Form::label('catemp_id', 'Empresa:*') !!}
+              {!! Form::select('catemp_id', $catempresas, null, ['class' => 'form-control select2', 'style'=>'width:100%' ,'maxlength' =>'13','placeholder'=>'Empresa Facturadora']) !!}
+          </div>
         <table class="table tablaconceptos" id="conceptos">
           <thead>
             <tr>
@@ -90,13 +94,13 @@
             <td class="ColIngImporte">
               <div class="input-group IngresoImporte">
                 <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
-                <input type="number" min="1" class="form-control PreUnitario" id="importecon[0]" name="importecon[0]" placeholder="Importe">
+                <input type="number" min="1" step="0.01" class="form-control PreUnitario" id="importecon[0]" name="importecon[0]" placeholder="Importe">
               </div>
             </td>
             <td class="ColNMonto">
               <div class="input-group NSubtotalProducto">
                 <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
-                <input type="number" min="1" class="form-control NMontoProducto" id="montoconcepto[0]" name="montoconcepto[0]" placeholder="Monto" readonly>
+                <input type="number" min="1" step="0.01" class="form-control NMontoProducto" id="montoconcepto[0]" name="montoconcepto[0]" placeholder="Monto" readonly>
                 <span class="input-group-btn">
                   <button type="button" class="btn btn-warning btn" id ="btnagregarotro"><i class="fa fa-plus"></i></button>
                 </span>

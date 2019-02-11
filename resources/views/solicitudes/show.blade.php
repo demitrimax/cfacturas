@@ -148,7 +148,7 @@
             <!-- /.box-header -->
             <div class="box-body no-padding">
               <div class="mailbox-read-info">
-                <h3>{{$solicitudes->descripcion}}</h3>
+                <h3>{{$solicitudes->empresafacturadora}}</h3>
 
               <div class="mailbox-read-message">
                 <table class="table tablaconceptos" id="conceptos">

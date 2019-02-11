@@ -95,5 +95,9 @@ class facsolicitud extends Model
     {
       return $this->hasMany('App\facdetsolicitud','solicitud_id');
     }
+    public function Empfacturadora()
+    {
+      return $this->belongsTo('App\Models\catempresas','catemp_id');
+    }
 
 }

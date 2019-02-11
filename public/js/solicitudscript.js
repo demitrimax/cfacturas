@@ -102,7 +102,7 @@ $('.FormSolicitud').on('change keyup paste', 'input.UnidadMedidaSAT', function(e
     $('.FormSolicitud').on('change', 'input.NCantidadProducto', function() {
       var PUnitario = $(this).parent().parent().parent().children(".ColIngImporte").children(".IngresoImporte").children(".PreUnitario");
       var Subtotal = $(this).parent().parent().parent().children(".ColNMonto").children(".NSubtotalProducto").children(".NMontoProducto");
-     
+
       var precioFinal = Number($(this).val()) * Number(PUnitario.val());
       //console.log(precioFinal);
       Subtotal.val(precioFinal);
@@ -118,7 +118,7 @@ $('.FormSolicitud').on('change keyup paste', 'input.UnidadMedidaSAT', function(e
        var precioFinal = Number($(this).val()) * Number(Cantidad.val());
        Subtotal.val(precioFinal);
        SumarTodosLosMontos();
-     
+
       CalcularTotales();
     });
 
@@ -131,7 +131,7 @@ $('.FormSolicitud').on('change keyup paste', 'input.UnidadMedidaSAT', function(e
       {
             ArraySumaMonto.push(Number($(ItemMonto[i]).val()));
             //console.log($(ItemMonto[i]).val());
-      } 
+      }
       //console.log('ArraySumaMonto',ArraySumaMonto);
       function sumaArrayMontos(total, numero)
       {
@@ -231,13 +231,13 @@ $('#btnagregarotro').click(function() {
     '<td class="ColIngImporte">'+
     '<div class="input-group IngresoImporte">'+
       '<span class="input-group-addon"><i class="ion ion-social-usd"></i></span>'+
-      '<input type="number" min="1" class="form-control PreUnitario" id="importecon['+IdRow+']" name="importecon['+IdRow+']" placeholder="Importe">'+
+      '<input type="number" step="0.01" min="1" class="form-control PreUnitario" id="importecon['+IdRow+']" name="importecon['+IdRow+']" placeholder="Importe">'+
       '</div>'+
     '</td>'+
     '<td class="ColNMonto">'+
       '<div class="input-group NSubtotalProducto">'+
         '<span class="input-group-addon"><i class="ion ion-social-usd"></i></span>'+
-        '<input type="number" min="1" class="form-control NMontoProducto" id="montoconcepto['+IdRow+']" name="montoconcepto['+IdRow+']" placeholder="monto" required readonly>'+
+        '<input type="number" step="0.01" min="1" class="form-control NMontoProducto" id="montoconcepto['+IdRow+']" name="montoconcepto['+IdRow+']" placeholder="monto" required readonly>'+
         '<span class="input-group-btn">'+
           '<button type="button" class="btn btn-danger btn QuitarConcepto" id="quitarconcepto"><i class="fa fa-times"></i></button>'+
         '</span>'+
@@ -247,4 +247,3 @@ $('#btnagregarotro').click(function() {
   $(newRow).appendTo($('#conceptos tbody'))
   $('body').append('<script> $(".selectpicker'+IdRow+'").selectpicker().filter(".with-ajax").ajaxSelectPicker(options); </script>')
 }) ;
-

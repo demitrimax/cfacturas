@@ -62,9 +62,13 @@ class solicitudController extends Controller
       $solicitudfac->concepto = $request->input('concepto');
       $solicitudfac->comentario = $request->input('comentario');
       $solicitudfac->fecha = date(now());
-      $solicitudfac->total = $request->input('cTotal');
-      $solicitudfac->subtotal = $request->input('csubtotal');
-      $solicitudfac->iva = $request->input('civa');
+      $cTotal = floatval(str_replace(',','',$request->input('cTotal')));
+      $solicitudfac->total = $cTotal;
+      $csubtotal = floatval(str_replace(',','',$request->input('csubtotal')));
+      $solicitudfac->subtotal = $csubtotal;
+      $civa = floatval(str_replace(',','',$request->input('civa')));
+      $solicitudfac->iva = $civa;
+      $solicitudfac->catemp_id = $request->input('catemp_id');
       //GUARDAR EL ARCHIVO ADJUNTO SI LO HAY
       if ($request->file('adjunto'))
       {
