@@ -27,12 +27,12 @@
             <tr>
             <td class="NCantidadProd">
                 <div class="input-group NCantProd">
-                 <input type="number" class="form-control NCantidadProducto" id="cantidad[]" name="cantidad" placeholder="Cantidad" title="Cantidad" min="1" value=1 >
+                 <input type="number" class="form-control NCantidadProducto" id="cantidad[0]" name="cantidad[0]" placeholder="Cantidad" title="Cantidad" min="1" value=1 >
               </div>
             </td>
               <td>
                 <div class="input-group">
-                 <input type="text" class="form-control UnidadMedidaSAT" id="unidadmedidasat[]" name="unidadmedidasat" placeholder="U. de Medida SAT" title="Clave de la Unidad de Medida del SAT" list="listumedida" maxlength="5">
+                 <input type="text" class="form-control UnidadMedidaSAT" id="unidadmedidasat[0]" name="unidadmedidasat[0]" placeholder="U. de Medida SAT" title="Clave de la Unidad de Medida del SAT" list="listumedida" maxlength="5">
                  <datalist id="listumedida">
                     <option value='H87'>
                     <option value='EA'>
@@ -70,33 +70,33 @@
             </td>
             <td class="ColUMedida">
               <div class="input-group UMedida">
-               <input type="text" class="form-control UnidadMedida" id="unidadmedida[]" name="unidadmedida" placeholder="U. medida" title="Unidad de Medida" list="listunidad">
+               <input type="text" class="form-control UnidadMedida" id="unidadmedida[0]" name="unidadmedida[0]" placeholder="U. medida" title="Unidad de Medida" list="listunidad">
                <datalist id="listunidad" class="ListaUnidad">
                </datalist>
              </div>
             </td>
             <td>
               <div class="input-group">
-                  <select id="ajax-select" class="selectpicker with-ajax" data-live-search="true" id="claveprod[]" name="claveprod"></select>
+                  <select id="ajax-select" class="selectpicker with-ajax" data-live-search="true" id="claveprod[0]" name="claveprod[0]"></select>
               </div>
               <datalist id="listcod">
               </datalist>
             </td>
             <td>
               <div class="input-group col-md-12">
-                 <input type="text" class="form-control" id="descripcion[]" name="descripcion"  placeholder="Descripción detallada" title="Descripción detallada del producto o servicio">
+                 <input type="text" class="form-control" id="descripcion[0]" name="descripcion[0]"  placeholder="Descripción detallada" title="Descripción detallada del producto o servicio">
               </div>
             </td>
             <td class="ColIngImporte">
               <div class="input-group IngresoImporte">
                 <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
-                <input type="number" min="1" class="form-control PreUnitario" id="importecon[]" name="importecon" placeholder="Importe">
+                <input type="number" min="1" class="form-control PreUnitario" id="importecon[0]" name="importecon[0]" placeholder="Importe">
               </div>
             </td>
             <td class="ColNMonto">
               <div class="input-group NSubtotalProducto">
                 <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
-                <input type="number" min="1" class="form-control NMontoProducto" id="montoconcepto[]" name="montoconcepto" placeholder="Monto" readonly>
+                <input type="number" min="1" class="form-control NMontoProducto" id="montoconcepto[0]" name="montoconcepto[0]" placeholder="Monto" readonly>
                 <span class="input-group-btn">
                   <button type="button" class="btn btn-warning btn" id ="btnagregarotro"><i class="fa fa-plus"></i></button>
                 </span>

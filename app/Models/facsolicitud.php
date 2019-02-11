@@ -91,5 +91,9 @@ class facsolicitud extends Model
     {
       return $this->belongsTo('App\Models\formapago','forma');
     }
+    public function detsolicitud()
+    {
+      return $this->hasMany('App\facdetsolicitud','solicitud_id');
+    }
 
 }

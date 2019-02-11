@@ -47,7 +47,7 @@ class solicitudController extends Controller
         'user_id.required' => 'Se requiere un ID de usuario registrado',
         'concepto.required' => 'Por favor se requiere el Campo Concepto.',
       ];
-      dd($request);
+      //dd($request);
       $this->validate($request, $rules, $messages);
 
       $solicitudfac = new facsolicitud();
@@ -62,6 +62,9 @@ class solicitudController extends Controller
       $solicitudfac->concepto = $request->input('concepto');
       $solicitudfac->comentario = $request->input('comentario');
       $solicitudfac->fecha = date(now());
+      $solicitudfac->total = $request->input('cTotal');
+      $solicitudfac->subtotal = $request->input('csubtotal');
+      $solicitudfac->iva = $request->input('civa');
       //GUARDAR EL ARCHIVO ADJUNTO SI LO HAY
       if ($request->file('adjunto'))
       {
@@ -73,13 +76,26 @@ class solicitudController extends Controller
         $solicitudfac->adjunto = 'solicitudes/'.$nombre;
       }
       $solicitudfac->save();
+
       //GUARDAR LOS DATOS DE LA SOLICITUD INTEREMPRESA SI FUERON SOLICITADOS
-      if(!empty($request->input('cantidad')))
+      $input = $request->all();
+      //dd($input);
+      foreach ($input['cantidad'] as $key=>$cantidad )
       {
         $interEmpresa = new facdetsolicitud();
         $interEmpresa->solicitud_id = $solicitudfac->id;
-        $request->input('cantidad');
+        $interEmpresa->cantidad = $input['cantidad'][$key];
+        $interEmpresa->umedida = $input['unidadmedidasat'][$key];
+        $interEmpresa->unidad = $input['unidadmedida'][$key];
+        $interEmpresa->prodserv_id = $input['claveprod'][$key];
+        $interEmpresa->descripcion = $input['descripcion'][$key];
+        $interEmpresa->punitario = $input['importecon'][$key];
+        $interEmpresa->monto = $input['montoconcepto'][$key];
+        $interEmpresa->save();
+
       }
+
+
       $mensaje = 'Se ha enviado correctamente su solicitud. En breve recibirá un correo electrónico como acuse de recibo.';
       //envío de correo electronico
       $enviomails = User::role('emailnotify')->get();
