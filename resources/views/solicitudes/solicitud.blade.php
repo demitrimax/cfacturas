@@ -11,7 +11,7 @@
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css"/>
  <link rel="stylesheet" href="{{asset('adminlte/bower_components/ajaxautocomplete/dist/css/ajax-bootstrap-select.css')}}"/>
 <!-- iCheck for checkboxes and radio inputs -->
- <link rel="stylesheet" href="{{asset('adminlte/bower_components/iCheck/skins/all.css')}}">
+ <link rel="stylesheet" href="{{asset('adminlte/bower_components/icheck/skins/all.css')}}">
 @endsection
 
 @section('content')
