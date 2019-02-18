@@ -188,7 +188,7 @@ class direccionesController extends AppBaseController
 
     public function GetMunicipios($id)
     {
-      $municipios = catmunicipios::where('id_edo',$id)->select('id','nomMunicipio')->get();
+      $municipios = catmunicipios::where('id_edo',$id)->select('id','nomMunicipio','munid')->get();
       /* ESTO ERA PARA EL JSON
       $data = [];
       $data[0] = [

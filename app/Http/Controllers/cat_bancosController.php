@@ -166,4 +166,10 @@ class cat_bancosController extends AppBaseController
 
         return redirect(route('catBancos.index'))->with(compact('sweet'));
     }
+    public function ajaxcatbancos(Request $request)
+    {
+      $this->catBancosRepository->pushCriteria(new RequestCriteria($request));
+      $catBancos = $this->catBancosRepository->all();
+
+    }
 }

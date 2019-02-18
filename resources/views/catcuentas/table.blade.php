@@ -42,15 +42,8 @@
 <!-- DataTables -->
 <script src="{{asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{asset('js/catbancos.js')}}"></script>
 <script>
-  $(function () {
-    $('#catcuentas-table').DataTable({
-      "language": {
-                "url": "{{asset('adminlte/bower_components/datatables.net/Spanish.json')}}"
-            }
-    })
-  })
-
 function ConfirmDelete(id) {
   swal({
         title: '¿Estás seguro?',

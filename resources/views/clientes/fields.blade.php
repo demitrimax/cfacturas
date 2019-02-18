@@ -382,10 +382,12 @@ $('#giroempresa').on('change keyup paste', function(e) {
       $('#listaciudad').empty();
       $.each(data, function(index, ciudad) {
         $('#listaciudad').append('<option value ="' + ciudad.ciudad + '">' );
+        $('#ciudad').val(ciudad.ciudad);
         estadoid = ciudad.estado_id;
         municipioid = ciudad.municipio_id;
       });
-      console.log(estadoid);
+      console.log('estado_id:',estadoid);
+      console.log('municipio_id:',municipioid);
       //cambiar el combobox del estado que esta en la variable estado_id
       $('select#estado_id').val(estadoid);
       $('#estado_id').change();

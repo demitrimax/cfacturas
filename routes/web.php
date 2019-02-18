@@ -97,4 +97,7 @@ Route::group(['middleware'=>['auth','verified','activity']], function() {
 
   Route::resource('asimilados', 'asimsalController');
   Route::post('asimilados/avatarchange', 'asimsalController@avatar');
+
+  //ajax para dataTables
+  Route::get("ajax/datatable-catbancos", 'cat_bancosController@ajaxcatbancos');
 });
