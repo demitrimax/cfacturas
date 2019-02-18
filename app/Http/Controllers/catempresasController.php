@@ -18,6 +18,8 @@ use App\Models\cattipodoc;
 use App\Models\catdocumentos;
 use App\Models\cat_bancos;
 use App\Models\catgiroempresa;
+use App\Models\catempresas;
+use Intervention\Image\ImageManager;
 
 
 class catempresasController extends AppBaseController
@@ -271,5 +273,26 @@ class catempresasController extends AppBaseController
         Alert::success('Empresa borrada correctamente.','Borrado');
 
         return redirect(route('catempresas.index'));
+    }
+    public function logotipo(Request $request)
+    {
+      $empresaid = $request->empresa_id;
+      //$clientes = $this->clientesRepository->findWithoutFail($clienteid);
+      //guardar la imagen en el sistema de archivos
+      $manager = new ImageManager;
+      $file = $request->file('avatarimg');
+      $path = public_path() . '/avatar/';
+
+      $filename = uniqid().$file->getClientOriginalName();
+      //cambiar el tamaño de la imagen
+      $image = $manager->make($file)->resize(400, 400)->save($path.$filename);
+      //$file->move($path,$filename);
+
+      //guardar el registro de la Imagen
+      $avatar = catempresas::find($empresaid);
+      $avatar->logoimg = $filename;
+      $avatar->save(); //INSERT
+      Alert::success('Logo de la empresa, guardado correctamente');
+      return back();
     }
 }

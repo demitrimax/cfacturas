@@ -54,6 +54,8 @@
 </div>
 @endsection
 
+@stack('modals')
+
 @section('scripts')
 
 @stack('scripts')

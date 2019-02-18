@@ -34,6 +34,7 @@ Route::group(['middleware'=>['auth','verified','activity']], function() {
   Route::get('GetAsentamientos','direccionesController@GetAsentamientos');
   Route::resource('catdocumentos', 'catdocumentosController');
   Route::resource('catempresas', 'catempresasController');
+  Route::post('catempresas/logochange', 'catempresasController@logotipo');
   Route::resource('empDatfiscales', 'emp_datfiscalesController');
   Route::resource('catBancos', 'cat_bancosController');
   Route::resource('catcuentas', 'catcuentasController');
