@@ -191,8 +191,16 @@ class solicitudesController extends AppBaseController
 
             return redirect(route('solfact.index'));
         }
+        $usocfdi = usocfdi::all();
+        $usocfdi = $usocfdi->pluck('usocfdicod','id');
+        $metodo = pagometodo::pluck('nombre','id');
+        $forma = formapago::pluck('descripcion','id');
+        $clientes = clientes::all();
+        $clientes = $clientes->pluck('nombrerfc','RFC');
+        $claveunits = catunidmed::pluck('nombre','clave');
+        $catempresas = catempresas::pluck('nombre','id');
 
-        return view('solicitudes.edit')->with('solicitudes', $solicitudes);
+        return view('solicitudes.edit')->with(compact('solicitudes','clientes','catempresas','forma','metodo','usocfdi'));
     }
 
     /**

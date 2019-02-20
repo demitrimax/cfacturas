@@ -1,41 +1,41 @@
 <!-- Nombre Field -->
-<div class="form-group col-sm-6">
+<div class="form-group">
     {!! Form::label('nombre', 'Nombre:') !!}
     {!! Form::text('nombre', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Correo Field -->
-<div class="form-group col-sm-6">
+<div class="form-group">
     {!! Form::label('correo', 'Correo:') !!}
     {!! Form::text('correo', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Telefono Field -->
-<div class="form-group col-sm-6">
+<div class="form-group">
     {!! Form::label('telefono', 'Telefono:') !!}
     {!! Form::text('telefono', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Rfc Field -->
-<div class="form-group col-sm-6">
+<div class="form-group">
     {!! Form::label('rfc', 'Rfc:') !!}
     {!! Form::text('rfc', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Condicion Field -->
-<div class="form-group col-sm-6">
+<div class="form-group">
     {!! Form::label('condicion', 'Condicion:') !!}
     {!! Form::text('condicion', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Metodo Field -->
-<div class="form-group col-sm-6">
+<div class="form-group">
     {!! Form::label('metodo', 'Metodo:') !!}
     {!! Form::text('metodo', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Forma Field -->
-<div class="form-group col-sm-6">
+<div class="form-group">
     {!! Form::label('forma', 'Forma:') !!}
     {!! Form::text('forma', null, ['class' => 'form-control']) !!}
 </div>
@@ -53,7 +53,7 @@
 </div>
 
 <!-- Adjunto Field -->
-<div class="form-group col-sm-6">
+<div class="form-group">
     {!! Form::label('adjunto', 'Adjunto:') !!}
     {!! Form::text('adjunto', null, ['class' => 'form-control']) !!}
 </div>

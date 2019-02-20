@@ -8,16 +8,19 @@
    </section>
    <div class="content">
        @include('adminlte-templates::common.errors')
+    <div class="row">
+      <div class="col-md-12">
        <div class="box box-primary">
            <div class="box-body">
-               <div class="row">
+
                    {!! Form::model($solicitudes, ['route' => ['solfact.update', $solicitudes->id], 'method' => 'patch']) !!}
 
-                        @include('solicitudes.fields')
+                        @include('solicitudes.editsolicitud')
 
                    {!! Form::close() !!}
                </div>
            </div>
        </div>
+     </div>
    </div>
 @endsection
