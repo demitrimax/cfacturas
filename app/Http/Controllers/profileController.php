@@ -43,6 +43,16 @@ class profileController extends Controller
     }
     public function storebio(Request $request)
     {
+      $rules = [
+        'biotext' =>  'required|min:20',
+      ];
+      $messages = [
+        'biotext.min'         => 'Al menos 20 caracteres',
+        'biotext.required'    => 'Es requerido un texto de biografia.',
+      ];
+
+        $this->validate($request, $rules, $messages);
+
       $input = $request->all();
       $usuario = User::find(Auth::user()->id);
       $usuario->bio = $request['biotext'];
@@ -64,7 +74,7 @@ class profileController extends Controller
         'passanterior.required' => 'Se requiere la contraseña anterior',
       ];
 
-        $this->validate($request, $rules);
+        $this->validate($request, $rules, $messages);
 
       if (Hash::check($request->get('passanterior'), Auth::user()->password)) {
         $input = $request->all();

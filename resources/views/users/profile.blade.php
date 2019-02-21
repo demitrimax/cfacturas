@@ -216,7 +216,7 @@
                           <div class="alert alert-info alert-dismissible">
                               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                               <h4><i class="icon fa fa-info"></i> Reglas</h4>
-                              La contrasña debe contener al menos 6 carácteres y como máximo 15, es permitido el uso de simbolos así como acentos.
+                              La contraseña debe contener al menos 6 carácteres y como máximo 15, es permitido el uso de simbolos así como acentos.
                             </div>
                         </div>
                       </div>
