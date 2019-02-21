@@ -41,7 +41,10 @@ Route::group(['middleware'=>['auth','verified','activity']], function() {
   //Route::resource('usrs', 'usrsController');
   Route::resource('users', 'usersController');
   Route::get('profile','profileController@index');
+  Route::post('profile/bio', 'profileController@storebio');
+  Route::post('profile/password', 'profileController@password');
   Route::post('avatarchan', 'profileController@avatarchange');
+
   Route::resource('cattmovimientos', 'cattmovimientoController');
   Route::resource('mbancas', 'mbancaController');
   Route::post('catcuentas/agregarmov', 'catcuentasController@agregarmov');

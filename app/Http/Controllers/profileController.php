@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use App\User;
 use Intervention\Image\ImageManager;
 use Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Facades\Hash;
 
 class profileController extends Controller
 {
@@ -36,6 +38,45 @@ class profileController extends Controller
       $avatar = User::find(Auth::user()->id);
       $avatar->avatar = $filename;
       $avatar->save(); //INSERT
+      Alert::success('Foto de perfil actualizada');
       return back();
+    }
+    public function storebio(Request $request)
+    {
+      $input = $request->all();
+      $usuario = User::find(Auth::user()->id);
+      $usuario->bio = $request['biotext'];
+      $usuario->save();
+      Alert::success('Se ha actualizado su biografia');
+      return back();
+    }
+    public function password(Request $request)
+    {
+      $rules = [
+        'passanterior' =>  'required',
+        'password'     => 'required|confirmed|min:6|max:15',
+      ];
+      $messages = [
+        'password.min'          => 'Al menos 6 caracteres',
+        'password.max'          => 'Máximo 15 caracteres',
+        'password.confirmed'    => 'Las contraseñas no coinciden.',
+        'password.required'     => 'El campo password es requerido.',
+        'passanterior.required' => 'Se requiere la contraseña anterior',
+      ];
+
+        $this->validate($request, $rules);
+
+      if (Hash::check($request->get('passanterior'), Auth::user()->password)) {
+        $input = $request->all();
+        $usuario = User::find(Auth::user()->id);
+        $usuario->password = Hash::make($request['password']);
+        $usuario->save();
+        Alert::success('Se ha actualizado su password');
+        return back();
+        }
+        else {
+          Alert::error('La contraseña anterior no coincide', 'No coincide');
+          return back();
+        }
     }
 }

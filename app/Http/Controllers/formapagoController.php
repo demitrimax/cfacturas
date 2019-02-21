@@ -8,9 +8,10 @@ use App\Repositories\formapagoRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use RealRashid\SweetAlert\Facades\Alert;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
-use RealRashid\SweetAlert\Facades\Alert;
+
 
 class formapagoController extends AppBaseController
 {
