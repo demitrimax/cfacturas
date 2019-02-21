@@ -38,10 +38,10 @@ class asimsalController extends AppBaseController
         $this->clientesRepository = $clientesRepo;
         $this->direccionesRepository = $direccionesRepo;
         $this->middleware('auth');
-        $this->middleware('permission:clientes-list');
-        $this->middleware('permission:clientes-create', ['only' => ['create','store']]);
-        $this->middleware('permission:clientes-edit', ['only' => ['edit','update']]);
-        $this->middleware('permission:clientes-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:asimsal-list');
+        $this->middleware('permission:asimsal-create', ['only' => ['create','store']]);
+        $this->middleware('permission:asimsal-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:asimsal-delete', ['only' => ['destroy']]);
     }
 
     /**
