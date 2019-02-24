@@ -343,7 +343,7 @@ class solicitudesController extends AppBaseController
       }
       $pdf = PDF::loadView('solicitudes.pdfInterEmp',compact('solicitudes'));
       return $pdf->download('solinteremp.pdf');
-      //return view('accomercials.viewacuerdoprint')->with(compact('accomercial'));
+      //return view('solicitudes.pdfInterEmp')->with(compact('solicitudes'));
     }
 
 }

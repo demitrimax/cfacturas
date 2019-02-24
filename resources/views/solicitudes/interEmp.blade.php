@@ -1,7 +1,3 @@
-<div class="wrapper">
-  <!-- Main content -->
-  <section class="invoice">
-    <!-- title row -->
     <div class="row">
       <div class="col-xs-12">
         <h2 class="page-header">
@@ -119,7 +115,3 @@
       <!-- /.col -->
     </div>
     <!-- /.row -->
-  </section>
-  <!-- /.content -->
-</div>
-<!-- ./wrapper -->
