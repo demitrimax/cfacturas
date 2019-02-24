@@ -76,6 +76,11 @@ class catdocumentosController extends AppBaseController
         $catdocumentos->tipodoc = $request->input('tipodoc');
         $catdocumentos->archivo = 'documents/'.$tipodoc->carpeta.'/'.$nombre;
         $catdocumentos->nota = $request->input('nota');
+        if(!empty($request->input('fecha')))
+        {
+          $catdocumentos->fecha =  $request->input('fecha');
+        }
+
         if (!empty($request->input('cliente_id'))) {
           $catdocumentos->cliente_id = $request->input('cliente_id');
         }

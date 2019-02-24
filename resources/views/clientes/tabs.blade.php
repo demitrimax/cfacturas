@@ -7,6 +7,9 @@
               @can('documentos-list')
               <li class=""><a href="#tab_5" data-toggle="tab" aria-expanded="false">Expediente</a></li>
               @endcan
+              @if($clientes->personafisica == 1)
+              <li class=""><a href="#tab_6" data-toggle="tab" aria-expanded="false">Cumplimientos y Obligaciones</a></li>
+              @endif
               @can('datoscontacto-list')
               <li class=""><a href="#tab_7" data-toggle="tab" aria-expanded="false">Datos de Contacto</a></li>
               @endcan
@@ -32,6 +35,11 @@
                   @include('clientes.tabdocumentos')
                 @endcan
               </div>
+              @if($clientes->personafisica == 1)
+              <div class="tab-pane" id="tab_6">
+                @include('clientes.tabcump')
+              </div>
+              @endif
               @can('datoscontacto-list')
               <div class="tab-pane" id="tab_7">
                 @include('clientes.tabdatoscontacto')

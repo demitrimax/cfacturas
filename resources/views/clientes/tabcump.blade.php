@@ -1,6 +1,6 @@
 @php
 
-function human_filesize($bytes, $decimals = 2) {
+function human_filesized($bytes, $decimals = 2) {
   $sz = 'BKMGTP';
   $factor = floor((strlen($bytes) - 1) / 3);
   return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$sz[$factor];
@@ -10,7 +10,7 @@ function human_filesize($bytes, $decimals = 2) {
 @can('documentos-list')
     <div class="box box-primary">
       <div class="box-header">
-        <h3 class="box-title">Documentos del Cliente</h3>
+        <h3 class="box-title">Cumplimientos y Obligaciones</h3>
         <div class="box-tools pull-right">
           <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
           </button>
@@ -18,23 +18,25 @@ function human_filesize($bytes, $decimals = 2) {
           </div>
           <!-- /.box-header -->
               <div class="box-body">
-      @if($clientes->catdocumentos->whereNotIn('tipodoc',[11,12])->count()>0)
+      @if($clientes->catdocumentos->whereIn('tipodoc',[11,12])->count()>0)
       <table class="table table-condensed">
         <tbody><tr>
           <th style="width: 10px">#</th>
           <th>Tipo de Documento</th>
+          <th>Fecha</th>
           <th>Documento</th>
           <th>Nota</th>
           <th>Acciones</th>
         </tr>
-      @foreach($clientes->catdocumentos->whereNotIn('tipodoc',[11,12]) as $key=>$documento)
+      @foreach($clientes->catdocumentos->whereIn('tipodoc',[11,12]) as$key=>$documento)
         <tr>
           <td>{{$key+1}}</td>
           <td>{{$documento->cattipodoc->tipo}}</td>
+          <td>{{ strftime("%B, %Y", strtotime($documento->fecha))  }}</td>
           <td>
             <a href="{!! asset($documento->archivo) !!}" target="_blank"> Documento </a>
             @if(file_exists($documento->archivo))
-              : {{ human_filesize(filesize($documento->archivo)) }} bytes.
+              : {{ human_filesized(filesize($documento->archivo)) }} bytes.
             @endif
           </td>
           <td>{{$documento->nota}}</td>
@@ -56,7 +58,7 @@ function human_filesize($bytes, $decimals = 2) {
     @endif
       <h1 class="pull-right">
         @can('documentos-create')
-         <button type="button" class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-documento">Agregar Documento</button>
+         <button type="button" class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-cumplimiento">Alta de Doc de Cumplimiento y Obligaciones</button>
         @endcan
       </h1>
     <!-- /.box-body -->
@@ -67,13 +69,13 @@ function human_filesize($bytes, $decimals = 2) {
 
 <!--modal -->
 @push('modals')
-<div class="modal fade" id="modal-documento">
+<div class="modal fade" id="modal-cumplimiento">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Agregar Documento</h4>
+            <h4 class="modal-title">Alta de Documento de Cumplimientos y Obligaciones</h4>
           </div>
           <div class="modal-body">
               {!! Form::open(['route' => 'catdocumentos.store', 'enctype' => 'multipart/form-data']) !!}
@@ -82,7 +84,11 @@ function human_filesize($bytes, $decimals = 2) {
           {!! Form::hidden('redirect', 'clientes.show') !!}
           <div class="form-group">
               {!! Form::label('tipodoc', 'Tipo de Documento:') !!}
-              {!! Form::select('tipodoc', $tipodocs, null, ['class' => 'form-control']) !!}
+              {!! Form::select('tipodoc', $tipodocsd, null, ['class' => 'form-control']) !!}
+          </div>
+          <div class="form-group">
+              {!! Form::label('fecha', 'Mes y Año:') !!}
+              {!! Form::date('fecha', null, ['class' => 'form-control']) !!}
           </div>
 
           <!-- Archivo Field -->

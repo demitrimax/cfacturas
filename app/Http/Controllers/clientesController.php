@@ -191,8 +191,9 @@ class clientesController extends AppBaseController
 
           $bancos = cat_bancos::pluck('nombrecorto','id');
           $tipodocs = cattipodoc::pluck('tipo','id');
+          $tipodocsd = cattipodoc::where('tipocliente',2)->pluck('tipo','id');
           $estados = catestados::pluck('nombre','id');
-        return view('clientes.show')->with(compact('clientes','estados','avatar','tipodocs', 'bancos','edad'));
+        return view('clientes.show')->with(compact('clientes','estados','avatar','tipodocs', 'bancos','edad','tipodocsd'));
     }
 
     /**

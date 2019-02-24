@@ -2,7 +2,7 @@
     <div class="col-md-6 col-sm-7">
       <div class="box box-widget widget-user-2">
             <!-- Add the bg color to the header using any of the bg-* classes -->
-            <div class="widget-user-header bg-aqua">
+            <div class="widget-user-header {!! ($clientes->personafisica == 1) ? 'bg-blue' : 'bg-gray' !!} ">
               <a href="#" data-toggle="modal" data-target="#modal-fotoperfil">
               <div class="widget-user-image">
                 <img class="img-circle" src="{{asset($avatar)}}" alt="User Avatar" width="40">
