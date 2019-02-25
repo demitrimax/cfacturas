@@ -8,6 +8,7 @@ use App\Repositories\solicitudesRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use RealRashid\SweetAlert\Facades\Alert;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\Helpers\SomeClass;
@@ -28,6 +29,9 @@ use App\catunidmed;
 use App\catsatprodser;
 use App\facdetsolicitud;
 use PDF;
+use App\Models\cattipodoc;
+use App\Models\comprobantes;
+use App\Models\cat_bancos;
 
 class solicitudesController extends AppBaseController
 {
@@ -154,9 +158,11 @@ class solicitudesController extends AppBaseController
           $empleados = User::role(['empleado','gerente'])->get();
           $empleados = $empleados->pluck('name','id');
           $borrados = facsolicitud::onlyTrashed()->count();
+          $bancos = cat_bancos::pluck('nombrecorto','id');
           if($solicitudes->atendidopor)
           {
             $usuarioid = $solicitudes->atendidopor;
+            $tipodocs = cattipodoc::pluck('tipo','id');
             $asignadas = facsolicitud::where('atendidopor',$usuarioid)->count();
             $atendidas = facsolicitud::where('atendidopor',$usuarioid)->where('atendido',1)->count();
             $borradas = facsolicitud::onlyTrashed()->where('atendidopor',$usuarioid)->count();
@@ -171,7 +177,7 @@ class solicitudesController extends AppBaseController
             return redirect(route('solfact.index'))->with(compact('sweeterror'));
         }
         //dd($solicitudes);
-        return view('solicitudes.show')->with(compact('solicitudes','tamanoadjunto','empleados','borrados','asignadas','atendidas','borradas'));
+        return view('solicitudes.show')->with(compact('solicitudes','tamanoadjunto','empleados','borrados','asignadas','atendidas','borradas','tipodocs','bancos'));
 
     }
 
@@ -344,6 +350,40 @@ class solicitudesController extends AppBaseController
       $pdf = PDF::loadView('solicitudes.pdfInterEmp',compact('solicitudes'));
       return $pdf->download('solinteremp.pdf');
       //return view('solicitudes.pdfInterEmp')->with(compact('solicitudes'));
+    }
+
+    public function comprobantestore(Request $request)
+    {
+      $rules = [
+        //'fechasolicitud' => 'required',
+        'solicitud_id' => 'required',
+        'archivo'      => 'required',
+        'nota'         => 'required|max:100',
+        'foliocomp'        => 'required|max:18',
+      ];
+        $this->validate($request, $rules);
+        $input = $request->all();
+        $solicitudid = $input['solicitud_id'];
+
+        $comprobante = new comprobantes;
+
+        if($request->has('archivo'))
+        {
+
+          $comprobante->archivo = $request->file('archivo')->store('comprobante');
+          $comprobante->documento = $request->file('archivo')->getClientOriginalName();
+          $comprobante->nota = $request->input('nota');
+          $comprobante->foliocomp = $request->input('foliocomp');
+          $comprobante->banco_id = $request->input('bancoid');
+          $comprobante->save();
+          $comprobante->solicitudes()->attach($solicitudid);
+          Alert::success('Se ha cargado correctamente el comprobante');
+        }
+        else {
+          Alert::error('Ha ocurrido un error al cargar el comprobante');
+        }
+
+        return back();
     }
 
 }

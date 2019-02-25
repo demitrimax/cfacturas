@@ -4,6 +4,7 @@
 <!-- Select2 -->
  <link rel="stylesheet" href="{{asset('adminlte/bower_components/select2/dist/css/select2.min.css')}}">
 @endsection
+
 @section('content')
 <section class="content-header">
   <h1>
@@ -81,7 +82,7 @@
             <div class="box-body no-padding">
               <div class="mailbox-read-info">
                 <h3>{{$solicitudes->descripcion}}</h3>
-                <h5><b>De:</b> {{$solicitudes->correo}} | Teléfono: {{$solicitudes->telefono}}
+                <h5><b>De:</b> {{$solicitudes->usuario->email}}
                   <span class="mailbox-read-time pull-right">{{$solicitudes->fecha}}</span></h5>
 
 
@@ -120,6 +121,23 @@
                 </li>
               </ul>
               @endif
+              @if ($solicitudes->comprobantes()->count()>0)
+              @foreach($solicitudes->comprobantes as $comprobante)
+              <ul class="mailbox-attachments clearfix">
+                <li>
+                  <span class="mailbox-attachment-icon"><i class="fa fa-file-pdf-o"></i></span>
+
+                  <div class="mailbox-attachment-info">
+                    <a href="{{ asset($comprobante->archivo) }}" target="_blank" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> {{$comprobante->documento}}</a>
+                        <span class="mailbox-attachment-size">
+
+                          <a href="{{ asset($comprobante->archivo) }}" target="_blank" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
+                        </span>
+                  </div>
+                </li>
+              </ul>
+              @endforeach
+              @endif
             </div>
             <!-- /.box-footer -->
             <div class="box-footer">
@@ -131,7 +149,9 @@
               @can('solicitud-delete')
               <button type="button" class="btn btn-default" Onclick="ConfirmaEliminar()"><i class="fa fa-trash-o"></i> Eliminar</button>
               @endcan
+              <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-documento"><i class="fa fa-file-archive-o"></i> Adjuntar</button>
               <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Imprimir</button>
+              <a type="button"  href="{{route('solfact.edit',[$solicitudes->id])}}" class="btn btn-default"><i class="fa fa-edit"></i> Editar</a>
             </div>
             <!-- /.box-footer -->
           </div>
@@ -277,8 +297,57 @@
           <!-- /.modal-dialog -->
         </div>
         <!-- /.modal -->
+        <div class="modal fade" id="modal-documento">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Agregar Comprobante Bancario</h4>
+                  </div>
+                  <div class="modal-body">
+                      {!! Form::open(['route' => 'comprobante.store', 'enctype' => 'multipart/form-data']) !!}
+
+                  {!! Form::hidden('solicitud_id', $solicitudes->id) !!}
+                  {!! Form::hidden('redirect', 'solicitudes.show') !!}
+
+                  <div class="form-group">
+                      {!! Form::label('bancoid', 'Banco:') !!}
+                      {!! Form::select('bancoid', $bancos, null, ['class' => 'form-control']) !!}
+                  </div>
+
+                  <div class="form-group">
+                      {!! Form::label('foliocomp', 'Num. Folio:') !!}
+                      {!! Form::text('foliocomp', null, ['class' => 'form-control', 'maxlength'=>'18']) !!}
+                  </div>
+                  <!-- Archivo Field -->
+                  <div class="form-group">
+                      {!! Form::label('archivo', 'Archivo:') !!}
+                      {!! Form::file('archivo', ['class' => 'form-control'])!!}
+                  </div>
+                  <div class="clearfix"></div>
+
+                  <!-- Nota Field -->
+                  <div class="form-group">
+                      {!! Form::label('nota', 'Nota:') !!}
+                      {!! Form::text('nota', null, ['class' => 'form-control', 'maxlength'=>'150']) !!}
+                  </div>
+                </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary" id="agregardoc">Agregar Documento</button>
+                  </div>
+                  {!! Form::close() !!}
+
+                <!-- /.modal-content -->
+              </div>
+              <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+          </div>
   {!! Form::open(['route' => ['solfact.destroy', $solicitudes->id], 'method' => 'delete', 'id'=>'formElimina']) !!}
   {!! Form::close() !!}
+
 @endsection
 @section('scripts')
 <!-- Select2 -->

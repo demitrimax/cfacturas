@@ -77,6 +77,7 @@ Route::group(['middleware'=>['auth','verified','activity']], function() {
   Route::get('solfact/InterEmpresa/pdf/{id}', 'solicitudesController@InterEmpresaPDF');
   Route::get('/GetUmedida', 'solicitudesController@getUmedida');
   Route::get('/GetClaveps', 'solicitudesController@getClaveps');
+  Route::post('/solfact/comprobante','solicitudesController@comprobantestore')->name('comprobante.store');
 
   Route::resource('pagocondicions', 'pagocondicionController');
   Route::resource('pagometodos', 'pagometodoController');

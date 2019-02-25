@@ -183,5 +183,10 @@ class solicitudes extends Model
       return $nomempresa;
     }
 
+    public function comprobantes()
+    {
+      return $this->belongsToMany('App\Models\comprobantes','factsol_comprobante','solfact_id','comprobante_id');
+    }
+
 
 }
