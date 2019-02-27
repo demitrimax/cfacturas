@@ -11,6 +11,7 @@
         "askedio/laravel-soft-cascade": "^5.7",
         "barryvdh/laravel-dompdf": "^0.8.3",
         "crocodicstudio/crudbooster": "^5.4",
+        "eclipxe/cfdiutils": "^2.8",
         "fideloper/proxy": "^4.0",
         "infyomlabs/adminlte-templates": "5.7.x-dev",
         "infyomlabs/laravel-generator": "5.7.x-dev",
