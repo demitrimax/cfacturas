@@ -86,6 +86,7 @@ Route::group(['middleware'=>['auth','verified','activity']], function() {
   Route::resource('facturas', 'facturasController');
   Route::get('facturas/GetAcuerdosCliente/{id}','facturasController@getAcuerdosCliente');
   Route::get('facturas/comprobante/{id}','facturasController@getComprobante');
+  Route::get('facturas/createxml', 'facturasController@createXML');
 
   Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
   Route::resource('blogs', 'blogController');

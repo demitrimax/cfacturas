@@ -247,4 +247,17 @@ class facturasController extends AppBaseController
 
       return Storage::download($facturas->savedas,$facturas->comprobante);
     }
+
+    public function createXML()
+    {
+      //UPLOAD DE XML
+      // crear el objeto CFDI
+      /* $cfdi = \CfdiUtils\Cfdi::newFromString(
+          file_get_contents('cfdi.xml')
+      );
+      // obtener el QuickReader con el método dedicado
+      $comprobante = $cfdi->getQuickReader(); */
+      return view('facturas.createxml');
+
+    }
 }
