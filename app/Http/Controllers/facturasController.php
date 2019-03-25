@@ -20,6 +20,9 @@ use App\Models\pagocondicion;
 use App\Models\facestatus;
 use App\Models\accomercial;
 use App\Models\formapago;
+use App\Models\facturas;
+use Orchestra\Parser\Xml\Facade as XmlParser;
+use Auth;
 
 
 
@@ -49,8 +52,10 @@ class facturasController extends AppBaseController
         $this->facturasRepository->pushCriteria(new RequestCriteria($request));
         $facturas = $this->facturasRepository->all();
         //Alert::message('Robots are working!');
+        $acuerdos = accomercial::whereNotNull('aut1_at')->get();
+        $acuerdos = $acuerdos->pluck('numacuerdo','id');
         return view('facturas.index')
-            ->with('facturas', $facturas);
+            ->with(compact('facturas','acuerdos'));
     }
 
     /**
@@ -259,5 +264,114 @@ class facturasController extends AppBaseController
       $comprobante = $cfdi->getQuickReader(); */
       return view('facturas.createxml');
 
+    }
+
+    public function storeXML(Request $request)
+    {
+      $rules = [
+          'acuerdo'       => 'required',
+          'archivo'       => 'required',
+      ];
+
+      $messages = [
+          'acuerdo.required'              => 'Es necesario un acuerdo comercial',
+          'archivo.required'             => 'Se requiere un archivo de tipo XML.',
+          'archivo.mimes'                => 'Solo es permitido cargar archivos XML',
+          'archivo.file'                => 'Es requerido un archivo',
+
+      ];
+
+      $this->validate($request, $rules,$messages);
+
+        $input = $request->all();
+        //dd($input);
+
+        $archivo = $request->file('archivo')->store('xml');
+
+        $facturas = new facturas();
+        $facturas->xmlfile = $archivo;
+        //tabla facturas
+        $facturas->accomercial_id = $input['acuerdo'];
+        // cliente Id se debe obtener del acuerdo seleccionado.
+        $acuerdosel = accomercial::find($input['acuerdo']);
+        $facturas->cliente_id = $acuerdosel->cliente_id;
+        //empresa id buscar del XML el RFC de la empresa
+        if (Storage::exists($archivo)){
+          $contenidoxml = Storage::get($archivo);
+          //dd($contenidoxml);
+          //$xml = XmlParser::load($contenidoxml);
+          $xml = new \SimpleXMLElement($contenidoxml);
+            $ns = $xml->getNamespaces(true);
+            $xml->registerXPathNamespace('c', $ns['cfdi']);
+            $xml->registerXPathNamespace('t', $ns['tfd']);
+          //dd($namespaces);
+
+          //carga xml to array
+          $json = json_encode($xml);
+          $array= json_decode($json, TRUE);
+          $facturas->observaciones = 'Factura creada a partir de archivo XML';
+          $facturas->user_id = Auth::user()->id;
+
+          foreach ($xml->xpath('//cfdi:Comprobante') as $cfdiComprobante){
+                  //dd($cfdiComprobante['Version']);
+                //if ($cfdiComprobante['Version'] == '3.3') {
+                //  Alert::error('Solo soporta versión CFDI Versión 3.3');
+                //  return back();
+                //}
+                $facturas->fecha = strtotime($cfdiComprobante['Fecha']);
+                $facturas->formapago_id = $cfdiComprobante['FormaPago'];
+
+                $metodopagoid = pagometodo::where('clave', $cfdiComprobante['MetodoPago'])->first();
+                $facturas->metodopago_id = $metodopagoid->id;
+                $facturas->foliofac = $cfdiComprobante['Serie'].$cfdiComprobante['Folio'];
+                $facturas->subtotal = $cfdiComprobante['SubTotal'];
+                $facturas->total = $cfdiComprobante['Total'];
+                $factiva = (float)$cfdiComprobante['Total'] - (float)$cfdiComprobante['SubTotal'];
+                $facturas->iva = $factiva;
+                /*
+                echo $cfdiComprobante['fecha'];
+                echo $cfdiComprobante['sello'];
+                echo $cfdiComprobante['total'];
+                echo $cfdiComprobante['subTotal'];
+                echo $cfdiComprobante['certificado'];
+                echo $cfdiComprobante['formaDePago'];
+                echo $cfdiComprobante['noCertificado'];
+                echo $cfdiComprobante['tipoDeComprobante'];
+                */
+
+          }
+          //extrae los datos del emisor de la factura
+          foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Emisor') as $Emisor){
+            // echo $Emisor['rfc'];
+            // echo $Emisor['nombre'];
+            //var_dump($Emisor);
+            //die;
+            $empresaid = catempresas::where('rfc',$Emisor['Rfc'])->first();
+            if(!empty($empresaid)){
+                $facturas->empresa_id = $empresaid->id;
+            }else{
+              Alert::error('RFC: '.$Emisor['Rfc'].', emisor no corresponde en la bases de datos.');
+              Storage::delete($archivo);
+              return back();
+            }
+
+           }
+           foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Receptor') as $Receptor){
+
+             //echo $Receptor['rfc'];
+             //echo $Receptor['nombre'];
+          }
+        $facturas->save();
+        Alert::success('Factura cargada correctamente, revise la información.');
+
+        } else {
+          Alert::error('No se pudo cargar el archivo XML.:'.$archivo);
+          Storage::delete($archivo);
+          return back();
+        }
+        //$archivoXML = new SimpleXMLElement($archivo);
+        //  dd($archivoXML);
+
+        return back();
     }
 }

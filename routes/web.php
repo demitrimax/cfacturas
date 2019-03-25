@@ -106,4 +106,6 @@ Route::group(['middleware'=>['auth','verified','activity']], function() {
 
   //ajax para dataTables
   Route::get("ajax/datatable-catbancos", 'cat_bancosController@ajaxcatbancos');
+  //guardar facturas xml
+  Route::post('facturaxml/save', 'facturasController@storeXML');
 });
