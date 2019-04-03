@@ -47,12 +47,15 @@
                     </div>
                   </div>
 
+                  @php
+                  /*
                   <!-- Base del porcentaje Field -->
                   <div class="form-group">
                       {!! Form::label('base', 'Base del porcentaje:') !!}
                         {!! Form::select('base', ['SUBTOTAL'=>'SUBTOTAL','DEVOLUCION'=>'DEVOLUCION','TOTAL'=>'TOTAL'],null, ['class' => 'form-control', 'placeholder'=>'Seleccione']) !!}
-
                   </div>
+                  */
+                  @endphp
 
                 </div>
               </div>
