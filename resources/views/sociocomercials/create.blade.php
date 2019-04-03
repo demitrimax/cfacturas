@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Alta de Socio Comercial
+            <i class="fa fa-user-plus"></i> Alta de Socio Comercial
         </h1>
     </section>
     <div class="content">

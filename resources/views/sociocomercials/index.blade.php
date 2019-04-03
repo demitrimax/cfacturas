@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1 class="pull-left">Socios Comerciales</h1>
+        <h1 class="pull-left"><i class="fa fa-user-plus"></i> Socios Comerciales</h1>
 
         <h1 class="pull-right">
             @can('sociocomercial-create')
