@@ -4,12 +4,19 @@
     <section class="content-header">
         <h1 class="pull-left"><i class="fa fa-file-text-o"></i> Facturas</h1>
         <h1 class="pull-right">
+          <div class="margin">
+          <div class="btn-group">
           @can('facturas-create')
            <a class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('facturas.create') !!}">Agregar Nueva Factura</a>
           @endcan
           @can('facturas-createxml')
            <button class="btn btn-warning pull-right" style="margin-top: -10px;margin-bottom: 5px" data-toggle="modal" data-target="#modal-uploadxml">Cargar XML CFDI v3.3</button>
           @endcan
+          @can('facturas-create')
+          <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('facturas.create') !!}">Generar Factura</a>
+          @endcan
+          </div>
+        </div>
         </h1>
     </section>
     <div class="content">

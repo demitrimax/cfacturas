@@ -1,7 +1,7 @@
     <div class="row">
       <div class="col-xs-12">
         <h2 class="page-header">
-          <img src="{{asset('favicon/favicon.ico')}}" height="30" width="30"> Solicitud Factura
+          <img src="{{asset('favicon/favicon-96x96.png')}}" height="30" width="30"> Solicitud Factura
           <small class="pull-right">Fecha: {{$solicitudes->created_at->format('d-m-Y')}}</small>
         </h2>
       </div>
@@ -32,7 +32,7 @@
 
     <!-- Table row -->
     <div class="row">
-      <div class="col-xs-12 table-responsive">
+      <div class="col-xs-12">
         <table class="table table-striped">
           <thead>
           <tr>
