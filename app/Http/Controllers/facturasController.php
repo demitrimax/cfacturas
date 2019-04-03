@@ -239,6 +239,22 @@ class facturasController extends AppBaseController
       return $acuerdoArray;
     }
 
+    public function getEmpresasAcuerdo($id)
+    {
+      $empresasArray[] =  ['id' => 0, 'empresa' => '---'];
+      $acuerdo = accomercial::find($id);
+      $empresasAcuerdo = $acuerdo->empresasfact;
+      if ($empresasAcuerdo){
+        unset($empresasArray);
+        $empresasArray = array();
+        foreach ($empresasAcuerdo as $key => $empresa) {
+          $empresasArray[]=['id'=>$empresa->id, 'nombre'=>$empresa->nombre];
+        }
+      }
+      return $empresasArray;
+
+    }
+
     public function getComprobante($id)
     {
       $facturas = $this->facturasRepository->findWithoutFail($id);

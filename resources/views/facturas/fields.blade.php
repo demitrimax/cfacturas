@@ -1,3 +1,8 @@
+@section('css')
+<link href="{{asset('adminlte/bower_components/select2/dist/css/select2.min.css')}}" rel="stylesheet" />
+<!-- iCheck for checkboxes and radio inputs -->
+ <link rel="stylesheet" href="{{asset('adminlte/bower_components/iCheck/skins/all.css')}}">
+@endsection
 <div class="panel panel-default">
   <div class="panel-heading">Datos del Acuerdo</div>
   <div class="panel-body">
@@ -84,8 +89,8 @@
     {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
     <a href="{!! route('facturas.index') !!}" class="btn btn-default">Cancel</a>
 </div>
+@section('scripts')
 
-@push('scripts')
 <script src="{{asset('adminlte/bower_components/select2/dist/js/select2.full.min.js')}}"></script>
 <!-- iCheck 1.0.1 -->
 <script src="{{asset('adminlte/bower_components/iCheck/icheck.min.js')}}"></script>
@@ -97,12 +102,27 @@ $('#cliente_id').on('change', function(e) {
   //console.log(e);
   var cliente_id = e.target.value;
   //ajax
-  $.get('/facturas/GetAcuerdosCliente/'+cliente_id, function(data) {
+  $.get('{{url('facturas/GetAcuerdosCliente')}}/'+cliente_id, function(data) {
     //exito al obtener los datos
     console.log(data);
     $('#accomercial_id').empty();
+    $('#accomercial_id').append('<option value ="0">Seleccione una opción</option>' );
     $.each(data, function(index, acuerdo) {
       $('#accomercial_id').append('<option value ="' + acuerdo.id + '">'+acuerdo.numacuerdo+'</option>' );
+    });
+  });
+});
+
+$('#accomercial_id').on('change', function(e) {
+  //console.log(e);
+  var acuerdo_id = e.target.value;
+  //ajax
+  $.get('{{url('facturas/GetEmpresasAcuerdo')}}/'+acuerdo_id, function(data) {
+    //exito al obtener los datos
+    console.log(data);
+    $('#empresa_id').empty();
+    $.each(data, function(index, empresa) {
+      $('#empresa_id').append('<option value ="' + empresa.id + '">'+empresa.nombre+'</option>' );
     });
   });
 });
@@ -158,4 +178,4 @@ function calculoiva(){
  @endif
 //si ya se tiene un id seleccionado
 </script>
-@endpush
+@endsection
