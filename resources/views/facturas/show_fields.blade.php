@@ -1,30 +1,34 @@
 <div class="panel panel-default col-md-6">
   <div class="panel-heading">Panel General</div>
   <div class="panel-body">
-    <div class="list-group">
-      <a href="#" class="list-group-item active">
-        <h4 class="list-group-item-heading">{!! Form::label('cliente_id', 'Cliente:') !!}</h4>
-        <p class="list-group-item-text">{!! $facturas->cliente->nombre !!}</p>
-      </a>
-      <a href="#" class="list-group-item">
-        <h4 class="list-group-item-heading">{!! Form::label('empresa_id', 'Empresa:') !!}</h4>
-        <p class="list-group-item-text">{!! $facturas->empresa->nombre !!}</p>
-      </a>
-      <a href="#" class="list-group-item">
-        <h4 class="list-group-item-heading">{!! Form::label('acuerdo_id', 'Acuerdo Comercial No.:') !!}</h4>
-        <p class="list-group-item-text">{!! $facturas->acuerdo->numacuerdo !!}</p>
-      </a>
-      <a href="#" class="list-group-item">
-        <h4 class="list-group-item-heading">{!! Form::label('fecha', 'Fecha:') !!}</h4>
-        <p class="list-group-item-text">{!! $facturas->fecha->format('d-M-Y') !!}</p>
-      </a>
-      <a href="#" class="list-group-item">
-        <h4 class="list-group-item-heading">{!! Form::label('observaciones', 'Observaciones:') !!}</h4>
-        <p class="list-group-item-text">{!! $facturas->observaciones !!}</p>
-      </a>
+    <table class="table table-striped table-bordered detail-view">
+  <tbody>
+    <tr>
+      <th>{!! Form::label('cliente_id', 'Cliente:') !!}</th>
+      <td>{!! $facturas->cliente->nombre !!}</td>
+    </tr>
+    <tr>
+      <th>{!! Form::label('empresa_id', 'Empresa:') !!}</th>
+      <td>{!! $facturas->empresa->nombre !!}</td>
+    </tr>
+    <tr>
+      <th>{!! Form::label('acuerdo_id', 'Acuerdo Comercial No.:') !!}</th>
+      <td>{!! $facturas->acuerdo->numacuerdo !!}</td>
+    </tr>
+    <tr>
+      <th>{!! Form::label('fecha', 'Fecha:') !!}</th>
+      <td>{!! $facturas->fecha->format('d-M-Y') !!}</td>
+    </tr>
+    <tr>
+      <th>{!! Form::label('observaciones', 'Observaciones:') !!}</th>
+      <td>{!! $facturas->observaciones !!}</td>
+    </tr>
+
+    </tbody>
+  </table>
+
     </div>
   </div>
-</div>
 
 <div class="panel panel-default col-md-6">
   <div class="panel-heading">Información Factura</div>

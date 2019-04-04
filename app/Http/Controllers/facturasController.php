@@ -54,8 +54,11 @@ class facturasController extends AppBaseController
         //Alert::message('Robots are working!');
         $acuerdos = accomercial::whereNotNull('aut1_at')->get();
         $acuerdos = $acuerdos->pluck('numacuerdo','id');
+
+        $clientes = clientes::has('accomerciales')->get();
+        $clientes = $clientes->pluck('nombrerfc','id');
         return view('facturas.index')
-            ->with(compact('facturas','acuerdos'));
+            ->with(compact('facturas','acuerdos','clientes'));
     }
 
     /**
@@ -67,7 +70,6 @@ class facturasController extends AppBaseController
     {
         //$clientes = clientes::has('direcciones')->get();
         $clientes = clientes::has('accomerciales')->get();
-        //$clientes = $clientes->where()
         $clientes = $clientes->pluck('nombrerfc','id');
         $direcciones = direcciones::pluck('RFC','id');
         $empresas = catempresas::pluck('nombre','id');
@@ -159,8 +161,14 @@ class facturasController extends AppBaseController
 
             return redirect(route('facturas.index'));
         }
+        $clientes = clientes::has('accomerciales')->get();
+        $clientes = $clientes->pluck('nombrerfc','id');
+        $empresas = catempresas::pluck('nombre','id');
+        $pagometodo = pagometodo::pluck('nombre','id');
+        $pagoforma = formapago::pluck('descripcion','id');
+        $facestatus = facestatus::pluck('nombre','id');
 
-        return view('facturas.edit')->with('facturas', $facturas);
+        return view('facturas.edit')->with(compact('facturas','clientes','empresas','pagometodo','pagoforma'));
     }
 
     /**
@@ -325,7 +333,7 @@ class facturasController extends AppBaseController
           //carga xml to array
           $json = json_encode($xml);
           $array= json_decode($json, TRUE);
-          $facturas->observaciones = 'Factura creada a partir de archivo XML';
+          $facturas->observaciones = 'Factura dada de alta a partir de archivo XML';
           $facturas->user_id = Auth::user()->id;
 
           foreach ($xml->xpath('//cfdi:Comprobante') as $cfdiComprobante){
@@ -389,5 +397,42 @@ class facturasController extends AppBaseController
         //  dd($archivoXML);
 
         return back();
+    }
+    public function facturaGenerate(Request $request)
+    {
+        $input = $request->all();
+        $clienteid = $input['cliente_id'];
+        $acuerdoid = $input['accomercial_id'];
+        $empresaid = $input['empresa_id'];
+        $cliente = clientes::find($clienteid);
+        $empresa = catempresas::find($empresaid);
+        $acuerdo = accomercial::find($acuerdoid);
+      return view('facturas.genfactura')->with(compact('cliente','empresa','acuerdo'));
+    }
+    public function registropago(Request $request, $id)
+    {
+      $facturaid = $id;
+      $factura = facturas::find($facturaid);
+      $cuentas = $factura->empresa->catcuentas;
+      $cuentas = $cuentas->pluck('bancocuenta','id');
+      return view('facturas.factregpago')->with(compact('factura','cuentas'));
+    }
+    public function guardarpago(Request $request)
+    {
+      $rules = [
+          'factura_id'    => 'required',
+          'archivo'       => 'required',
+      ];
+
+      $messages = [
+          'factura.required'    => 'Es necesario un acuerdo comercial',
+          'archivo.file'        => 'Es requerido un archivo',
+
+      ];
+
+      $this->validate($request, $rules,$messages);
+
+        $input = $request->all();
+
     }
 }

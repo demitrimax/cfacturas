@@ -130,4 +130,8 @@ class catcuentas extends Model
       }
       return $nombreempresa;
     }
+    public function getBancocuentaAttribute()
+    {
+      return $this->catBanco->nombre.' - '.$this->numcuenta;
+    }
 }

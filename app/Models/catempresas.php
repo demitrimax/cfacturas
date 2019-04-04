@@ -125,5 +125,14 @@ class catempresas extends Model
       }
       return $direccion;
     }
+    public function getTienedatosbancariosAttribute()
+    {
+      if ($this->catcuentas->count()>0) {
+        return true;
+      }
+      else{
+        return false;  
+      }
+    }
 
 }

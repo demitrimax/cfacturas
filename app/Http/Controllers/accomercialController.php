@@ -163,6 +163,7 @@ class accomercialController extends AppBaseController
 
         Flash::success('Acuerdo Comercial guardado correctamente, Se enviaron correos electronicos a los participantes.');
 
+
         return redirect(route('accomercials.index'))->with(compact('sweet'));
     }
 

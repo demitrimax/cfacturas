@@ -1,10 +1,10 @@
 @extends('layouts.app')
-@section('title',config('app.name').' | Alta de Facturas' )
+@section('title',config('app.name').' | Generar Facturas' )
 
 @section('content')
     <section class="content-header">
         <h1>
-            Alta de Facturas
+            <i class="fa fa-file-text-o"></i> Generar Facturas
         </h1>
     </section>
     <div class="content">
@@ -15,26 +15,61 @@
             <div class="box-body">
                     {!! Form::open(['route' => 'facturas.store', 'enctype'=>'multipart/form-data']) !!}
 
-                    <div class="panel panel-default">
-                      <div class="panel-heading">Datos del Acuerdo</div>
+                    <div class="panel panel-primary">
+                      <div class="panel-heading">Emisor</div>
                       <div class="panel-body">
-                        <!-- Cliente Id Field -->
-                        <div class="form-group">
-                            {!! Form::label('cliente_id', 'Cliente:*') !!}
-                            {!! Form::select('cliente_id', $clientes, null, ['class' => 'form-control select2', 'placeholder' => 'Seleccione un cliente', 'required', 'style'=>'width: 100%;']) !!}
+                        <div class="row">
+                          <!-- Empresa Id Field -->
+                          <div class="form-group col-md-4">
+                              {!! Form::label('empresa_id', 'Razón Social:*') !!}
+                              {!! Form::text('empresa', $empresa->nombre, ['class' => 'form-control', 'placeholder'=>'Nombre de la Empresa', 'required', 'readonly']) !!}
+                              {!! Form::hidden('empresa_id', $empresa->id ) !!}
+                          </div>
+                          <!-- Empresa Id Field -->
+                          <div class="form-group col-md-4">
+                              {!! Form::label('rfc_emisor', 'RFC:*') !!}
+                              {!! Form::text('rfc_emisor', $empresa->rfc, ['class' => 'form-control', 'placeholder'=>'RFC de la Empresa', 'required', 'readonly']) !!}
+                          </div>
+                          <div class="form-group col-md-4">
+                              {!! Form::label('fecha', 'Fecha:*') !!}
+                              {!! Form::date('fecha', date("Y-m-d"), ['class' => 'form-control', 'placeholder'=>'Fecha de emisión', 'required', 'readonly']) !!}
+                          </div>
+
+                      </div>
+                        <div class="row">
+                          <div class="form-group col-md-4">
+                              {!! Form::label('serie', 'Serie:*') !!}
+                              {!! Form::text('serie', null, ['class' => 'form-control', 'placeholder'=>'Serie', 'required']) !!}
+                          </div>
+                          <div class="form-group col-md-4">
+                              {!! Form::label('folio', 'Folio:*') !!}
+                              {!! Form::text('folio', null, ['class' => 'form-control', 'placeholder'=>'Folio', 'required']) !!}
+                          </div>
+                          <div class="form-group col-md-4">
+                              {!! Form::label('tcomprobante', 'Tipo de Comprobante:*') !!}
+                              {!! Form::text('rfc', 'I-Ingreso', ['class' => 'form-control', 'placeholder'=>'Tipo de comprobante', 'required', 'readonly']) !!}
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="panel panel-primary">
+                      <div class="panel-heading">Receptor</div>
+                      <div class="panel-body">
+                        <div class="row">
+                          <!-- Cliente Id Field -->
+                          <div class="form-group col-md-4">
+                              {!! Form::label('cliente', 'Cliente:*') !!}
+                              {!! Form::text('cliente', $cliente->nombre, ['class' => 'form-control', 'placeholder' => 'Razon Social Receptor', 'required', 'readonly']) !!}
+                          </div>
+                          <!-- Cliente Id Field -->
+                          <div class="form-group col-md-4">
+                              {!! Form::label('rfc_receptor', 'RFC:*') !!}
+                              {!! Form::text('rfc_receptor', $cliente->RFC, ['class' => 'form-control', 'placeholder' => 'RFC Receptor', 'required', 'readonly']) !!}
+                          </div>
                         </div>
 
-                        <!-- Acuerdo Comercial Id Field -->
-                        <div class="form-group">
-                            {!! Form::label('accomercial_id', 'Acuerdo Comercial:*') !!}
-                            {!! Form::select('accomercial_id', [], null, ['class' => 'form-control select2', 'placeholder'=>'Seleccione un Acuerdo', 'required', 'style'=>'width: 100%;']) !!}
-                        </div>
-
-                        <!-- Empresa Id Field -->
-                        <div class="form-group">
-                            {!! Form::label('empresa_id', 'Empresa:*') !!}
-                            {!! Form::select('empresa_id', $empresas, null, ['class' => 'form-control select2', 'placeholder'=>'Seleccione una Empresa', 'required', 'style'=>'width: 100%;']) !!}
-                        </div>
                       </div>
                     </div>
 
@@ -76,13 +111,13 @@
                         <!-- Metodopago Id Field -->
                         <div class="form-group">
                             {!! Form::label('metodopago_id', 'Método de Pago:*') !!}
-                            {!! Form::select('metodopago_id', $pagometodo, null, ['class' => 'form-control', 'required']) !!}
+                            {!! Form::select('metodopago_id', [], null, ['class' => 'form-control', 'required']) !!}
                         </div>
 
                         <!-- forma de pago Id Field -->
                         <div class="form-group">
                             {!! Form::label('formapago_id', 'Forma de pago:*') !!}
-                            {!! Form::select('formapago_id', $pagoforma, null, ['class' => 'form-control', 'required']) !!}
+                            {!! Form::select('formapago_id', [], null, ['class' => 'form-control', 'required']) !!}
                         </div>
                         <!-- Comprobante Field -->
                         <div class="form-group">

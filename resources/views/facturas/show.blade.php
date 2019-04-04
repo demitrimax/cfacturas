@@ -9,7 +9,7 @@
     <div class="content">
         <div class="box box-primary">
             <div class="box-body">
-                <div class="row" style="padding-left: 20px">
+                <div class="row">
                     @include('facturas.show_fields')
                     <a href="{!! route('facturas.index') !!}" class="btn btn-default">Regresar</a>
                 </div>

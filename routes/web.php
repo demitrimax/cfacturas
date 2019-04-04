@@ -83,11 +83,15 @@ Route::group(['middleware'=>['auth','verified','activity']], function() {
   Route::resource('pagometodos', 'pagometodoController');
   Route::resource('facestatuses', 'facestatusController');
 
+  //rutas para facturas
   Route::resource('facturas', 'facturasController');
   Route::get('facturas/GetAcuerdosCliente/{id}','facturasController@getAcuerdosCliente');
   Route::get('facturas/comprobante/{id}','facturasController@getComprobante');
   Route::get('facturas/createxml', 'facturasController@createXML');
   Route::get('facturas/GetEmpresasAcuerdo/{id}','facturasController@getEmpresasAcuerdo');
+  Route::get('facturas/generate/create', 'facturasController@facturaGenerate');
+  Route::get('facturas/registro/{id}/pago', 'facturasController@registropago');
+  Route::post('facturas/guardar/pago', 'facturasController@guardarpago');
 
   Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
   Route::resource('blogs', 'blogController');

@@ -6,6 +6,7 @@
           <th>Acuerdo</th>
           <th>Fecha</th>
           <th>Folio</th>
+          <th>Met. Pago</th>
           <th>Total</th>
           <th>Acciones</th>
         </tr>
@@ -18,7 +19,16 @@
             <td>{!! $facturas->acuerdo->numacuerdo !!}</td>
             <td>{!! $facturas->fecha->format('d-M-Y') !!}</td>
             <td>{!! $facturas->foliofac !!}</td>
-            <td>${!! number_format($facturas->total,2) !!}</td>
+            <td title="{!!$facturas->pagoMetodo->nombre!!}">{!! $facturas->pagoMetodo->clave !!}</td>
+            <td>${!! number_format($facturas->total,2) !!}
+              @can('registrar-pago')
+                @if($facturas->empresa->tienedatosbancarios)
+                  <a href="{{url('facturas/registro/'.$facturas->id.'/pago')}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Registrar Pago"><i class="fa fa-dollar"></i></a>
+                @else
+                  <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="La empresa no tiene cuentas bancarias registradas"><i class="fa fa-dollar"></i></button>
+                @endif
+              @endcan
+            </td>
             <td>
                 {!! Form::open(['route' => ['facturas.destroy', $facturas->id], 'method' => 'delete', 'id'=>'form'.$facturas->id]) !!}
                 <div class='btn-group'>
@@ -35,24 +45,24 @@
     </tbody>
 </table>
 
-@section('scripts')
+@push('scripts')
 <script>
-@can('facturas-delete')
-function ConfirmDelete(id) {
-  swal({
-        title: '¿Estás seguro?',
-        text: 'Estás seguro de borrar esta factura.',
-        type: 'warning',
-        showCancelButton: true,
-        cancelButtonText: 'Cancelar',
-        confirmButtonColor: '#3085d6',
-        confirmButtonText: 'Continuar',
-        }).then((result) => {
-  if (result.value) {
-    document.forms['form'+id].submit();
+  @can('facturas-delete')
+  function ConfirmDelete(id) {
+    swal({
+          title: '¿Estás seguro?',
+          text: 'Estás seguro de borrar esta factura.',
+          type: 'warning',
+          showCancelButton: true,
+          cancelButtonText: 'Cancelar',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Continuar',
+          }).then((result) => {
+    if (result.value) {
+      document.forms['form'+id].submit();
+    }
+  })
   }
-})
-}
-@endcan
-</script>
-@endsection
+  @endcan
+  </script>
+@endpush
