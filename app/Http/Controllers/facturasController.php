@@ -21,6 +21,7 @@ use App\Models\facestatus;
 use App\Models\accomercial;
 use App\Models\formapago;
 use App\Models\facturas;
+use App\Models\mbanca;
 use Orchestra\Parser\Xml\Facade as XmlParser;
 use Auth;
 
@@ -419,20 +420,55 @@ class facturasController extends AppBaseController
     }
     public function guardarpago(Request $request)
     {
+      //dd($request);
       $rules = [
           'factura_id'    => 'required',
-          'archivo'       => 'required',
+          'comprobante'   => 'required|file',
+          'referencia'    => 'required',
       ];
 
       $messages = [
-          'factura.required'    => 'Es necesario un acuerdo comercial',
-          'archivo.file'        => 'Es requerido un archivo',
-
+          'factura.required'    => 'Es necesario los datos de la factura',
+          'comprobante.file'    => 'Es requerido un archivo',
+          'referencia'          => 'Es necesario la referencia',
       ];
 
-      $this->validate($request, $rules,$messages);
+      $this->validate($request, $rules, $messages);
 
         $input = $request->all();
+
+        //VERIFICAR QUE LA REFERENCIA NO EXISTA EN LA BASE DE Datos
+        $factura = facturas::find($input['factura_id']);
+        $referenciaexists = mbanca::where('referencia',$input['referencia'])->first();
+        if ($referenciaexists)
+        {
+          Alert::error('La referencia ya existe, porfavor escriba una referencia diferente');
+          return back();
+        }
+
+        $archivo = $request->file('comprobante')->store('compfacturas');
+
+        //$comprobante = $arcivo;
+        $movbancario = new mbanca();
+
+        $movbancario->cuenta_id     = $input['cuenta'];
+        $movbancario->toperacion    = 'abono';
+        $movbancario->tmovimiento   = 7;
+        $movbancario->concepto      = 'ENTRADA DE FONDOS DE LA FACTURA NO.';
+        $movbancario->monto         = $factura->total;
+        $movbancario->fecha         = $input['fecha'];
+        $movbancario->metodo        = 1;
+        $movbancario->referencia    = $input['referencia'];
+        $movbancario->user_id       = Auth::user()->id;
+        $movbancario->factura_id    = $input['factura_id'];
+        $movbancario->documento     = $archivo;
+        $movbancario->save();
+
+        $factura->estatus_id  = 5;
+        $factura->save();
+
+        Alert::success('Pago registrado correctamente');
+        return redirect(route('facturas.index'));
 
     }
 }

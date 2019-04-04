@@ -359,7 +359,7 @@ $('#giroempresa').on('change keyup paste', function(e) {
     //console.log(e);
     var estado_id = e.target.value;
     //ajax
-    $.get('/GetMunicipios/'+estado_id, function(data) {
+    $.get('{{url('/GetMunicipios')}}/'+estado_id, function(data) {
       //exito al obtener los datos
       //console.log(data);
       $('#municipio_id').empty();
@@ -376,7 +376,7 @@ $('#giroempresa').on('change keyup paste', function(e) {
     var municipioid;
     if (codpostal.length >= 5  ) {
     //ajax
-    $.get('/GetCiudades?cp='+codpostal, function(data) {
+    $.get('{{url('/GetCiudades')}}?cp='+codpostal, function(data) {
       //exito al obtener los datos
       //console.log(data);
       $('#listaciudad').empty();
@@ -393,7 +393,7 @@ $('#giroempresa').on('change keyup paste', function(e) {
       $('#estado_id').change();
       $('select#municipio_id').val(municipioid);
     });
-    $.get('/GetAsentamientos?cp='+codpostal, function(data) {
+    $.get('{{url('/GetAsentamientos')}}?cp='+codpostal, function(data) {
       //exito al obtener los datos
       console.log(data);
       $('#listacolonias').empty();

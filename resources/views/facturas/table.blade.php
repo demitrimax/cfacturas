@@ -23,7 +23,11 @@
             <td>${!! number_format($facturas->total,2) !!}
               @can('registrar-pago')
                 @if($facturas->empresa->tienedatosbancarios)
+                  @if($facturas->estatus_id == 5)
+                  <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Pagada"><i class="fa fa-dollar"></i></button>
+                  @else
                   <a href="{{url('facturas/registro/'.$facturas->id.'/pago')}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Registrar Pago"><i class="fa fa-dollar"></i></a>
+                  @endif
                 @else
                   <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="La empresa no tiene cuentas bancarias registradas"><i class="fa fa-dollar"></i></button>
                 @endif

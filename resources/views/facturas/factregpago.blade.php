@@ -7,11 +7,20 @@
         <i class="fa fa-file-text-o"></i> Registrar pago de factuas
     </h1>
 </section>
+
+
 <div class="content">
+  <div class="clearfix"></div>
+
+  @include('flash::message')
+          @include('adminlte-templates::common.errors')
+  <div class="clearfix"></div>
+
   <div class="panel panel-primary">
     <div class="panel-heading">Datos del Pago</div>
     <div class="panel-body">
-      {!! Form::open(['url' => ['facturas/guadar/pago'], 'method' => 'post' ]) !!}
+      <div class="row">
+      {!! Form::open(['url' => ['facturas/guardar/pago'], 'method' => 'post', 'enctype'=>'multipart/form-data'  ]) !!}
       <!-- Cliente Id Field -->
       <div class="form-group col-md-4">
           {!! Form::label('factura', 'Factura:*') !!}
@@ -52,10 +61,17 @@
           {!! Form::text('sociocomercial', $factura->acuerdo->sociocomer->nombre, ['class' => 'form-control', 'placeholder' => 'Socio Comercial', 'required', 'readonly']) !!}
       </div>
       @endif
-      <!-- Empresa Id Field -->
-      <div class="form-group col-md-12">
-          {!! Form::label('comprobante', 'comprobante:*') !!}
-          {!! Form::file('comprobamte', null, ['class' => 'form-control', 'placeholder'=>'Seleccione el archivo del comprobante', 'required']) !!}
+    </div>
+      <div class="row">
+        <!-- Empresa Id Field -->
+        <div class="form-group col-md-4">
+            {!! Form::label('comprobante', 'Comprobante:*') !!}
+            {!! Form::file('comprobante', null, ['class' => 'form-control', 'placeholder'=>'Seleccione el archivo del comprobante', 'required']) !!}
+        </div>
+        <div class="form-group col-md-4">
+            {!! Form::label('referencia', 'Referencia de Comprobante:*') !!}
+            {!! Form::text('referencia', null, ['class' => 'form-control', 'placeholder' => 'Referencia del comprobante', 'required', 'maxlength'=>'50']) !!}
+        </div>
       </div>
     </div>
     <div class="panel-footer">
