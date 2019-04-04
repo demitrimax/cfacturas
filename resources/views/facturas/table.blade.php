@@ -1,8 +1,8 @@
 <table class="table table-responsive" id="facturas-table">
     <thead>
         <tr>
-          <th>Cliente</th>
-          <th>Empresa</th>
+          <th>Emisor</th>
+          <th>Receptor</th>
           <th>Acuerdo</th>
           <th>Fecha</th>
           <th>Folio</th>
@@ -14,8 +14,8 @@
     <tbody>
     @foreach($facturas as $facturas)
         <tr>
-            <td>{!! $facturas->cliente->nomcompleto !!}</td>
             <td>{!! $facturas->empresa->nombre !!}</td>
+            <td>{!! $facturas->cliente->nomcompleto !!}</td>
             <td>{!! $facturas->acuerdo->numacuerdo !!}</td>
             <td>{!! $facturas->fecha->format('d-M-Y') !!}</td>
             <td>{!! $facturas->foliofac !!}</td>

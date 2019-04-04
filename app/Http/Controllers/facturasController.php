@@ -371,11 +371,21 @@ class facturasController extends AppBaseController
             // echo $Emisor['nombre'];
             //var_dump($Emisor);
             //die;
-            $empresaid = catempresas::where('rfc',$Emisor['Rfc'])->first();
+            //$empresaid = catempresas::where('rfc',$Emisor['Rfc'])->first();
+            $empresaid = null;
+            $empresasfact = $acuerdosel->empresasfact;
+            foreach($empresasfact as $empresafact) {
+              // Recorre el arreglo de empresas que pertenezcan al acuerdo comercial y que coincidan con el RFC del emisor
+              if ($empresafact->rfc == $Emisor['Rfc'])
+              {
+                $empresaid = $empresafact->id;
+              }
+            }
             if(!empty($empresaid)){
-                $facturas->empresa_id = $empresaid->id;
+                $facturas->empresa_id = $empresaid;
             }else{
-              Alert::error('RFC: '.$Emisor['Rfc'].', emisor no corresponde en la bases de datos.');
+              Flash::error('RFC: '.$Emisor['Rfc'].', emisor no corresponde al acuerdo comercial.');
+              Alert::error('RFC: '.$Emisor['Rfc'].', emisor no corresponde al acuerdo comercial.');
               Storage::delete($archivo);
               return back();
             }
