@@ -4582,25 +4582,25 @@
         },
         {
             "name": "spatie/laravel-backup",
-            "version": "5.12.0",
+            "version": "5.12.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-backup.git",
-                "reference": "9f6466ad6b51dedba0ceccc65aff8a613d5f4521"
+                "reference": "553562557ef13fda0e823cc609cd7d4f2c4f2552"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/9f6466ad6b51dedba0ceccc65aff8a613d5f4521",
-                "reference": "9f6466ad6b51dedba0ceccc65aff8a613d5f4521",
+                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/553562557ef13fda0e823cc609cd7d4f2c4f2552",
+                "reference": "553562557ef13fda0e823cc609cd7d4f2c4f2552",
                 "shasum": ""
             },
             "require": {
-                "illuminate/console": "~5.5.0|~5.6.0|~5.7.0",
-                "illuminate/contracts": "~5.5.0|~5.6.0|~5.7.0",
-                "illuminate/events": "~5.5.0|~5.6.0|~5.7.0",
-                "illuminate/filesystem": "~5.5.0|~5.6.0|~5.7.0",
-                "illuminate/notifications": "~5.5.0|~5.6.0|~5.7.0",
-                "illuminate/support": "~5.5.0|~5.6.0|~5.7.0",
+                "illuminate/console": "~5.5.0|~5.6.0|~5.7.0|~5.8.0",
+                "illuminate/contracts": "~5.5.0|~5.6.0|~5.7.0|~5.8.0",
+                "illuminate/events": "~5.5.0|~5.6.0|~5.7.0|~5.8.0",
+                "illuminate/filesystem": "~5.5.0|~5.6.0|~5.7.0|~5.8.0",
+                "illuminate/notifications": "~5.5.0|~5.6.0|~5.7.0|~5.8.0",
+                "illuminate/support": "~5.5.0|~5.6.0|~5.7.0|~5.8.0",
                 "league/flysystem": "^1.0.27",
                 "php": "^7.1",
                 "spatie/db-dumper": "^2.11.1",
@@ -4609,7 +4609,7 @@
             },
             "require-dev": {
                 "mockery/mockery": "^1.0",
-                "orchestra/testbench": "~3.5.0|~3.6.0|~3.7.0",
+                "orchestra/testbench": "~3.5.0|~3.6.0|~3.7.0|~3.8.0",
                 "phpunit/phpunit": "^7.3"
             },
             "suggest": {
@@ -4651,7 +4651,7 @@
                 "laravel-backup",
                 "spatie"
             ],
-            "time": "2018-12-28T07:57:48+00:00"
+            "time": "2019-04-04T12:00:30+00:00"
         },
         {
             "name": "spatie/laravel-permission",

@@ -113,4 +113,10 @@ Route::group(['middleware'=>['auth','verified','activity']], function() {
   Route::get("ajax/datatable-catbancos", 'cat_bancosController@ajaxcatbancos');
   //guardar facturas xml
   Route::post('facturaxml/save', 'facturasController@storeXML');
+  //backup interface-control
+  Route::get('backup', 'BackupController@index');
+  Route::get('backup/create', 'BackupController@create');
+  Route::get('backup/download/{file_name}', 'BackupController@download');
+  Route::get('backup/delete/{file_name}', 'BackupController@delete');
+
 });
