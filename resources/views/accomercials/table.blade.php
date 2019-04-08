@@ -14,7 +14,13 @@
     <tbody>
     @foreach($accomercials as $accomercial)
         <tr>
-            <td width="100">{!! ($accomercial->autorizado) ? $accomercial->numacuerdo : $accomercial->fechasolicitud->format('d-M-Y') !!}</td>
+            <td width="100">
+               @if($accomercial->autorizado)
+                <a href="{!! route('accomercials.show', [$accomercial->id]) !!}"> {{$accomercial->numacuerdo}} </a>
+                @else
+                  {!! $accomercial->fechasolicitud->format('d-M-Y') !!}
+                @endif
+                </td>
             <td>{!! $accomercial->nomsocio !!}</td>
             <td>{!! $accomercial->nomcliente !!}</td>
             <td>{!! $accomercial->informacion !!}</td>

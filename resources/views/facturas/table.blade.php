@@ -1,6 +1,11 @@
-<table class="table table-responsive" id="facturas-table">
+@push('css')
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{{asset('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
+@endpush
+<table class="table table-bordered table-striped" id="facturas-table">
     <thead>
         <tr>
+          <th>No</th>
           <th>Emisor</th>
           <th>Receptor</th>
           <th>Acuerdo</th>
@@ -12,8 +17,9 @@
         </tr>
     </thead>
     <tbody>
-    @foreach($facturas as $facturas)
+    @foreach($facturas as $key=>$facturas)
         <tr>
+            <td>{!! $key+1 !!}</td>
             <td>{!! $facturas->empresa->nombre !!}</td>
             <td>{!! $facturas->cliente->nomcompleto !!}</td>
             <td>{!! $facturas->acuerdo->numacuerdo !!}</td>
@@ -50,6 +56,18 @@
 </table>
 
 @push('scripts')
+<!-- DataTables -->
+<script src="{{asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+  <script>
+  $(function () {
+    $('#facturas-table').DataTable({
+      "language": {
+                "url": "{{asset('adminlte/bower_components/datatables.net/Spanish.json')}}"
+            }
+    })
+  })
+  </script>
 <script>
   @can('facturas-delete')
   function ConfirmDelete(id) {

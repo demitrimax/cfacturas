@@ -58,7 +58,7 @@
       @if($factura->acuerdo->sociocomer)
       <div class="form-group col-md-4">
           {!! Form::label('sociocomericial', 'Socio Comercial:*') !!}
-          {!! Form::text('sociocomercial', $factura->acuerdo->sociocomer->nombre, ['class' => 'form-control', 'placeholder' => 'Socio Comercial', 'required', 'readonly']) !!}
+          {!! Form::text('sociocomercial', $factura->acuerdo->sociocomer->nombre.' - '.number_format($factura->acuerdo->asoc_comision,2).'%', ['class' => 'form-control', 'placeholder' => 'Socio Comercial', 'required', 'readonly']) !!}
       </div>
       @endif
     </div>

@@ -10,7 +10,7 @@
     <tbody>
     @foreach($sociocomercials as $sociocomercial)
         <tr>
-            <td>{!! $sociocomercial->nomcompleto !!}</td>
+            <td><a href="{!! route('sociocomercials.show', [$sociocomercial->id]) !!}">{!! $sociocomercial->nomcompleto !!}</a></td>
             <td>{!! $sociocomercial->correo !!}</td>
             <td>{!! $sociocomercial->telefono !!}</td>
             <td>
