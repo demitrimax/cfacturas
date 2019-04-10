@@ -13,6 +13,9 @@
               @can('datoscontacto-list')
               <li class=""><a href="#tab_7" data-toggle="tab" aria-expanded="false">Datos de Contacto</a></li>
               @endcan
+              @can('cliente-saldos')
+              <li class=""><a href="#tab_10" data-toggle="tab" aria-expanded="false">Saldos</a></li>
+              @endcan
               <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
             </ul>
             <div class="tab-content">
@@ -45,6 +48,12 @@
                 @include('clientes.tabdatoscontacto')
               </div>
               @endcan
+              @can('cliente-saldos')
+              <div class="tab-pane" id="tab_10">
+                @include('clientes.tabsaldos')
+              </div>
+              @endcan
+
               <!-- /.tab-pane -->
             </div>
             <!-- /.tab-content -->

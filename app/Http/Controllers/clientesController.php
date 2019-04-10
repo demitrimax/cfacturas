@@ -25,7 +25,7 @@ use Intervention\Image\ImageManager;
 use App\Models\cattipodoc;
 use App\Models\cat_bancos;
 use App\Helpers\VerificaRFC;
-use App\Models\catgiroempresa;
+use App\Models\catgiroempresa; 
 
 class clientesController extends AppBaseController
 {

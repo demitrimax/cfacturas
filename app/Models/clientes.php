@@ -111,6 +111,10 @@ class clientes extends Model
     {
       return $this->hasMany('App\Models\accomercial', 'cliente_id');
     }
+    public function saldos()
+    {
+      return $this->belongsToMany('App\Models\saldos');
+    }
   public function getCodigogiroAttribute()
   {
     $girocod = catgiroempresa::where('descripcion', $this->giroempresa)->first();
@@ -133,7 +137,7 @@ class clientes extends Model
     }
     else {
       return false;
-    }    
+    }
   }
 
 }

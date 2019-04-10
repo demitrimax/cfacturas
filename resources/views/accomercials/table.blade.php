@@ -23,7 +23,7 @@
                 </td>
             <td>{!! $accomercial->nomsocio !!}</td>
             <td>{!! $accomercial->nomcliente !!}</td>
-            <td>{!! $accomercial->informacion !!}</td>
+            <td>{!! $accomercial->informacion !!}  <span class="label label-info pull-right" title="Facturas Asignadas al Acuerdo">{!! $accomercial->facturas->count()!!}</span></td>
             <td title="{!! ($accomercial->autorizado ) ? 'AUTORIZADO' : 'PENDIENTE' !!}">
               {!! ($accomercial->autorizado) ? '<span class="badge bg-blue"><i class="fa fa-check"></i></span>' : '<span class="badge bg-red"><i class="fa fa-close"></i></span>' !!}
             </td>

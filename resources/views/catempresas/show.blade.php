@@ -24,6 +24,9 @@
                   <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Acuerdos</a></li>
                   <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Datos Bancarios</a></li>
                   <li class=""><a href="#tab_4" data-toggle="tab" aria-expanded="false">Expediente</a></li>
+                  @can('empresa-saldos')
+                  <li class=""><a href="#tab_5" data-toggle="tab" aria-expanded="false">Saldos</a></li>
+                  @endcan
                   <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
                 </ul>
                 <div class="tab-content">
@@ -41,6 +44,11 @@
                   <div class="tab-pane" id="tab_4">
                       @include('catempresas.tabdocumentos')
                   </div>
+                  @can('empresa-saldos')
+                  <div class="tab-pane" id="tab_5">
+                      @include('catempresas.tabsaldos')
+                  </div>
+                  @endcan
                   @can('datoscontacto-list')
                   <div class="tab-pane" id="tab_7">
 

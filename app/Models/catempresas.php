@@ -108,6 +108,10 @@ class catempresas extends Model
     {
       return $this->BelongsToMany('App\Models\accomercial','ac_empresas','empresa_id','acuerdoc_id');
     }
+    public function saldos()
+    {
+      return $this->belongsToMany('App\Models\saldos');
+    }
     public function getEmpdireccionAttribute()
     {
       $direccion = "Dirección No Disponible";
@@ -131,7 +135,7 @@ class catempresas extends Model
         return true;
       }
       else{
-        return false;  
+        return false;
       }
     }
 

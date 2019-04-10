@@ -22,6 +22,8 @@ use App\Models\accomercial;
 use App\Models\formapago;
 use App\Models\facturas;
 use App\Models\mbanca;
+use App\Models\saldos;
+use App\Models\sociocomercial;
 use Orchestra\Parser\Xml\Facade as XmlParser;
 use Auth;
 
@@ -224,6 +226,7 @@ class facturasController extends AppBaseController
 
           return redirect(route('facturas.index'));
         }
+        //TAMBIEN SI LA FACTURA YA TIEN REGISTRADOS MOVIMIENTOS BANCARIOS DE PAGO TAMPOCO PUEDE ELIMINARSE
         */
 
         $this->facturasRepository->delete($id);
@@ -447,8 +450,13 @@ class facturasController extends AppBaseController
 
         $input = $request->all();
 
-        //VERIFICAR QUE LA REFERENCIA NO EXISTA EN LA BASE DE Datos
+        //VERIFICAR QUE LA FACTURA EXISTA
         $factura = facturas::find($input['factura_id']);
+        if(empty($factura)){
+          Alert::error('La factura no existe!');
+          return back();
+        }
+        //VERIFICAR QUE LA REFERENCIA NO EXISTA EN LA BASE DE Datos
         $referenciaexists = mbanca::where('referencia',$input['referencia'])->first();
         if ($referenciaexists)
         {
@@ -463,17 +471,71 @@ class facturasController extends AppBaseController
 
         $movbancario->cuenta_id     = $input['cuenta'];
         $movbancario->toperacion    = 'abono';
-        $movbancario->tmovimiento   = 7;
-        $movbancario->concepto      = 'ENTRADA DE FONDOS DE LA FACTURA NO.';
+        $movbancario->tmovimiento   = 7; //REGISTRADO COMO PAGO DE FACTURA
+        $movbancario->concepto      = 'ENTRADA DE FONDOS DE LA FACTURA NO. '.$factura->foliofac;
         $movbancario->monto         = $factura->total;
-        $movbancario->fecha         = $input['fecha'];
-        $movbancario->metodo        = 1;
+        $movbancario->fecha         = date('Y-m-d h:i:s');
+        $movbancario->metodo        = 1; //metodo de pago PUE
         $movbancario->referencia    = $input['referencia'];
         $movbancario->user_id       = Auth::user()->id;
-        $movbancario->factura_id    = $input['factura_id'];
+        $movbancario->factura_id    = $factura->id;
         $movbancario->documento     = $archivo;
         $movbancario->save();
+        //REGISTRAR un SALDO a favor para la empresa que factura que es la comision
+        $saldostable = new saldos();
+        $empresa = catempresas::find($factura->empresa->id);
+        //depende del acuerdo es el tipo de toperacion
+        if($factura->acuerdo->base == 'TOTAL'){
+                    $saldofac = ($factura->total * ($factura->acuerdo->ac_principalporc/100));
+                    $saldostable->monto = $saldofac;
+        }
+        if($factura->acuerdo->base == 'SUBTOTAL'){
+                    $saldofac = ($factura->subtotal * ($factura->acuerdo->ac_principalporc/100));
+                    $saldostable->monto = $saldofac;
+        }
+        if($factura->acuerdo->base == 'DEVOLUCION'){
+                    $saldofac = ($factura->total * ($factura->acuerdo->ac_principalporc/100));
+                    $saldostable->monto = $saldofac;
+        }
+        $saldostable->fecha = date('Y-m-d');
+        $saldostable->toperacion = 'abono';
+        $saldostable->tmovimiento = 9; //MOVIMIENTO COMISION DE FACTURA
+        $saldostable->user_id = Auth::user()->id;
+        $saldostable->observaciones = 'Generado automaticamente por el modulo de registro de pagos de facturas.';
+        $saldostable->estatus_id = 2; //estado pendiente
+        $saldostable->save();
+        $saldostable->empresas()->attach($empresa);
 
+        //Registrar el saldo a favor que se devuelve al cliente
+        $saldoscliente = new saldos();
+        $cliente = clientes::find($factura->cliente->id);
+        $saldoscliente->monto = ($factura->total - $saldofac);
+        $saldoscliente->fecha = date('Y-m-d');
+        $saldoscliente->toperacion = 'abono';
+        $saldoscliente->tmovimiento = 8; //DEVOLUCION DE FACTURA
+        $saldoscliente->user_id = Auth::user()->id;
+        $saldoscliente->observaciones = 'Generado automaticamente por el modulo de registro de pagos de facturas.';
+        $saldoscliente->estatus_id = 2; //pendiente
+        $saldoscliente->save();
+        $saldoscliente->clientes()->attach($cliente);
+
+
+        //Registrar el saldo a favor del asociado comercial
+        if($factura->acuerdo->sociocomer){
+          $saldosocio = new saldos();
+          $socio = sociocomercial::find($factura->acuerdo->sociocomer->id);
+          $saldosocio->monto = ($saldofac * $factura->acuerdo->asoc_comision);
+          $saldosocio->fecha = date('Y-m-d');
+          $saldosocio->toperacion = 'abono';
+          $saldosocio->tmovimiento = 9; //COMISION DE LA COMISION DE FACTURA
+          $saldosocio->user_id = Auth::user()->id;
+          $saldosocio->observaciones = 'Generado automaticamente por el modulo de registro de pagos de facturas.';
+          $saldosocio->estatus_id = 2; //pendiente
+          $saldosocio->save();
+          $saldosocio->socios()->attach($socio);
+        }
+
+        //asignar el estatus '5' a la factura (que signigifica que ya esta pagado completamente)
         $factura->estatus_id  = 5;
         $factura->save();
 

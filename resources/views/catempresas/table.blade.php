@@ -15,7 +15,7 @@
     <tbody>
     @foreach($catempresas as $catempresas)
         <tr>
-            <td>{!! $catempresas->nombre !!}</td>
+            <td><a href="{!! route('catempresas.show', [$catempresas->id]) !!}">{!! $catempresas->nombre !!}</a></td>
             <td>{!! $catempresas->correo_factura !!}</td>
             <td>{!! $catempresas->correo_notifica !!}</td>
             <td>{!! $catempresas->telefono !!}</td>

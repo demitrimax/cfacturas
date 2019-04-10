@@ -48,12 +48,20 @@
           <p>{!! $facturas->pagoForma->descripcion !!}</p>
       </div>
 
-
+      @if($facturas->comprobante)
       <!-- Comprobante Field -->
       <div class="form-group">
           {!! Form::label('comprobante', 'Comprobante de Factura:') !!}
           <p><a href="comprobante/{!! $facturas->id !!}"> {!! $facturas->comprobante !!}</a></p>
       </div>
+      @endif
+      @if($facturas->xmlfile)
+      <!-- Archivo XML -->
+      <div class="form-group">
+          {!! Form::label('xmlfile', 'Comprobante de Factura:') !!}
+          <p><a href="xmlfile/{!! $facturas->id !!}"> Archivo XML</a></p>
+      </div>
+      @endif
     </div>
   </div>
 </div>
