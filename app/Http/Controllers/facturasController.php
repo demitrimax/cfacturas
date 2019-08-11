@@ -79,7 +79,7 @@ class facturasController extends AppBaseController
         $pagometodo = pagometodo::pluck('nombre','id');
         $pagoforma = formapago::pluck('descripcion','id');
         $facestatus = facestatus::pluck('nombre','id');
-        return view('facturas.create')->with(compact('clientes','direcciones','empresas','pagometodo','pagocondicion','facestatus','pagoforma'));
+        return view('facturas.create')->with(compact('clientes','direcciones','empresas','pagometodo','facestatus','pagoforma'));
     }
 
     /**

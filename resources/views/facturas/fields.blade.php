@@ -145,19 +145,19 @@ $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
 })
 function calculoiva(){
 	//tasa de impuesto
-  var tasa = 15;
+  var tasa = 0.16;
 
   //monto a calcular el impuesto
   var monto = $("input[name=subtotal]").val();
 
-  //calsulo del impuesto
-  var iva = (monto * tasa)/100;
+  //calculo del impuesto
+  var iva = (parseFloat(monto) * parseFloat(tasa));
 
   //se carga el iva en el campo correspondien te
   $("input[name=iva]").val(iva);
 
   //se carga el total en el campo correspondiente
-  $("input[name=total]").val(parseFloat(monto)+parseFloat(iva));
+  $("input[name=total]").val(parseFloat(monto).toFixed(2)+parseFloat(iva).toFixed(2));
 }
  @if(Request::old('cliente_id') != NULL)
    if($('select[name="cliente_id"]').val()) {

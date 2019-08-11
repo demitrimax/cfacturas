@@ -70,7 +70,7 @@ class asimsalController extends AppBaseController
         //$clientes = null;
         $estados = catestados::pluck('nombre','id');
         $municipios = catmunicipios::get()->where('id_edo',1)->pluck('nomMunicipio','id');
-        return view('asimsal.create')->with(compact('giro','estados','municipios'));
+        return view('asimsal.create')->with(compact('estados','municipios'));
     }
 
     /**

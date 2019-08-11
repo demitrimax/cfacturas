@@ -159,6 +159,8 @@ class solicitudesController extends AppBaseController
           $empleados = $empleados->pluck('name','id');
           $borrados = facsolicitud::onlyTrashed()->count();
           $bancos = cat_bancos::pluck('nombrecorto','id');
+          $atendidas = '';
+          $asignadas = '';
           if($solicitudes->atendidopor)
           {
             $usuarioid = $solicitudes->atendidopor;
